@@ -46,7 +46,7 @@ export default function LoginPage() {
   return (
     <>
       <Helmet>
-        <title> Đăng nhập | BIDs </title>
+        <title> Đăng nhập | REAs </title>
       </Helmet>
 
       <StyledRoot>
@@ -61,7 +61,7 @@ export default function LoginPage() {
         {mdUp && (
           <StyledSection>
             <Typography variant="h3" sx={{ px: 5, mt: 10, mb: 5 }}>
-              Chào mừng bạn đến với BIDs
+              Chào mừng bạn đến với REAs
             </Typography>
             <img src="/assets/illustrations/illustration_login2.png" alt="login" />
           </StyledSection>
@@ -70,7 +70,7 @@ export default function LoginPage() {
         <Container maxWidth="sm">
           <StyledContent>
             <Typography variant="h4" gutterBottom>
-              Đăng nhập vào BIDs
+              Đăng nhập vào REAs
             </Typography>
 
             <Typography variant="body2" sx={{ mb: 5 }}>

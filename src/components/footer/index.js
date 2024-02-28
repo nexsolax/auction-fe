@@ -45,7 +45,7 @@ export default function Footer() {
         <Grid item md={6} lg={4}>
           <FooterTitle variant="body1">Về chúng tôi.</FooterTitle>
           <Typography variant="caption2">
-            BIDs online là hệ thống ứng dụng đấu giá trực tuyến cung cấp dịch vụ đấu giá trực tuyến cho người dùng khắp cả nước sử dụng mọi lúc mọi nơi.
+            REAs online là hệ thống ứng dụng đấu giá trực tuyến cung cấp dịch vụ đấu giá trực tuyến cho người dùng khắp cả nước sử dụng mọi lúc mọi nơi.
           </Typography>
         </Grid>
         <Grid item md={6} lg={2}>
@@ -53,7 +53,7 @@ export default function Footer() {
           <List>
             <ListItemText>
               <Typography lineHeight={2} variant="caption2">
-                <StyledLink component="a" href="https://docs.google.com/document/d/1wHiHLmHivLH5tboGqxfcfztanMaKYAEFcwhX5U0CNeI/edit?fbclid=IwAR3OaRPLB2kXR-c67JIGYy0sFnNy1XmpRuWHeuMAU4ufsUEjtotPbpGF37c" underline="none" color="inherit">
+                <StyledLink component="a" href="https://docs.google.com/document/d/12t4U1_UjGMhxriOG8_rHABxr3JCbcYLmHFQ8M9L5RCU/edit" underline="none" color="inherit">
                   Quy tắc hệ thống
                 </StyledLink >
               </Typography>

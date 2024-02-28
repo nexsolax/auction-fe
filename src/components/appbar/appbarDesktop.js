@@ -42,7 +42,7 @@ export default function AppbarDesktop({ matches }) {
         <AppbarContainer >
             <AppbarHeader>
                 <StyledLink underline="none" href="/home">
-                    Online Bids
+                    REAs
                 </StyledLink>
             </AppbarHeader>
             <MyList type="row">

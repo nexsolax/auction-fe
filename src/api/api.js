@@ -4,7 +4,7 @@ class Api
 {
     constructor() 
     {
-        this.baseURL = 'http://54.211.24.168';
+        this.baseURL = 'https://reasapi.azurewebsites.net';
 
         axios.interceptors.request.use(
             config =>
@@ -87,7 +87,7 @@ class Api
         config['method'] = method;
         config['url'] = url;
         config['responseType'] = responseType;
-        config['Access-Control-Allow-Origin'] = 'http://54.211.24.168';
+        config['Access-Control-Allow-Origin'] = 'https://reasapi.azurewebsites.net';
         config['headers'] = {
             'Content-Type': contentType
         };
@@ -95,14 +95,63 @@ class Api
         return axios(config)
     }
 
-    getWards()
+    getAuction()
     {
-        return this.Request('get',`${this.baseURL}/get-all-ward`)  
+        return this.Request('get',`${this.baseURL}/api/Auction`)  
     }
 
-    getAllCategories()
+    CreateAuction(rowData)
     {
-        return this.Request('get',`${this.baseURL}/api/Category/get-all-category`)     
+        const {
+            startingPrice,
+            bidIncrement,
+            maxBidIncrement,
+            realEstate,    
+            isService,
+            isActive
+        } = rowData
+
+        const payload = {
+            data : {
+                startingPrice,
+                bidIncrement,
+                maxBidIncrement,
+                realEstateId:+realEstate.id,                
+                isService,
+                isActive}
+        }
+
+        return this.Request('post',`${this.baseURL}/api/Auction/create-request`,payload)  
+    }
+
+    EditAuction(rowData)
+    {
+        const {
+            id,
+            ...rest
+        } = rowData
+        const payload = {
+            data : rest
+        }
+        return this.Request('put',`${this.baseURL}/api/Auction/${id}/approve`,payload)  
+    }
+
+    DeleteAuction(rowData)
+    {
+        const {
+            id
+        } = rowData
+        return this.Request('delete',`${this.baseURL}/api/Auction/${id}`)  
+    }
+
+    getOwnAuction()
+    {
+        return this.Request('get',`${this.baseURL}/api/Auction/own`)     
+    }
+
+    getCategory()
+    {
+        return this.Request('get',`${this.baseURL}/api/Category`)  
     }
 
     CreateCategory(rowData)
@@ -135,103 +184,19 @@ class Api
         return this.Request('delete',`${this.baseURL}/api/Category/${id}`)  
     }
 
-    // Manufac
-    getAllManufacturers()
+
+    getRealEstate()
     {
-        return this.Request('get',`${this.baseURL}/get-all-manufacturer`)     
+        return this.Request('get',`${this.baseURL}/api/RealEstate`)     
     }
-
-    CreateManufacturer(rowData)
-    {
-        
-        const payload = {
-            data : rowData
-        }
-
-        return this.Request('post',`${this.baseURL}/api/Manufactuer`,payload)  
-    }
-
-    EditManufacturer(rowData)
-    {
-        const {
-            id,
-            ...rest
-        } = rowData
-        const payload = {
-            data : rest
-        }
-        return this.Request('put',`${this.baseURL}/api/Manufactuer/${id}`,payload)  
-    }
-
-    DeleteManufacturer(rowData)
-    {
-        const {
-            id
-        } = rowData
-        return this.Request('delete',`${this.baseURL}/api/Manufactuer/${id}`)  
-    }
-
-    //STORE:
-    getAllStores()
-    {
-        return this.Request('get',`${this.baseURL}/api/Store/get-all-store`) 
-    }
-
-    CreateStore(rowData)
+    
+    CreateRealEstate(rowData)
     {
         const {
             name,
             address,
-            phoneNumber,
-            wardId
-        } = rowData;
-        const payload = {
-            data : {
-                name,
-                address,
-                phoneNumber,
-                wardId:wardId.id
-            }
-        }
-
-        return this.Request('post',`${this.baseURL}/api/Store`,payload)  
-    }
-
-    EditStore(rowData)
-    {
-        const {
-            id,
-            ...rest
-        } = rowData
-        const payload = {
-            data : rest
-        }
-        return this.Request('put',`${this.baseURL}/api/Store/${id}`,payload)  
-    }
-
-    DeleteStore(rowData)
-    {
-        const {
-            id
-        } = rowData
-        return this.Request('delete',`${this.baseURL}/api/Store/${id}`)  
-    }
-
-    // Products:
-    getAllProducts()
-    {
-        return this.Request('get',`${this.baseURL}/api/Product/get-all-product`)     
-    }
-    
-    CreateProduct(rowData)
-    {
-        const {
-            name,
-            price,
-            quantity,
-            manufacturer,
-            category,
-            store,
+            description,
+            category,           
             isService,
             isActive
         } = rowData
@@ -239,19 +204,17 @@ class Api
         const payload = {
             data : {
                 name,
-                price,
-                quantity,
-                manufacturerId:+manufacturer.id,
-                categoryId:+category.id,
-                storeId:+store.id,
+                address,
+                description,
+                categoryId:+category.id,                
                 isService,
                 isActive}
         }
 
-        return this.Request('post',`${this.baseURL}/api/Product`,payload)  
+        return this.Request('post',`${this.baseURL}/api/RealEstate`,payload)  
     }
 
-    EditProduct(rowData)
+    EditRealEstate(rowData)
     {
         const {
             id,
@@ -260,15 +223,15 @@ class Api
         const payload = {
             data : rest
         }
-        return this.Request('put',`${this.baseURL}/api/Product/${id}`,payload)  
+        return this.Request('put',`${this.baseURL}/api/RealEstate/${id}`,payload)  
     }
 
-    DeleteProduct(rowData)
+    DeleteRealEstate(rowData)
     {
         const {
             id
         } = rowData
-        return this.Request('delete',`${this.baseURL}/api/Product/${id}`)  
+        return this.Request('delete',`${this.baseURL}/api/RealEstate/${id}`)  
     }
 
 

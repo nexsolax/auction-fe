@@ -29,42 +29,42 @@ export default function Actions({ matches }) {
     const [sessionData, setSessionData] = useState([]);
     const token = localStorage.getItem('token');
 
-    // const api = `https://bids-online.azurewebsites.net/api/Users/by_id?id=${jsonUser?.Id}`
+    const api = `https://reasapi.azurewebsites.net/api/Users/by_id?id=${jsonUser?.Id}`
 
 
-    // const fetchProfileData = async () => {
-    //     // try {
-    //     //     const response = await axios.get(api, {headers: { Authorization: `Bearer ${token}` },});
-    //     //     setProfileData(response.data);
-    //     // } catch (error) {
-    //     //     console.log('Error fetching profile data:', error);
-    //     // }
+    const fetchProfileData = async () => {
+        // try {
+        //     const response = await axios.get(api, {headers: { Authorization: `Bearer ${token}` },});
+        //     setProfileData(response.data);
+        // } catch (error) {
+        //     console.log('Error fetching profile data:', error);
+        // }
 
-    //     try {
-    //         const response = await axios.get(api, { headers: { Authorization: `Bearer ${token}` }, });
-    //         setProfileData(response.data);
-    //     } catch (error) {
-    //         console.log('Error fetching profile data:', error);
-    //     }
-    // };
+        try {
+            const response = await axios.get(api, { headers: { Authorization: `Bearer ${token}` }, });
+            setProfileData(response.data);
+        } catch (error) {
+            console.log('Error fetching profile data:', error);
+        }
+    };
 
-    // const fetchSessionData = () => {
-    //     // Fetch data from the API link using Axios
-    //     axios.get(`https://bids-online.azurewebsites.net/api/Sessions/by_user_for_payment?id=${jsonUser?.Id}`, { headers: { Authorization: `Bearer ${token}` } })
-    //         .then(response => {
-    //             setSessionData(response.data); // Set the fetched data to the state
-    //         })
-    //         .catch(error => {
-    //             console.error("Error fetching data:", error);
-    //         });
-    // };
-    // useEffect(() => {
-    //     fetchSessionData();
-    // }, []);
+    const fetchSessionData = () => {
+        // Fetch data from the API link using Axios
+        axios.get(`https://reasapi.azurewebsites.net/api/Sessions/by_user_for_payment?id=${jsonUser?.Id}`, { headers: { Authorization: `Bearer ${token}` } })
+            .then(response => {
+                setSessionData(response.data); // Set the fetched data to the state
+            })
+            .catch(error => {
+                console.error("Error fetching data:", error);
+            });
+    };
+    useEffect(() => {
+        fetchSessionData();
+    }, []);
 
-    // useEffect(() => {
-    //     fetchProfileData();
-    // }, []);
+    useEffect(() => {
+        fetchProfileData();
+    }, []);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
