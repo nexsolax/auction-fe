@@ -2,23 +2,23 @@ import axios from "axios";
 import axiosInstance from "./axios-instance";
 
 //const BASE_URL = 'https://bids-online.azurewebsites.net/api';
-const BASE_URL = 'https://reasapi.azurewebsites.net/api';
+const BASE_URL = 'https://reasapi.azurewebsites.net/api/auction';
 
 export async function getAllItems() {
-    const url = `${BASE_URL}/items`;
+    const url = `${BASE_URL}`;
     return axiosInstance.get(url);
 }
 
 export async function getItemById(id) {
-    const url = `${BASE_URL}/items?id=${id}`;
+    const url = `${BASE_URL}?id=${id}`;
     return axiosInstance.get(url);
 }
 
 export async function deleteItems(id) {
-    const url = `${BASE_URL}/items?id=${id}`;
+    const url = `${BASE_URL}?id=${id}`;
     try {
         axiosInstance.delete(url, { data: { id } });
-        console.log(`Deleted Items: ${id}`);
+        console.log(`Deleted auction: ${id}`);
     } catch (error) {
         console.log(error);
     }
