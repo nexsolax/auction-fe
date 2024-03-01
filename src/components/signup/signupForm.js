@@ -27,9 +27,9 @@ const SignUpForm = () => {
   const [avatar, setAvatar] = useState(null);
   const [cccdfrontImage, setFrontImage] = useState(null);
   const [cccdbackImage, setBackImage] = useState(null);
-  const [otpValue, setOtpValue] = useState('');
-  const [otpError, setOtpError] = useState(false);
-  const otpInputRef = useRef('');
+  // const [otpValue, setOtpValue] = useState('');
+  // const [otpError, setOtpError] = useState(false);
+  // const otpInputRef = useRef('');
   const token = localStorage.getItem('token');
   const user = localStorage.getItem('loginUser');
   const jsonUser = JSON.parse(user)
@@ -37,7 +37,7 @@ const SignUpForm = () => {
   const [updateRoleMessage, setUpdateRoleMessage] = useState('');
   const [checkboxError, setCheckboxError] = useState(false);
   const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
-  const [otpDialogOpen, setOtpDialogOpen] = useState(false);
+  // const [otpDialogOpen, setOtpDialogOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [successDialogOpen, setSuccessDialogOpen] = useState(false);
   const [errorDialogOpen, setErrorDialogOpen] = useState(false);
@@ -48,95 +48,96 @@ const SignUpForm = () => {
   const theme = useTheme();
 //   const uploader = Uploader({ apiKey: "public_12a1ybtATujHiWyzUEfMyoyzWFbL" });
 
-  const UpdateRoleApi = `https://reasapi.azurewebsites.net/api/Users/update_role_user`
-   const confirm = `https://reasapi.azurewebsites.net/api/Users/confirm_email?email=${email}`
+  // const UpdateRoleApi = `https://reasapi.azurewebsites.net/api/Users/update_role_user`
+  //  const confirm = `https://reasapi.azurewebsites.net/api/Users/confirm_email?email=${email}`
 
 
-  const myCustomLocale = {
-    "orDragDropImages": "... kéo và thả hình ảnh.",
-    "uploadImages": "Tải lên hình ảnh",
-    "maxImagesReached": "Số lượng hình ảnh tối đa:",
-    "cancel": "Hủy bỏ",
-    "continue": "Tiếp Tục",
-    "addAnotherImage": "Thêm một hình ảnh khác...",
-  }
-
-
-  
-
-  const uploaderOptions = {
-    multi: true,
-    maxFileCount: 1,
-    locale: myCustomLocale,
-    // Comment out this line & use 'onUpdate' instead of
-    // 'onComplete' to have the dropzone close after upload.
-    maxFileSizeBytes: 10 * 1024 * 1024,
-    mimeTypes: ["image/jpeg", "image/png", "image/jpg"],
-    showRemoveButton: true,
-    styles: {
-      colors: {
-        primary: '#377dff',
-      },
-    },
-    
-    
-    editor: {
-      images: {
-        preview: false,              // True by default if cropping is enabled. Previews PDFs and videos too.
-        crop: false,                 // True by default.
-        cropFilePath: image => {    // Choose the file path used for JSON image crop files.
-          const { filePath } = image  // In:  https://www.bytescale.com/docs/upload-api/types/FileDetails
-          return `${filePath}.crop` // Out: https://www.bytescale.com/docs/upload-api/types/FilePathDefinition
-        },
-        cropRatio: 4 / 3,           // Width / Height. Undefined enables freeform (default).
-        cropShape: "rect"           // "rect" (default) or "circ".
-      }
-    },
-  };
-
-  const handleOtpInputChange = (event) => {
-    setOtpError(false);
-  };
-
-  const handleOpenOtpDialog = () => {
-
-    if (!email) {
-      setError('Địa chỉ Email không được bỏ trống');
-      // You can set an error message if email is empty
-      setErrorDialogOpen(true);
-      return;
-    }
-
-    // If email is not empty, proceed to send OTP
-    setError(''); // Clear any previous error message
-    handleOtpSubmit(); // Call the function to send OTP
-    setOtpDialogOpen(true);
-    setOtpValue('');
-    setOtpError(false);
-  };
+  // const myCustomLocale = {
+  //   "orDragDropImages": "... kéo và thả hình ảnh.",
+  //   "uploadImages": "Tải lên hình ảnh",
+  //   "maxImagesReached": "Số lượng hình ảnh tối đa:",
+  //   "cancel": "Hủy bỏ",
+  //   "continue": "Tiếp Tục",
+  //   "addAnotherImage": "Thêm một hình ảnh khác...",
+  // }
 
 
   
 
-  const handleOtpSubmit = () => {
-    axios
-      .put(confirm, null, { headers: { Authorization: `Bearer ${token}` } })
-      .then((response) => {
-        // If the API response has no error, proceed to update the user's role
-        setOtpError(false);
-        setUpdateRoleMessage('');
-        // return handleUpgradeToAuctioneer();
-      })
-      .catch((error) => {
-        setOtpError(true);
-        setUpdateRoleMessage('');
-      });
-  };
+  // const uploaderOptions = {
+  //   multi: true,
+  //   maxFileCount: 1,
+  //   locale: myCustomLocale,
+  //   // Comment out this line & use 'onUpdate' instead of
+  //   // 'onComplete' to have the dropzone close after upload.
+  //   maxFileSizeBytes: 10 * 1024 * 1024,
+  //   mimeTypes: ["image/jpeg", "image/png", "image/jpg"],
+  //   showRemoveButton: true,
+  //   styles: {
+  //     colors: {
+  //       primary: '#377dff',
+  //     },
+  //   },
+    
+    
+  //   editor: {
+  //     images: {
+  //       preview: false,              // True by default if cropping is enabled. Previews PDFs and videos too.
+  //       crop: false,                 // True by default.
+  //       cropFilePath: image => {    // Choose the file path used for JSON image crop files.
+  //         const { filePath } = image  // In:  https://www.bytescale.com/docs/upload-api/types/FileDetails
+  //         return `${filePath}.crop` // Out: https://www.bytescale.com/docs/upload-api/types/FilePathDefinition
+  //       },
+  //       cropRatio: 4 / 3,           // Width / Height. Undefined enables freeform (default).
+  //       cropShape: "rect"           // "rect" (default) or "circ".
+  //     }
+  //   },
+  // };
+
+  // const handleOtpInputChange = (event) => {
+  //   setOtpError(false);
+  // };
+
+  // const handleOpenOtpDialog = () => {
+
+  //   if (!email) {
+  //     setError('Địa chỉ Email không được bỏ trống');
+  //     // You can set an error message if email is empty
+  //     setErrorDialogOpen(true);
+  //     return;
+  //   }
+
+  //   // If email is not empty, proceed to send OTP
+  //   setError(''); // Clear any previous error message
+  //   handleOtpSubmit(); // Call the function to send OTP
+  //   setOtpDialogOpen(true);
+  //   setOtpValue('');
+  //   setOtpError(false);
+  // };
+
+
+  
+
+  // const handleOtpSubmit = () => {
+  //   axios
+  //     // .put(comfirm, null, { headers: { Authorization: `Bearer ${token}` } })
+  //     .put( null, { headers: { Authorization: `Bearer ${token}` } })
+  //     .then((response) => {
+  //       // If the API response has no error, proceed to update the user's role
+  //       setOtpError(false);
+  //       setUpdateRoleMessage('');
+  //       // return handleUpgradeToAuctioneer();
+  //     })
+  //     .catch((error) => {
+  //       setOtpError(true);
+  //       setUpdateRoleMessage('');
+  //     });
+  // };
 
   
 
   const handleDialogClose1 = () => {
-    setOtpDialogOpen(false);
+    // setOtpDialogOpen(false);
     setDialogOpen(false);
     setUpdateRoleMessage(''); // If needed to clear the updateRoleMessage state
   };
@@ -166,43 +167,43 @@ const SignUpForm = () => {
 
 
   const handleUpgradeToAuctioneer = async () => {
-    const otpValue = otpInputRef.current.value;
+    // const otpValue = otpInputRef.current.value;
+    setRoleUpgradeSuccess(true);
+    // try {
+    //   const response = await axios.put(
+    //     // UpdateRoleApi,
+    //     {
+    //       email,
+    //       code: otpValue,
+    //     },
+    //     { headers: { Authorization: `Bearer ${token}` } }
+    //   );
 
-    try {
-      const response = await axios.put(
-        UpdateRoleApi,
-        {
-          email,
-          code: otpValue,
-        },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-
-      if (response.status === 200) {
-        if (response.data === true) {
-          setRoleUpgradeSuccess(true);
-          setUpdateRoleMessage('Xác Thực Email Thành Công');
-          setOtpError(false);
-          setEmailDisabled(true);
-        } else if (response.data === false) {
-          setRoleUpgradeSuccess(false);
-          // setUpdateRoleMessage('Xác Thực Email Thành Công');
-          setOtpError(true);
-        }
-      } else {
-        setRoleUpgradeSuccess(false);
-        setOtpError(true);
-      }
-    } catch (error) {
-      setRoleUpgradeSuccess(false);
-      setOtpError(true);
-    }
+    //   if (response.status === 200) {
+    //     if (response.data === true) {
+    //       setRoleUpgradeSuccess(true);
+    //       setUpdateRoleMessage('Xác Thực Email Thành Công');
+    //       setOtpError(false);
+    //       setEmailDisabled(true);
+    //     } else if (response.data === false) {
+    //       setRoleUpgradeSuccess(false);
+    //       // setUpdateRoleMessage('Xác Thực Email Thành Công');
+    //       setOtpError(true);
+    //     }
+    //   } else {
+    //     setRoleUpgradeSuccess(false);
+    //     setOtpError(true);
+    //   }
+    // } catch (error) {
+    //   setRoleUpgradeSuccess(false);
+    //   setOtpError(true);
+    // }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!userName || !email || !password || !rePassword || !address || !phone || !dateOfBirth || !cccdnumber) {
+    if (!userName || !email || !password || !rePassword || !address || !phone || !dateOfBirth ) {
       setError('Không Được Bỏ Trống');
       setErrorDialogOpen(true);
       return;
@@ -225,33 +226,33 @@ const SignUpForm = () => {
       setErrorDialogOpen(true);
       return;
     }
-    if (!avatar || !cccdfrontImage || !cccdbackImage) {
-      setError('Vui lòng tải lên đủ 3 hình ảnh (Ảnh đại diện, Mặt trước CCCD, Mặt sau CCCD).');
-      setErrorDialogOpen(true);
-      return;
-    }
-    if (!isCheckboxChecked) {
-      setCheckboxError(true); // Set checkbox error when not checked
-      return;
-    }
-    setIsLoading(true);
+    // if (!avatar || !cccdfrontImage || !cccdbackImage) {
+    //   setError('Vui lòng tải lên đủ 3 hình ảnh (Ảnh đại diện, Mặt trước CCCD, Mặt sau CCCD).');
+    //   setErrorDialogOpen(true);
+    //   return;
+    // }
+    // if (!isCheckboxChecked) {
+    //   setCheckboxError(true); // Set checkbox error when not checked
+    //   return;
+    // }
+    // setIsLoading(true);
 
     const date = format(new Date(dateOfBirth), 'MM-dd-yyyy')
     console.log(date)
     try {
 
       const response = await axios
-        .post('https://bids-online.azurewebsites.net/api/Users', {
+        .post('https://reasapi.azurewebsites.net/api/User', {
           userName,
           email,
           password,
           address,
           phone,
-          dateOfBirth: date,
-          cccdnumber,
-          avatar,
-          cccdfrontImage,
-          cccdbackImage,
+          dateOfBirth: date
+          // cccdnumber,
+          // avatar,
+          // cccdfrontImage,
+          // cccdbackImage,
         })
         .then(data => {
           console.log(data);
@@ -262,7 +263,7 @@ const SignUpForm = () => {
             paypalAccount,
           };
 
-          axios.post('https://bids-online.azurewebsites.net/api/UserPaymentInformation', paypalData)
+          axios.post('https://reasapi.azurewebsites.net/api/BankAccount', paypalData)
 
             .catch(err => {
               if (err.response.status === 400) {
@@ -333,11 +334,11 @@ const SignUpForm = () => {
     }
   };
 
-  const handleCloseOtpDialog = () => {
-    setOtpDialogOpen(false);
-    setOtpValue('');
-    setOtpError(false);
-  };
+  // const handleCloseOtpDialog = () => {
+  //   setOtpDialogOpen(false);
+  //   setOtpValue('');
+  //   setOtpError(false);
+  // };
 
   const handleSuccessDialogClose = () => {
     navigate('/home', { replace: true });
@@ -409,16 +410,16 @@ const SignUpForm = () => {
       </Grid>
 
 
-      <Button
+      {/* <Button
         variant="outlined"
         color="primary"
         sx={{ marginTop: '10px', width: '100%' }}
-        onClick={handleOpenOtpDialog}
+        // onClick={handleOpenOtpDialog}
         endIcon={<EmailIcon />}
         disabled={emailDisabled}
       >
         Xác Thực Email
-      </Button>
+      </Button> */}
       <Grid container>
         <Grid xs={6}>
           <TextField
@@ -430,7 +431,7 @@ const SignUpForm = () => {
             required
             sx={{ width: '100%' }}
             id="password"
-            disabled={!roleUpgradeSuccess}
+            // disabled={!roleUpgradeSuccess}
           />
         </Grid>
         <Grid xs={6}>
@@ -443,7 +444,7 @@ const SignUpForm = () => {
             required
             sx={{ width: '100%' , marginLeft:"5px"}}
             id="rePassword"
-            disabled={!roleUpgradeSuccess}
+            // disabled={!roleUpgradeSuccess}
           />
         </Grid>
       </Grid>
@@ -458,7 +459,7 @@ const SignUpForm = () => {
         required
         sx={{ width: '100%' }}
         id="paypal"
-        disabled={!roleUpgradeSuccess}
+        // disabled={!roleUpgradeSuccess}
       />
       <TextField
         label="Địa Chỉ"
@@ -471,7 +472,7 @@ const SignUpForm = () => {
         id="address"
         multiline
         rows={2}
-        disabled={!roleUpgradeSuccess}
+        // disabled={!roleUpgradeSuccess}
       />
 
       <Grid container>
@@ -485,7 +486,7 @@ const SignUpForm = () => {
         required
         sx={{ width: '100%' }}
         id="phone"
-        disabled={!roleUpgradeSuccess}
+        // disabled={!roleUpgradeSuccess}
       />
         </Grid>
         <Grid xs={6}>
@@ -501,7 +502,7 @@ const SignUpForm = () => {
         InputLabelProps={{
           shrink: true
         }}
-        disabled={!roleUpgradeSuccess}
+        // disabled={!roleUpgradeSuccess}
       />
         </Grid>
       </Grid>
@@ -572,7 +573,7 @@ const SignUpForm = () => {
         </Typography>
       )} */}
 
-      <FormControlLabel
+      {/* <FormControlLabel
         control={
           <Checkbox
             color="primary"
@@ -585,9 +586,9 @@ const SignUpForm = () => {
           />
         }
         label="Tôi cam kết tuân thủ Quyền và trách nhiệm của Người tham gia đấu giá (Quy định theo tài sản đấu giá), Chính sách bảo mật thông tin khách hàng, Cơ chế giải quyết tranh chấp, Quy chế hoạt động tại website đấu giá trực tuyến của REAs."
-      />
+      /> */}
 
-      <Dialog fullWidth maxWidth={maxWidth} open={otpDialogOpen} onClose={handleCloseOtpDialog}>
+      {/* <Dialog fullWidth maxWidth={maxWidth} open={otpDialogOpen} onClose={handleCloseOtpDialog}>
 
 
         <DialogTitle sx={{ textAlign: 'center', }}> <ErrorOutlineOutlinedIcon style={styles.errorIcon} /> </DialogTitle>
@@ -611,7 +612,7 @@ const SignUpForm = () => {
             OK
           </Button>
         </DialogActions>
-      </Dialog>
+      </Dialog> */}
 
 
       <Dialog fullWidth maxWidth={maxWidth} open={!!updateRoleMessage} onClose={handleDialogClose1}>
@@ -658,7 +659,7 @@ const SignUpForm = () => {
         variant="contained"
         color="primary"
         sx={{ marginTop: '20px' }}
-        disabled={!roleUpgradeSuccess || isLoading} // Disable when loading
+        // disabled={!roleUpgradeSuccess || isLoading} // Disable when loading
       >
         {isLoading ? <CircularProgress size={24} /> : 'Đăng Kí'}
       </Button>

@@ -89,13 +89,14 @@ export default function Router() {
       </Suspense>
     ), },
     { path: 'signup', element: <SignUp /> },
-    { path: 'additem', element: (
-      <Suspense>
-        <RolesAuthRoute roles={['User']}>
-          <AddProduct />
-        </RolesAuthRoute>
-      </Suspense>
-    ), },
+    { path: 'additem', element:  <AddProduct />},
+    //  (
+    //   <Suspense>
+    //     <RolesAuthRoute roles={['User']}>
+    //       <AddProduct />
+    //     </RolesAuthRoute>
+    //   </Suspense>
+    // ), },
     { path: 'profile', element: (
       <Suspense>
         <RolesAuthRoute roles={['User']}>

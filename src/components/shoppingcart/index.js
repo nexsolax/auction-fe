@@ -46,26 +46,26 @@ const ShoppingCartForm = () => {
     };
 
 
-    // const api = `https://bids-online.azurewebsites.net/api/Sessions/by_user_for_payment?id=${jsonUser.Id}`;
-    // const rejectPayment = `https://bids-online.azurewebsites.net/api/Sessions/reject_payment`;
-    // const paymentAPI = `https://bids-online.azurewebsites.net/api/Login/payment_complete?sessionId=${selectedItem?.sessionId}&payerId=${jsonUser?.Id}&urlSuccess=https://capstone-bid-fe.vercel.app/payment-success&urlFail=https://capstone-bid-fe.vercel.app/payment-fail`
+    const api = `https://reasapi.azurewebsites.net/api/Sessions/by_user_for_payment?id=${jsonUser.Id}`;
+    const rejectPayment = `https://reasapi.azurewebsites.net/api/Sessions/reject_payment`;
+    const paymentAPI = `https://reasapi.azurewebsites.net/api/Login/payment_complete?sessionId=${selectedItem?.sessionId}&payerId=${jsonUser?.Id}&urlSuccess=https://capstone-bid-fe.vercel.app/payment-success&urlFail=https://capstone-bid-fe.vercel.app/payment-fail`
 
-    // useEffect(() => {
-    //     setIsLoading(true); // Set loading to true before making the request
-    //     axios.get(api, { headers: { Authorization: `Bearer ${token}` } })
-    //         .then(response => {
-    //             setItems(response.data);
-    //         })
-    //         .catch(error => {
-    //             console.error('Error fetching data:', error);
-    //         })
-    //         .finally(() => {
-    //             setIsLoading(false); // Set loading to false when the request is complete
-    //         });
-    // }, []);
+    useEffect(() => {
+        setIsLoading(true); // Set loading to true before making the request
+        axios.get(api, { headers: { Authorization: `Bearer ${token}` } })
+            .then(response => {
+                setItems(response.data);
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            })
+            .finally(() => {
+                setIsLoading(false); // Set loading to false when the request is complete
+            });
+    }, []);
 
-    // console.log(selectedItem?.sessionId);
-    // console.log(link)
+    console.log(selectedItem?.sessionId);
+    console.log(link)
 
     const handleOpen = (item) => {
         setSelectedItem(item);
