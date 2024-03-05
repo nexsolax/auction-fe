@@ -4,12 +4,12 @@ import axiosInstance from './axios-instance';
 const BASE_URL = 'https://reasapi.azurewebsites.net/api';
 
 export async function getAllStaff() {
-  const url = `https://reasapi.azurewebsites.net/api/staffs`;
+  const url = `https://reasapi.azurewebsites.net/api/User`;
   return axiosInstance.get(url);
 }
 
 export async function getStaffById(id) {
-  const url = `${BASE_URL}/staffs/by_id?id=${id}`;
+  const url = `${BASE_URL}/User/by_id?id=${id}`;
   try {
     axiosInstance.get(url, { data: { id } });
   } catch (error) {
@@ -29,7 +29,7 @@ export async function getNotificationById(id) {
 }
 
 export async function createStaff(newStaff) {
-  const url = `${BASE_URL}/staffs`;
+  const url = `${BASE_URL}/User`;
   const data = {
     staffName: newStaff.staffName,
     email: newStaff.email,
@@ -47,7 +47,7 @@ export async function createStaff(newStaff) {
 }
 
 export async function updateStaff(upStaff) {
-  const url = `${BASE_URL}/staffs`;
+  const url = `${BASE_URL}/User`;
   const data = {
     staffId: upStaff.staffId,
     staffName: upStaff.staffName,
@@ -62,7 +62,7 @@ export async function updateStaff(upStaff) {
 }
 
 export async function deleteStaff(id) {
-  const url = `${BASE_URL}/staffs?id=${id}`;
+  const url = `${BASE_URL}/User?id=${id}`;
   try {
     axiosInstance.delete(url, { data: { id } });
     console.log(`Deleted Staff: ${id}`);
@@ -72,7 +72,7 @@ export async function deleteStaff(id) {
 }
 
 export async function acceptUserWaiting(id) {
-  const url = `${BASE_URL}/staffs/accept_user?AcceptId=${id}`;
+  const url = `${BASE_URL}/User/accept_user?AcceptId=${id}`;
   const data = { id };
   try {
     axiosInstance.put(url, { params: data });
@@ -82,7 +82,7 @@ export async function acceptUserWaiting(id) {
   }
 }
 export async function denyUserWaiting(id, reason) {
-  const url = `${BASE_URL}/staffs/deny_user?DenyId=${id}&reason=${reason}`;
+  const url = `${BASE_URL}/User/deny_user?DenyId=${id}&reason=${reason}`;
   const data = {
     id,
     reason,
@@ -96,7 +96,7 @@ export async function denyUserWaiting(id, reason) {
 }
 
 export async function banUser(id, reason) {
-  const url = `${BASE_URL}/staffs/ban?BanID=${id}&Reason=${reason}`;
+  const url = `${BASE_URL}/User/ban?BanID=${id}&Reason=${reason}`;
   const data = {
     id,
     reason,
@@ -110,7 +110,7 @@ export async function banUser(id, reason) {
 }
 
 export async function unBanUser(id) {
-  const url = `${BASE_URL}/staffs/unban?UnBanId=${id}`;
+  const url = `${BASE_URL}/User/unban?UnBanId=${id}`;
   const data = { id }
   try {
     axiosInstance.put(url, { params: data });

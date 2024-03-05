@@ -136,7 +136,7 @@ export default function DashboardAppPage() {
       setIsLoading(true);
       try {
         const response = await axiosInstance.get(
-          'https://bids-online.azurewebsites.net/api/Login/report_session_total'
+          'https://reasapi.azurewebsites.net/api/Login/report_session_total'
         );
         console.log(response);
         setTotal(response.data);
@@ -152,7 +152,7 @@ export default function DashboardAppPage() {
     (async () => {
       setIsLoading(true);
       try {
-        const response = await axiosInstance.get('https://bids-online.azurewebsites.net/api/Categorys');
+        const response = await axiosInstance.get('https://reasapi.azurewebsites.net/api/Categorys');
         console.log(response);
         setCategories(response.data);
         setIsLoading(false);
@@ -284,7 +284,7 @@ export default function DashboardAppPage() {
         return; // Exit the function early to prevent the API request
       }
   
-      const response = await axiosInstance.get('https://bids-online.azurewebsites.net/api/Login/report_session_total_by_date', {
+      const response = await axiosInstance.get('https://reasapi.azurewebsites.net/api/Login/report_session_total_by_date', {
         params: {
           startDate: startDatePayment.toISOString(),
           endDate: endDatePayment.toISOString()
@@ -330,7 +330,7 @@ export default function DashboardAppPage() {
         setIsLoading(false);
         return; // Exit the function early to prevent the API request
       }
-      const response = await axiosInstance.get('https://bids-online.azurewebsites.net/api/Login/report_category', {
+      const response = await axiosInstance.get('https://reasapi.azurewebsites.net/api/Login/report_category', {
         params: {
           categoryId: selectedCategoryId,
           startDate: startDate.toISOString(),

@@ -322,10 +322,10 @@ const SignUpForm = () => {
       setAddress('');
       setPhoneNumber('');
       setDateOfBirth('');
-      setCitizenId('');
-      setAvatar(null);
-      setFrontImage(null);
-      setBackImage(null);
+      // setCitizenId('');
+      // setAvatar(null);
+      // setFrontImage(null);
+      // setBackImage(null);
       setError('');
 
     } catch (error) {

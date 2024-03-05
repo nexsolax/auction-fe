@@ -120,35 +120,35 @@ export default function LoginForm() {
           // withCredentials: true,
         }
       );
-      // console.log(JSON.stringify(response?.data));
-      // const token = response?.data?.token;
-      // const decoded = jwtDecode(token);
-      // localStorage.setItem('token', token);
-      // localStorage.setItem('loginUser', JSON.stringify(decoded));
-      // navigate('/dashboard/app', { replace: true });
-      // const role = response?.data?.role;
-      // console.log(decoded.role);
-      // setAuth({ email, password, role, token });
+      console.log(JSON.stringify(response?.data));
+      const token = response?.data?.token;
+      const decoded = jwtDecode(token);
+      localStorage.setItem('token', token);
+      localStorage.setItem('loginUser', JSON.stringify(decoded));
+      navigate('/dashboard/app', { replace: true });
+      const role = response?.data?.role;
+      console.log(decoded.role);
+      // setAuth({ username, password, role, token });
       setUsername('');
       setPassword('');
       setSuccess(true);
-      navigate('/additem', { replace: true });
-      // switch (decoded.Role) {
-      //   case 'Admin':
-      //     return navigate('/dashboard/app', { replace: true });
-      //   case 'User':
-      //     return navigate('/home', { replace: true });
-      //   case 'Staff':
-      //     return navigate('/dashboard/app', { replace: true });
-      //   default:
-      //     return null;
-      // }
+      
+      switch (decoded.Role) {
+        case 'Admin':
+          return navigate('/dashboard/app', { replace: true });
+        case 'Customer':
+          return navigate('/home', { replace: true });
+        case 'Staff':
+          return navigate('/dashboard/app', { replace: true });
+        default:
+          return null;
+      }
     } catch (err) {
       if (!err?.response) {
         setError('No Server Response');
         setErrorDialogOpen(true);
       } else if (err.response?.status === 400) {
-        setError('tài khoản hoặc mặt khẩu không đúng');
+        setError('Tài khoản hoặc mặt khẩu không đúng');
         setErrorDialogOpen(true);
         console.log('Wrong Username or Password');
       } else if (err.response?.status === 401) {
