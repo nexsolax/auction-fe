@@ -111,7 +111,7 @@ const ReAuctionForm = () => {
       return;
     }
     
-    // const apiReUrl = `https://bids-online.azurewebsites.net/api/Sessions/re_auction`;
+    const apiReUrl = `https://reasapi.azurewebsites.net/api/Auction`;
     const requestBody = {
       itemId, itemName, description, deposit, quantity, auctionHour, auctionMinute, firstPrice, stepPrice
     };

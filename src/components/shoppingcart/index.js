@@ -46,9 +46,9 @@ const ShoppingCartForm = () => {
     };
 
 
-    const api = `https://reasapi.azurewebsites.net/api/Sessions/by_user_for_payment?id=${jsonUser.Id}`;
-    const rejectPayment = `https://reasapi.azurewebsites.net/api/Sessions/reject_payment`;
-    const paymentAPI = `https://reasapi.azurewebsites.net/api/Login/payment_complete?sessionId=${selectedItem?.sessionId}&payerId=${jsonUser?.Id}&urlSuccess=https://capstone-bid-fe.vercel.app/payment-success&urlFail=https://capstone-bid-fe.vercel.app/payment-fail`
+    const api = `https://reasapi.azurewebsites.net/api/Auction?id=${jsonUser.Id}`;
+    const rejectPayment = `https://reasapi.azurewebsites.net/api/Transaction`;
+    const paymentAPI = `https://reasapi.azurewebsites.net/api/Transaction?transactionId=${selectedItem?.transactionId}`;
 
     useEffect(() => {
         setIsLoading(true); // Set loading to true before making the request

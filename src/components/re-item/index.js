@@ -115,7 +115,7 @@ const ReItemForm = () => {
     //   setErrorDialogOpen(true);
     //   return;
     // }
-    // const apiReUrl = `https://bids-online.azurewebsites.net/api/Items/re_auction_item`;
+    const apiReUrl = `https://reasapi.azurewebsites.net/api/RealEstate`;
     const requestBody = {
       itemId, itemName, description, deposit, quantity, auctionHour, auctionMinute, firstPrice, stepPrice
     };
@@ -144,7 +144,7 @@ const ReItemForm = () => {
   useEffect(() => {
     // Define the API URL
     setIsLoading(true);
-    const apiUrl = `https://bids-online.azurewebsites.net/api/Items/by_id?id=${itemId}`;
+    const apiUrl = `https://reasapi.azurewebsites.net/api/RealEstate/by_id?id=${itemId}`;
 
     // Fetch data from the API using Axios
     axios
@@ -172,7 +172,7 @@ const ReItemForm = () => {
 
   useEffect(() => {
     axios
-      .get('https://bids-online.azurewebsites.net/api/Categorys', {
+      .get('https://reasapi.azurewebsites.net/api/Category', {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
