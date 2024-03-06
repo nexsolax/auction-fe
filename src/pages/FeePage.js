@@ -285,7 +285,7 @@ export default function FeePage() {
   return (
     <>
       <Helmet>
-        <title> Phân khúc đấu giá | BIDS </title>
+        <title> Phân khúc đấu giá | REAs </title>
       </Helmet>
 
       <Container>

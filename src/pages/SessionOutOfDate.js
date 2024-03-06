@@ -252,7 +252,7 @@ export default function SessionOutOfDate() {
   return (
     <>
       <Helmet>
-        <title> Phiên đấu giá thất bại | BIDS </title>
+        <title> Phiên đấu giá thất bại | REAs </title>
       </Helmet>
 
       <Container>

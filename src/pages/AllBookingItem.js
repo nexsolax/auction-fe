@@ -277,7 +277,7 @@ export default function AllBookingItem() {
   return (
     <>
       <Helmet>
-        <title> Đơn đăng ký đấu giá | BIDS </title>
+        <title> Đơn đăng ký đấu giá | REAs </title>
       </Helmet>
 
       <Container>

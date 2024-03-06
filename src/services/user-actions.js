@@ -9,7 +9,7 @@ export async function getAllUser() {
 }
 
 export async function getUserNotificationById(id) {
-  const url = `${BASE_URL}/usernotificationdetail/by_id?userId=${id}`;
+  const url = `${BASE_URL}/Notification/by_id?=${id}`;
   try {
     axiosInstance.get(url, { data: { id } });
   } catch (error) {
@@ -28,17 +28,17 @@ export async function getUserById(id) {
 }
 
 export async function getUserWaiting() {
-  const url = `${BASE_URL}/User/get_waitting`;
+  const url = `${BASE_URL}/User`;
   return axiosInstance.get(url);
 }
 
 export async function getAllUserActive() {
-  const url = `${BASE_URL}/User/get_active`;
+  const url = `${BASE_URL}/User`;
   return axiosInstance.get(url);
 }
 
 export async function getAllUserBan() {
-  const url = `${BASE_URL}/User/get_ban`;
+  const url = `${BASE_URL}/User`;
   return axiosInstance.get(url);
 }
 

@@ -4,12 +4,12 @@ import axiosInstance from './axios-instance';
 const BASE_URL = 'https://reasapi.azurewebsites.net/api';
 
 export async function getAllSessions() {
-  const url = `${BASE_URL}/sessions`;
+  const url = `${BASE_URL}/Auction`;
   return axiosInstance.get(url);
 }
 
 export async function getSessionsById(id) {
-  const url = `${BASE_URL}/sessions/by_id?id=${id}`;
+  const url = `${BASE_URL}/Auction/by_id?id=${id}`;
   try {
     axiosInstance.get(url, { data: { id } });
   } catch (error) {
@@ -18,7 +18,7 @@ export async function getSessionsById(id) {
 }
 
 export async function getSessionHistoryById(id) {
-  const url = `${BASE_URL}/sessiondetails/by_session?id=${id}`;
+  const url = `${BASE_URL}/Auction/by_id?id=${id}`;
   try {
     axiosInstance.get(url, { data: { id } });
   } catch (error) {
@@ -27,41 +27,41 @@ export async function getSessionHistoryById(id) {
 }
 
 export async function getSessionsSuccess() {
-  const url = `${BASE_URL}/sessions/by_complete`;
+  const url = `${BASE_URL}/Auction`;
   return axiosInstance.get(url);
 }
 export async function getSessionsReceived() {
-  const url = `${BASE_URL}/sessions/by_received`;
+  const url = `${BASE_URL}/Auction`;
   return axiosInstance.get(url);
 }
 
 export async function getSessionsErrorItem() {
-  const url = `${BASE_URL}/sessions/by_error_item`;
+  const url = `${BASE_URL}/Auction`;
   return axiosInstance.get(url);
 }
 
 export async function getSessionsInStage() {
-  const url = `${BASE_URL}/sessions/by_in_stage`;
+  const url = `${BASE_URL}/Auction`;
   return axiosInstance.get(url);
 }
 
 export async function getSessionsNotStart() {
-  const url = `${BASE_URL}/sessions/by_not_start`;
+  const url = `${BASE_URL}/Auction`;
   return axiosInstance.get(url);
 }
 
 export async function getSessionsNotPay() {
-  const url = `${BASE_URL}/sessions/by_havent_pay`;
+  const url = `${BASE_URL}/Auction`;
   return axiosInstance.get(url);
 }
 
 export async function getSessionsOutOfDate() {
-  const url = `${BASE_URL}/sessions/by_fail`;
+  const url = `${BASE_URL}/Auction`;
   return axiosInstance.get(url);
 }
 
 export async function deleteSession(id) {
-  const url = `${BASE_URL}/sessions/${id}`;
+  const url = `${BASE_URL}/Auction/${id}`;
   try {
     axiosInstance.delete(url, { data: { id } });
     console.log(`Deleted Session: ${id}`);
@@ -71,7 +71,7 @@ export async function deleteSession(id) {
 }
 
 export async function createSession(session, itemId) {
-  const url = `${BASE_URL}/sessions/add_session`;
+  const url = `${BASE_URL}/Auction`;
   console.log(session);
   const data = {
     sessionName: session.sessionName,
@@ -89,7 +89,7 @@ export async function createSession(session, itemId) {
 }
 
 export async function createSessionNow(session, itemId) {
-  const url = `${BASE_URL}/sessions/add_begin_now_session`;
+  const url = `${BASE_URL}/Auction`;
   console.log(session);
   const data = {
     sessionName: session.sessionName,

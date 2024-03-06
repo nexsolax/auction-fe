@@ -41,27 +41,12 @@ const StaffProfile = () => {
   const newPasswordRef = useRef('');
   const otpInputRef = useRef('');
 
-  const ChangePasswordApi = `https://bids-online.azurewebsites.net/api/Users/update_password/${jsonUser.Id}`;
-  const api = `https://bids-online.azurewebsites.net/api/Users/by_id?id=${jsonUser.Id}`;
-  const confirm = `https://bids-online.azurewebsites.net/api/Users/confirm_email?email=${jsonUser.Email}`;
-  const UpdateRoleApi = `https://bids-online.azurewebsites.net/api/Users/update_role_user`;
+  const ChangePasswordApi = `https://reasapi.azurewebsites.net/api/User/by_id?id=${jsonUser.Id}`;
+  const api = `https://reasapi.azurewebsites.net/api/User/by_id?id=${jsonUser.Id}`;
+ 
+  const UpdateRoleApi = `https://reasapi.azurewebsites.net/api/User/by_id?id=${jsonUser.Id}`;
 
-  const handleOpenOtpDialog = () => {
-    handleOtpSubmit();
-    setOtpDialogOpen(true);
-    setOtpValue('');
-    setOtpError(false);
-  };
 
-  const handleCloseOtpDialog = () => {
-    setOtpDialogOpen(false);
-    setOtpValue('');
-    setOtpError(false);
-  };
-
-  const handleOtpInputChange = (event) => {
-    setOtpError(false);
-  };
 
   const Product = styled(Card)(({ theme }) => ({
     display: 'flex',
@@ -93,7 +78,7 @@ const StaffProfile = () => {
     setUpdateRoleMessage(''); // If needed to clear the updateRoleMessage state
   };
 
-  const isAuctioneer = profileData.role === 'Auctioneer';
+  const isAuctioneer = profileData.role === 'Staff';
 
   const formatProfileData = (data) => {
     const formattedDateOfBirth = formatDate(data.dateOfBirth);
@@ -117,20 +102,7 @@ const StaffProfile = () => {
 
     return `${year}-${month}-${day}`;
   };
-  const handleOtpSubmit = () => {
-    axios
-      .put(confirm, null, { headers: { Authorization: `Bearer ${token}` } })
-      .then((response) => {
-        // If the API response has no error, proceed to update the user's role
-        setOtpError(false);
-        setUpdateRoleMessage('');
-        // return handleUpgradeToAuctioneer();
-      })
-      .catch((error) => {
-        setOtpError(true);
-        setUpdateRoleMessage('');
-      });
-  };
+
 
   useEffect(() => {
     getStaffById(jsonUser.Id).then((response) => {

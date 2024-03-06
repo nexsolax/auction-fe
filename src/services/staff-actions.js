@@ -19,7 +19,7 @@ export async function getStaffById(id) {
 }
 
 export async function getNotificationById(id) {
-  const url = `${BASE_URL}/staffnotificationdetail/by_id?staffId=${id}`;
+  const url = `${BASE_URL}/Notification/by_id?staffId=${id}`;
   try {
     axiosInstance.get(url, { data: { id } });
   } catch (error) {
@@ -72,7 +72,7 @@ export async function deleteStaff(id) {
 }
 
 export async function acceptUserWaiting(id) {
-  const url = `${BASE_URL}/User/accept_user?AcceptId=${id}`;
+  const url = `${BASE_URL}/User/by_id?id=${id}/approve`;
   const data = { id };
   try {
     axiosInstance.put(url, { params: data });
@@ -82,7 +82,7 @@ export async function acceptUserWaiting(id) {
   }
 }
 export async function denyUserWaiting(id, reason) {
-  const url = `${BASE_URL}/User/deny_user?DenyId=${id}&reason=${reason}`;
+  const url = `${BASE_URL}/User`;
   const data = {
     id,
     reason,
@@ -96,10 +96,10 @@ export async function denyUserWaiting(id, reason) {
 }
 
 export async function banUser(id, reason) {
-  const url = `${BASE_URL}/User/ban?BanID=${id}&Reason=${reason}`;
+  const url = `${BASE_URL}/User/by_id?id=${id}`;
   const data = {
-    id,
-    reason,
+    id
+    
   };
   try {
     axiosInstance.put(url, data );
@@ -110,7 +110,7 @@ export async function banUser(id, reason) {
 }
 
 export async function unBanUser(id) {
-  const url = `${BASE_URL}/User/unban?UnBanId=${id}`;
+  const url = `${BASE_URL}}/User/by_id?id=${id}`;
   const data = { id }
   try {
     axiosInstance.put(url, { params: data });

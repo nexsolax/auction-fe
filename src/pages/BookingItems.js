@@ -172,8 +172,8 @@ export default function BookingItems() {
   useEffect(() => {
     (async () => {
       try {
-        const response = await axiosInstance.get('https://bids-online.azurewebsites.net/api/bookingitems/by_staff_watting', {
-        params: { email: user.Email },
+        const response = await axiosInstance.get('https://reasapi.azurewebsites.net/api/User', {
+        params: { userName: user.UserName },
       });
       console.log(response);
       setBookingItem(response.data);
@@ -182,7 +182,7 @@ export default function BookingItems() {
         console.log(error);
       }
     })();
-  }, [user.Email]);
+  }, [user.UserName]);
   // useEffect(() => {
   //   getBookingItemWaiting(user.Email).then((response) => {
   //     setBookingItem(response.data);
@@ -299,7 +299,7 @@ export default function BookingItems() {
   return (
     <>
       <Helmet>
-        <title> Đơn đăng kí đấu giá | BIDS </title>
+        <title> Đơn đăng kí đấu giá | REAs </title>
       </Helmet>
 
       <Container>

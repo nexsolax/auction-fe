@@ -121,7 +121,7 @@ export default function LoginForm() {
         }
       );
       console.log(JSON.stringify(response?.data));
-      const token = response?.data?.token;
+      const token = response?.data?.data?.tokenString;
       const decoded = jwtDecode(token);
       localStorage.setItem('token', token);
       localStorage.setItem('loginUser', JSON.stringify(decoded));

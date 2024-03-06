@@ -136,7 +136,7 @@ export default function DashboardAppPage() {
       setIsLoading(true);
       try {
         const response = await axiosInstance.get(
-          'https://reasapi.azurewebsites.net/api/Login/report_session_total'
+          'https://reasapi.azurewebsites.net/api/Auction'
         );
         console.log(response);
         setTotal(response.data);
@@ -152,7 +152,7 @@ export default function DashboardAppPage() {
     (async () => {
       setIsLoading(true);
       try {
-        const response = await axiosInstance.get('https://reasapi.azurewebsites.net/api/Categorys');
+        const response = await axiosInstance.get('https://reasapi.azurewebsites.net/api/Category');
         console.log(response);
         setCategories(response.data);
         setIsLoading(false);
@@ -284,7 +284,7 @@ export default function DashboardAppPage() {
         return; // Exit the function early to prevent the API request
       }
   
-      const response = await axiosInstance.get('https://reasapi.azurewebsites.net/api/Login/report_session_total_by_date', {
+      const response = await axiosInstance.get('https://reasapi.azurewebsites.net/api/Transaction', {
         params: {
           startDate: startDatePayment.toISOString(),
           endDate: endDatePayment.toISOString()
@@ -330,11 +330,11 @@ export default function DashboardAppPage() {
         setIsLoading(false);
         return; // Exit the function early to prevent the API request
       }
-      const response = await axiosInstance.get('https://reasapi.azurewebsites.net/api/Login/report_category', {
+      const response = await axiosInstance.get('https://reasapi.azurewebsites.net/api/Category', {
         params: {
-          categoryId: selectedCategoryId,
-          startDate: startDate.toISOString(),
-          endDate: endDate.toISOString(),
+          categoryId: selectedCategoryId
+          // startDate: startDate.toISOString(),
+          // endDate: endDate.toISOString(),
         },
       });
       setIsLoading(false);
@@ -342,18 +342,18 @@ export default function DashboardAppPage() {
       setTotalCategory(response.data);
 
       // Update chartData with the new data from the API response
-      const updatedChartData = [
-        { label: 'Chưa bắt đầu', value: response.data.totalCountNotStart },
-        { label: 'Đang diễn ra', value: response.data.totalCountInStage },
-        { label: 'Chưa thanh toán', value: response.data.totalCountHaventTranfer },
-        { label: 'Thành công', value: response.data.totalCountComplete },
-        { label: 'Thất bại', value: response.data.totalCountFail },
-        { label: 'Đã nhận hàng', value: response.data.totalCountReceived },
-        { label: 'Nhận hàng lỗi', value: response.data.totalCountErrorItem },
-        { label: 'Đã xóa', value: response.data.totalCountDelete },
-      ];
+      // const updatedChartData = [
+      //   { label: 'Chưa bắt đầu', value: response.data.totalCountNotStart },
+      //   { label: 'Đang diễn ra', value: response.data.totalCountInStage },
+      //   { label: 'Chưa thanh toán', value: response.data.totalCountHaventTranfer },
+      //   { label: 'Thành công', value: response.data.totalCountComplete },
+      //   { label: 'Thất bại', value: response.data.totalCountFail },
+      //   { label: 'Đã nhận hàng', value: response.data.totalCountReceived },
+      //   { label: 'Nhận hàng lỗi', value: response.data.totalCountErrorItem },
+      //   { label: 'Đã xóa', value: response.data.totalCountDelete },
+      // ];
 
-      setChartCategoryData(updatedChartData);
+      // setChartCategoryData(updatedChartData);
     } catch (error) {
       setIsLoading(false);
       console.log('Failed to fetch: ', error);
@@ -378,7 +378,7 @@ export default function DashboardAppPage() {
         setIsLoading(false);
         return; // Exit the function early to prevent the API request
       }
-      const response = await axiosInstance.get('https://bids-online.azurewebsites.net/api/Login/report_user', {
+      const response = await axiosInstance.get('https://reasapi.azurewebsites.net/api/User', {
         params: {
           startDate: startDateUser.toISOString(),
           endDate: endDateUser.toISOString(),
@@ -405,7 +405,7 @@ export default function DashboardAppPage() {
   return (
     <>
       <Helmet>
-        <title> Tổng quan | BIDS </title>
+        <title> Tổng quan | REAs </title>
       </Helmet>
 
       <Container maxWidth="xl">
@@ -525,8 +525,8 @@ export default function DashboardAppPage() {
                 >
                   {/* Render a list of categories from your API */}
                   {categories.map((category) => (
-                    <MenuItem key={category.categoryId} value={category.categoryId}>
-                      {category.categoryName}
+                    <MenuItem key={category.id} value={category.id}>
+                      {category.name}
                     </MenuItem>
                   ))}
                 </Select>

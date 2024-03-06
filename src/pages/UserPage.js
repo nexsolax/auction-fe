@@ -261,7 +261,7 @@ export default function UserPage() {
   return (
     <>
       <Helmet>
-        <title> Người dùng đang hoạt động | BIDS </title>
+        <title> Người dùng đang hoạt động | REAs </title>
       </Helmet>
 
       <Container>
