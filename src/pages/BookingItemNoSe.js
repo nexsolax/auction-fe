@@ -176,8 +176,8 @@ export default function BookingItemNoSe() {
     (async () => {
       try {
         const response = await axiosInstance.get(
-          'https://bids-online.azurewebsites.net/api/bookingitems/by_staff_to_create_session',
-          { params: { email: user.Email } }
+          'https://reasapi.azurewebsites.net/api/User',
+          { params: { userName: user.UserName } }
         );
         console.log(response);
         setBookingItem(response.data);

@@ -4,12 +4,12 @@ import axiosInstance from './axios-instance';
 const BASE_URL = 'https://reasapi.azurewebsites.net/api';
 
 export async function getAllBookingItem() {
-  const url = `${BASE_URL}/bookingitems`;
+  const url = `${BASE_URL}/RealEstate`;
   return axiosInstance.get(url);
 }
 
 export async function getBookingItemById(id) {
-  const url = `${BASE_URL}/bookingitems/by_id?id=${id}`;
+  const url = `${BASE_URL}/RealEstate/by_id?id=${id}`;
   try {
     axiosInstance.get(url, { data: { id } });
   } catch (error) {
@@ -18,29 +18,28 @@ export async function getBookingItemById(id) {
   return axiosInstance.get(url);
 }
 
-export async function getBookingItemWaiting(email) {
-  const url = `${BASE_URL}/bookingitems/by_staff_watting?email=${email}`;
-  const data = { email };
+export async function getBookingItemWaiting(id) {
+  const url = `${BASE_URL}/RealEstate/by_id?id=${id}/approve`;
+ 
   try {
-    await axiosInstance.get(url, { params: data });
+    await axiosInstance.get(url);
   } catch (error) {
     console.log(error);
   }
 }
 
-export async function getBookingItemNoSesssion(email) {
-  const url = `${BASE_URL}/bookingitems/by_staff_to_create_session`;
-  const data = { email };
-  console.log(data);
+export async function getBookingItemNoSesssion(id) {
+  const url = `${BASE_URL}//RealEstate/by_id?id=${id}`;
+
   try {
-    await axiosInstance.get(url, { params: data });
+    await axiosInstance.get(url);
   } catch (error) {
     console.log(error);
   }
 }
 
 export async function acceptBookingItemWaiting(id) {
-  const url = `${BASE_URL}/bookingitems/accept?id=${id}`;
+  const url = `${BASE_URL}/RealEstate/by_id?id=${id}`;
   try {
     axiosInstance.put(url, { data: { id } });
     console.log(`Accept BookingItem: ${id}`);
@@ -49,11 +48,11 @@ export async function acceptBookingItemWaiting(id) {
   }
 }
 
-export async function denyBookingItemWaiting(id, reason) {
-  const url = `${BASE_URL}/bookingitems/deny?id=${id}&reason=${reason}`;
+export async function denyBookingItemWaiting(id) {
+  const url = `${BASE_URL}/RealEstate/by_id?id=${id}`;
   const data = {
-    id,
-    reason,
+    id
+
   };
   try {
     axiosInstance.put(url, data);

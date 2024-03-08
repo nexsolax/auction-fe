@@ -30,7 +30,7 @@ import axios from 'axios';
 const AddProductForm = () => {
   const [itemName, setItemName] = useState('');
   const [description, setDescription] = useState('');
-  const [categoryId, setCategoryId] = useState('');
+  // const [categoryId, setCategoryId] = useState('');
   const [selectedCategoryName, setSelectedCategoryName] = useState('');
   const [categories, setCategories] = useState([]);
   const [deposit, setDeposit] = useState(false);
@@ -58,41 +58,41 @@ const AddProductForm = () => {
   const [auctionMinuteError, setAuctionMinuteError] = useState('');
 //   const uploader = Uploader({ apiKey: 'public_12a1ybtATujHiWyzUEfMyoyzWFbL' });
 
-  const myCustomLocale = {
-    "orDragDropImages": "... kéo và thả hình ảnh.",
-    "uploadImages": "Tải lên hình ảnh",
-    "maxImagesReached": "Số lượng hình ảnh tối đa:",
-    "cancel": "Hủy bỏ",
-    "continue": "Tiếp Tục",
-    "addAnotherImage": "Thêm một hình ảnh khác...",
-  }
-  const uploaderOptions = {
-    multi: true,
-    maxFileCount: 4,
-    // Comment out this line & use 'onUpdate' instead of
-    // 'onComplete' to have the dropzone close after upload.
-    locale: myCustomLocale,
-    maxFileSizeBytes: 10 * 1024 * 1024,
-    mimeTypes: ["image/jpeg", "image/png", "image/jpg"],
-    showRemoveButton: true,
-    styles: {
-      colors: {
-        active: "#528fff",
-      },
-    },
-    editor: {
-      images: {
-        preview: false,              // True by default if cropping is enabled. Previews PDFs and videos too.
-        crop: false,                 // True by default.
-        cropFilePath: image => {    // Choose the file path used for JSON image crop files.
-          const { filePath } = image  // In:  https://www.bytescale.com/docs/upload-api/types/FileDetails
-          return `${filePath}.crop` // Out: https://www.bytescale.com/docs/upload-api/types/FilePathDefinition
-        },
-        cropRatio: 4 / 3,           // Width / Height. Undefined enables freeform (default).
-        cropShape: "rect"           // "rect" (default) or "circ".
-      }
-    },
-  };
+  // const myCustomLocale = {
+  //   "orDragDropImages": "... kéo và thả hình ảnh.",
+  //   "uploadImages": "Tải lên hình ảnh",
+  //   "maxImagesReached": "Số lượng hình ảnh tối đa:",
+  //   "cancel": "Hủy bỏ",
+  //   "continue": "Tiếp Tục",
+  //   "addAnotherImage": "Thêm một hình ảnh khác...",
+  // }
+  // const uploaderOptions = {
+  //   multi: true,
+  //   maxFileCount: 4,
+  //   // Comment out this line & use 'onUpdate' instead of
+  //   // 'onComplete' to have the dropzone close after upload.
+  //   locale: myCustomLocale,
+  //   maxFileSizeBytes: 10 * 1024 * 1024,
+  //   mimeTypes: ["image/jpeg", "image/png", "image/jpg"],
+  //   showRemoveButton: true,
+  //   styles: {
+  //     colors: {
+  //       active: "#528fff",
+  //     },
+  //   },
+  //   editor: {
+  //     images: {
+  //       preview: false,              // True by default if cropping is enabled. Previews PDFs and videos too.
+  //       crop: false,                 // True by default.
+  //       cropFilePath: image => {    // Choose the file path used for JSON image crop files.
+  //         const { filePath } = image  // In:  https://www.bytescale.com/docs/upload-api/types/FileDetails
+  //         return `${filePath}.crop` // Out: https://www.bytescale.com/docs/upload-api/types/FilePathDefinition
+  //       },
+  //       cropRatio: 4 / 3,           // Width / Height. Undefined enables freeform (default).
+  //       cropShape: "rect"           // "rect" (default) or "circ".
+  //     }
+  //   },
+  // };
 
 
   // useEffect(() => {
@@ -108,14 +108,14 @@ const AddProductForm = () => {
   //     });
   // }, []);
 
-  useEffect(() => {
-    const selectedCategory = categories.find((category) => category.categoryId === categoryId);
-    if (selectedCategory) {
-      setSelectedCategoryName(selectedCategory.categoryName);
-    } else {
-      setSelectedCategoryName('');
-    }
-  }, [categoryId, categories]);
+  // useEffect(() => {
+  //   const selectedCategory = categories.find((category) => category.categoryId === categoryId);
+  //   if (selectedCategory) {
+  //     setSelectedCategoryName(selectedCategory.categoryName);
+  //   } else {
+  //     setSelectedCategoryName('');
+  //   }
+  // }, [categoryId, categories]);
 
   useEffect(() => {
     // Calculate the step price based on firstPrice
@@ -128,28 +128,28 @@ const AddProductForm = () => {
     }
   }, [firstPrice]);
 
-  const handleCategoryChange = (event) => {
-    const selectedCategoryId = event.target.value;
-    setCategoryId(selectedCategoryId);
+  // const handleCategoryChange = (event) => {
+  //   const selectedCategoryId = event.target.value;
+  //   setCategoryId(selectedCategoryId);
 
-    // Find the selected category in the categories array
-    const selectedCategory = categories.find((category) => category.categoryId === selectedCategoryId);
-    if (selectedCategory) {
-      setSelectedCategoryName(selectedCategory.categoryName);
-      setSelectedCategoryDescriptions(selectedCategory.descriptions || []);
+  //   // Find the selected category in the categories array
+  //   const selectedCategory = categories.find((category) => category.categoryId === selectedCategoryId);
+  //   if (selectedCategory) {
+  //     setSelectedCategoryName(selectedCategory.categoryName);
+  //     setSelectedCategoryDescriptions(selectedCategory.descriptions || []);
 
-      // Initialize the description values with empty strings
-      const initialDescriptionValues = {};
-      selectedCategory.descriptions.forEach((description) => {
-        initialDescriptionValues[description.name] = '';
-      });
-      setDescriptionValues(initialDescriptionValues);
-    } else {
-      setSelectedCategoryName('');
-      setSelectedCategoryDescriptions([]);
-      setDescriptionValues({});
-    }
-  };
+  //     // Initialize the description values with empty strings
+  //     const initialDescriptionValues = {};
+  //     selectedCategory.descriptions.forEach((description) => {
+  //       initialDescriptionValues[description.name] = '';
+  //     });
+  //     setDescriptionValues(initialDescriptionValues);
+  //   } else {
+  //     setSelectedCategoryName('');
+  //     setSelectedCategoryDescriptions([]);
+  //     setDescriptionValues({});
+  //   }
+  // };
 
   const handleDescriptionChange = (descriptionName, event) => {
     const newValue = event.target.value;
@@ -175,133 +175,134 @@ const AddProductForm = () => {
       setErrorDialogOpen(true); // Show error dialog
       return; // Prevent form submission
     }
-    if (!image) {
-      setError('Hình Ảnh Không Được Bỏ Trống');
-      setErrorDialogOpen(true);
-      setLoading(false);
-      return; // Prevent form submission
-    }
+    // if (!image) {
+    //   setError('Hình Ảnh Không Được Bỏ Trống');
+    //   setErrorDialogOpen(true);
+    //   setLoading(false);
+    //   return; // Prevent form submission
+    // }
     const formData = {
-      userId: jsonUser.Id,
+      // userId: jsonUser.Id,
       itemName,
       description,
-      categoryId,
+      // categoryId,
       quantity,
-      auctionHour,
-      auctionMinute,
-      typeOfSession,
-      image,
+      // auctionHour,
+      // auctionMinute,
+      // typeOfSession,
+      // image,
       firstPrice,
       stepPrice,
       deposit, // Include the deposit value
     };
 
-    // api = `api/${userId}`
+    //api = `https://reasapi.azurewebsites.net/api/User${userId}`
 
-    // axios
-    //   .post('https://reasapi.azurewebsites.net/api/RealEstate', formData, {
-    //     headers: { Authorization: `Bearer ${token}` },
-    //   })
-    //   .then((response) => {
-    //     console.log('Data successfully posted:', response.data);
-    //     const itemId = response.data[0].itemId;
-    //     const descriptionPromises = selectedCategoryDescriptions.map((description) => {
-    //       const descriptionData = {
-    //         itemId,
-    //         descriptionId: description.id,
-    //         detail: descriptionValues[description.name],
-    //       };
-    //       console.log(itemId);
-    //       return axios.post('https://reasapi.azurewebsites.net/api/RealEstate', descriptionData, {
-    //         headers: { Authorization: `Bearer ${token}` },
-    //       });
-    //     });
-    //     Promise.all(descriptionPromises)
-    //       .then(() => {
-    //         console.log('Item descriptions successfully posted.');
+    axios
+      .post('https://reasapi.azurewebsites.net/api/RealEstate', formData, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        console.log('Data successfully posted:', response.data);
+        const itemId = response.data[0].itemId;
+        const descriptionPromises = selectedCategoryDescriptions.map((description) => {
+          const descriptionData = {
+            itemId,
+            descriptionId: description.id,
+            detail: descriptionValues[description.name],
+          };
+          console.log(itemId);
+          return axios.post('https://reasapi.azurewebsites.net/api/RealEstate', descriptionData, {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+        });
+        Promise.all(descriptionPromises)
+          .then(() => {
+            console.log('Item descriptions successfully posted.');
 
-    //         // Now upload the image to the new API endpoint
-    //         const imageUrls = image.split('\n');
+            // Now upload the image to the new API endpoint
+            // const imageUrls = image.split('\n');
 
-    //         if (!imageUrls) {
-    //           setError("Hình Ảnh Không Được Bỏ Trống");
-    //           setErrorDialogOpen(true);
-    //           return;
-    //         }
-    //         // Create an array to store the promises for image uploads
-    //         const imageUploadPromises = imageUrls.map((imageUrl) => {
-    //           const imageFormData = {
-    //             itemId,
-    //             detailImage: imageUrl,
-    //           };
+            // if (!imageUrls) {
+            //   setError("Hình Ảnh Không Được Bỏ Trống");
+            //   setErrorDialogOpen(true);
+            //   return;
+            // }
 
-    //           return axios.post('https://reasapi.azurewebsites.net/api/RealEstateImage', imageFormData, {
-    //             headers: { Authorization: `Bearer ${token}` },
-    //           });
-    //         });
-    //         Promise.all(imageUploadPromises)
-    //           .then(() => {
-    //             console.log('Image uploaded successfully.');
+            // Create an array to store the promises for image uploads
+            // const imageUploadPromises = imageUrls.map((imageUrl) => {
+            //   const imageFormData = {
+            //     itemId,
+            //     detailImage: imageUrl,
+            //   };
 
-    //             setSuccessDialogOpen(true);
-    //             // Reset form fields
-    //             setItemName('');
-    //             setDescription('');
-    //             setCategoryId('');
-    //             setQuantity('');
-    //             setAuctionHour('');
-    //             setAuctionMinute('');
-    //             setTypeOfSession('');
-    //             // setProductImage(null);
-    //             setFirstPrice('');
-    //             setStepPrice('');
-    //             setLoading(false);
-    //           })
-    //           .catch((error) => {
-    //             console.error('Error uploading image:', error);
-    //             setLoading(false);
-    //             setErrorDialogOpen(true);
-    //           })
-    //           .finally(() => {
-    //             // Set loading back to false after the response is received
-    //           });
-    //       })
-    //       .catch((error) => {
-    //         console.error('Error posting item descriptions:', error);
-    //         setErrorDialogOpen(true);
-    //       });
-    //     // setSuccessDialogOpen(true);
-    //     // // Reset form fields
-    //     // setItemName('');
-    //     // setDescription('');
-    //     // setCategoryId('');
-    //     // setQuantity('');
-    //     // setProductImage(null);
-    //     // setFirstPrice('');
-    //     // setStepPrice('');
-    //   })
-    //   .catch((error) => {
-    //     // Handle error
-    //     if (error.response) {
-    //       // The request was made, and the server responded with an error status code (4xx, 5xx)
-    //       if (error.response.status === 400) {
-    //         // The server returned a 400 status code
-    //         // You can access the error message from the response data
-    //         const errorMessage = error.response.data; // Assuming the error message is in the response data
-    //         console.log('Error:', errorMessage);
-    //         error = setError(errorMessage);
-    //         // Now you can save the errorMessage to your frontend state to display it on the UI
-    //         // this.setState({ errorMessage });
-    //         setLoading(false);
-    //       } else {
-    //         // Other error handling for different status codes
-    //       }
-    //     } else {
-    //       // The request was made but no response was received, or something happened in between
-    //       console.error('Error:', error.message);
-    //     }
-    //     setErrorDialogOpen(true);
-    //   });
+            //   return axios.post('https://reasapi.azurewebsites.net/api/RealEstateImage', imageFormData, {
+            //     headers: { Authorization: `Bearer ${token}` },
+            //   });
+            // });
+            // Promise.all(imageUploadPromises)
+            //   .then(() => {
+            //     console.log('Image uploaded successfully.');
+
+            //     setSuccessDialogOpen(true);
+            //     // Reset form fields
+            //     setItemName('');
+            //     setDescription('');
+            //     // setCategoryId('');
+            //     setQuantity('');
+            //     // setAuctionHour('');
+            //     // setAuctionMinute('');
+            //     // setTypeOfSession('');
+            //     // setProductImage(null);
+            //     setFirstPrice('');
+            //     setStepPrice('');
+            //     setLoading(false);
+            //   })
+            //   .catch((error) => {
+            //     console.error('Error uploading image:', error);
+            //     setLoading(false);
+            //     setErrorDialogOpen(true);
+            //   })
+            //   .finally(() => {
+            //     // Set loading back to false after the response is received
+            //   });
+          })
+          .catch((error) => {
+            console.error('Error posting item descriptions:', error);
+            setErrorDialogOpen(true);
+          });
+        // setSuccessDialogOpen(true);
+        // // Reset form fields
+        // setItemName('');
+        // setDescription('');
+        // setCategoryId('');
+        // setQuantity('');
+        // setProductImage(null);
+        // setFirstPrice('');
+        // setStepPrice('');
+      })
+      .catch((error) => {
+        // Handle error
+        if (error.response) {
+          // The request was made, and the server responded with an error status code (4xx, 5xx)
+          if (error.response.status === 400) {
+            // The server returned a 400 status code
+            // You can access the error message from the response data
+            const errorMessage = error.response.data; // Assuming the error message is in the response data
+            console.log('Error:', errorMessage);
+            error = setError(errorMessage);
+            // Now you can save the errorMessage to your frontend state to display it on the UI
+            // this.setState({ errorMessage });
+            setLoading(false);
+          } else {
+            // Other error handling for different status codes
+          }
+        } else {
+          // The request was made but no response was received, or something happened in between
+          console.error('Error:', error.message);
+        }
+        setErrorDialogOpen(true);
+      });
   };
 
   const handleSuccessDialogClose = () => {
@@ -357,7 +358,7 @@ const AddProductForm = () => {
           />
 
         </Grid>
-        <Grid xs={6} >
+        {/* <Grid xs={6} >
           <FormControl sx={{ marginLeft: "5px" }} fullWidth required margin="normal">
             <InputLabel>Thể Loại Sản Phẩm</InputLabel>
             <Select value={categoryId} onChange={handleCategoryChange} label="Category">
@@ -368,14 +369,14 @@ const AddProductForm = () => {
               ))}
             </Select>
           </FormControl>
-        </Grid>
+        </Grid> */}
       </Grid>
 
 
 
 
 
-      <Box
+      {/* <Box
         sx={{
           display: 'flex',
           justifyContent: 'space-between',
@@ -396,7 +397,7 @@ const AddProductForm = () => {
             sx={{ flex: '1 0 calc(25% - 10px)' }} // This will ensure each TextField takes up 25% of the container width minus 10px for the gap.
           />
         ))}
-      </Box>
+      </Box> */}
 
 
       <Grid container >
@@ -433,7 +434,7 @@ const AddProductForm = () => {
         </Grid>
       </Grid>
 
-
+{/* 
       <Grid container >
         <Grid xs={6}>
           <TextField
@@ -484,7 +485,7 @@ const AddProductForm = () => {
             helperText={auctionMinuteError}
           />
         </Grid>
-      </Grid>
+      </Grid> */}
 
 
 
@@ -512,7 +513,7 @@ const AddProductForm = () => {
         multiline
         rows={4}
       />
-      <description>Hình Ảnh Sản Phẩm</description>
+      {/* <description>Hình Ảnh Sản Phẩm</description> */}
       {/* <UploadDropzone
         uploader={uploader} // Required.
         width="100%" // Optional.

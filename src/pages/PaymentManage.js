@@ -67,7 +67,7 @@ const PaymentManage = () => {
   return (
     <>
           <Helmet>
-        <title> Quản lý thanh toán | BIDS </title>
+        <title> Quản lý thanh toán | REAs </title>
       </Helmet>
     <Container maxWidth="lg">
       <Card>

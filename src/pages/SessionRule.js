@@ -292,7 +292,7 @@ export default function SessionRule() {
   return (
     <>
       <Helmet>
-        <title> Cấu hình thời gian đấu giá | BIDS </title>
+        <title> Cấu hình thời gian đấu giá | REAs </title>
       </Helmet>
 
       <Container>

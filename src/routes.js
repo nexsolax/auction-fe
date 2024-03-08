@@ -83,22 +83,23 @@ export default function Router() {
     // ), },
     { path: 'auction/:sessionId', element: (
       <Suspense>
-        <RolesAuthRoute roles={['Admin', 'Staff', 'User']}>
+        <RolesAuthRoute roles={['Admin', 'Staff', 'Customer']}>
           <AuctionPage />
         </RolesAuthRoute>
       </Suspense>
     ), },
     { path: 'signup', element: <SignUp /> },
-    { path: 'additem', element: (
-      <Suspense>
-        <RolesAuthRoute roles={['User']}>
-          <AddProduct />
-        </RolesAuthRoute>
-      </Suspense>
-    ), },
+    { path: 'additem', element:  <AddProduct />},
+    //  (
+    //   <Suspense>
+    //     <RolesAuthRoute roles={['User']}>
+    //       <AddProduct />
+    //     </RolesAuthRoute>
+    //   </Suspense>
+    // ), },
     { path: 'profile', element: (
       <Suspense>
-        <RolesAuthRoute roles={['User']}>
+        <RolesAuthRoute roles={['Customer']}>
           <Profile />
         </RolesAuthRoute>
       </Suspense>
@@ -107,7 +108,7 @@ export default function Router() {
     { path: 'prepare', element: <PrepareSession />},
     { path: 'instage',element: (
       <Suspense>
-        <RolesAuthRoute roles={[ 'User']}>
+        <RolesAuthRoute roles={[ 'Customer']}>
           <InstageSession />
         </RolesAuthRoute>
       </Suspense>
@@ -115,28 +116,28 @@ export default function Router() {
     { path: 'finish', element: <FinishSession />},
     { path: 'myitem',element: (
       <Suspense>
-        <RolesAuthRoute roles={[ 'User']}>
+        <RolesAuthRoute roles={[ 'Customer']}>
           <MyProductPage />
         </RolesAuthRoute>
       </Suspense>
     ),},
     { path: 'mysession', element: (
       <Suspense>
-        <RolesAuthRoute roles={[ 'User']}>
+        <RolesAuthRoute roles={[ 'Customer']}>
           <MySessionPage />
         </RolesAuthRoute>
       </Suspense>
     ),},
     { path: 'myhistory', element: (
       <Suspense>
-        <RolesAuthRoute roles={[ 'User']}>
+        <RolesAuthRoute roles={[ 'Customer']}>
           <MyHistoryPage />
         </RolesAuthRoute>
       </Suspense>
     ),},
     { path: 'shoppingcart', element: (
       <Suspense>
-        <RolesAuthRoute roles={[ 'User']}>
+        <RolesAuthRoute roles={[ 'Customer']}>
           <ShoppingCartPage />
         </RolesAuthRoute>
       </Suspense>
@@ -146,28 +147,28 @@ export default function Router() {
     { path: 'payment-fail', element: <PaymentFailPage />},
     { path: 'payment-history', element: (
       <Suspense>
-        <RolesAuthRoute roles={[ 'User']}>
+        <RolesAuthRoute roles={[ 'Customer']}>
           <TransactionHistoryPage />
         </RolesAuthRoute>
       </Suspense>
     ),},
     { path: 're-auction/:itemId', element: (
       <Suspense>
-        <RolesAuthRoute roles={[ 'User']}>
+        <RolesAuthRoute roles={[ 'Customer']}>
           <Reauction />
         </RolesAuthRoute>
       </Suspense>
     ), },
     { path: 'update-item/:itemId', element: (
       <Suspense>
-        <RolesAuthRoute roles={[ 'User']}>
+        <RolesAuthRoute roles={[ 'Customer']}>
           <UpdateItem />
         </RolesAuthRoute>
       </Suspense>
     ), },
     { path: 're-item/:itemId', element: (
       <Suspense>
-        <RolesAuthRoute roles={[ 'User']}>
+        <RolesAuthRoute roles={[ 'Customer']}>
           <ReItem />
         </RolesAuthRoute>
       </Suspense>
@@ -179,9 +180,10 @@ export default function Router() {
       path: '/dashboard',
       element: (
         <Suspense>
-          <RolesAuthRoute roles={['Admin', 'Staff']}>
+          <DashboardLayout />
+          {/* <RolesAuthRoute roles={['Admin', 'Staff']}>
             <DashboardLayout />
-          </RolesAuthRoute>
+          </RolesAuthRoute> */}
         </Suspense>
       ),
       children: [
@@ -206,9 +208,10 @@ export default function Router() {
           path: 'staff',
           element: (
             <Suspense>
-              <RolesAuthRoute roles={['Admin']}>
+              <StaffPage/>
+              {/* <RolesAuthRoute roles={['Admin']}>
                 <StaffPage />
-              </RolesAuthRoute>
+              </RolesAuthRoute> */}
             </Suspense>
           ),
         },

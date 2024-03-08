@@ -3,11 +3,11 @@ import axiosInstance from './axios-instance';
 const BASE_URL = 'https://reasapi.azurewebsites.net/api';
 
 export async function getAllPayment() {
-  const url = `${BASE_URL}/Login/report_payment_total`;
+  const url = `${BASE_URL}/Transaction`;
   return axiosInstance.get(url);
 }
 
 export async function getPaymentDetails(userId) {
-  const url = `${BASE_URL}/Login/report_payment_user_total?userId=${userId}`;
+  const url = `${BASE_URL}/Transaction`;
   return axiosInstance.get(url);
 }

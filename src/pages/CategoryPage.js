@@ -343,7 +343,7 @@ export default function CaterogyPage() {
   return (
     <>
       <Helmet>
-        <title> Loại đấu giá | BIDS </title>
+        <title> Loại đấu giá | REAs </title>
       </Helmet>
 
       <Container>

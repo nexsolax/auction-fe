@@ -4,12 +4,12 @@ import axiosInstance from "./axios-instance";
 const BASE_URL = 'https://reasapi.azurewebsites.net/api';
 
 export async function getAllCategory() {
-    const url = `${BASE_URL}/categorys`;
+    const url = `${BASE_URL}/Category`;
     return axiosInstance.get(url);
 }
 
 export async function createCategory(newCategory) {
-    const url = `${BASE_URL}/categorys`;
+    const url = `${BASE_URL}/Category`;
     const data = {
         categoryName: newCategory.categoryName,
     }
@@ -23,7 +23,7 @@ export async function createCategory(newCategory) {
 }
 
 export async function createDescription(categoryId, descriptionName) {
-    const url = `${BASE_URL}/Description`;
+    const url = `${BASE_URL}/Category`;
     const data = {
         categoryId,
         detail: descriptionName
@@ -38,17 +38,17 @@ export async function createDescription(categoryId, descriptionName) {
 }
 
 export async function deleteDescription(id) {
-    const url = `${BASE_URL}/Description?id=${id}`;
+    const url = `${BASE_URL}/Category?id=${id}`;
     try {
         axiosInstance.delete(url, { data: { id } });
-        console.log(`Deleted Description: ${id}`);
+        console.log(`Deleted Category: ${id}`);
     } catch (error) {
         console.log('Khong delete duoc', error);
     }
 }
 
 export async function updateCategory(upCategory) {
-    const url = `${BASE_URL}/categorys`;
+    const url = `${BASE_URL}/Category`;
     const data = {
         categoryId: upCategory.categoryId,
         categoryName: upCategory.categoryName,
@@ -62,10 +62,10 @@ export async function updateCategory(upCategory) {
 }
 
 export async function deleteCategory(id) {
-    const url = `${BASE_URL}/categorys?id=${id}`;
+    const url = `${BASE_URL}/Category?id=${id}`;
     try {
         axiosInstance.delete(url, { data: { id } });
-        console.log(`Deleted Categorys: ${id}`);
+        console.log(`Deleted Category: ${id}`);
     } catch (error) {
         console.log('Khong delete duoc', error);
     }

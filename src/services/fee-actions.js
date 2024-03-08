@@ -4,12 +4,12 @@ import axiosInstance from './axios-instance';
 const BASE_URL = 'https://reasapi.azurewebsites.net/api';
 
 export async function getAllFee() {
-  const url = `${BASE_URL}/fee`;
+  const url = `${BASE_URL}/Auction`;
   return axiosInstance.get(url);
 }
 
 export async function createFee(fee) {
-  const url = `${BASE_URL}/fee`;
+  const url = `${BASE_URL}/Auction`;
   const data = {
     name: fee.name,
     min: fee.min,
@@ -26,7 +26,7 @@ export async function createFee(fee) {
 }
 
 export async function updateFee(fee) {
-  const url = `${BASE_URL}/fee`;
+  const url = `${BASE_URL}/Auction`;
   const data = {
     feeId: fee.feeId,
     name: fee.feeName,
@@ -45,7 +45,7 @@ export async function updateFee(fee) {
 }
 
 export async function deleteFee(feeId) {
-  const url = `${BASE_URL}/fee?id=${feeId}`;
+  const url = `${BASE_URL}/Auction?id=${feeId}`;
   try {
     axiosInstance.delete(url, { data: { feeId } });
     console.log(`Deleted Fee: ${feeId}`);

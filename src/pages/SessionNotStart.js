@@ -254,7 +254,7 @@ export default function SessionNotStart() {
   return (
     <>
       <Helmet>
-        <title> Phiên đấu giá chưa bắt đầu | BIDS </title>
+        <title> Phiên đấu giá chưa bắt đầu | REAs </title>
       </Helmet>
 
       <Container>

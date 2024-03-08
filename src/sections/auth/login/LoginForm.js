@@ -121,21 +121,22 @@ export default function LoginForm() {
         }
       );
       console.log(JSON.stringify(response?.data));
-      const token = response?.data?.token;
+      const token = response?.data?.data?.tokenString;
       const decoded = jwtDecode(token);
       localStorage.setItem('token', token);
       localStorage.setItem('loginUser', JSON.stringify(decoded));
       navigate('/dashboard/app', { replace: true });
       const role = response?.data?.role;
       console.log(decoded.role);
-      // setAuth({ email, password, role, token });
+      // setAuth({ username, password, role, token });
       setUsername('');
       setPassword('');
       setSuccess(true);
+      
       switch (decoded.Role) {
         case 'Admin':
           return navigate('/dashboard/app', { replace: true });
-        case 'User':
+        case 'Customer':
           return navigate('/home', { replace: true });
         case 'Staff':
           return navigate('/dashboard/app', { replace: true });
@@ -147,7 +148,7 @@ export default function LoginForm() {
         setError('No Server Response');
         setErrorDialogOpen(true);
       } else if (err.response?.status === 400) {
-        setError('Địa chỉ email hoặc mặt khẩu không đúng');
+        setError('Tài khoản hoặc mặt khẩu không đúng');
         setErrorDialogOpen(true);
         console.log('Wrong Username or Password');
       } else if (err.response?.status === 401) {
