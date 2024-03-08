@@ -312,7 +312,7 @@ export default function BookingItemNoSe() {
   return (
     <>
       <Helmet>
-        <title> Đơn đăng kí đấu giá | BIDS </title>
+        <title> Đơn đăng kí đấu giá | REAs </title>
       </Helmet>
 
       <Container>

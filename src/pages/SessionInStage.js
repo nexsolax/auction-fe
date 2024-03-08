@@ -252,7 +252,7 @@ export default function SessionInStage() {
   return (
     <>
       <Helmet>
-        <title> Phiên đấu giá đang diễn ra | BIDS </title>
+        <title> Phiên đấu giá đang diễn ra | REAs </title>
       </Helmet>
 
       <Container>

@@ -148,7 +148,7 @@ export default function SessionNotPay() {
   useEffect(() => {
     (async () => {
       try {
-        const response = await axiosInstance.get('https://bids-online.azurewebsites.net/api/sessions/by_havent_pay');
+        const response = await axiosInstance.get('https://reasapi.azurewebsites.net/api/Auction');
         console.log(response);
         setSession(response.data);
       } catch (error) {
@@ -276,7 +276,7 @@ export default function SessionNotPay() {
   return (
     <>
       <Helmet>
-        <title> Phiên đấu giá chưa thanh toán | BIDS </title>
+        <title> Phiên đấu giá chưa thanh toán | REAs </title>
       </Helmet>
 
       <Container>

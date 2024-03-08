@@ -238,7 +238,7 @@ export default function ItemPage() {
   return (
     <>
       <Helmet>
-        <title> Sản phẩm đấu giá | BIDS </title>
+        <title> Sản phẩm đấu giá | REAs </title>
       </Helmet>
 
       <Container>
