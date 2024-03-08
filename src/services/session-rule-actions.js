@@ -4,17 +4,17 @@ import axiosInstance from './axios-instance';
 const BASE_URL = 'https://reasapi.azurewebsites.net/api';
 
 export async function getAllSessionRule() {
-    const url = `${BASE_URL}/sessionrule`;
+    const url = `${BASE_URL}/Auction`;
     return axiosInstance.get(url);
 }
 
 export async function getSessionRuleValid() {
-    const url = `${BASE_URL}/sessionrule/valid`;
+    const url = `${BASE_URL}/Auction`;
     return axiosInstance.get(url);
 }
 
 export async function createSessionRule(newSessionRule) {
-    const url = `${BASE_URL}/sessionrule`;
+    const url = `${BASE_URL}/Auction`;
     const data = {
         name: newSessionRule.name,
         increaseTime: newSessionRule.increaseTime,
@@ -32,7 +32,7 @@ export async function createSessionRule(newSessionRule) {
 }
 
 export async function updateSessionRule(upSessionRule) {
-    const url = `${BASE_URL}/sessionrule`;
+    const url = `${BASE_URL}/Auction`;
     const data = {
         sessionRuleId: upSessionRule.sessionRuleId,
         name: upSessionRule.name,
@@ -49,7 +49,7 @@ export async function updateSessionRule(upSessionRule) {
 }
 
 export async function deleteSessionRule(id) {
-    const url = `${BASE_URL}/sessionrule?id=${id}`;
+    const url = `${BASE_URL}/Auction?id=${id}`;
     try {
         axiosInstance.delete(url, { data: { id } });
         console.log(`Deleted SessionRule: ${id}`);

@@ -264,7 +264,7 @@ export default function SessionSuccess() {
   return (
     <>
       <Helmet>
-        <title> Phiên đấu giá sản phẩm lỗi | BIDS </title>
+        <title> Phiên đấu giá sản phẩm lỗi | REAs </title>
       </Helmet>
 
       <Container>

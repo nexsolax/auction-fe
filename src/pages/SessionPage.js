@@ -215,7 +215,7 @@ export default function SessionPage() {
   return (
     <>
       <Helmet>
-        <title> Session | BIDS </title>
+        <title> Session | REAs </title>
       </Helmet>
 
       <Container>
