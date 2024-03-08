@@ -50,21 +50,21 @@ export default function DashboardAppPage() {
   const user = JSON.parse(localStorage.getItem('loginUser'));
 
   const [selectedMenuItem, setSelectedMenuItem] = useState('Quy1');
-  const [selectedCategoryId, setSelectedCategoryId] = useState('');
+  // const [selectedCategoryId, setSelectedCategoryId] = useState('');
 
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [startDateUser, setStartDateUser] = useState(null);
   const [endDateUser, setEndDateUser] = useState(null);
-  const [startDatePayment, setStartDatePayment] = useState(null);
-  const [endDatePayment, setEndDatePayment] = useState(null);
+  // const [startDatePayment, setStartDatePayment] = useState(null);
+  // const [endDatePayment, setEndDatePayment] = useState(null);
   const [total, setTotal] = useState({});
-  const [totalPayment, setTotalPayment] = useState({});
-  const [totalCategory, setTotalCategory] = useState({});
+  // const [totalPayment, setTotalPayment] = useState({});
+  // const [totalCategory, setTotalCategory] = useState({});
   const [totalUser, setTotalUser] = useState({});
-  const [categories, setCategories] = useState([]);
+  // const [categories, setCategories] = useState([]);
   const [chartData, setChartData] = useState([]);
-  const [chartCategoryData, setChartCategoryData] = useState([]);
+  // const [chartCategoryData, setChartCategoryData] = useState([]);
   const [chartUserData, setChartUserData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -109,16 +109,16 @@ export default function DashboardAppPage() {
     'Đã xóa',
   ];
 
-  const labelsCategory = [
-    'Chưa bắt đầu',
-    'Đang diễn ra',
-    'Chưa thanh toán',
-    'Thành công',
-    'Thất bại',
-    'Đã nhận hàng',
-    'Nhận hàng lỗi',
-    'Đã xóa',
-  ];
+  // const labelsCategory = [
+  //   'Chưa bắt đầu',
+  //   'Đang diễn ra',
+  //   'Chưa thanh toán',
+  //   'Thành công',
+  //   'Thất bại',
+  //   'Đã nhận hàng',
+  //   'Nhận hàng lỗi',
+  //   'Đã xóa',
+  // ];
 
   const labelsUser = [
     'Đã chấp nhận',
@@ -128,7 +128,7 @@ export default function DashboardAppPage() {
   ];
 
   const chartColorsPayment = mapLabelsToColors(labelsPayment);
-  const chartColorsCategory = mapLabelsToColors(labelsCategory); // Define labelsCategory based on your data
+  // const chartColorsCategory = mapLabelsToColors(labelsCategory); // Define labelsCategory based on your data
   const chartColorsUser = mapUserLabelsToColors(labelsUser); // Define labelsUser based on your data
 
   useEffect(() => {
@@ -147,21 +147,27 @@ export default function DashboardAppPage() {
       }
     })();
   }, []);
+  
 
-  useEffect(() => {
-    (async () => {
-      setIsLoading(true);
-      try {
-        const response = await axiosInstance.get('https://reasapi.azurewebsites.net/api/Category');
-        console.log(response);
-        setCategories(response.data);
-        setIsLoading(false);
-      } catch (error) {
-        setIsLoading(false);
-        console.log('Failed to fetch: ', error);
-      }
-    })();
-  }, []);
+  // useEffect(() => {
+  //   (async () => {
+  //     setIsLoading(true);
+  //     try {
+  //       const response = await axiosInstance.get('https://reasapi.azurewebsites.net/api/Category');
+  //       console.log(response);
+  //       if (Array.isArray(response.data)) {
+  //         setCategories(response.data);
+  //       } else {
+  //         console.log('Response data is not an array:', response.data);
+  //       }
+  //       setIsLoading(false);
+  //     } catch (error) {
+  //       setIsLoading(false);
+  //       console.log('Failed to fetch: ', error);
+  //     }
+  //   })();
+  // }, []);
+  
 
   const styles = {
     TaskAltIcon: {
@@ -229,7 +235,7 @@ export default function DashboardAppPage() {
   //       const endDate = new Date(currentYear, endMonth + 1, 0);
 
   //       const response = await axiosInstance.get(
-  //         `https://bids-online.azurewebsites.net/api/Login/report_session_total_by_date`,
+  //         `'https://reasapi.azurewebsites.net/api/Auction`,
   //         {
   //           params: {
   //             startDate: startDate.toISOString(),
@@ -263,102 +269,102 @@ export default function DashboardAppPage() {
     setErrorDialogOpen(false);
   };
 
-  const handleSubmitPayment = async (event) => {
-    event.preventDefault();
-    setIsLoading(true);
+  // const handleSubmitPayment = async (event) => {
+  //   event.preventDefault();
+  //   setIsLoading(true);
 
-    try {
+  //   try {
 
-      if (!startDatePayment || !endDatePayment) {
-        setErrorMessage('Ngày Bắt Đầu Hoặc Kết Thúc Không Được Bỏ Trống');
-        setErrorDialogOpen(true);
-        setIsLoading(false);
-        return; // Exit the function early to prevent the API request
-      }
+  //     if (!startDatePayment || !endDatePayment) {
+  //       setErrorMessage('Ngày Bắt Đầu Hoặc Kết Thúc Không Được Bỏ Trống');
+  //       setErrorDialogOpen(true);
+  //       setIsLoading(false);
+  //       return; // Exit the function early to prevent the API request
+  //     }
   
-      // Check if end date is not greater than start date
-      if (endDatePayment <= startDatePayment) {
-        setErrorMessage('Ngày Kết Thúc Phải bằng Hoặc Lớn Hơn Ngày Bắt Đầu');
-        setErrorDialogOpen(true);
-        setIsLoading(false);
-        return; // Exit the function early to prevent the API request
-      }
+  //     // Check if end date is not greater than start date
+  //     if (endDatePayment <= startDatePayment) {
+  //       setErrorMessage('Ngày Kết Thúc Phải bằng Hoặc Lớn Hơn Ngày Bắt Đầu');
+  //       setErrorDialogOpen(true);
+  //       setIsLoading(false);
+  //       return; // Exit the function early to prevent the API request
+  //     }
   
-      const response = await axiosInstance.get('https://reasapi.azurewebsites.net/api/Transaction', {
-        params: {
-          startDate: startDatePayment.toISOString(),
-          endDate: endDatePayment.toISOString()
-        }
-      });
-      console.log(response)
-      setTotalPayment(response.data);
-      setIsLoading(false);
-      const updatedChartData = [
-        { label: 'Chưa bắt đầu', value: response.data.totalCountNotStart },
-        { label: 'Đang diễn ra', value: response.data.totalCountInStage },
-        { label: 'Chưa thanh toán', value: response.data.totalCountHaventTranfer },
-        { label: 'Thành công', value: response.data.totalCountComplete },
-        { label: 'Thất bại', value: response.data.totalCountFail },
-        { label: 'Đã nhận hàng', value: response.data.totalCountReceived },
-        { label: 'Nhận hàng lỗi', value: response.data.totalCountErrorItem },
-        { label: 'Đã xóa', value: response.data.totalCountDelete },
-      ];
-      setChartData(updatedChartData);
-    }
-    catch (error) {
-      setIsLoading(false);
-      console.log('Failed to fetch: ', error);
-    }
-  }
+  //     const response = await axiosInstance.get('https://reasapi.azurewebsites.net/api/Transaction', {
+  //       params: {
+  //         startDate: startDatePayment.toISOString(),
+  //         endDate: endDatePayment.toISOString()
+  //       }
+  //     });
+  //     console.log(response)
+  //     setTotalPayment(response.data);
+  //     setIsLoading(false);
+  //     // const updatedChartData = [
+  //     //   { label: 'Chưa bắt đầu', value: response.data.totalCountNotStart },
+  //     //   { label: 'Đang diễn ra', value: response.data.totalCountInStage },
+  //     //   { label: 'Chưa thanh toán', value: response.data.totalCountHaventTranfer },
+  //     //   { label: 'Thành công', value: response.data.totalCountComplete },
+  //     //   { label: 'Thất bại', value: response.data.totalCountFail },
+  //     //   { label: 'Đã nhận hàng', value: response.data.totalCountReceived },
+  //     //   { label: 'Nhận hàng lỗi', value: response.data.totalCountErrorItem },
+  //     //   { label: 'Đã xóa', value: response.data.totalCountDelete },
+  //     // ];
+  //     // setChartData(updatedChartData);
+  //   }
+  //   catch (error) {
+  //     setIsLoading(false);
+  //     console.log('Failed to fetch: ', error);
+  //   }
+  // }
 
-  const handleSubmitCategory = async (e) => {
-    e.preventDefault();
-    setIsLoading(true);
-    try {
+  // const handleSubmitCategory = async (e) => {
+  //   e.preventDefault();
+  //   setIsLoading(true);
+  //   try {
 
-      if (!startDate || !endDate) {
-        setErrorMessage('Ngày Bắt Đầu Hoặc Kết Thúc Không Được Bỏ Trống');
-        setErrorDialogOpen(true);
-        setIsLoading(false);
-        return; // Exit the function early to prevent the API request
-      }
+  //     if (!startDate || !endDate) {
+  //       setErrorMessage('Ngày Bắt Đầu Hoặc Kết Thúc Không Được Bỏ Trống');
+  //       setErrorDialogOpen(true);
+  //       setIsLoading(false);
+  //       return; // Exit the function early to prevent the API request
+  //     }
   
-      // Check if end date is not greater than start date
-      if (endDate <= startDate) {
-        setErrorMessage('Ngày Kết Thúc Phải bằng Hoặc Lớn Hơn Ngày Bắt Đầu');
-        setErrorDialogOpen(true);
-        setIsLoading(false);
-        return; // Exit the function early to prevent the API request
-      }
-      const response = await axiosInstance.get('https://reasapi.azurewebsites.net/api/Category', {
-        params: {
-          categoryId: selectedCategoryId
-          // startDate: startDate.toISOString(),
-          // endDate: endDate.toISOString(),
-        },
-      });
-      setIsLoading(false);
-      console.log(response);
-      setTotalCategory(response.data);
+  //     // Check if end date is not greater than start date
+  //     if (endDate <= startDate) {
+  //       setErrorMessage('Ngày Kết Thúc Phải bằng Hoặc Lớn Hơn Ngày Bắt Đầu');
+  //       setErrorDialogOpen(true);
+  //       setIsLoading(false);
+  //       return; // Exit the function early to prevent the API request
+  //     }
+  //     const response = await axiosInstance.get('https://reasapi.azurewebsites.net/api/Category', {
+  //       params: {
+  //         categoryId: selectedCategoryId
+  //         // startDate: startDate.toISOString(),
+  //         // endDate: endDate.toISOString(),
+  //       },
+  //     });
+  //     setIsLoading(false);
+  //     console.log(response);
+  //     setTotalCategory(response.data);
 
-      // Update chartData with the new data from the API response
-      // const updatedChartData = [
-      //   { label: 'Chưa bắt đầu', value: response.data.totalCountNotStart },
-      //   { label: 'Đang diễn ra', value: response.data.totalCountInStage },
-      //   { label: 'Chưa thanh toán', value: response.data.totalCountHaventTranfer },
-      //   { label: 'Thành công', value: response.data.totalCountComplete },
-      //   { label: 'Thất bại', value: response.data.totalCountFail },
-      //   { label: 'Đã nhận hàng', value: response.data.totalCountReceived },
-      //   { label: 'Nhận hàng lỗi', value: response.data.totalCountErrorItem },
-      //   { label: 'Đã xóa', value: response.data.totalCountDelete },
-      // ];
+  //     // Update chartData with the new data from the API response
+  //     // const updatedChartData = [
+  //     //   { label: 'Chưa bắt đầu', value: response.data.totalCountNotStart },
+  //     //   { label: 'Đang diễn ra', value: response.data.totalCountInStage },
+  //     //   { label: 'Chưa thanh toán', value: response.data.totalCountHaventTranfer },
+  //     //   { label: 'Thành công', value: response.data.totalCountComplete },
+  //     //   { label: 'Thất bại', value: response.data.totalCountFail },
+  //     //   { label: 'Đã nhận hàng', value: response.data.totalCountReceived },
+  //     //   { label: 'Nhận hàng lỗi', value: response.data.totalCountErrorItem },
+  //     //   { label: 'Đã xóa', value: response.data.totalCountDelete },
+  //     // ];
 
-      // setChartCategoryData(updatedChartData);
-    } catch (error) {
-      setIsLoading(false);
-      console.log('Failed to fetch: ', error);
-    }
-  };
+  //     // setChartCategoryData(updatedChartData);
+  //   } catch (error) {
+  //     setIsLoading(false);
+  //     console.log('Failed to fetch: ', error);
+  //   }
+  // };
 
   const handleSubmitUser = async (event) => {
     event.preventDefault();
@@ -474,7 +480,7 @@ export default function DashboardAppPage() {
               ]}
             />
           </Grid> */}
-          <Grid item xs={12} md={12}>
+          {/* <Grid item xs={12} md={12}>
             <form onSubmit={handleSubmitPayment} >
               <LocalizationProvider dateAdapter={AdapterMoment}>
                 <DatePicker
@@ -501,11 +507,11 @@ export default function DashboardAppPage() {
               >
                 {isLoading ? <CircularProgress size={24} color="inherit" /> : <SearchIcon />}
               </Button>
-              {/* <Button sx={{marginLeft: '20px', marginTop: '10px'}} type="submit" variant="contained" color="primary">
+              <Button sx={{marginLeft: '20px', marginTop: '10px'}} type="submit" variant="contained" color="primary">
                 Xong
-              </Button> */}
+              </Button>
             </form>
-          </Grid>
+          </Grid> */}
           <Grid item xs={12} md={12}>
             <AppCurrentVisits
               title="Thống kê tổng số phiên đấu giá"
@@ -513,7 +519,7 @@ export default function DashboardAppPage() {
               chartColors={chartColorsPayment}
             />
           </Grid>
-          <Grid item xs={12} md={12}>
+          {/* <Grid item xs={12} md={12}>
             <form onSubmit={handleSubmitCategory}>
               <FormControl fullWidth required margin="normal" sx={{ mb: 3 }}>
                 <InputLabel>Chọn loại đấu giá</InputLabel>
@@ -523,7 +529,7 @@ export default function DashboardAppPage() {
                   label="Select Category"
                   sx={{ minWidth: 120 }}
                 >
-                  {/* Render a list of categories from your API */}
+              
                   {categories.map((category) => (
                     <MenuItem key={category.id} value={category.id}>
                       {category.name}
@@ -556,14 +562,14 @@ export default function DashboardAppPage() {
                 {isLoading ? <CircularProgress size={24} color="inherit" /> : <SearchIcon />}
               </Button>
             </form>
-          </Grid>
-          <Grid item xs={12} md={12}>
+          </Grid> */}
+          {/* <Grid item xs={12} md={12}>
             <AppCurrentVisits
               title="Thống kê theo thể loại"
               chartData={chartCategoryData} // Update chartData with the state variable
               chartColors={chartColorsCategory}
             />
-          </Grid>
+          </Grid> */}
           <Grid item xs={12} md={12}>
             <form onSubmit={handleSubmitUser}>
               <LocalizationProvider dateAdapter={AdapterMoment}>

@@ -128,15 +128,14 @@ export default function LoginForm() {
       navigate('/dashboard/app', { replace: true });
       const role = response?.data?.role;
       console.log(decoded.role);
-      // setAuth({ username, password, role, token });
+      // setAuth({ email, password, role, token });
       setUsername('');
       setPassword('');
       setSuccess(true);
-      
-      switch (decoded.Role) {
+      switch (role) {
         case 'Admin':
           return navigate('/dashboard/app', { replace: true });
-        case 'Customer':
+        case 'User':
           return navigate('/home', { replace: true });
         case 'Staff':
           return navigate('/dashboard/app', { replace: true });

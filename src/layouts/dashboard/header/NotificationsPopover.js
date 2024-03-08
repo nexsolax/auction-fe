@@ -297,13 +297,13 @@ function renderContent(notification) {
       title,
     };
   }
-  if (notification.typeName === 'Sản Phẩ') {
+  if (notification.typeName === 'Sản Phẩm') {
     return {
       avatar: <img alt={notification.typeName} src="/assets/icons/ic_notification_shipping.svg" />,
       title,
     };
   }
-  if (notification.typeName === 'Tài hoản') {
+  if (notification.typeName === 'Tài khoản') {
     return {
       avatar: <img alt={notification.title} src="/assets/icons/ic_notification_mail.svg" />,
       title,

@@ -30,7 +30,8 @@ import axios from 'axios';
 const AddProductForm = () => {
   const [itemName, setItemName] = useState('');
   const [description, setDescription] = useState('');
-  // const [categoryId, setCategoryId] = useState('');
+  const [categoryId, setCategoryId] = useState('');
+  const [address, setAddress] = useState('');
   const [selectedCategoryName, setSelectedCategoryName] = useState('');
   const [categories, setCategories] = useState([]);
   const [deposit, setDeposit] = useState(false);
@@ -95,27 +96,32 @@ const AddProductForm = () => {
   // };
 
 
-  // useEffect(() => {
-  //   axios
-  //     .get('https://reasapi.azurewebsites.net/api/Category', {
-  //       headers: { Authorization: `Bearer ${token}` },
-  //     })
-  //     .then((response) => {
-  //       setCategories(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }, []);
+  useEffect(() => {
+    axios
+      .get('https://reasapi.azurewebsites.net/api/Category', {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        const mappedCategories = response.data.map(category => ({
+          categoryId: category.id,
+          categoryName: category.name,
+          // Add other properties as needed
+        }));
+        setCategories(mappedCategories);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
-  // useEffect(() => {
-  //   const selectedCategory = categories.find((category) => category.categoryId === categoryId);
-  //   if (selectedCategory) {
-  //     setSelectedCategoryName(selectedCategory.categoryName);
-  //   } else {
-  //     setSelectedCategoryName('');
-  //   }
-  // }, [categoryId, categories]);
+  useEffect(() => {
+    const selectedCategory = categories.find((category) => category.categoryId === categoryId);
+    if (selectedCategory) {
+      setSelectedCategoryName(selectedCategory.categoryName);
+    } else {
+      setSelectedCategoryName('');
+    }
+  }, [categoryId, categories]);
 
   useEffect(() => {
     // Calculate the step price based on firstPrice
@@ -128,28 +134,28 @@ const AddProductForm = () => {
     }
   }, [firstPrice]);
 
-  // const handleCategoryChange = (event) => {
-  //   const selectedCategoryId = event.target.value;
-  //   setCategoryId(selectedCategoryId);
+  const handleCategoryChange = (event) => {
+    const selectedCategoryId = event.target.value;
+    setCategoryId(selectedCategoryId);
 
-  //   // Find the selected category in the categories array
-  //   const selectedCategory = categories.find((category) => category.categoryId === selectedCategoryId);
-  //   if (selectedCategory) {
-  //     setSelectedCategoryName(selectedCategory.categoryName);
-  //     setSelectedCategoryDescriptions(selectedCategory.descriptions || []);
+    // Find the selected category in the categories array
+    const selectedCategory = categories.find((category) => category.categoryId === selectedCategoryId);
+    if (selectedCategory) {
+      setSelectedCategoryName(selectedCategory.categoryName);
+      setSelectedCategoryDescriptions(selectedCategory.descriptions || []);
 
-  //     // Initialize the description values with empty strings
-  //     const initialDescriptionValues = {};
-  //     selectedCategory.descriptions.forEach((description) => {
-  //       initialDescriptionValues[description.name] = '';
-  //     });
-  //     setDescriptionValues(initialDescriptionValues);
-  //   } else {
-  //     setSelectedCategoryName('');
-  //     setSelectedCategoryDescriptions([]);
-  //     setDescriptionValues({});
-  //   }
-  // };
+      // Initialize the description values with empty strings
+      const initialDescriptionValues = {};
+      selectedCategory.descriptions.forEach((description) => {
+        initialDescriptionValues[description.name] = '';
+      });
+      setDescriptionValues(initialDescriptionValues);
+    } else {
+      setSelectedCategoryName('');
+      setSelectedCategoryDescriptions([]);
+      setDescriptionValues({});
+    }
+  };
 
   const handleDescriptionChange = (descriptionName, event) => {
     const newValue = event.target.value;
@@ -184,9 +190,10 @@ const AddProductForm = () => {
     const formData = {
       // userId: jsonUser.Id,
       itemName,
+      address,
       description,
-      // categoryId,
-      quantity,
+      categoryId,
+     
       // auctionHour,
       // auctionMinute,
       // typeOfSession,
@@ -219,7 +226,28 @@ const AddProductForm = () => {
         Promise.all(descriptionPromises)
           .then(() => {
             console.log('Item descriptions successfully posted.');
-
+            setSuccessDialogOpen(true);
+                // Reset form fields
+                setItemName('');
+                setDescription('');
+                setCategoryId('');
+                // setQuantity('');
+                // setAuctionHour('');
+                // setAuctionMinute('');
+                // setTypeOfSession('');
+                // setProductImage(null);
+                setFirstPrice('');
+                setStepPrice('');
+                setLoading(false);
+              })
+              .catch((error) => {
+                console.error('Error uploading image:', error);
+                setLoading(false);
+                setErrorDialogOpen(true);
+              })
+              .finally(() => {
+                // Set loading back to false after the response is received
+              
             // Now upload the image to the new API endpoint
             // const imageUrls = image.split('\n');
 
@@ -358,7 +386,7 @@ const AddProductForm = () => {
           />
 
         </Grid>
-        {/* <Grid xs={6} >
+        <Grid xs={6} >
           <FormControl sx={{ marginLeft: "5px" }} fullWidth required margin="normal">
             <InputLabel>Thể Loại Sản Phẩm</InputLabel>
             <Select value={categoryId} onChange={handleCategoryChange} label="Category">
@@ -369,14 +397,14 @@ const AddProductForm = () => {
               ))}
             </Select>
           </FormControl>
-        </Grid> */}
+        </Grid>
       </Grid>
 
 
 
 
 
-      {/* <Box
+      <Box
         sx={{
           display: 'flex',
           justifyContent: 'space-between',
@@ -397,11 +425,11 @@ const AddProductForm = () => {
             sx={{ flex: '1 0 calc(25% - 10px)' }} // This will ensure each TextField takes up 25% of the container width minus 10px for the gap.
           />
         ))}
-      </Box> */}
+      </Box>
 
 
       <Grid container >
-        <Grid xs={6}>
+        {/* <Grid xs={6}>
           <TextField
             label="Số Lượng"
             value={quantity}
@@ -414,7 +442,7 @@ const AddProductForm = () => {
             margin="normal"
             type="text"  // Change type to "text" to prevent non-numeric input
           />
-        </Grid>
+        </Grid> */}
         <Grid xs={6} paddingLeft={"10%"}>
           <Box sx={{ width: '50%' }}>
             <InputLabel>Yêu cầu đặt cọc</InputLabel>

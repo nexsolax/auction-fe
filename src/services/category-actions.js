@@ -41,7 +41,7 @@ export async function deleteDescription(id) {
     const url = `${BASE_URL}/Category?id=${id}`;
     try {
         axiosInstance.delete(url, { data: { id } });
-        console.log(`Deleted Category: ${id}`);
+        console.log(`Deleted description: ${id}`);
     } catch (error) {
         console.log('Khong delete duoc', error);
     }

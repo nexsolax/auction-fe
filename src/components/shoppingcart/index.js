@@ -48,7 +48,7 @@ const ShoppingCartForm = () => {
 
     const api = `https://reasapi.azurewebsites.net/api/Auction?id=${jsonUser.Id}`;
     const rejectPayment = `https://reasapi.azurewebsites.net/api/Transaction`;
-    const paymentAPI = `https://reasapi.azurewebsites.net/api/Transaction?transactionId=${selectedItem?.transactionId}`;
+    const paymentAPI = `https://reasapi.azurewebsites.net/api/Transaction?id=${selectedItem?.transactionId}`;
 
     useEffect(() => {
         setIsLoading(true); // Set loading to true before making the request
@@ -211,7 +211,7 @@ const ShoppingCartForm = () => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {items.map((item) => (
+                        {Array.isArray(items) && items.map((item) => (
                                 <TableRow key={item.sessionId}>
                                     <TableCell align="center">
                                         {item.images && item.images.length > 0 && (

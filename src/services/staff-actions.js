@@ -11,111 +11,90 @@ export async function getAllStaff() {
 export async function getStaffById(id) {
   const url = `${BASE_URL}/User/by_id?id=${id}`;
   try {
-    axiosInstance.get(url, { data: { id } });
+    return axiosInstance.get(url);
   } catch (error) {
     console.log(error);
+    throw error;
   }
-  return axiosInstance.get(url);
 }
 
 export async function getNotificationById(id) {
-  const url = `${BASE_URL}/Notification/by_id?staffId=${id}`;
+  const url = `${BASE_URL}/Notification/by_id?id=${id}`;
   try {
-    axiosInstance.get(url, { data: { id } });
+    const response = await axiosInstance.get(url);
+    return response.data;
   } catch (error) {
-    console.log(error);
+    console.log('Error fetching notification by id:', error);
+    throw error; // Re-throw the error to handle it elsewhere
   }
-  return axiosInstance.get(url);
 }
 
 export async function createStaff(newStaff) {
   const url = `${BASE_URL}/User`;
-  const data = {
-    staffName: newStaff.staffName,
-    email: newStaff.email,
-    password: newStaff.password,
-    address: newStaff.address,
-    phone: newStaff.phone,
-    dateOfBirth: newStaff.dateOfBirth,
-  };
-
   try {
-    axiosInstance.post(url, data);
+    return axiosInstance.post(url, newStaff);
   } catch (error) {
     console.log(error);
+    throw error;
   }
 }
 
 export async function updateStaff(upStaff) {
   const url = `${BASE_URL}/User`;
-  const data = {
-    staffId: upStaff.staffId,
-    staffName: upStaff.staffName,
-    address: upStaff.address,
-    phone: upStaff.phone,
-  };
   try {
-    axiosInstance.put(url, data);
+    return axiosInstance.put(url, upStaff);
   } catch (error) {
     console.log(error);
+    throw error;
   }
 }
 
 export async function deleteStaff(id) {
   const url = `${BASE_URL}/User?id=${id}`;
   try {
-    axiosInstance.delete(url, { data: { id } });
-    console.log(`Deleted Staff: ${id}`);
+    return axiosInstance.delete(url);
   } catch (error) {
     console.log(error);
+    throw error;
   }
 }
 
 export async function acceptUserWaiting(id) {
-  const url = `${BASE_URL}/User/by_id?id=${id}/approve`;
-  const data = { id };
+  const url = `${BASE_URL}/User/by_id/${id}/approve`;
   try {
-    axiosInstance.put(url, { params: data });
-    console.log(`Accept User: ${id}`);
+    return axiosInstance.put(url);
   } catch (error) {
     console.log(error);
-  }
-}
-export async function denyUserWaiting(id, reason) {
-  const url = `${BASE_URL}/User`;
-  const data = {
-    id,
-    reason,
-  };
-  try {
-    axiosInstance.put(url, data);
-    console.log(`Deny User: ${id}`);
-  } catch (error) {
-    console.log(error);
+    throw error;
   }
 }
 
-export async function banUser(id, reason) {
-  const url = `${BASE_URL}/User/by_id?id=${id}`;
-  const data = {
-    id
-    
-  };
+export async function denyUserWaiting(id, reason) {
+  const url = `${BASE_URL}/User/by_id/${id}`;
   try {
-    axiosInstance.put(url, data );
-    console.log(`Ban User: ${id}`);
+    return axiosInstance.put(url, { reason });
   } catch (error) {
     console.log(error);
+    throw error;
+  }
+}
+
+export async function banUser(id) {
+  const url = `${BASE_URL}/User/by_id/${id}`;
+  try {
+    return axiosInstance.put(url);
+  } catch (error) {
+    console.log(error);
+    throw error;
   }
 }
 
 export async function unBanUser(id) {
-  const url = `${BASE_URL}}/User/by_id?id=${id}`;
-  const data = { id }
+  const url = `${BASE_URL}/User/by_id/${id}`;
   try {
-    axiosInstance.put(url, { params: data });
-    console.log(`UnBan User: ${id}`);
+    return axiosInstance.put(url);
   } catch (error) {
     console.log(error);
+    throw error;
   }
 }
