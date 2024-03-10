@@ -29,7 +29,7 @@ export default function Actions({ matches }) {
     const [sessionData, setSessionData] = useState([]);
     const token = localStorage.getItem('token');
 
-    const api = `https://reasapi.azurewebsites.net/api/User/by_id?id=${jsonUser?.Id}`
+    const api = `https://reasapiv2.azurewebsites.net/api/User/by_id?id=${jsonUser?.Id}`
 
 
     const fetchProfileData = async () => {
@@ -50,7 +50,7 @@ export default function Actions({ matches }) {
 
     const fetchSessionData = () => {
         // Fetch data from the API link using Axios
-        axios.get(`https://reasapi.azurewebsites.net/api/User?id=${jsonUser?.Id}`, { headers: { Authorization: `Bearer ${token}` } })
+        axios.get(`https://reasapiv2.azurewebsites.net/api/User?id=${jsonUser?.Id}`, { headers: { Authorization: `Bearer ${token}` } })
             .then(response => {
                 setSessionData(response.data); // Set the fetched data to the state
             })

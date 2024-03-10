@@ -75,11 +75,11 @@ import ReItem from './pages/ReItem';
 export default function Router() {
   const routes = useRoutes([
     // { path: 'home', element: (
-    //   <Suspense>
-    //     <RolesAuthRoute roles={['Admin', 'Staff', 'Auctioneer', 'Bidder']}>
-    //       <HomePage />
-    //     </RolesAuthRoute>
-    //   </Suspense>
+    //   // <Suspense>
+    //   //   <RolesAuthRoute roles={['Admin', 'Staff', 'Customer']}>
+    //   //     <HomePage />
+    //   //   </RolesAuthRoute>
+    //   // </Suspense>
     // ), },
     { path: 'auction/:sessionId', element: (
       <Suspense>

@@ -148,7 +148,7 @@ export default function SessionNotPay() {
   useEffect(() => {
     (async () => {
       try {
-        const response = await axiosInstance.get('https://reasapi.azurewebsites.net/api/Auction');
+        const response = await axiosInstance.get('https://reasapiv2.azurewebsites.net/api/Auction');
         console.log(response);
         setSession(response.data);
       } catch (error) {

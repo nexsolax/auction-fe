@@ -3,8 +3,8 @@ import axios from 'axios';
 const service = {
     getData: () => {
         return new Promise((resolve, reject) => {
-            //const apiUrl = "https://bids-online.azurewebsites.net/api/Sessions/by_not_start";
-            const apiUrl = "https://reasapi.azurewebsites.net/api/Auction";
+            //const apiUrl = "https://reasapiv2.azurewebsites.net/api/Sessions/by_not_start";
+            const apiUrl = "https://reasapiv2.azurewebsites.net/api/Auction";
             // Fetch data from the API using Axios
             axios.get(apiUrl)
                 .then((response) => {

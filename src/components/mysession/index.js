@@ -38,13 +38,13 @@
 //     function SlideTransition(props) {
 //         return <Slide direction="down" {...props} />;
 //     }
-//     const apiNotStart = `https://bids-online.azurewebsites.net/api/Sessions/by_not_start_user?id=${jsonUser.Id}`;
-//     const apiInState = `https://bids-online.azurewebsites.net/api/Sessions/by_in_stage_user?id=${jsonUser.Id}`;
-//     const apiNotPay = `https://bids-online.azurewebsites.net/api/Sessions/by_havent_pay_user?id=${jsonUser.Id}`;
-//     const apiComplete = `https://bids-online.azurewebsites.net/api/Sessions/by_complete_user?id=${jsonUser.Id}`;
-//     const apiFail = `https://bids-online.azurewebsites.net/api/Sessions/by_fail_user?id=${jsonUser.Id}`;
-//     const apiReceived = `https://bids-online.azurewebsites.net/api/Sessions/by_received_user?id=${jsonUser.Id}`;
-//     const apiError = `https://bids-online.azurewebsites.net/api/Sessions/by_error_item_user?id=${jsonUser.Id}`;
+//     const apiNotStart = `https://reasapiv2.azurewebsites.net/api/Sessions/by_not_start_user?id=${jsonUser.Id}`;
+//     const apiInState = `https://reasapiv2.azurewebsites.net/api/Sessions/by_in_stage_user?id=${jsonUser.Id}`;
+//     const apiNotPay = `https://reasapiv2.azurewebsites.net/api/Sessions/by_havent_pay_user?id=${jsonUser.Id}`;
+//     const apiComplete = `https://reasapiv2.azurewebsites.net/api/Sessions/by_complete_user?id=${jsonUser.Id}`;
+//     const apiFail = `https://reasapiv2.azurewebsites.net/api/Sessions/by_fail_user?id=${jsonUser.Id}`;
+//     const apiReceived = `https://reasapiv2.azurewebsites.net/api/Sessions/by_received_user?id=${jsonUser.Id}`;
+//     const apiError = `https://reasapiv2.azurewebsites.net/api/Sessions/by_error_item_user?id=${jsonUser.Id}`;
 
 //     useEffect(() => {
 //         loadItems(option);

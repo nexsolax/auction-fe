@@ -19,7 +19,7 @@ export default function Cart() {
     
 
 
-    // const api = `https://bids-online.azurewebsites.net/api/Sessions/by_user_for_payment?id=${jsonUser?.Id}`
+    // const api = `https://reasapiv2.azurewebsites.net/api/Sessions/by_user_for_payment?id=${jsonUser?.Id}`
     // const fetchSessionData = () => {
     //     // Fetch data from the API link using Axios
     //     axios.get(api , { headers: { Authorization: `Bearer ${token}` } })

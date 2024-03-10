@@ -98,7 +98,7 @@ const AddProductForm = () => {
 
   useEffect(() => {
     axios
-      .get('https://reasapi.azurewebsites.net/api/Category', {
+      .get('https://reasapiv2.azurewebsites.net/api/Category', {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
@@ -203,10 +203,10 @@ const AddProductForm = () => {
       deposit, // Include the deposit value
     };
 
-    //api = `https://reasapi.azurewebsites.net/api/User${userId}`
+    //api = `https://reasapiv2.azurewebsites.net/api/User${userId}`
 
     axios
-      .post('https://reasapi.azurewebsites.net/api/RealEstate', formData, {
+      .post('https://reasapiv2.azurewebsites.net/api/RealEstate', formData, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
@@ -219,7 +219,7 @@ const AddProductForm = () => {
             detail: descriptionValues[description.name],
           };
           console.log(itemId);
-          return axios.post('https://reasapi.azurewebsites.net/api/RealEstate', descriptionData, {
+          return axios.post('https://reasapiv2.azurewebsites.net/api/RealEstate', descriptionData, {
             headers: { Authorization: `Bearer ${token}` },
           });
         });
@@ -264,7 +264,7 @@ const AddProductForm = () => {
             //     detailImage: imageUrl,
             //   };
 
-            //   return axios.post('https://reasapi.azurewebsites.net/api/RealEstateImage', imageFormData, {
+            //   return axios.post('https://reasapiv2.azurewebsites.net/api/RealEstateImage', imageFormData, {
             //     headers: { Authorization: `Bearer ${token}` },
             //   });
             // });

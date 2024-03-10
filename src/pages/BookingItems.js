@@ -172,7 +172,7 @@ export default function BookingItems() {
   useEffect(() => {
     (async () => {
       try {
-        const response = await axiosInstance.get('https://reasapi.azurewebsites.net/api/User', {
+        const response = await axiosInstance.get('https://reasapiv2.azurewebsites.net/api/User', {
         params: { userName: user.UserName },
       });
       console.log(response);

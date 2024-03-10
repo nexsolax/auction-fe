@@ -136,7 +136,7 @@ export default function DashboardAppPage() {
       setIsLoading(true);
       try {
         const response = await axiosInstance.get(
-          'https://reasapi.azurewebsites.net/api/Auction'
+          'https://reasapiv2.azurewebsites.net/api/Auction'
         );
         console.log(response);
         setTotal(response.data);
@@ -153,7 +153,7 @@ export default function DashboardAppPage() {
   //   (async () => {
   //     setIsLoading(true);
   //     try {
-  //       const response = await axiosInstance.get('https://reasapi.azurewebsites.net/api/Category');
+  //       const response = await axiosInstance.get('https://reasapiv2.azurewebsites.net/api/Category');
   //       console.log(response);
   //       if (Array.isArray(response.data)) {
   //         setCategories(response.data);
@@ -184,7 +184,7 @@ export default function DashboardAppPage() {
   //   if (selectedCategoryId) {
   //     (async () => {
   //       try {
-  //         const response = await axiosInstance.get('https://bids-online.azurewebsites.net/api/Login/report_category', {
+  //         const response = await axiosInstance.get('https://reasapiv2.azurewebsites.net/api/Login/report_category', {
   //           params: {
   //             categoryId: selectedCategoryId,
   //             startDate: startDate.toISOString(),
@@ -235,7 +235,7 @@ export default function DashboardAppPage() {
   //       const endDate = new Date(currentYear, endMonth + 1, 0);
 
   //       const response = await axiosInstance.get(
-  //         `'https://reasapi.azurewebsites.net/api/Auction`,
+  //         `'https://reasapiv2.azurewebsites.net/api/Auction`,
   //         {
   //           params: {
   //             startDate: startDate.toISOString(),
@@ -290,7 +290,7 @@ export default function DashboardAppPage() {
   //       return; // Exit the function early to prevent the API request
   //     }
   
-  //     const response = await axiosInstance.get('https://reasapi.azurewebsites.net/api/Transaction', {
+  //     const response = await axiosInstance.get('https://reasapiv2.azurewebsites.net/api/Transaction', {
   //       params: {
   //         startDate: startDatePayment.toISOString(),
   //         endDate: endDatePayment.toISOString()
@@ -336,7 +336,7 @@ export default function DashboardAppPage() {
   //       setIsLoading(false);
   //       return; // Exit the function early to prevent the API request
   //     }
-  //     const response = await axiosInstance.get('https://reasapi.azurewebsites.net/api/Category', {
+  //     const response = await axiosInstance.get('https://reasapiv2.azurewebsites.net/api/Category', {
   //       params: {
   //         categoryId: selectedCategoryId
   //         // startDate: startDate.toISOString(),
@@ -384,7 +384,7 @@ export default function DashboardAppPage() {
         setIsLoading(false);
         return; // Exit the function early to prevent the API request
       }
-      const response = await axiosInstance.get('https://reasapi.azurewebsites.net/api/User', {
+      const response = await axiosInstance.get('https://reasapiv2.azurewebsites.net/api/User', {
         params: {
           startDate: startDateUser.toISOString(),
           endDate: endDateUser.toISOString(),
@@ -416,7 +416,7 @@ export default function DashboardAppPage() {
 
       <Container maxWidth="xl">
         <Typography variant="h4" sx={{ mb: 5 }}>
-          Xin chào {user?.role}
+          Xin chào {user?.unique_name}
         </Typography>
 
         <Grid container spacing={3}>

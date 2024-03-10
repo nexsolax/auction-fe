@@ -132,7 +132,7 @@ const UserBanDetail = () => {
   useEffect(() => {
     (async () => {
       try {
-        const response = await axiosInstance.get('https://bids-online.azurewebsites.net/api/users/by_id', {
+        const response = await axiosInstance.get('https://reasapiv2.azurewebsites.net/api/users/by_id', {
         params: { id: userId },
       });
       console.log(response);

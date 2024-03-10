@@ -1,8 +1,8 @@
 import axios from "axios";
 import axiosInstance from "./axios-instance";
 
-//const BASE_URL = 'https://bids-online.azurewebsites.net/api';
-const BASE_URL = 'https://reasapi.azurewebsites.net/api/Auction';
+//const BASE_URL = 'https://reasapiv2.azurewebsites.net/api';
+const BASE_URL = 'https://reasapiv2.azurewebsites.net/api/Auction';
 
 export async function getAllItems() {
     const url = `${BASE_URL}`;

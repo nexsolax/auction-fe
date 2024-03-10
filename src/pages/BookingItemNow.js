@@ -176,7 +176,7 @@ export default function BookingItemNow() {
     (async () => {
       try {
         const response = await axiosInstance.get(
-          'https://reasapi.azurewebsites.net/api/User',
+          'https://reasapiv2.azurewebsites.net/api/User',
           { params: { userName: user.UserName } }
         );
         console.log(response);

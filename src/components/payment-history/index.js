@@ -65,7 +65,7 @@ const PaymentHistoryForm = () => {
   //     }
   //     setIsLoading(true);
   //     const response = await axios.get(
-  //       `https://bids-online.azurewebsites.net/api/Login/report_payment_user?userId=${jsonUser.Id}&start=${startDate}&end=${endDate}`, { headers: { Authorization: `Bearer ${token}` } }
+  //       `https://reasapiv2.azurewebsites.net/api/Login/report_payment_user?userId=${jsonUser.Id}&start=${startDate}&end=${endDate}`, { headers: { Authorization: `Bearer ${token}` } }
   //     );
   //     setPaymentHistory(response.data);
   //   } catch (error) {

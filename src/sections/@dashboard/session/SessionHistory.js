@@ -159,7 +159,7 @@ const SessionHistory = () => {
     (async () => {
       try {
         const response = await axiosInstance.get(
-          `https://bids-online.azurewebsites.net/api/sessiondetails/by_session?id=${sessionId}`,
+          `https://reasapiv2.azurewebsites.net/api/sessiondetails/by_session?id=${sessionId}`,
           {
             params: { id: sessionId },
           }

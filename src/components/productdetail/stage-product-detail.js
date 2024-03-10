@@ -120,8 +120,8 @@ export default function StageProductDetail({ open, onClose, product }) {
     const isLoggedIn = !!jsonUser && !!jsonUser.Email;
     const [maxWidth, setMaxWidth] = React.useState('sm');
     const [isLoading, setLoading] = useState(false);
-    // const apiUrl = 'https://bids-online.azurewebsites.net/api/SessionDetails/joinning_in_stage';
-    // const paymentAPI = `https://bids-online.azurewebsites.net/api/Login/payment_joinning?sessionId=${selectedItem?.sessionId}&payerId=${jsonUser?.Id}&urlSuccess=https://capstone-bid-fe.vercel.app/payment-success&urlFail=https://capstone-bid-fe.vercel.app/payment-fail`
+    // const apiUrl = 'https://reasapiv2.azurewebsites.net/api/SessionDetails/joinning_in_stage';
+    // const paymentAPI = `https://reasapiv2.azurewebsites.net/api/Login/payment_joinning?sessionId=${selectedItem?.sessionId}&payerId=${jsonUser?.Id}&urlSuccess=https://capstone-bid-fe.vercel.app/payment-success&urlFail=https://capstone-bid-fe.vercel.app/payment-fail`
     const navigate = useNavigate();
 
     useEffect(() => {

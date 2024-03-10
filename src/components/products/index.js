@@ -24,7 +24,7 @@ export default function Products() {
 
     //   useEffect to fetch products (uncomment this when you want to fetch data)
     // useEffect(() => {
-    //     axios.get('https://bids-online.azurewebsites.net/api/Sessions/by_not_start')
+    //     axios.get('https://reasapiv2.azurewebsites.net/api/Sessions/by_not_start')
     //         .then(response => {
     //             const data = response.data;
     //             // Map the fetched data to the products array

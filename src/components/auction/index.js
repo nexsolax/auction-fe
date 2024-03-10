@@ -90,11 +90,11 @@ const AuctionForm = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  const api = `https://reasapi.azurewebsites.net/api/Sessions/by_id?id=${sessionId}`
-  const IncreaseApi = `https://reasapi.azurewebsites.net/api/SessionDetails/increase_price`
-  const NotPayApi = `https://reasapi.azurewebsites.net/api/Sessions/session_status_to_haven't_pay`
-  const sessionDetailAPI = `https://reasapi.azurewebsites.net/api/SessionDetails/by_session?id=${sessionId}`
-  const paymentAPI = `https://reasapi.azurewebsites.net/api/Login/payment_joinning?sessionId=${sessionId}&payerId=${jsonUser?.Id}&urlSuccess=https://capstone-bid-fe.vercel.app/payment-success&urlhttps://capstone-bid-fe.vercel.app/payment-fail`
+  const api = `https://reasapiv2.azurewebsites.net/api/Sessions/by_id?id=${sessionId}`
+  const IncreaseApi = `https://reasapiv2.azurewebsites.net/api/SessionDetails/increase_price`
+  const NotPayApi = `https://reasapiv2.azurewebsites.net/api/Sessions/session_status_to_haven't_pay`
+  const sessionDetailAPI = `https://reasapiv2.azurewebsites.net/api/SessionDetails/by_session?id=${sessionId}`
+  const paymentAPI = `https://reasapiv2.azurewebsites.net/api/Login/payment_joinning?sessionId=${sessionId}&payerId=${jsonUser?.Id}&urlSuccess=https://capstone-bid-fe.vercel.app/payment-success&urlhttps://capstone-bid-fe.vercel.app/payment-fail`
 
   // useEffect(() => {
   //   const interval = setInterval(() => {
@@ -137,7 +137,7 @@ const AuctionForm = () => {
 
   // useEffect(() => {
   //   const connect = new HubConnectionBuilder()
-  //     .withUrl("https://bids-online.azurewebsites.net/sessiondetailhub")
+  //     .withUrl("https://reasapiv2.azurewebsites.net/sessiondetailhub")
   //     .withAutomaticReconnect()
   //     .build();
 

@@ -103,7 +103,7 @@ const ItemDetail = () => {
   useEffect(() => {
     (async () => {
       try {
-        const response = await axiosInstance.get('https://bids-online.azurewebsites.net/api/items/by_id', {
+        const response = await axiosInstance.get('https://reasapiv2.azurewebsites.net/api/items/by_id', {
         params: { id: itemId },
       });
       console.log(response);

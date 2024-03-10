@@ -41,10 +41,10 @@ const StaffProfile = () => {
   const newPasswordRef = useRef('');
   const otpInputRef = useRef('');
 
-  const ChangePasswordApi = `https://reasapi.azurewebsites.net/api/User/by_id?id=${jsonUser.Id}`;
-  const api = `https://reasapi.azurewebsites.net/api/User/by_id?id=${jsonUser.Id}`;
+  const ChangePasswordApi = `https://reasapiv2.azurewebsites.net/api/User/by_id?id=${jsonUser.Id}`;
+  const api = `https://reasapiv2.azurewebsites.net/api/User/by_id?id=${jsonUser.Id}`;
  
-  const UpdateRoleApi = `https://reasapi.azurewebsites.net/api/User/by_id?id=${jsonUser.Id}`;
+  const UpdateRoleApi = `https://reasapiv2.azurewebsites.net/api/User/by_id?id=${jsonUser.Id}`;
 
 
 

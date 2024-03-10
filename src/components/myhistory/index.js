@@ -42,15 +42,15 @@
 //     const [cancelToken, setCancelToken] = useState(null);
 //     const [isLoading, setIsLoading] = useState(true);
 
-//     // const apiDetail = `https://bids-online.azurewebsites.net/api/SessionDetails/by_session_for_bidder?id=${items[0]?.sessionId}&userId=${jsonUser.Id}`;
-//     // const apiDetailfBidder = `https://bids-online.azurewebsites.net/api/SessionDetails/by_session_for_bidder?id=${items[0]?.sessionResponseCompletes?.sessionId}&userId=${jsonUser.Id}`;
-//     const apiInState = `https://bids-online.azurewebsites.net/api/Sessions/by_in_stage_by_auctioneer?id=${jsonUser.Id}`;
-//     const apiNotPay = `https://bids-online.azurewebsites.net/api/Sessions/by_havent_tranfer_by_auctioneer?userId=${jsonUser.Id}`;
-//     const apiComplete = `https://bids-online.azurewebsites.net/api/Sessions/by_complete_by_auctioneer?userId=${jsonUser.Id}`;
-//     const apiFail = `https://bids-online.azurewebsites.net/api/Sessions/by_fail_by_auctioneer?userId=${jsonUser.Id}`;
-//     const apiWinner = `https://bids-online.azurewebsites.net/api/Sessions/by_complete_by_winner?userId=${jsonUser.Id}`;
-//     const apiRecieve = `https://bids-online.azurewebsites.net/api/Sessions/by_received_by_auctioneer?userId=${jsonUser.Id}`;
-//     const apiError = `https://bids-online.azurewebsites.net/api/Sessions/by_error_item_by_auctioneer?userId=${jsonUser.Id}`;
+//     // const apiDetail = `https://reasapiv2.azurewebsites.net/api/SessionDetails/by_session_for_bidder?id=${items[0]?.sessionId}&userId=${jsonUser.Id}`;
+//     // const apiDetailfBidder = `https://reasapiv2.azurewebsites.net/api/SessionDetails/by_session_for_bidder?id=${items[0]?.sessionResponseCompletes?.sessionId}&userId=${jsonUser.Id}`;
+//     const apiInState = `https://reasapiv2.azurewebsites.net/api/Sessions/by_in_stage_by_auctioneer?id=${jsonUser.Id}`;
+//     const apiNotPay = `https://reasapiv2.azurewebsites.net/api/Sessions/by_havent_tranfer_by_auctioneer?userId=${jsonUser.Id}`;
+//     const apiComplete = `https://reasapiv2.azurewebsites.net/api/Sessions/by_complete_by_auctioneer?userId=${jsonUser.Id}`;
+//     const apiFail = `https://reasapiv2.azurewebsites.net/api/Sessions/by_fail_by_auctioneer?userId=${jsonUser.Id}`;
+//     const apiWinner = `https://reasapiv2.azurewebsites.net/api/Sessions/by_complete_by_winner?userId=${jsonUser.Id}`;
+//     const apiRecieve = `https://reasapiv2.azurewebsites.net/api/Sessions/by_received_by_auctioneer?userId=${jsonUser.Id}`;
+//     const apiError = `https://reasapiv2.azurewebsites.net/api/Sessions/by_error_item_by_auctioneer?userId=${jsonUser.Id}`;
 
 //     useEffect(() => {
 //         loadItems(option);
@@ -96,7 +96,7 @@
 //         }
 
 //         // Create the PUT request URL
-//         const apiUrl = `https://bids-online.azurewebsites.net/api/Sessions/session_status_to_received`;
+//         const apiUrl = `https://reasapiv2.azurewebsites.net/api/Sessions/session_status_to_received`;
 
 //         // Create the request body
 //         const requestBody = {
@@ -133,7 +133,7 @@
 //             alert('Session ID is missing.'); // You can replace this with a more user-friendly error message
 //             return;
 //         }
-//         const apiUrl = `https://bids-online.azurewebsites.net/api/Sessions/session_status_to_error_item?reason=${selectedReason}`;
+//         const apiUrl = `https://reasapiv2.azurewebsites.net/api/Sessions/session_status_to_error_item?reason=${selectedReason}`;
 //         const requestBody = {
 //             sessionID: sessionIdToError,
 //         };
@@ -167,19 +167,19 @@
 //         setSessionIdToError(sessionId);
 
 //         if (selectedOption === 'instate') {
-//             apiUrl = `https://bids-online.azurewebsites.net/api/SessionDetails/by_session?id=${sessionId}`;
+//             apiUrl = `https://reasapiv2.azurewebsites.net/api/SessionDetails/by_session?id=${sessionId}`;
 //         } else if (selectedOption === 'notpay') {
-//             apiUrl = `https://bids-online.azurewebsites.net/api/SessionDetails/by_session?id=${sessionId}`;
+//             apiUrl = `https://reasapiv2.azurewebsites.net/api/SessionDetails/by_session?id=${sessionId}`;
 //         } else if (selectedOption === 'success') {
-//             apiUrl = `https://bids-online.azurewebsites.net/api/SessionDetails/by_session?id=${sessionId}`;
+//             apiUrl = `https://reasapiv2.azurewebsites.net/api/SessionDetails/by_session?id=${sessionId}`;
 //         } else if (selectedOption === 'fail') {
-//             apiUrl = `https://bids-online.azurewebsites.net/api/SessionDetails/by_session?id=${sessionId}`;
+//             apiUrl = `https://reasapiv2.azurewebsites.net/api/SessionDetails/by_session?id=${sessionId}`;
 //         } else if (selectedOption === 'pay-success') {
-//             apiUrl = `https://bids-online.azurewebsites.net/api/SessionDetails/by_session?id=${sessionId}`;
+//             apiUrl = `https://reasapiv2.azurewebsites.net/api/SessionDetails/by_session?id=${sessionId}`;
 //         } else if (selectedOption === 'received') {
-//             apiUrl = `https://bids-online.azurewebsites.net/api/SessionDetails/by_session?id=${sessionId}`;
+//             apiUrl = `https://reasapiv2.azurewebsites.net/api/SessionDetails/by_session?id=${sessionId}`;
 //         } else if (selectedOption === 'error') {
-//             apiUrl = `https://bids-online.azurewebsites.net/api/SessionDetails/by_session?id=${sessionId}`;
+//             apiUrl = `https://reasapiv2.azurewebsites.net/api/SessionDetails/by_session?id=${sessionId}`;
 //         }
 
 //         axios

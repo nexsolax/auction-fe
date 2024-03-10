@@ -85,7 +85,7 @@ export default function LoginForm() {
 //       setErrorDialogOpen(true);
 //       return;
 //     }
-//     const api = `https://bids-online.azurewebsites.net/api/Login/reset_password/sdfsdfsdf%40gmail.com?email=${emailValue}`;
+//     const api = `https://reasapiv2.azurewebsites.net/api/Login/reset_password/sdfsdfsdf%40gmail.com?email=${emailValue}`;
 
 //     axios
 //       .put(api)
@@ -113,7 +113,7 @@ export default function LoginForm() {
     try {
 
       const response = await axiosInstance.post(
-        'https://reasapi.azurewebsites.net/api/User/login',
+        'https://reasapiv2.azurewebsites.net/api/User/login',
         JSON.stringify({ username, password }),
         {
           headers: { 'Content-Type': 'application/json' },
@@ -126,8 +126,8 @@ export default function LoginForm() {
       localStorage.setItem('token', token);
       localStorage.setItem('loginUser', JSON.stringify(decoded));
       navigate('/dashboard/app', { replace: true });
-      const role = response?.data?.role;
-      console.log(decoded.role);
+      const role = decoded.role;
+      console.log(role);
       // setAuth({ email, password, role, token });
       setUsername('');
       setPassword('');

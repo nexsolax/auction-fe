@@ -25,7 +25,7 @@ export default function StageProducts() {
 
     // useEffect(() => {
 
-    //     axios.get('https://bids-online.azurewebsites.net/api/Sessions/by_in_stage', {
+    //     axios.get('https://reasapiv2.azurewebsites.net/api/Sessions/by_in_stage', {
     //         headers: { Authorization: `Bearer ${token}` },
     //     })
     //         .then(response => {
