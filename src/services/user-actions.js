@@ -65,7 +65,7 @@ export const getRoleLabel = (status) => {
       return 'Quản trị viên';
     case 'Staff':
       return 'Nhân viên';
-    case 'Customer':
+    case 'Member':
       return 'Người dùng';
     // case 'Guest':
     //   return 'Khách';

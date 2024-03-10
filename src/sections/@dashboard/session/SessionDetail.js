@@ -449,7 +449,7 @@ const SessionDetail = () => {
               <Box
                 sx={{
                   display: 'flex',
-                  justifyContent: 'space-between',
+                  justifycontent: 'space-between',
                   alignItems: 'center',
                   width: '100%',
                   mb: '10px',
@@ -528,7 +528,7 @@ const SessionDetail = () => {
                     </LocalizationProvider>
                   </Grid>
                   <Grid item md={6} sm={12}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <div style={{ display: 'flex', justifycontent: 'space-between' }}>
                       <Button variant="contained" color="primary" onClick={handleUpdateSubmit}>
                         Cập nhật
                       </Button>

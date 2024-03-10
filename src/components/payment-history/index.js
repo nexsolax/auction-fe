@@ -84,7 +84,7 @@ const PaymentHistoryForm = () => {
 
       {paymentHistory.paymentReport && paymentHistory.paymentReport.length > 0 ? (
         <Stack boxShadow={3}>
-          <Grid sx={{ display: "flex", justifyContent: "space-between", margin: "3%" }}>
+          <Grid sx={{ display: "flex", justifycontent: "space-between", margin: "3%" }}>
             <Grid container sx={{ textAlign: "center" }}>
               <Grid item xs={12}>
                 <Typography margin={"1%"} variant="subtitle" >

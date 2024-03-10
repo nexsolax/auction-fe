@@ -18,16 +18,16 @@ export async function getStaffById(id) {
   }
 }
 
-export async function getNotificationById(id) {
-  const url = `${BASE_URL}/Notification/by_id?id=${id}`;
-  try {
-    const response = await axiosInstance.get(url);
-    return response.data;
-  } catch (error) {
-    console.log('Error fetching notification by id:', error);
-    throw error; // Re-throw the error to handle it elsewhere
-  }
-}
+// export async function getNotificationById(id) {
+//   const url = `${BASE_URL}/Notification?id=${id}`;
+//   try {
+//     const response = await axiosInstance.get(url);
+//     return response.data;
+//   } catch (error) {
+//     console.log('Error fetching notification by id:', error);
+//     throw error; // Re-throw the error to handle it elsewhere
+//   }
+// }
 
 export async function createStaff(newStaff) {
   const url = `${BASE_URL}/User`;
@@ -70,7 +70,7 @@ export async function acceptUserWaiting(id) {
 }
 
 export async function denyUserWaiting(id, reason) {
-  const url = `${BASE_URL}/User/by_id/${id}`;
+  const url = `${BASE_URL}/User?id=${id}`;
   try {
     return axiosInstance.put(url, { reason });
   } catch (error) {
@@ -80,7 +80,7 @@ export async function denyUserWaiting(id, reason) {
 }
 
 export async function banUser(id) {
-  const url = `${BASE_URL}/User/by_id/${id}`;
+  const url = `${BASE_URL}/User?id=${id}`;
   try {
     return axiosInstance.put(url);
   } catch (error) {
@@ -90,7 +90,7 @@ export async function banUser(id) {
 }
 
 export async function unBanUser(id) {
-  const url = `${BASE_URL}/User/by_id/${id}`;
+  const url = `${BASE_URL}//User?id=${id}`;
   try {
     return axiosInstance.put(url);
   } catch (error) {

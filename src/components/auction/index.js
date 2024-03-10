@@ -381,7 +381,7 @@ const AuctionForm = () => {
     return (
 
 
-      <Grid container margin={"1%"} sx={{ justifyContent: 'center' }}>
+      <Grid container margin={"1%"} sx={{ justifycontent: 'center' }}>
         <Grid item>
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <Typography variant="h6" component="span" sx={{ mr: 1 }}>
@@ -653,7 +653,7 @@ const AuctionForm = () => {
         </Product>
 
         <ProductDetailInfoWrapper>
-          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', justifycontent: 'center', flexDirection: 'column' }}>
             {auctionData[0]?.endTime && auctionData[0]?.beginTime && (
               <AuctionCountdown endTime={auctionData[0]?.endTime} beginTime={auctionData[0]?.beginTime} />
             )}
@@ -667,21 +667,21 @@ const AuctionForm = () => {
           >
             <Typography sx={{
               display: "flex",
-              justifyContent: "space-between",
+              justifycontent: "space-between",
             }}>
               <Typography margin={'1%'} align="inherit" color={"#696969"} variant="subtitle">Mô tả sản phẩm  </Typography>
               <Typography margin={'1%'} align="right" color={"#B41712"} variant="subtitle"> {auctionData[0]?.description} </Typography>
             </Typography>
             <Typography sx={{
               display: "flex",
-              justifyContent: "space-between",
+              justifycontent: "space-between",
             }}>
               <Typography margin={'1%'} color={"#696969"} align="left" variant="subtitle">Giá khởi Điểm :  </Typography>
               <Typography margin={'1%'} align="right" color={"#B41712"} variant="subtitle"> {formatToVND(auctionData[0]?.firstPrice)} </Typography>
             </Typography>
             <Typography sx={{
               display: "flex",
-              justifyContent: "space-between",
+              justifycontent: "space-between",
             }}>
               <Typography margin={'1%'} color={"#696969"} align="left" variant="subtitle">Phí Tham Gia Đấu Giá:  </Typography>
               <Typography margin={'1%'} align="right" color={"#B41712"} variant="subtitle">
@@ -696,7 +696,7 @@ const AuctionForm = () => {
             </Typography>
             <Typography sx={{
               display: "flex",
-              justifyContent: "space-between",
+              justifycontent: "space-between",
             }}>
               <Typography margin={'1%'} color={"#696969"} align="left" variant="subtitle">Tiền Đặt Cọc:  </Typography>
               <Typography margin={'1%'} align="right" color={"#B41712"} variant="subtitle">  {auctionData[0]?.deposit ? (
@@ -707,49 +707,49 @@ const AuctionForm = () => {
             </Typography>
             <Typography sx={{
               display: "flex",
-              justifyContent: "space-between",
+              justifycontent: "space-between",
             }}>
               <Typography margin={'1%'} color={"#696969"} align="left" variant="subtitle">Bước Giá :  </Typography>
               <Typography margin={'1%'} align="right" color={"#B41712"} variant="subtitle"> {formatToVND(auctionData[0]?.stepPrice)} </Typography>
             </Typography>
             <Typography sx={{
               display: "flex",
-              justifyContent: "space-between",
+              justifycontent: "space-between",
             }}>
               <Typography margin={'1%'} color={"#696969"} align="left" variant="subtitle">Giá hiện tại  </Typography>
               <Typography margin={'1%'} align="right" color={"#B41712"} variant="subtitle"> {formatToVND(auctionData[0]?.finalPrice)} </Typography>
             </Typography>
             <Typography sx={{
               display: "flex",
-              justifyContent: "space-between",
+              justifycontent: "space-between",
             }}>
               <Typography margin={'1%'} color={"#696969"} align="left" variant="subtitle">Thời gian trì hoãn tăng giá :  </Typography>
               <Typography margin={'1%'} align="right" color={"#B41712"} variant="subtitle"> {(auctionData[0]?.delayTime)} </Typography>
             </Typography>
             <Typography sx={{
               display: "flex",
-              justifyContent: "space-between",
+              justifycontent: "space-between",
             }}>
               <Typography margin={'1%'} color={"#696969"} align="left" variant="subtitle">Thay đổi thời gian trì hoãn tăng giá :  </Typography>
               <Typography margin={'1%'} align="right" color={"#B41712"} variant="subtitle"> {(auctionData[0]?.freeTime)} (Cuối) </Typography>
             </Typography>
             <Typography sx={{
               display: "flex",
-              justifyContent: "space-between",
+              justifycontent: "space-between",
             }}>
               <Typography margin={'1%'} color={"#696969"} align="left" variant="subtitle">Thời gian trì hoãn tăng giá đã thay đổi :  </Typography>
               <Typography margin={'1%'} align="right" color={"#B41712"} variant="subtitle"> {(auctionData[0]?.delayFreeTime)} </Typography>
             </Typography>
             <Typography sx={{
               display: "flex",
-              justifyContent: "space-between",
+              justifycontent: "space-between",
             }}>
               <Typography margin={'1%'} color={"#696969"} align="left" variant="subtitle">Thời gian bắt đầu :  </Typography>
               <Typography margin={'1%'} align="right" color={"#B41712"} variant="subtitle"> {formatCreateDate(auctionData[0]?.beginTime)} </Typography>
             </Typography>
             <Typography sx={{
               display: "flex",
-              justifyContent: "space-between",
+              justifycontent: "space-between",
               margin: '1%'
             }}>
               <Typography color={"#696969"} align="left" variant="subtitle">Thời gian Kết thúc :  </Typography>
@@ -768,7 +768,7 @@ const AuctionForm = () => {
                   margin={"1%"}
                   sx={{
                     display: showDescriptions ? "flex" : "none", // Show or hide the descriptions based on state
-                    justifyContent: "space-between",
+                    justifycontent: "space-between",
                   }}
                 >
                   <Typography color={"#696969"} variant="subtitle">
@@ -789,7 +789,7 @@ const AuctionForm = () => {
               margin={"1%"}
               fontWeight={"bold"}
               variant="dashed"
-              sx={{ cursor: "pointer", display: "flex", justifyContent: "center", }}
+              sx={{ cursor: "pointer", display: "flex", justifycontent: "center", }}
               onClick={handleToggleDescriptions} // Toggle the visibility on click
             >
               {showDescriptions ? (
@@ -805,7 +805,7 @@ const AuctionForm = () => {
 
 
 
-            <Box display="flex" alignItems="center" justifyContent="space-between">
+            <Box display="flex" alignItems="center" justifycontent="space-between">
               {auctionData[0]?.delayTime && (
                 <RemainingTime endTime={auctionData[0]?.endTime} />
               )}
@@ -910,7 +910,7 @@ const AuctionForm = () => {
             {auctionData && (
               <>
                 <Grid marginTop={"50px"} marginBottom={"50px"} >
-                  <Typography sx={{ mt: 1, mb: 1, display: "flex", justifyContent: "space-between" }}>
+                  <Typography sx={{ mt: 1, mb: 1, display: "flex", justifycontent: "space-between" }}>
                     <Typography margin={'1%'} align="inherit" variant="subtitle1">Phí Tham Gia Đấu Giá</Typography>
                     <Typography margin={'1%'} align="right" variant="subtitle1">
                       {formatToVND(
@@ -922,7 +922,7 @@ const AuctionForm = () => {
 
                     </Typography>
                   </Typography>
-                  <Typography sx={{ mt: 1, mb: 1, display: "flex", justifyContent: "space-between" }}>
+                  <Typography sx={{ mt: 1, mb: 1, display: "flex", justifycontent: "space-between" }}>
                     <Typography margin={'1%'} align="inherit" variant="subtitle1">Phí Đặt Cọc</Typography>
                     <Typography margin={'1%'} align="right" variant="subtitle1">
                       {auctionData[0]?.deposit ? (
@@ -936,7 +936,7 @@ const AuctionForm = () => {
                 <Divider variant="inset" />
                 <Typography marginTop={"50px"} marginBottom={"50px"}>
 
-                  <Typography sx={{ mt: 1, mb: 1, display: "flex", justifyContent: "space-between" }}>
+                  <Typography sx={{ mt: 1, mb: 1, display: "flex", justifycontent: "space-between" }}>
                     <Typography margin={'1%'} align="inherit" variant="subtitle1">Tổng phụ</Typography>
                     <Typography margin={'1%'} align="right" variant="subtitle1">
 
@@ -960,21 +960,21 @@ const AuctionForm = () => {
 
                     </Typography>
                   </Typography>
-                  <Typography sx={{ mt: 1, mb: 1, display: "flex", justifyContent: "space-between" }}>
+                  <Typography sx={{ mt: 1, mb: 1, display: "flex", justifycontent: "space-between" }}>
                     <Typography margin={'1%'} align="inherit" variant="subtitle1">Phí Vận Chuyển</Typography>
                     <Typography margin={'1%'} align="right" variant="subtitle1"> -- </Typography>
                   </Typography>
-                  <Typography sx={{ mt: 1, mb: 1, display: "flex", justifyContent: "space-between" }}>
+                  <Typography sx={{ mt: 1, mb: 1, display: "flex", justifycontent: "space-between" }}>
                     <Typography margin={'1%'} align="inherit" variant="subtitle1">Thuế</Typography>
                     <Typography margin={'1%'} align="right" variant="subtitle1"> -- </Typography>
                   </Typography>
-                  <Typography sx={{ mt: 1, mb: 1, display: "flex", justifyContent: "space-between" }}>
+                  <Typography sx={{ mt: 1, mb: 1, display: "flex", justifycontent: "space-between" }}>
                     <Typography margin={'1%'} color={"#4688F4"} align="inherit" variant="subtitle1">Khuyến Mãi/ Mã Quà Tặng </Typography>
                   </Typography>
                 </Typography>
 
                 <Divider variant="inset" />
-                <Typography sx={{ display: "flex", justifyContent: "space-between" }}>
+                <Typography sx={{ display: "flex", justifycontent: "space-between" }}>
                   <Typography margin={'1%'} align="inherit" variant="subtitle1">Tổng tiền phải trả</Typography>
                   <Typography margin={'1%'} align="right" variant="h4">
 

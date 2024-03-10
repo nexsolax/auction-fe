@@ -7,7 +7,7 @@ import Tooltip from '@mui/material/Tooltip';
 export default function PositionedTooltips() {
   return (
     <Box sx={{ width: 500 }}>
-      <Grid container justifyContent="center">
+      <Grid container justifycontent="center">
         <Grid item>
           <Tooltip title="Add" placement="top-start">
             <Button>top-start</Button>
@@ -20,7 +20,7 @@ export default function PositionedTooltips() {
           </Tooltip>
         </Grid>
       </Grid>
-      <Grid container justifyContent="center">
+      <Grid container justifycontent="center">
         <Grid item xs={6}>
           <Tooltip title="Add" placement="left-start">
             <Button>left-start</Button>
@@ -52,7 +52,7 @@ export default function PositionedTooltips() {
           </Grid>
         </Grid>
       </Grid>
-      <Grid container justifyContent="center">
+      <Grid container justifycontent="center">
         <Grid item>
           <Tooltip title="Add" placement="bottom-start">
             <Button>bottom-start</Button>

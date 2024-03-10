@@ -76,14 +76,14 @@ export default function Router() {
   const routes = useRoutes([
     // { path: 'home', element: (
     //   // <Suspense>
-    //   //   <RolesAuthRoute roles={['Admin', 'Staff', 'Customer']}>
+    //   //   <RolesAuthRoute roles={['Admin', 'Staff', 'Member']}>
     //   //     <HomePage />
     //   //   </RolesAuthRoute>
     //   // </Suspense>
     // ), },
     { path: 'auction/:sessionId', element: (
       <Suspense>
-        <RolesAuthRoute roles={['Admin', 'Staff', 'Customer']}>
+        <RolesAuthRoute roles={['Admin', 'Staff', 'Member']}>
           <AuctionPage />
         </RolesAuthRoute>
       </Suspense>
@@ -100,7 +100,7 @@ export default function Router() {
     { path: 'profile', element: (
       <Suspense>
              <Profile />
-        {/* <RolesAuthRoute roles={['Customer']}>
+        {/* <RolesAuthRoute roles={['Member']}>
           <Profile />
         </RolesAuthRoute> */}
       </Suspense>
@@ -110,7 +110,7 @@ export default function Router() {
     { path: 'instage',element: (
       <Suspense>
         <InstageSession />
-        {/* <RolesAuthRoute roles={[ 'Customer']}>
+        {/* <RolesAuthRoute roles={[ 'Member']}>
           <InstageSession />
         </RolesAuthRoute> */}
       </Suspense>
@@ -119,7 +119,7 @@ export default function Router() {
     { path: 'myitem',element: (
       <Suspense>
          <MyProductPage />
-        {/* <RolesAuthRoute roles={[ 'Customer']}>
+        {/* <RolesAuthRoute roles={[ 'Member']}>
           <MyProductPage />
         </RolesAuthRoute> */}
       </Suspense>
@@ -127,7 +127,7 @@ export default function Router() {
     { path: 'mysession', element: (
       <Suspense>
          <MySessionPage />
-        {/* <RolesAuthRoute roles={[ 'Customer']}>
+        {/* <RolesAuthRoute roles={[ 'Member']}>
           <MySessionPage />
         </RolesAuthRoute> */}
       </Suspense>
@@ -135,7 +135,7 @@ export default function Router() {
     { path: 'myhistory', element: (
       <Suspense>
          <MyHistoryPage />
-        {/* <RolesAuthRoute roles={[ 'Customer']}>
+        {/* <RolesAuthRoute roles={[ 'Member']}>
           <MyHistoryPage />
         </RolesAuthRoute> */}
       </Suspense>
@@ -143,7 +143,7 @@ export default function Router() {
     { path: 'shoppingcart', element: (
       <Suspense>
         <ShoppingCartPage />
-        {/* <RolesAuthRoute roles={[ 'Customer']}>
+        {/* <RolesAuthRoute roles={[ 'Member']}>
           <ShoppingCartPage />
         </RolesAuthRoute> */}
       </Suspense>
@@ -154,7 +154,7 @@ export default function Router() {
     { path: 'payment-history', element: (
       <Suspense>
         <TransactionHistoryPage />
-        {/* <RolesAuthRoute roles={[ 'Customer']}>
+        {/* <RolesAuthRoute roles={[ 'Member']}>
           <TransactionHistoryPage />
         </RolesAuthRoute> */}
       </Suspense>
@@ -162,7 +162,7 @@ export default function Router() {
     { path: 're-auction/:itemId', element: (
       <Suspense>
          <Reauction />
-        {/* <RolesAuthRoute roles={[ 'Customer']}>
+        {/* <RolesAuthRoute roles={[ 'Member']}>
           <Reauction />
         </RolesAuthRoute> */}
       </Suspense>
@@ -170,7 +170,7 @@ export default function Router() {
     { path: 'update-item/:itemId', element: (
       <Suspense>
         <UpdateItem />
-        {/* <RolesAuthRoute roles={[ 'Customer']}>
+        {/* <RolesAuthRoute roles={[ 'Member']}>
           <UpdateItem />
         </RolesAuthRoute> */}
       </Suspense>
@@ -178,7 +178,7 @@ export default function Router() {
     { path: 're-item/:itemId', element: (
       <Suspense>
         <ReItem />
-        {/* <RolesAuthRoute roles={[ 'Customer']}>
+        {/* <RolesAuthRoute roles={[ 'Member']}>
           <ReItem />
         </RolesAuthRoute> */}
       </Suspense>
@@ -190,10 +190,10 @@ export default function Router() {
       path: '/dashboard',
       element: (
         <Suspense>
-          <DashboardLayout />
-          {/* <RolesAuthRoute roles={['Admin', 'Staff','Customer']}>
+          {/* <DashboardLayout /> */}
+          <RolesAuthRoute roles={['Admin', 'Staff','Member']}>
             <DashboardLayout />
-          </RolesAuthRoute> */}
+          </RolesAuthRoute>
         </Suspense>
       ),
       children: [
@@ -218,10 +218,10 @@ export default function Router() {
           path: 'staff',
           element: (
             <Suspense>
-              <StaffPage/>
-              {/* <RolesAuthRoute roles={['Admin']}>
+           
+              <RolesAuthRoute roles={['Admin']}>
                 <StaffPage />
-              </RolesAuthRoute> */}
+              </RolesAuthRoute>
             </Suspense>
           ),
         },
@@ -229,10 +229,10 @@ export default function Router() {
           path: 'staff-create',
           element: (
             <Suspense>
-                        <StaffCreateNew />
-              {/* <RolesAuthRoute roles={['Admin']}>
+                 
+              <RolesAuthRoute roles={['Admin']}>
                 <StaffCreateNew />
-              </RolesAuthRoute> */}
+              </RolesAuthRoute>
             </Suspense>
           ),
         },
@@ -240,10 +240,10 @@ export default function Router() {
           path: 'category',
           element: (
             <Suspense>
-              <CategoryPage />
-              {/* <RolesAuthRoute roles={['Admin']}>
+          
+              <RolesAuthRoute roles={['Admin']}>
                 <CategoryPage />
-              </RolesAuthRoute> */}
+              </RolesAuthRoute>
             </Suspense>
           ),
         },

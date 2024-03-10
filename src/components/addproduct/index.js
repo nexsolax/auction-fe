@@ -407,7 +407,7 @@ const AddProductForm = () => {
       <Box
         sx={{
           display: 'flex',
-          justifyContent: 'space-between',
+          justifycontent: 'space-between',
           gap: '10px',
           flexWrap: 'wrap',
           maxWidth: 'calc(4 * (100% - 10px) / 4)',

@@ -21,7 +21,7 @@ function Profile() {
         >
 <UIProvider>
                 <Appbar />
-                <Box display={"flex"} flexDirection={'column'} alignItems="center" justifyContent={"center"} sx={{ p: 4 }}>
+                <Box display={"flex"} flexDirection={'column'} alignItems="center" justifycontent={"center"} sx={{ p: 4 }}>
                     <Typography variant="h4">Thông Tin Tài Khoản</Typography>
 
                 </Box>

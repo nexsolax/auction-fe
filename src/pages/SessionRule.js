@@ -296,7 +296,7 @@ export default function SessionRule() {
       </Helmet>
 
       <Container>
-        <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
+        <Stack direction="row" alignItems="center" justifycontent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
             Cấu hình thời gian đấu giá
           </Typography>

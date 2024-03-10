@@ -85,7 +85,7 @@ export default function StageProducts() {
 
     return (
         <Container>
-            <Box sx={{ display: "flex", justifyContent: "flex-start" }}>
+            <Box sx={{ display: "flex", justifycontent: "flex-start" }}>
                 <TextField
                     label="Tìm Kiếm Sản Phẩm"
                     variant="standard"
@@ -101,7 +101,7 @@ export default function StageProducts() {
                 <Grid
                     container
                     spacing={{ xs: 2, md: 3 }}
-                    justifyContent="center"
+                    justifycontent="center"
                     sx={{ margin: `20px 4px 10px 4px` }}
                     columns={{ xs: 4, sm: 8, md: 12 }}
                 >
@@ -113,7 +113,7 @@ export default function StageProducts() {
                 page={currentPage}
                 onChange={handlePageChange}
                 color="primary"
-                sx={{ marginTop: "20px", display: "flex", justifyContent: "center", marginBottom: "10px" }}
+                sx={{ marginTop: "20px", display: "flex", justifycontent: "center", marginBottom: "10px" }}
             />
         </Container>
     );

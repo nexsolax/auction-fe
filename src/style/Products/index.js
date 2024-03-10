@@ -6,7 +6,7 @@ import { Colors } from "../theme";
 export const Product = styled(Box)(({ theme }) => ({
 
     display: 'flex',
-    justifyContent: 'center',
+    justifycontent: 'center',
     alignItems: 'center',
     flexDirection: 'column',
     width : "100%",

@@ -242,7 +242,7 @@ export default function ItemPage() {
       </Helmet>
 
       <Container>
-        <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
+        <Stack direction="row" alignItems="center" justifycontent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
             Sản phẩm đấu giá
           </Typography>

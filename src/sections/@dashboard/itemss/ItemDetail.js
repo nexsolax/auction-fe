@@ -283,7 +283,7 @@ const ItemDetail = () => {
               <Box
                 sx={{
                   display: 'flex',
-                  justifyContent: 'space-between',
+                  justifycontent: 'space-between',
                   alignItems: 'center',
                   width: '100%',
                   mb: '10px',

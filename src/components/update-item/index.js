@@ -265,7 +265,7 @@ const UpdateItemForm = () => {
         <DialogTitle align='center'>Đang tải</DialogTitle>
         <DialogContent>
             {/* You can customize the loading message or add a spinner here */}
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <div style={{ display: 'flex', justifycontent: 'center', alignItems: 'center' }}>
                 <CircularProgress color="primary" size={60} />
             </div>
         </DialogContent>

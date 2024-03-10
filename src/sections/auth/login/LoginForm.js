@@ -135,7 +135,7 @@ export default function LoginForm() {
       switch (role) {
         case 'Admin':
           return navigate('/dashboard/app', { replace: true });
-        case 'User':
+        case 'Member':
           return navigate('/home', { replace: true });
         case 'Staff':
           return navigate('/dashboard/app', { replace: true });
@@ -207,7 +207,7 @@ export default function LoginForm() {
           />
         </Stack>
 
-        <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ my: 2 }}>
+        <Stack direction="row" alignItems="center" justifycontent="space-between" sx={{ my: 2 }}>
           <FormControlLabel required control={<Checkbox />} label="Remember me" />
           <Link onClick={handleClickOpen} variant="subtitle2" underline="hover">
             Quên mật khẩu?

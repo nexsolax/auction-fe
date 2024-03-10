@@ -64,7 +64,7 @@ const UserWaitingDetail = () => {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center', // Center the image vertically
+    justifycontent: 'center', // Center the image vertically
     maxHeight: '80vh',
     overflow: 'auto',
     width: '100%', // Set the width to 100% to make the background color cover the entire modal width

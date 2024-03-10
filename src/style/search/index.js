@@ -10,7 +10,7 @@ export const SearchBoxContainer = styled(Box)(({theme}) => ({
     height: '100%',
     background: Colors.primary,
     display: 'flex',
-    justifyContent:'center',
+    justifycontent:'center',
     alignItems:'center',
     zIndex: 99999,
     opacity:0.9

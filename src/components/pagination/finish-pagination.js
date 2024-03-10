@@ -28,7 +28,7 @@ export default function AppFinishPagination({ setProductsss}) {
         setPagination({ ...pagination, from : From, to: To });
     }
     return (
-        <Box justifyContent={"center"} alignContent={"center"} display={"flex"} sx={{
+        <Box justifycontent={"center"} alignContent={"center"} display={"flex"} sx={{
             margin: "20px 0px"
         }}>
             <Pagination 

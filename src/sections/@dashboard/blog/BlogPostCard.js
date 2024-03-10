@@ -36,7 +36,7 @@ const StyledAvatar = styled(Avatar)(({ theme }) => ({
 const StyledInfo = styled('div')(({ theme }) => ({
   display: 'flex',
   flexWrap: 'wrap',
-  justifyContent: 'flex-end',
+  justifycontent: 'flex-end',
   marginTop: theme.spacing(3),
   color: theme.palette.text.disabled,
 }));

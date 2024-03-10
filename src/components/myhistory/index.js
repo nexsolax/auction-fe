@@ -309,7 +309,7 @@
 //                     <DialogTitle align='center'>Đang tải</DialogTitle>
 //                     <DialogContent>
 //                         {/* You can customize the loading message or add a spinner here */}
-//                         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+//                         <div style={{ display: 'flex', justifycontent: 'center', alignItems: 'center' }}>
 //                             <CircularProgress color="primary" size={60} />
 //                         </div>
 //                     </DialogContent>
@@ -424,7 +424,7 @@
 //                         onChange={handlePageChange}
 //                         color="primary"
 //                         size="large"
-//                         sx={{ display: 'flex', justifyContent: 'center', mt: '20px' }}
+//                         sx={{ display: 'flex', justifycontent: 'center', mt: '20px' }}
 //                     />
 //                 </Paper>
 //             </Box>
@@ -438,7 +438,7 @@
 //                     style={{
 //                         display: 'flex',
 //                         alignItems: 'center',
-//                         justifyContent: 'center',
+//                         justifycontent: 'center',
 //                     }}
 //                 >
 //                     <Box
@@ -461,7 +461,7 @@
 //                             <Box
 //                                 display="flex"
 //                                 alignItems="center"
-//                                 justifyContent={"space-between"}
+//                                 justifycontent={"space-between"}
 //                                 fontSize={"25px"}
 //                             >
 //                                 Lịch Sử Đấu Giá Của Phiên
@@ -507,7 +507,7 @@
 //                                     <Stack
 //                                         spacing={2}
 //                                         direction="row"
-//                                         justifyContent="flex-end" // Align to the right
+//                                         justifycontent="flex-end" // Align to the right
 //                                         padding={2} // Optional padding
 //                                         marginTop={"1%"}
 //                                         marginRight={"5%"}
@@ -548,7 +548,7 @@
 //                             onChange={(event, page) => setDialogCurrentPage(page)}
 //                             color="primary"
 //                             size="large"
-//                             sx={{ display: 'flex', justifyContent: 'center', mt: '20px' }}
+//                             sx={{ display: 'flex', justifycontent: 'center', mt: '20px' }}
 //                         />
 //                     </Box>
 //                 </Modal>
@@ -563,7 +563,7 @@
 //                     style={{
 //                         display: 'flex',
 //                         alignItems: 'center',
-//                         justifyContent: 'center',
+//                         justifycontent: 'center',
 //                     }}
 //                 >
 //                     <Box
@@ -585,7 +585,7 @@
 //                             <Box
 //                                 display="flex"
 //                                 alignItems="center"
-//                                 justifyContent={"space-between"}
+//                                 justifycontent={"space-between"}
 //                                 fontSize={"25px"}
 //                             >
 //                                 Lịch Sử Đấu Giá Của Phiên
@@ -637,7 +637,7 @@
 //                             onChange={(event, page) => setDialogCurrentPage(page)}
 //                             color="primary"
 //                             size="large"
-//                             sx={{ display: 'flex', justifyContent: 'center', mt: '20px' }}
+//                             sx={{ display: 'flex', justifycontent: 'center', mt: '20px' }}
 //                         />
 
 //                     </Box>

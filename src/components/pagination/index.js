@@ -27,7 +27,7 @@ export default function AppPagination({ setProducts }) {
 
     return (
         <Box
-            justifyContent={"center"}
+            justifycontent={"center"}
             alignContent={"center"}
             display={"flex"}
             sx={{

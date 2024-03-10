@@ -303,7 +303,7 @@ export default function BookingItems() {
       </Helmet>
 
       <Container>
-        <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
+        <Stack direction="row" alignItems="center" justifycontent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
             Đơn đăng kí đấu giá
           </Typography>

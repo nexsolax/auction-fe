@@ -183,7 +183,7 @@ const MyProductForm = () => {
         width: '50%',
         height: '100%',
         display: 'flex',
-        justifyContent: 'center',
+        justifycontent: 'center',
         alignItems: 'center',
         flexDirection: 'column',
         [theme.breakpoints.down('md')]: {
@@ -252,7 +252,7 @@ const MyProductForm = () => {
                     <DialogTitle align='center'>Đang tải</DialogTitle>
                     <DialogContent>
                         {/* You can customize the loading message or add a spinner here */}
-                        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                        <div style={{ display: 'flex', justifycontent: 'center', alignItems: 'center' }}>
                             <CircularProgress color="primary" size={60} />
                         </div>
                     </DialogContent>
@@ -343,7 +343,7 @@ const MyProductForm = () => {
                             onChange={handlePageChange}
                             color="primary"
                             size="large"
-                            sx={{ display: 'flex', justifyContent: 'center', mt: '20px' }}
+                            sx={{ display: 'flex', justifycontent: 'center', mt: '20px' }}
                         />
                     </Box>
                 </Paper>
@@ -361,7 +361,7 @@ const MyProductForm = () => {
                     <Box
                         display="flex"
                         alignItems="center"
-                        justifyContent={"space-between"}
+                        justifycontent={"space-between"}
                         fontSize={"25px"}
                     >
                         Thông Tin Sản Phẩm
@@ -447,42 +447,42 @@ const MyProductForm = () => {
                                 >
                                     <Typography sx={{
                                         display: "flex",
-                                        justifyContent: "space-between",
+                                        justifycontent: "space-between",
                                     }}>
                                         <Typography margin={'1%'} align="inherit" color={"#696969"} variant="subtitle">Tên sản phẩm:</Typography>
                                         <Typography margin={'1%'} align="right" color={"#B41712"} variant="subtitle"> {selectedItem.itemName} </Typography>
                                     </Typography>
                                     <Typography sx={{
                                         display: "flex",
-                                        justifyContent: "space-between",
+                                        justifycontent: "space-between",
                                     }}>
                                         <Typography margin={'1%'} align="inherit" color={"#696969"} variant="subtitle">Mô Tả sản phẩm:</Typography>
                                         <Typography margin={'1%'} align="right" color={"#B41712"} variant="subtitle"> {selectedItem?.descriptionDetail} </Typography>
                                     </Typography>
                                     <Typography sx={{
                                         display: "flex",
-                                        justifyContent: "space-between",
+                                        justifycontent: "space-between",
                                     }}>
                                         <Typography margin={'1%'} align="inherit" color={"#696969"} variant="subtitle">Giá Khởi điểm:</Typography>
                                         <Typography margin={'1%'} align="right" color={"#B41712"} variant="subtitle"> {selectedItem?.firstPrice?.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }) || '-'} </Typography>
                                     </Typography>
                                     <Typography sx={{
                                         display: "flex",
-                                        justifyContent: "space-between",
+                                        justifycontent: "space-between",
                                     }}>
                                         <Typography margin={'1%'} align="inherit" color={"#696969"} variant="subtitle">Bước Giá:</Typography>
                                         <Typography margin={'1%'} align="right" color={"#B41712"} variant="subtitle"> {selectedItem?.stepPrice?.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }) || '-'} </Typography>
                                     </Typography>
                                     <Typography sx={{
                                         display: "flex",
-                                        justifyContent: "space-between",
+                                        justifycontent: "space-between",
                                     }}>
                                         <Typography margin={'1%'} align="inherit" color={"#696969"} variant="subtitle">Thể Loại:</Typography>
                                         <Typography margin={'1%'} align="right" color={"#B41712"} variant="subtitle"> {selectedItem?.categoryName} </Typography>
                                     </Typography>
                                     <Typography sx={{
                                         display: "flex",
-                                        justifyContent: "space-between",
+                                        justifycontent: "space-between",
                                     }}>
                                         <Typography margin={'1%'} align="inherit" color={"#696969"} variant="subtitle">Ngày Tạo:</Typography>
                                         <Typography margin={'1%'} align="right" color={"#B41712"} variant="subtitle"> {formatCreateDate(selectedItem?.createDate)} </Typography>
@@ -494,7 +494,7 @@ const MyProductForm = () => {
                                                 margin={"1%"}
                                                 sx={{
                                                     display: "flex", // Show or hide the descriptions based on state
-                                                    justifyContent: "space-between",
+                                                    justifycontent: "space-between",
                                                 }}
                                             >
                                                 <Typography color={"#696969"} variant="subtitle">

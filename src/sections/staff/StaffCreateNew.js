@@ -232,7 +232,7 @@ const StaffCreateNew = () => {
             </DialogActions>
           </Dialog>
 
-          <Box sx={{ display: 'flex', justifyContent: 'center'}}>
+          <Box sx={{ display: 'flex', justifycontent: 'center'}}>
 
           <Button onClick={handleSubmit} variant="contained" color="primary" sx={{ margin: '0 50px 50px 0' }}>
             Tạo tài khoản

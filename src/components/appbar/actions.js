@@ -85,11 +85,11 @@ export default function Actions({ matches }) {
                     <>
 
                         <ListItemButton sx={{
-                            justifyContent: 'center'
+                            justifycontent: 'center'
                         }}>
                             <ListItemIcon sx={{
                                 display: 'flex',
-                                justifyContent: 'center',
+                                justifycontent: 'center',
                                 color: matches && Colors.white,
                             }}>
                                 <Badge badgeContent={sessionData && sessionData.length} color="secondary">
@@ -101,13 +101,13 @@ export default function Actions({ matches }) {
                         <Divider orientation="vertical" flexItem />
                         <ListItemButton
                             sx={{
-                                justifyContent: 'center'
+                                justifycontent: 'center'
                             }}
                         >
                             <ListItemIcon
                                 sx={{
                                     display: 'flex',
-                                    justifyContent: 'center',
+                                    justifycontent: 'center',
                                     color: matches && Colors.white,
                                 }}
                             >
@@ -240,7 +240,7 @@ export default function Actions({ matches }) {
                     </>
                 ) : ( // If user is not logged in (email does not exist in local storage)
                     <Link to="/login" style={{ textDecoration: "none", color: "inherit" }}>
-                        <Typography variant="button" sx={{ display: 'flex', justifyContent: 'center', color: matches && Colors.white }}>
+                        <Typography variant="button" sx={{ display: 'flex', justifycontent: 'center', color: matches && Colors.white }}>
                             Đăng Nhập
                         </Typography>
                     </Link>

@@ -190,7 +190,7 @@ const SessionHistory = () => {
       </Helmet>
 
       <Container>
-        <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
+        <Stack direction="row" alignItems="center" justifycontent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
             Lịch sử đấu giá
           </Typography>

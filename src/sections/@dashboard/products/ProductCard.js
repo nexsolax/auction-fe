@@ -55,7 +55,7 @@ export default function ShopProductCard({ product }) {
           </Typography>
         </Link>
 
-        <Stack direction="row" alignItems="center" justifyContent="space-between">
+        <Stack direction="row" alignItems="center" justifycontent="space-between">
           <ColorPreview colors={colors} />
           <Typography variant="subtitle1">
             <Typography
