@@ -80,6 +80,12 @@ function getComparator(order, orderBy) {
 }
 
 function applySortFilter(array, comparator, query) {
+  // Check if array is null or not an array
+  if (!Array.isArray(array)) {
+    // Return an empty array or handle the error according to your use case
+    return [];
+  }
+
   const stabilizedThis = array.map((el, index) => [el, index]);
   stabilizedThis.sort((a, b) => {
     const order = comparator(a[0], b[0]);
@@ -421,7 +427,7 @@ export default function SessionSuccess() {
             onPageChange={handleChangePage}
             onRowsPerPageChange={handleChangeRowsPerPage}
           />
-
+        
           <Modal
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
