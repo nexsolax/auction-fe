@@ -99,53 +99,53 @@ export default function Router() {
     // ), },
     { path: 'profile', element: (
       <Suspense>
-             <Profile />
-        {/* <RolesAuthRoute roles={['Member']}>
+             {/* <Profile /> */}
+        <RolesAuthRoute roles={['Member']}>
           <Profile />
-        </RolesAuthRoute> */}
+        </RolesAuthRoute>
       </Suspense>
     ), },
     { path: 'home', element: <HomePage />},
     { path: 'prepare', element: <PrepareSession />},
     { path: 'instage',element: (
       <Suspense>
-        <InstageSession />
-        {/* <RolesAuthRoute roles={[ 'Member']}>
+        {/* <InstageSession /> */}
+        <RolesAuthRoute roles={[ 'Member']}>
           <InstageSession />
-        </RolesAuthRoute> */}
+        </RolesAuthRoute>
       </Suspense>
     ),},
     { path: 'finish', element: <FinishSession />},
     { path: 'myitem',element: (
       <Suspense>
-         <MyProductPage />
-        {/* <RolesAuthRoute roles={[ 'Member']}>
+         {/* <MyProductPage /> */}
+        <RolesAuthRoute roles={[ 'Member']}>
           <MyProductPage />
-        </RolesAuthRoute> */}
+        </RolesAuthRoute>
       </Suspense>
     ),},
     { path: 'mysession', element: (
       <Suspense>
-         <MySessionPage />
-        {/* <RolesAuthRoute roles={[ 'Member']}>
+         {/* <MySessionPage /> */}
+        <RolesAuthRoute roles={[ 'Member']}>
           <MySessionPage />
-        </RolesAuthRoute> */}
+        </RolesAuthRoute>
       </Suspense>
     ),},
     { path: 'myhistory', element: (
       <Suspense>
-         <MyHistoryPage />
-        {/* <RolesAuthRoute roles={[ 'Member']}>
+      //    <MyHistoryPage />
+        <RolesAuthRoute roles={[ 'Member']}>
           <MyHistoryPage />
-        </RolesAuthRoute> */}
+        </RolesAuthRoute>
       </Suspense>
     ),},
     { path: 'shoppingcart', element: (
       <Suspense>
-        <ShoppingCartPage />
-        {/* <RolesAuthRoute roles={[ 'Member']}>
+        {/* <ShoppingCartPage /> */}
+        <RolesAuthRoute roles={[ 'Member']}>
           <ShoppingCartPage />
-        </RolesAuthRoute> */}
+        </RolesAuthRoute>
       </Suspense>
     ),},
     { path: 'payment-join-success', element: <PaymentSuccessJoinPage />},
@@ -153,34 +153,34 @@ export default function Router() {
     { path: 'payment-fail', element: <PaymentFailPage />},
     { path: 'payment-history', element: (
       <Suspense>
-        <TransactionHistoryPage />
-        {/* <RolesAuthRoute roles={[ 'Member']}>
+      //   <TransactionHistoryPage />
+        <RolesAuthRoute roles={[ 'Member']}>
           <TransactionHistoryPage />
-        </RolesAuthRoute> */}
+        </RolesAuthRoute>
       </Suspense>
     ),},
     { path: 're-auction/:itemId', element: (
       <Suspense>
-         <Reauction />
-        {/* <RolesAuthRoute roles={[ 'Member']}>
+         {/* <Reauction /> */}
+        <RolesAuthRoute roles={[ 'Member']}>
           <Reauction />
-        </RolesAuthRoute> */}
+        </RolesAuthRoute>
       </Suspense>
     ), },
     { path: 'update-item/:itemId', element: (
       <Suspense>
-        <UpdateItem />
-        {/* <RolesAuthRoute roles={[ 'Member']}>
+        {/* <UpdateItem /> */}
+        <RolesAuthRoute roles={[ 'Member']}>
           <UpdateItem />
-        </RolesAuthRoute> */}
+        </RolesAuthRoute>
       </Suspense>
     ), },
     { path: 're-item/:itemId', element: (
       <Suspense>
-        <ReItem />
-        {/* <RolesAuthRoute roles={[ 'Member']}>
+        {/* <ReItem /> */}
+        <RolesAuthRoute roles={[ 'Member']}>
           <ReItem />
-        </RolesAuthRoute> */}
+        </RolesAuthRoute>
       </Suspense>
     ), },
     { path: 'test', element: <Test /> },
@@ -251,10 +251,10 @@ export default function Router() {
           path: 'session-rule',
           element: (
             <Suspense>
-               <SessionRulePage />
-              {/* <RolesAuthRoute roles={['Admin']}>
+               {/* <SessionRulePage /> */}
+              <RolesAuthRoute roles={['Admin']}>
                 <SessionRulePage />
-              </RolesAuthRoute> */}
+              </RolesAuthRoute>
             </Suspense>
           ),
         },
@@ -263,10 +263,10 @@ export default function Router() {
           path: 'fee',
           element: (
             <Suspense>
-               <FeePage />
-              {/* <RolesAuthRoute roles={['Admin']}>
+               {/* <FeePage /> */}
+              <RolesAuthRoute roles={['Admin']}>
                 <FeePage />
-              </RolesAuthRoute> */}
+              </RolesAuthRoute>
             </Suspense>
           ),
         },
@@ -293,10 +293,10 @@ export default function Router() {
           element: (
             
             <Suspense>
-               <BookingItemsPage />
-              {/* <RolesAuthRoute roles={['Staff']}>
+               {/* <BookingItemsPage /> */}
+              <RolesAuthRoute roles={['Staff']}>
                 <BookingItemsPage />
-              </RolesAuthRoute> */}
+              </RolesAuthRoute>
             </Suspense>
           ),
         },
@@ -304,10 +304,10 @@ export default function Router() {
           path: 'booking-item-no-session',
           element: (
             <Suspense>
-               <BookingItemNoSe />
-              {/* <RolesAuthRoute roles={['Staff']}>
+               {/* <BookingItemNoSe /> */}
+              <RolesAuthRoute roles={['Staff']}>
                 <BookingItemNoSe />
-              </RolesAuthRoute> */}
+              </RolesAuthRoute>
             </Suspense>
           ),
         },
@@ -315,10 +315,10 @@ export default function Router() {
           path: 'booking-item-now',
           element: (
             <Suspense>
-               <BookingItemNow />
-              {/* <RolesAuthRoute roles={['Staff']}>
+               {/* <BookingItemNow /> */}
+              <RolesAuthRoute roles={['Staff']}>
                 <BookingItemNow />
-              </RolesAuthRoute> */}
+              </RolesAuthRoute>
             </Suspense>
           ),
         },
@@ -326,10 +326,10 @@ export default function Router() {
           path: 'all-booking-items',
           element: (
             <Suspense>
-              <AllBookingItemPage />
-              {/* <RolesAuthRoute roles={['Admin']}>
+              {/* <AllBookingItemPage /> */}
+              <RolesAuthRoute roles={['Admin']}>
                 <AllBookingItemPage />
-              </RolesAuthRoute> */}
+              </RolesAuthRoute>
             </Suspense>
           ),
         },
