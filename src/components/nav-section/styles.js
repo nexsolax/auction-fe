@@ -19,5 +19,5 @@ export const StyledNavItemIcon = styled(ListItemIcon)({
   color: 'inherit',
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'center',
+  justifycontent: 'center',
 });

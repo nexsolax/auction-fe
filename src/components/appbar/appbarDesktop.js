@@ -97,7 +97,7 @@ export default function AppbarDesktop({ matches }) {
                         <ListItemText primary="Liên Hệ" />
                     </>
                 )}
-                <ListItemButton justifyCont onClick={() => setShowSearchBox(true)}>
+                <ListItemButton justifycont onClick={() => setShowSearchBox(true)}>
                     <ListItemIcon>
                         <SearchIcon />
                     </ListItemIcon>

@@ -172,15 +172,7 @@ const BookingItemDetail = () => {
     navigate(`/dashboard/session-create/${selectedBookingItem.itemId}`);
   };
 
-  const handleDenyBookingItem = (bookingItemId, reason) => {
-    denyBookingItemWaiting(bookingItemId, reason);
-    toast.success('Từ chối đơn đăng kí thành công', {
-      position: toast.POSITION.TOP_RIGHT,
-      autoClose: 3000, // Notification will automatically close after 3 seconds (3000 milliseconds)
-    });
-    setIsInputModalOpen(false)
-    navigate('/dashboard/booking-items');
-  };
+  
 
   useEffect(() => {
     getBookingItemById(bookingItemId).then((res) => {
@@ -359,22 +351,7 @@ const BookingItemDetail = () => {
                       </Grid>
                     </>
                   )}
-                  <Modal open={isInputModalOpen} onClose={handleInputModalClose}>
-                    <Box sx={styleModal}>
-                      <TextField
-                        label="Nhập lý do từ chối đơn đăng kí"
-                        variant="outlined"
-                        value={reason}
-                        onChange={handleInputChange}
-                        fullWidth
-                        multiline
-                        rows={4}
-                        sx={{ marginBottom: '20px' }}
-                      />
-                      <Button onClick={() => handleDenyBookingItem(item.bookingItemId, reason)}>Xong</Button>
-                      <Button onClick={handleInputModalClose}>Hủy</Button>
-                    </Box>
-                  </Modal>
+                  
                 </Grid>
               </div>
             ))}
@@ -388,7 +365,7 @@ const BookingItemDetail = () => {
               <Box
                 sx={{
                   display: 'flex',
-                  justifyContent: 'space-between',
+                  justifycontent: 'space-between',
                   alignItems: 'center',
                   width: '100%',
                   mb: '10px',
@@ -412,22 +389,7 @@ const BookingItemDetail = () => {
         </Box>
       </Modal>
 
-      {/* <Modal open={isInputModalOpen} onClose={handleInputModalClose}>
-        <Box sx={styleModal}>
-          <TextField
-            label="Nhập lý do từ chối đơn đăng kí"
-            variant="outlined"
-            value={reason}
-            onChange={handleInputChange}
-            fullWidth
-            multiline
-            rows={4}
-            sx={{ marginBottom: '20px' }}
-          />
-          <Button onClick={() => handleDenyBookingItem(bookingItemDetail.bookingItemId, reason)}>Xong</Button>
-          <Button onClick={handleInputModalClose}>Hủy</Button>
-        </Box>
-      </Modal> */}
+      
     </Container>
   );
 };

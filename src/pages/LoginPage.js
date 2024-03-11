@@ -23,7 +23,7 @@ const StyledSection = styled('div')(({ theme }) => ({
   maxWidth: 480,
   display: 'flex',
   flexDirection: 'column',
-  justifyContent: 'center',
+  justifycontent: 'center',
   boxShadow: theme.customShadows.card,
   backgroundColor: theme.palette.background.default,
 }));
@@ -33,7 +33,7 @@ const StyledContent = styled('div')(({ theme }) => ({
   margin: 'auto',
   minHeight: '100vh',
   display: 'flex',
-  justifyContent: 'center',
+  justifycontent: 'center',
   flexDirection: 'column',
   padding: theme.spacing(12, 0),
 }));

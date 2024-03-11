@@ -49,7 +49,7 @@ export default function AppStagePagination({ setProductss }) {
 
   return (
     // <Box
-    //   justifyContent={"center"}
+    //   justifycontent={"center"}
     //   alignContent={"center"}
     //   display={"flex"}
     //   sx={{
@@ -65,7 +65,7 @@ export default function AppStagePagination({ setProductss }) {
     // </Box>
 
     <Box
-      justifyContent={"center"}
+      justifycontent={"center"}
       alignContent={"center"}
       display={"flex"}
       sx={{

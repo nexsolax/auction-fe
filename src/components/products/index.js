@@ -24,7 +24,7 @@ export default function Products() {
 
     //   useEffect to fetch products (uncomment this when you want to fetch data)
     // useEffect(() => {
-    //     axios.get('https://bids-online.azurewebsites.net/api/Sessions/by_not_start')
+    //     axios.get('https://reasapiv2.azurewebsites.net/api/Sessions/by_not_start')
     //         .then(response => {
     //             const data = response.data;
     //             // Map the fetched data to the products array
@@ -80,7 +80,7 @@ export default function Products() {
 
     return (
         <Container>
-            <Box sx={{ display: "flex", justifyContent: "flex-start" }}>
+            <Box sx={{ display: "flex", justifycontent: "flex-start" }}>
                 <TextField
                     label="Tìm Kiếm Sản Phẩm"
                     variant="standard"
@@ -96,7 +96,7 @@ export default function Products() {
             <Grid
                 container
                 spacing={{ xs: 2, md: 3 }}
-                justifyContent="center"
+                justifycontent="center"
                 sx={{ margin: `20px 4px 10px 4px` }}
                 columns={{ xs: 4, sm: 8, md: 12 }}
             >
@@ -109,7 +109,7 @@ export default function Products() {
                 page={currentPage}
                 onChange={handlePageChange}
                 color="primary"
-                sx={{ marginTop: "20px", display: "flex", justifyContent: "center", marginBottom: "10px" }}
+                sx={{ marginTop: "20px", display: "flex", justifycontent: "center", marginBottom: "10px" }}
             />
         </Container>
     );

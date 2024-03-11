@@ -158,10 +158,15 @@ export default function FeePage() {
 
   // lay du lieu tat ca user
   useEffect(() => {
-    getAllFee().then((response) => {
-      setFee(response.data);
-      console.log(response.data);
-    });
+    getAllFee()
+      .then((response) => {
+        const data = Array.isArray(response.data) ? response.data : [];
+        setFee(data);
+        console.log(data);
+      })
+      .catch((error) => {
+        console.error('Error fetching fees:', error);
+      });
   }, []);
 
   const handleOpenMenu = (event, userId) => {
@@ -289,7 +294,7 @@ export default function FeePage() {
       </Helmet>
 
       <Container>
-        <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
+        <Stack direction="row" alignItems="center" justifycontent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
             Phân khúc đấu giá
           </Typography>

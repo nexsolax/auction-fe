@@ -1,22 +1,22 @@
 import axios from 'axios';
 import axiosInstance from './axios-instance';
 
-const BASE_URL = 'https://reasapi.azurewebsites.net/api';
+const BASE_URL = 'https://reasapiv2.azurewebsites.net/api';
 
 export async function getAllUser() {
   const url = `${BASE_URL}/User`;
   return axiosInstance.get(url);
 }
 
-export async function getUserNotificationById(id) {
-  const url = `${BASE_URL}/Notification/by_id?=${id}`;
-  try {
-    axiosInstance.get(url, { data: { id } });
-  } catch (error) {
-    console.log(error);
-  }
-  return axiosInstance.get(url);
-}
+// export async function getUserNotificationById(id) {
+//   const url = `${BASE_URL}/Notification/by_id?=${id}`;
+//   try {
+//     axiosInstance.get(url, { data: { id } });
+//   } catch (error) {
+//     console.log(error);
+//   }
+//   return axiosInstance.get(url);
+// }
 
 export async function getUserById(id) {
   const url = `${BASE_URL}/User/by_id`;
@@ -65,7 +65,7 @@ export const getRoleLabel = (status) => {
       return 'Quản trị viên';
     case 'Staff':
       return 'Nhân viên';
-    case 'Customer':
+    case 'Member':
       return 'Người dùng';
     // case 'Guest':
     //   return 'Khách';

@@ -62,7 +62,7 @@ import {
           <Box
             display="flex"
             alignItems="center"
-            justifyContent={"space-between"}
+            justifycontent={"space-between"}
           >
             Product title
             <IconButton onClick={onClose}>
@@ -90,7 +90,7 @@ import {
                 sx={{ mt: 4 }}
                 display="flex"
                 alignItems="center"
-                justifyContent="space-between"
+                justifycontent="space-between"
               >
                 <IncDec />
                 <Button variant="contained">Add to Cart</Button>

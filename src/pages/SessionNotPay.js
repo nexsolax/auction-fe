@@ -148,7 +148,7 @@ export default function SessionNotPay() {
   useEffect(() => {
     (async () => {
       try {
-        const response = await axiosInstance.get('https://reasapi.azurewebsites.net/api/Auction');
+        const response = await axiosInstance.get('https://reasapiv2.azurewebsites.net/api/Auction');
         console.log(response);
         setSession(response.data);
       } catch (error) {
@@ -280,7 +280,7 @@ export default function SessionNotPay() {
       </Helmet>
 
       <Container>
-        <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
+        <Stack direction="row" alignItems="center" justifycontent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
             Phiên đấu giá chưa thanh toán
           </Typography>

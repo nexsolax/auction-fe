@@ -22,11 +22,11 @@ export default function ReItem() {
             <UIProvider>
                 <Appbar />
 
-                <Box display={"flex"} flexDirection={'column'} alignItems="center" justifyContent={"center"} sx={{ p: 4 }}>
+                <Box display={"flex"} flexDirection={'column'} alignItems="center" justifycontent={"center"} sx={{ p: 4 }}>
                     <Typography variant="h4">Cập Nhật Thông Tin tài sản </Typography>
                 </Box>
                 <ReItemForm />
-                <Box display={"flex"} justifyContent={"center"} sx={{ p: 0.5 }}>
+                <Box display={"flex"} justifycontent={"center"} sx={{ p: 0.5 }}>
                     <Typography variant="h7"> </Typography>
                 </Box>
                 <Footer />

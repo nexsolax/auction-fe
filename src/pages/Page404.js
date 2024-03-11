@@ -11,7 +11,7 @@ const StyledContent = styled('div')(({ theme }) => ({
   margin: 'auto',
   minHeight: '100vh',
   display: 'flex',
-  justifyContent: 'center',
+  justifycontent: 'center',
   flexDirection: 'column',
   padding: theme.spacing(12, 0),
 }));

@@ -8,7 +8,7 @@ import { Colors, DrawerWidth } from "../theme";
 export const AppbarContainer = styled(Box)(() => ({
     display: 'flex',
     marginTop: 4,
-    justifyContent: 'center',
+    justifycontent: 'center',
     alignItems: 'center',
     padding: '2px 8px'
 }));
@@ -43,7 +43,7 @@ export const ActionIconsContainerDesktop = styled(Box)(() => ({
 export const MyList = styled(List)(({ type }) => ({
     display: type === "row" ? "flex" : "block",
     flexGrow: 3,
-    justifyContent: "center",
+    justifycontent: "center",
     alignItems: "center",
 }));
 

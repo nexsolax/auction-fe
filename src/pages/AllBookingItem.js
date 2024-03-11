@@ -225,11 +225,7 @@ export default function AllBookingItem() {
     handleCloseMenu();
   };
 
-  const handleDenyBookingItem = (bookingItemId) => {
-    denyBookingItemWaiting(bookingItemId);
-    handleCloseModal();
-    handleCloseMenu();
-  };
+  
 
   const handleClick = (event, name) => {
     const selectedIndex = selected.indexOf(name);
@@ -281,7 +277,7 @@ export default function AllBookingItem() {
       </Helmet>
 
       <Container>
-        <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
+        <Stack direction="row" alignItems="center" justifycontent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
             Đơn đăng ký đấu giá
           </Typography>
@@ -482,7 +478,7 @@ export default function AllBookingItem() {
                 height: '100%',
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center',
+                justifycontent: 'center',
                 backgroundColor: 'rgba(0, 0, 0, 0.6)', // Semi-transparent background
               }}
             >

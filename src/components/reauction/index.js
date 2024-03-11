@@ -111,7 +111,7 @@ const ReAuctionForm = () => {
       return;
     }
     
-    const apiReUrl = `https://reasapi.azurewebsites.net/api/Auction`;
+    const apiReUrl = `https://reasapiv2.azurewebsites.net/api/Auction`;
     const requestBody = {
       itemId, itemName, description, deposit, quantity, auctionHour, auctionMinute, firstPrice, stepPrice
     };
@@ -140,7 +140,7 @@ const ReAuctionForm = () => {
   useEffect(() => {
     // Define the API URL
     setIsLoading(true);
-    // const apiUrl = `https://bids-online.azurewebsites.net/api/Items/by_id?id=${itemId}`;
+    // const apiUrl = `https://reasapiv2.azurewebsites.net/api/Items/by_id?id=${itemId}`;
 
     // Fetch data from the API using Axios
     // axios
@@ -168,7 +168,7 @@ const ReAuctionForm = () => {
 
   // useEffect(() => {
   //   axios
-  //     .get('https://bids-online.azurewebsites.net/api/Categorys/valid', {
+  //     .get('https://reasapiv2.azurewebsites.net/api/Categorys/valid', {
   //       headers: { Authorization: `Bearer ${token}` },
   //     })
   //     .then((response) => {
@@ -261,7 +261,7 @@ const ReAuctionForm = () => {
         <DialogTitle align='center'>Đang tải</DialogTitle>
         <DialogContent>
             {/* You can customize the loading message or add a spinner here */}
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <div style={{ display: 'flex', justifycontent: 'center', alignItems: 'center' }}>
                 <CircularProgress color="primary" size={60} />
             </div>
         </DialogContent>

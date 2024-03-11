@@ -30,10 +30,10 @@ const ProfilePage = () => {
     const [isUpdating, setIsUpdating] = useState(false);
 
 
-    // const ChangePasswordApi = `https://bids-online.azurewebsites.net/api/Users/update_password`
-    // const api = `https://bids-online.azurewebsites.net/api/Users/by_id?id=${jsonUser.Id}`
-    // const apiUpdateInfo = `https://bids-online.azurewebsites.net/api/Users`
-    // const apiUpdatePaypal = `https://bids-online.azurewebsites.net/api/UserPaymentInformation`
+    // const ChangePasswordApi = `https://reasapiv2.azurewebsites.net/api/Users/update_password`
+    // const api = `https://reasapiv2.azurewebsites.net/api/Users/by_id?id=${jsonUser.Id}`
+    // const apiUpdateInfo = `https://reasapiv2.azurewebsites.net/api/Users`
+    // const apiUpdatePaypal = `https://reasapiv2.azurewebsites.net/api/UserPaymentInformation`
 
 
     const Product = styled(Card)(({ theme }) => ({
@@ -260,7 +260,7 @@ const ProfilePage = () => {
     return profileData && (
         <Product >
             <CardContent>
-                <Box display="flex" alignItems="center" justifyContent="center" mb={3}>
+                <Box display="flex" alignItems="center" justifycontent="center" mb={3}>
                     <Avatar src={profileData.avatar} alt="Avatar" sx={{ width: 150, height: 150, borderRadius: '50%' }} />
                 </Box>
                 <Grid container spacing={3}>

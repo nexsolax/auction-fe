@@ -52,7 +52,7 @@ export default function Icon({ checked, whiteColor, sx, ...other }) {
         borderRadius: '50%',
         position: 'relative',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifycontent: 'center',
         bgcolor: 'currentColor',
         transition: (theme) =>
           theme.transitions.create('all', {

@@ -119,7 +119,7 @@ export default function FinishProductDetail({ open, onClose, product }) {
                     <Box
                         display="flex"
                         alignItems="center"
-                        justifyContent={"space-between"}
+                        justifycontent={"space-between"}
                     >
                         Chi Tiết Sản Phẩm.
                         <IconButton onClick={onClose}>

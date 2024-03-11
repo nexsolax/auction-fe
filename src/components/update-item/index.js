@@ -115,7 +115,7 @@ const UpdateItemForm = () => {
     //   setErrorDialogOpen(true);
     //   return;
     // }
-    const apiReUrl = `https://reasapi.azurewebsites.net/api/ReaLEstate`;
+    const apiReUrl = `https://reasapiv2.azurewebsites.net/api/ReaLEstate`;
     const requestBody = {
       id, itemName, description, deposit, quantity, auctionHour, auctionMinute, firstPrice, stepPrice
     };
@@ -144,7 +144,7 @@ const UpdateItemForm = () => {
   useEffect(() => {
     // Define the API URL
     setIsLoading(true);
-    const apiUrl = `hhttps://reasapi.azurewebsites.net/api/ReaLEstate/by_id?id=${id}`;
+    const apiUrl = `hhttps://reasapiv2.azurewebsites.net/api/ReaLEstate/by_id?id=${id}`;
 
     // Fetch data from the API using Axios
     axios
@@ -172,7 +172,7 @@ const UpdateItemForm = () => {
 
   useEffect(() => {
     axios
-      .get('hhttps://reasapi.azurewebsites.net/api/Category', {
+      .get('hhttps://reasapiv2.azurewebsites.net/api/Category', {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
@@ -265,7 +265,7 @@ const UpdateItemForm = () => {
         <DialogTitle align='center'>Đang tải</DialogTitle>
         <DialogContent>
             {/* You can customize the loading message or add a spinner here */}
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <div style={{ display: 'flex', justifycontent: 'center', alignItems: 'center' }}>
                 <CircularProgress color="primary" size={60} />
             </div>
         </DialogContent>

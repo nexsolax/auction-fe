@@ -46,9 +46,9 @@ const ShoppingCartForm = () => {
     };
 
 
-    const api = `https://reasapi.azurewebsites.net/api/Auction?id=${jsonUser.Id}`;
-    const rejectPayment = `https://reasapi.azurewebsites.net/api/Transaction`;
-    const paymentAPI = `https://reasapi.azurewebsites.net/api/Transaction?transactionId=${selectedItem?.transactionId}`;
+    const api = `https://reasapiv2.azurewebsites.net/api/Auction?id=${jsonUser.Id}`;
+    const rejectPayment = `https://reasapiv2.azurewebsites.net/api/Transaction`;
+    const paymentAPI = `https://reasapiv2.azurewebsites.net/api/Transaction?id=${selectedItem?.transactionId}`;
 
     useEffect(() => {
         setIsLoading(true); // Set loading to true before making the request
@@ -173,7 +173,7 @@ const ShoppingCartForm = () => {
     return (
         <>
             {/* {isLoading && (
-                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+                <div style={{ display: 'flex', justifycontent: 'center', alignItems: 'center', height: '100vh' }}>
                     <CircularProgress color="primary" size={60} />
                 </div>
             )} */}
@@ -183,7 +183,7 @@ const ShoppingCartForm = () => {
                     <DialogTitle align='center'>Đang tải</DialogTitle>
                     <DialogContent>
                         {/* You can customize the loading message or add a spinner here */}
-                        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                        <div style={{ display: 'flex', justifycontent: 'center', alignItems: 'center' }}>
                             <CircularProgress color="primary" size={60} />
                         </div>
                     </DialogContent>
@@ -195,7 +195,7 @@ const ShoppingCartForm = () => {
                 background: Colors.white,
             }}
 
-                justifyContent={"center"}
+                justifycontent={"center"}
                 alignItems={"center"}>
                 <TableContainer sx={{ width: matches ? '100%' : '60%' }} component={Paper}>
                     <Table sx={{ width: '100%', maxWidth: '100%' }} aria-label="spanning table">
@@ -211,7 +211,7 @@ const ShoppingCartForm = () => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {items.map((item) => (
+                        {Array.isArray(items) && items.map((item) => (
                                 <TableRow key={item.sessionId}>
                                     <TableCell align="center">
                                         {item.images && item.images.length > 0 && (
@@ -262,11 +262,11 @@ const ShoppingCartForm = () => {
                                 <Divider variant="inset" />
                                 <Typography marginTop={"50px"} marginBottom={"50px"}>
 
-                                    <Typography sx={{ mt: 1, mb: 1, display: "flex", justifyContent: "space-between" }}>
+                                    <Typography sx={{ mt: 1, mb: 1, display: "flex", justifycontent: "space-between" }}>
                                         <Typography margin={'1%'} align="inherit" variant="subtitle1">Tổng phụ</Typography>
                                         <Typography margin={'1%'} align="right" variant="subtitle1"> {selectedItem?.finalPrice?.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })} </Typography>
                                     </Typography>
-                                    <Typography sx={{ mt: 1, mb: 1, display: "flex", justifyContent: "space-between" }}>
+                                    <Typography sx={{ mt: 1, mb: 1, display: "flex", justifycontent: "space-between" }}>
                                         <Typography margin={'1%'} align="inherit" variant="subtitle1">Phí đặt cọc</Typography>
                                         <Typography margin={'1%'} align="right" variant="subtitle1"> {selectedItem?.deposit ? (
                                         (selectedItem.firstPrice * selectedItem.depositFee).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })
@@ -274,21 +274,21 @@ const ShoppingCartForm = () => {
                                         "--"
                                     )}</Typography>
                                     </Typography>
-                                    <Typography sx={{ mt: 1, mb: 1, display: "flex", justifyContent: "space-between" }}>
+                                    <Typography sx={{ mt: 1, mb: 1, display: "flex", justifycontent: "space-between" }}>
                                         <Typography margin={'1%'} align="inherit" variant="subtitle1">Phí Vận Chuyển</Typography>
                                         <Typography margin={'1%'} align="right" variant="subtitle1"> -- </Typography>
                                     </Typography>
-                                    <Typography sx={{ mt: 1, mb: 1, display: "flex", justifyContent: "space-between" }}>
+                                    <Typography sx={{ mt: 1, mb: 1, display: "flex", justifycontent: "space-between" }}>
                                         <Typography margin={'1%'} align="inherit" variant="subtitle1">Thuế</Typography>
                                         <Typography margin={'1%'} align="right" variant="subtitle1"> -- </Typography>
                                     </Typography>
-                                    <Typography sx={{ mt: 1, mb: 1, display: "flex", justifyContent: "space-between" }}>
+                                    <Typography sx={{ mt: 1, mb: 1, display: "flex", justifycontent: "space-between" }}>
                                         <Typography margin={'1%'} color={"#4688F4"} align="inherit" variant="subtitle1">Khuyến Mãi/ Mã Quà Tặng </Typography>
                                     </Typography>
                                 </Typography>
 
                                 <Divider variant="inset" />
-                                <Typography sx={{ display: "flex", justifyContent: "space-between" }}>
+                                <Typography sx={{ display: "flex", justifycontent: "space-between" }}>
                                     <Typography margin={'1%'} align="inherit" variant="subtitle1">Tổng tiền phải trả</Typography>
                                     <Typography margin={'1%'} align="right" variant="h4"> {selectedItem?.deposit ? (
                                          (selectedItem?.finalPrice - selectedItem?.firstPrice * selectedItem?.depositFee).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })

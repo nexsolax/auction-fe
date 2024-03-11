@@ -41,10 +41,10 @@ const StaffProfile = () => {
   const newPasswordRef = useRef('');
   const otpInputRef = useRef('');
 
-  const ChangePasswordApi = `https://reasapi.azurewebsites.net/api/User/by_id?id=${jsonUser.Id}`;
-  const api = `https://reasapi.azurewebsites.net/api/User/by_id?id=${jsonUser.Id}`;
+  const ChangePasswordApi = `https://reasapiv2.azurewebsites.net/api/User/by_id?id=${jsonUser.Id}`;
+  const api = `https://reasapiv2.azurewebsites.net/api/User/by_id?id=${jsonUser.Id}`;
  
-  const UpdateRoleApi = `https://reasapi.azurewebsites.net/api/User/by_id?id=${jsonUser.Id}`;
+  const UpdateRoleApi = `https://reasapiv2.azurewebsites.net/api/User/by_id?id=${jsonUser.Id}`;
 
 
 
@@ -171,7 +171,7 @@ const StaffProfile = () => {
   return (
     <Product>
       <CardContent>
-        <Box display="flex" alignItems="center" justifyContent="center" mb={3}>
+        <Box display="flex" alignItems="center" justifycontent="center" mb={3}>
           <Avatar src={profileData.avatar} alt="Avatar" sx={{ width: 150, height: 150, borderRadius: '50%' }} />
         </Box>
         <Grid container spacing={3}>

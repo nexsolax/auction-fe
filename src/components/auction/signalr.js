@@ -3,7 +3,7 @@
 
 // const startConnection = (updateCallback) => {
 //   const connection = new HubConnectionBuilder()
-//     .withUrl("https://bids-online.azurewebsites.net/sessiondetailhub")
+//     .withUrl("https://reasapiv2.azurewebsites.net/sessiondetailhub")
 //     .withAutomaticReconnect()
 //     .build();
 

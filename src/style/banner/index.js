@@ -6,7 +6,7 @@ const Image ="https://images.unsplash.com/photo-1483921020237-2ff51e8e4b22?ixlib
 
 export const BannerContainer = styled(Box)(({ theme }) => ({
     display: 'flex',
-    justifyContent: 'center',
+    justifycontent: 'center',
     width: '100%',
     height: '100%',
     padding: '0px 0px',
@@ -34,7 +34,7 @@ export const Bannerimage = styled('img')(({src,theme}) => ({
 export const BannerContent = styled(Box)(() => ({
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'center',
+    justifycontent: 'center',
     maxWidt: 420,
     padding: '30px',
 }));

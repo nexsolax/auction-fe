@@ -347,7 +347,7 @@ export default function CaterogyPage() {
       </Helmet>
 
       <Container>
-        <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
+        <Stack direction="row" alignItems="center" justifycontent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
             Loại đấu giá
           </Typography>
@@ -576,7 +576,7 @@ export default function CaterogyPage() {
                     {/* <Box
                       sx={{
                         display: 'flex',
-                        justifyContent: 'left',
+                        justifycontent: 'left',
                         p: 3,
                       }}
                     >
@@ -593,7 +593,7 @@ export default function CaterogyPage() {
                     <Box
                       sx={{
                         display: 'flex',
-                        justifyContent: 'center',
+                        justifycontent: 'center',
                         p: 3,
                       }}
                     >
@@ -604,7 +604,7 @@ export default function CaterogyPage() {
                     <Box
                       sx={{
                         display: 'flex',
-                        justifyContent: 'right',
+                        justifycontent: 'right',
                         p: 3,
                       }}
                     >
@@ -615,7 +615,7 @@ export default function CaterogyPage() {
                     <Box
                       sx={{
                         display: 'flex',
-                        justifyContent: 'center',
+                        justifycontent: 'center',
                         p: 2,
                       }}
                     >

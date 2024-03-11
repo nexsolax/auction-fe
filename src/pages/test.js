@@ -27,7 +27,7 @@ function Test() {
                 <Appbar />
                 <Banner />
                 <Promotions />
-                <Box display={"flex"} justifyContent={"center"} sx={{ p: 4 }}>
+                <Box display={"flex"} justifycontent={"center"} sx={{ p: 4 }}>
                     <Typography variant="h4">Tài Sản Sắp Được đấu giá</Typography>
                 </Box>
                 <Notify />

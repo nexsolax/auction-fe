@@ -31,7 +31,7 @@ function SessionRuleCreate() {
 
   const buttonContainerStyle = {
     display: 'flex',
-    justifyContent: 'center',
+    justifycontent: 'center',
     marginTop: '20px',
   };
 
@@ -121,7 +121,7 @@ function SessionRuleCreate() {
 
   return (
     <Container>
-      <Stack direction="row" alignItems="center" justifyContent="space-between" mb={3}>
+      <Stack direction="row" alignItems="center" justifycontent="space-between" mb={3}>
         <Typography variant="h4" gutterBottom>
           Tạo mới cấu hình thời gian đấu giá
         </Typography>

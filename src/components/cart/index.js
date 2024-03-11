@@ -19,7 +19,7 @@ export default function Cart() {
     
 
 
-    // const api = `https://bids-online.azurewebsites.net/api/Sessions/by_user_for_payment?id=${jsonUser?.Id}`
+    // const api = `https://reasapiv2.azurewebsites.net/api/Sessions/by_user_for_payment?id=${jsonUser?.Id}`
     // const fetchSessionData = () => {
     //     // Fetch data from the API link using Axios
     //     axios.get(api , { headers: { Authorization: `Bearer ${token}` } })
@@ -41,7 +41,7 @@ export default function Cart() {
                 pt: 2, pb: 2, mr: 2
             }}
                 alignItems="start"
-                justifyContent={"space-between"}
+                justifycontent={"space-between"}
             >
                 {session.images.length > 0 && (
                     <Avatar src={session.images[0].detail} sx={{ width: 50, height: 50, mr: 2, ml: 2 }} />
@@ -51,7 +51,7 @@ export default function Cart() {
                     <Typography variant="h6">{session.itemName}</Typography>
                     {!matches && <Typography variant="subtitle2">{session.description}</Typography>}
                 </Box>
-                <Typography variant="body1" justifyContent={"end"}>{session.finalPrice.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</Typography>
+                <Typography variant="body1" justifycontent={"end"}>{session.finalPrice.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</Typography>
 
             </Box>
             {matches && <Typography variant="subtitle2">{session.description}</Typography>}
@@ -74,7 +74,7 @@ export default function Cart() {
         >
             {sessionData.length > 0 ? <Box sx={{ p: 4 }}
                 display="flex"
-                justifyContent={"center"}
+                justifycontent={"center"}
                 flexDirection="column"
                 alignItems="center"
             >
@@ -92,7 +92,7 @@ export default function Cart() {
                 <Button sx={{ mt: 4 }} variant="contained" href="/shoppingcart"> Thanh toán Ngay</Button>
             </Box> : <Box sx={{ p: 4, }}
                 display="flex"
-                justifyContent={"center"}
+                justifycontent={"center"}
                 flexDirection="column"
                 alignItems="center"
 

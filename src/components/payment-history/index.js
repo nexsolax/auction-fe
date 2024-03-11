@@ -65,7 +65,7 @@ const PaymentHistoryForm = () => {
   //     }
   //     setIsLoading(true);
   //     const response = await axios.get(
-  //       `https://bids-online.azurewebsites.net/api/Login/report_payment_user?userId=${jsonUser.Id}&start=${startDate}&end=${endDate}`, { headers: { Authorization: `Bearer ${token}` } }
+  //       `https://reasapiv2.azurewebsites.net/api/Login/report_payment_user?userId=${jsonUser.Id}&start=${startDate}&end=${endDate}`, { headers: { Authorization: `Bearer ${token}` } }
   //     );
   //     setPaymentHistory(response.data);
   //   } catch (error) {
@@ -84,7 +84,7 @@ const PaymentHistoryForm = () => {
 
       {paymentHistory.paymentReport && paymentHistory.paymentReport.length > 0 ? (
         <Stack boxShadow={3}>
-          <Grid sx={{ display: "flex", justifyContent: "space-between", margin: "3%" }}>
+          <Grid sx={{ display: "flex", justifycontent: "space-between", margin: "3%" }}>
             <Grid container sx={{ textAlign: "center" }}>
               <Grid item xs={12}>
                 <Typography margin={"1%"} variant="subtitle" >

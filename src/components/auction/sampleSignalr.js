@@ -8,7 +8,7 @@ export const Notify = () => {
 
   // useEffect(() => {
   //   const connect = new HubConnectionBuilder()
-  //     .withUrl("https://bids-online.azurewebsites.net/sessiondetailhub")
+  //     .withUrl("https://reasapiv2.azurewebsites.net/sessiondetailhub")
   //     .withAutomaticReconnect()
   //     .build();
 

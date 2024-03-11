@@ -48,8 +48,8 @@ const SignUpForm = () => {
   const theme = useTheme();
 //   const uploader = Uploader({ apiKey: "public_12a1ybtATujHiWyzUEfMyoyzWFbL" });
 
-  // const UpdateRoleApi = `https://reasapi.azurewebsites.net/api/Users/update_role_user`
-  //  const confirm = `https://reasapi.azurewebsites.net/api/Users/confirm_email?email=${email}`
+  // const UpdateRoleApi = `https://reasapiv2.azurewebsites.net/api/Users/update_role_user`
+  //  const confirm = `https://reasapiv2.azurewebsites.net/api/Users/confirm_email?email=${email}`
 
 
   // const myCustomLocale = {
@@ -148,7 +148,7 @@ const SignUpForm = () => {
   //   formData.append('file', file);
 
   //   try {
-  //     const response = await axios.post('https://bids-online.azurewebsites.net/api/Users', formData, {
+  //     const response = await axios.post('https://reasapiv2.azurewebsites.net/api/Users', formData, {
   //       onUploadProgress: (progressEvent) => {
   //         const progress = Math.round((progressEvent.loaded * 100) / progressEvent.total);
   //         onProgress({ progress });
@@ -242,7 +242,7 @@ const SignUpForm = () => {
     try {
 
       const response = await axios
-        .post('https://reasapi.azurewebsites.net/api/User', {
+        .post('https://reasapiv2.azurewebsites.net/api/User', {
           userName,
           email,
           password,
@@ -263,7 +263,7 @@ const SignUpForm = () => {
             paypalAccount,
           };
 
-          axios.post('https://reasapi.azurewebsites.net/api/BankAccount', paypalData)
+          axios.post('https://reasapiv2.azurewebsites.net/api/BankAccount', paypalData)
 
             .catch(err => {
               if (err.response.status === 400) {

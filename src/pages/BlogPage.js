@@ -25,7 +25,7 @@ export default function BlogPage() {
       </Helmet>
 
       <Container>
-        <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
+        <Stack direction="row" alignItems="center" justifycontent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
             Blog
           </Typography>
@@ -34,7 +34,7 @@ export default function BlogPage() {
           </Button>
         </Stack>
 
-        <Stack mb={5} direction="row" alignItems="center" justifyContent="space-between">
+        <Stack mb={5} direction="row" alignItems="center" justifycontent="space-between">
           {/* <BlogPostsSearch posts={POSTS} /> */}
           <BlogPostsSort options={SORT_OPTIONS} />
         </Stack>

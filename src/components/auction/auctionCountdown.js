@@ -48,7 +48,7 @@ const AuctionCountdown = ({ endTime, beginTime }) => {
       <Typography fontSize={"25px"} fontWeight={"bold"} margin={"1%"} variant="subtitle">Thời Gian Còn Lại</Typography>
       <Box sx={{ width: "100%", boxShadow: 3, margin: '3%' }}>
         
-        <Typography sx={{ display: 'flex', justifyContent: 'space-between', margin: '3%' }}>
+        <Typography sx={{ display: 'flex', justifycontent: 'space-between', margin: '3%' }}>
         <Grid container sx={{ textAlign: 'center' }}>
           <Grid fontSize={"25px"} fontWeight={"bold"} margin={"1%"} item xs={12}>
             {countdown.days.toString().padStart(2, '0')}

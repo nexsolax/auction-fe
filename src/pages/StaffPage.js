@@ -77,18 +77,30 @@ function getComparator(order, orderBy) {
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
 
+
+
 function applySortFilter(array, comparator, query) {
+  // Check if 'array' is an array
+  if (!Array.isArray(array)) {
+    // If 'array' is not an array, return an empty array
+    return [];
+  }
+
+  // Use 'filter' function from lodash if 'query' is provided
+  if (query) {
+    return filter(array, (_user) => _user.name.toLowerCase().indexOf(query.toLowerCase()) !== -1);
+  }
+
+  // Otherwise, continue with sorting and mapping as before
   const stabilizedThis = array.map((el, index) => [el, index]);
   stabilizedThis.sort((a, b) => {
     const order = comparator(a[0], b[0]);
     if (order !== 0) return order;
     return a[1] - b[1];
   });
-  if (query) {
-    return filter(array, (_user) => _user.email.toLowerCase().indexOf(query.toLowerCase()) !== -1);
-  }
   return stabilizedThis.map((el) => el[0]);
 }
+
 
 export default function StaffPage() {
   // const [open, setOpen] = useState(null);
@@ -251,7 +263,7 @@ export default function StaffPage() {
       </Helmet>
 
       <Container>
-        <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
+        <Stack direction="row" alignItems="center" justifycontent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
             Nhân viên
           </Typography>
@@ -459,7 +471,7 @@ export default function StaffPage() {
                     <Box
                       sx={{
                         display: 'flex',
-                        justifyContent: 'left',
+                        justifycontent: 'left',
                         p: 5,
                       }}
                     >
@@ -476,7 +488,7 @@ export default function StaffPage() {
                     <Box
                       sx={{
                         display: 'flex',
-                        justifyContent: 'right',
+                        justifycontent: 'right',
                         p: 2,
                       }}
                     >

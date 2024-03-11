@@ -176,7 +176,7 @@ export default function BookingItemNoSe() {
     (async () => {
       try {
         const response = await axiosInstance.get(
-          'https://reasapi.azurewebsites.net/api/User',
+          'https://reasapiv2.azurewebsites.net/api/User',
           { params: { userName: user.UserName } }
         );
         console.log(response);
@@ -256,15 +256,7 @@ export default function BookingItemNoSe() {
     handleCloseMenu();
   };
 
-  const handleDenyBookingItem = (bookingItemId) => {
-    denyBookingItemWaiting(bookingItemId);
-    toast.success('Từ chối đơn đăng kí thành công', {
-      position: toast.POSITION.TOP_RIGHT,
-      autoClose: 3000, // Notification will automatically close after 3 seconds (3000 milliseconds)
-    });
-    handleCloseModal();
-    handleCloseMenu();
-  };
+ 
 
   const handleClick = (event, name) => {
     const selectedIndex = selected.indexOf(name);
@@ -316,7 +308,7 @@ export default function BookingItemNoSe() {
       </Helmet>
 
       <Container>
-        <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
+        <Stack direction="row" alignItems="center" justifycontent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
             Đơn đăng kí đấu giá
           </Typography>
@@ -579,15 +571,7 @@ export default function BookingItemNoSe() {
                           Chấp nhận
                         </Button>
                       </Grid>
-                      <Grid item md={6} xs={12}>
-                        <Button
-                          onClick={() => {
-                            handleDenyBookingItem(bookingItemDetail.bookingItemId);
-                          }}
-                        >
-                          Từ Chối
-                        </Button>
-                      </Grid>
+                      
                     </Grid>
                   </CardContent>
                 </Card>

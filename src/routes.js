@@ -75,15 +75,15 @@ import ReItem from './pages/ReItem';
 export default function Router() {
   const routes = useRoutes([
     // { path: 'home', element: (
-    //   <Suspense>
-    //     <RolesAuthRoute roles={['Admin', 'Staff', 'Auctioneer', 'Bidder']}>
-    //       <HomePage />
-    //     </RolesAuthRoute>
-    //   </Suspense>
+    //   // <Suspense>
+    //   //   <RolesAuthRoute roles={['Admin', 'Staff', 'Member']}>
+    //   //     <HomePage />
+    //   //   </RolesAuthRoute>
+    //   // </Suspense>
     // ), },
     { path: 'auction/:sessionId', element: (
       <Suspense>
-        <RolesAuthRoute roles={['Admin', 'Staff', 'Customer']}>
+        <RolesAuthRoute roles={['Admin', 'Staff', 'Member']}>
           <AuctionPage />
         </RolesAuthRoute>
       </Suspense>
@@ -99,7 +99,8 @@ export default function Router() {
     // ), },
     { path: 'profile', element: (
       <Suspense>
-        <RolesAuthRoute roles={['Customer']}>
+             {/* <Profile /> */}
+        <RolesAuthRoute roles={['Member']}>
           <Profile />
         </RolesAuthRoute>
       </Suspense>
@@ -108,7 +109,8 @@ export default function Router() {
     { path: 'prepare', element: <PrepareSession />},
     { path: 'instage',element: (
       <Suspense>
-        <RolesAuthRoute roles={[ 'Customer']}>
+        {/* <InstageSession /> */}
+        <RolesAuthRoute roles={[ 'Member']}>
           <InstageSession />
         </RolesAuthRoute>
       </Suspense>
@@ -116,28 +118,32 @@ export default function Router() {
     { path: 'finish', element: <FinishSession />},
     { path: 'myitem',element: (
       <Suspense>
-        <RolesAuthRoute roles={[ 'Customer']}>
+         {/* <MyProductPage /> */}
+        <RolesAuthRoute roles={[ 'Member']}>
           <MyProductPage />
         </RolesAuthRoute>
       </Suspense>
     ),},
     { path: 'mysession', element: (
       <Suspense>
-        <RolesAuthRoute roles={[ 'Customer']}>
+         {/* <MySessionPage /> */}
+        <RolesAuthRoute roles={[ 'Member']}>
           <MySessionPage />
         </RolesAuthRoute>
       </Suspense>
     ),},
     { path: 'myhistory', element: (
       <Suspense>
-        <RolesAuthRoute roles={[ 'Customer']}>
+      //    <MyHistoryPage />
+        <RolesAuthRoute roles={[ 'Member']}>
           <MyHistoryPage />
         </RolesAuthRoute>
       </Suspense>
     ),},
     { path: 'shoppingcart', element: (
       <Suspense>
-        <RolesAuthRoute roles={[ 'Customer']}>
+        {/* <ShoppingCartPage /> */}
+        <RolesAuthRoute roles={[ 'Member']}>
           <ShoppingCartPage />
         </RolesAuthRoute>
       </Suspense>
@@ -147,28 +153,32 @@ export default function Router() {
     { path: 'payment-fail', element: <PaymentFailPage />},
     { path: 'payment-history', element: (
       <Suspense>
-        <RolesAuthRoute roles={[ 'Customer']}>
+      //   <TransactionHistoryPage />
+        <RolesAuthRoute roles={[ 'Member']}>
           <TransactionHistoryPage />
         </RolesAuthRoute>
       </Suspense>
     ),},
     { path: 're-auction/:itemId', element: (
       <Suspense>
-        <RolesAuthRoute roles={[ 'Customer']}>
+         {/* <Reauction /> */}
+        <RolesAuthRoute roles={[ 'Member']}>
           <Reauction />
         </RolesAuthRoute>
       </Suspense>
     ), },
     { path: 'update-item/:itemId', element: (
       <Suspense>
-        <RolesAuthRoute roles={[ 'Customer']}>
+        {/* <UpdateItem /> */}
+        <RolesAuthRoute roles={[ 'Member']}>
           <UpdateItem />
         </RolesAuthRoute>
       </Suspense>
     ), },
     { path: 're-item/:itemId', element: (
       <Suspense>
-        <RolesAuthRoute roles={[ 'Customer']}>
+        {/* <ReItem /> */}
+        <RolesAuthRoute roles={[ 'Member']}>
           <ReItem />
         </RolesAuthRoute>
       </Suspense>
@@ -180,8 +190,8 @@ export default function Router() {
       path: '/dashboard',
       element: (
         <Suspense>
-          <DashboardLayout />
-          <RolesAuthRoute roles={['Admin', 'Staff']}>
+          {/* <DashboardLayout /> */}
+          <RolesAuthRoute roles={['Admin', 'Staff','Member']}>
             <DashboardLayout />
           </RolesAuthRoute>
         </Suspense>
@@ -208,10 +218,10 @@ export default function Router() {
           path: 'staff',
           element: (
             <Suspense>
-              <StaffPage/>
-              {/* <RolesAuthRoute roles={['Admin']}>
+           
+              <RolesAuthRoute roles={['Admin']}>
                 <StaffPage />
-              </RolesAuthRoute> */}
+              </RolesAuthRoute>
             </Suspense>
           ),
         },
@@ -219,6 +229,7 @@ export default function Router() {
           path: 'staff-create',
           element: (
             <Suspense>
+                 
               <RolesAuthRoute roles={['Admin']}>
                 <StaffCreateNew />
               </RolesAuthRoute>
@@ -229,6 +240,7 @@ export default function Router() {
           path: 'category',
           element: (
             <Suspense>
+          
               <RolesAuthRoute roles={['Admin']}>
                 <CategoryPage />
               </RolesAuthRoute>
@@ -239,6 +251,7 @@ export default function Router() {
           path: 'session-rule',
           element: (
             <Suspense>
+               {/* <SessionRulePage /> */}
               <RolesAuthRoute roles={['Admin']}>
                 <SessionRulePage />
               </RolesAuthRoute>
@@ -250,6 +263,7 @@ export default function Router() {
           path: 'fee',
           element: (
             <Suspense>
+               {/* <FeePage /> */}
               <RolesAuthRoute roles={['Admin']}>
                 <FeePage />
               </RolesAuthRoute>
@@ -277,7 +291,9 @@ export default function Router() {
         {
           path: 'booking-items',
           element: (
+            
             <Suspense>
+               {/* <BookingItemsPage /> */}
               <RolesAuthRoute roles={['Staff']}>
                 <BookingItemsPage />
               </RolesAuthRoute>
@@ -288,6 +304,7 @@ export default function Router() {
           path: 'booking-item-no-session',
           element: (
             <Suspense>
+               {/* <BookingItemNoSe /> */}
               <RolesAuthRoute roles={['Staff']}>
                 <BookingItemNoSe />
               </RolesAuthRoute>
@@ -298,6 +315,7 @@ export default function Router() {
           path: 'booking-item-now',
           element: (
             <Suspense>
+               {/* <BookingItemNow /> */}
               <RolesAuthRoute roles={['Staff']}>
                 <BookingItemNow />
               </RolesAuthRoute>
@@ -308,6 +326,7 @@ export default function Router() {
           path: 'all-booking-items',
           element: (
             <Suspense>
+              {/* <AllBookingItemPage /> */}
               <RolesAuthRoute roles={['Admin']}>
                 <AllBookingItemPage />
               </RolesAuthRoute>

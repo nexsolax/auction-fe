@@ -9,7 +9,7 @@ export const PromotionsContainer = styled(Box)(({theme}) => ({
     },
     color: Colors.black,
     display: 'flex',
-    justifyContent:'center',
+    justifycontent:'center',
     alignItems: 'center',
     padding: '20px 0px 20px 0px',
     overflow:'hidden',
