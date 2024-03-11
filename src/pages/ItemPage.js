@@ -82,15 +82,28 @@ function getComparator(order, orderBy) {
 }
 
 function applySortFilter(array, comparator, query) {
+  // Check if the input array is not an array
+  if (!Array.isArray(array)) {
+    console.error('Input is not an array');
+    return [];
+  }
+
+  // Map each element of the array to include its index
   const stabilizedThis = array.map((el, index) => [el, index]);
+
+  // Sort the mapped array using the comparator function
   stabilizedThis.sort((a, b) => {
     const order = comparator(a[0], b[0]);
     if (order !== 0) return order;
     return a[1] - b[1];
   });
+
+  // If there is a query, filter the array based on it
   if (query) {
     return filter(array, (_user) => _user.itemName.toLowerCase().indexOf(query.toLowerCase()) !== -1);
   }
+
+  // Return the sorted and mapped array
   return stabilizedThis.map((el) => el[0]);
 }
 
@@ -145,8 +158,10 @@ export default function ItemPage() {
   // lay du lieu tat ca user
   useEffect(() => {
     getAllItems().then((response) => {
+      console.log(response.data); // Log the response data
       setItem(response.data);
-      console.log(response.data);
+    }).catch((error) => {
+      console.error('Error fetching items:', error);
     });
   }, []);
 
@@ -184,12 +199,16 @@ export default function ItemPage() {
   };
 
   const handleSelectAllClick = (event) => {
-    if (event.target.checked) {
-      const newSelecteds = item.map((n) => n.name);
-      setSelected(newSelecteds);
-      return;
+    if (Array.isArray(item)) {
+      if (event.target.checked) {
+        const newSelecteds = item.map((n) => n.name);
+        setSelected(newSelecteds);
+      } else {
+        setSelected([]);
+      }
+    } else {
+      console.error('Item is not an array');
     }
-    setSelected([]);
   };
 
   const handleClick = (event, name) => {

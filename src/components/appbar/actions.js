@@ -29,19 +29,12 @@ export default function Actions({ matches }) {
     const [sessionData, setSessionData] = useState([]);
     const token = localStorage.getItem('token');
 
-    const api = `https://reasapiv2.azurewebsites.net/api/User/by_id?id=${jsonUser?.Id}`
-
+    const apiProfile = `https://reasapiv2.azurewebsites.net/api/User/by_id?id=${jsonUser?.Id}`
+    const apiSession = `https://reasapiv2.azurewebsites.net/api/User?id=${jsonUser?.Id}`
 
     const fetchProfileData = async () => {
-        // try {
-        //     const response = await axios.get(api, {headers: { Authorization: `Bearer ${token}` },});
-        //     setProfileData(response.data);
-        // } catch (error) {
-        //     console.log('Error fetching profile data:', error);
-        // }
-
         try {
-            const response = await axios.get(api, { headers: { Authorization: `Bearer ${token}` }, });
+            const response = await axios.get(apiProfile, { headers: { Authorization: `Bearer ${token}` }, });
             setProfileData(response.data);
         } catch (error) {
             console.log('Error fetching profile data:', error);
@@ -49,69 +42,49 @@ export default function Actions({ matches }) {
     };
 
     const fetchSessionData = () => {
-        // Fetch data from the API link using Axios
-        axios.get(`https://reasapiv2.azurewebsites.net/api/User?id=${jsonUser?.Id}`, { headers: { Authorization: `Bearer ${token}` } })
+        axios.get(apiSession, { headers: { Authorization: `Bearer ${token}` } })
             .then(response => {
-                setSessionData(response.data); // Set the fetched data to the state
+                setSessionData(response.data);
             })
             .catch(error => {
-                console.error("Error fetching data:", error);
+                console.error("Error fetching session data:", error);
             });
     };
-    useEffect(() => {
-        fetchSessionData();
-    }, []);
 
     useEffect(() => {
         fetchProfileData();
+        fetchSessionData();
     }, []);
+
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
+
     const handleClose = () => {
         setAnchorEl(null);
     };
+
     const Component = matches
         ? ActionIconsContainerMobile
         : ActionIconsContainerDesktop;
-
 
     return (
         <Component>
             <MyList type="row">
                 <Divider orientation="vertical" flexItem />
 
-                {userEmail ? ( // If user is logged in (email exists in local storage)
+                {userEmail ? (
                     <>
-
-                        <ListItemButton sx={{
-                            justifycontent: 'center'
-                        }}>
-                            <ListItemIcon sx={{
-                                display: 'flex',
-                                justifycontent: 'center',
-                                color: matches && Colors.white,
-                            }}>
+                        <ListItemButton sx={{ justifycontent: 'center' }}>
+                            <ListItemIcon sx={{ display: 'flex', justifycontent: 'center', color: matches && Colors.white }}>
                                 <Badge badgeContent={sessionData && sessionData.length} color="secondary">
                                     <ShoppingCartIcon onClick={() => setShowCart(true)} />
                                 </Badge>
-
                             </ListItemIcon>
                         </ListItemButton>
                         <Divider orientation="vertical" flexItem />
-                        <ListItemButton
-                            sx={{
-                                justifycontent: 'center'
-                            }}
-                        >
-                            <ListItemIcon
-                                sx={{
-                                    display: 'flex',
-                                    justifycontent: 'center',
-                                    color: matches && Colors.white,
-                                }}
-                            >
-
+                        <ListItemButton sx={{ justifycontent: 'center' }}>
+                            <ListItemIcon sx={{ display: 'flex', justifycontent: 'center', color: matches && Colors.white }}>
                                 <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
                                     <NotificationsUserPopover />
                                     <Tooltip title="Account settings">
@@ -165,9 +138,8 @@ export default function Actions({ matches }) {
                                     {role === "User" ? (
                                         <>
                                             <MenuItem onClick={handleClose} sx={{ display: "flex", alignItems: "center" }}>
-                                            <Avatar src={profileData.avatar} />
+                                                <Avatar src={profileData.avatar} />
                                                 <Link to="/profile" style={{ textDecoration: "none", color: "inherit" }}>
-
                                                     <Typography sx={{ marginLeft: 1 }}>{jsonUser.Email}</Typography>
                                                 </Link>
                                             </MenuItem>
@@ -175,20 +147,15 @@ export default function Actions({ matches }) {
                                             <MenuItem onClick={handleClose} sx={{ display: "flex", alignItems: "center" }}>
                                                 <Inventory2OutlinedIcon />
                                                 <Link to="/mysession" style={{ textDecoration: "none", color: "inherit" }}>
-
                                                     <Typography sx={{ marginLeft: 1 }}>Phiên đấu giá của tôi</Typography>
                                                 </Link>
                                             </MenuItem>
-
                                             <MenuItem onClick={handleClose}>
                                                 <HistoryIcon />
                                                 <Link to="/payment-history" style={{ textDecoration: "none", color: "inherit" }}>
-
                                                     <Typography sx={{ marginLeft: 1 }}>Lịch Sử Giao Dịch</Typography>
                                                 </Link>
                                             </MenuItem>
-
-                                            
                                             <MenuItem onClick={handleClose}>
                                                 <ListItemIcon>
                                                     <Settings fontSize="small" />
@@ -211,7 +178,6 @@ export default function Actions({ matches }) {
                                                 </Link>
                                             </MenuItem>
                                             <Divider />
-
                                             <MenuItem onClick={handleClose}>
                                                 <ListItemIcon>
                                                     <AlternateEmailIcon fontSize="small" />
@@ -232,20 +198,17 @@ export default function Actions({ matches }) {
                                             </MenuItem>
                                         </>
                                     )}
-
                                 </Menu>
                             </ListItemIcon>
                         </ListItemButton>
-
                     </>
-                ) : ( // If user is not logged in (email does not exist in local storage)
+                ) : (
                     <Link to="/login" style={{ textDecoration: "none", color: "inherit" }}>
                         <Typography variant="button" sx={{ display: 'flex', justifycontent: 'center', color: matches && Colors.white }}>
                             Đăng Nhập
                         </Typography>
                     </Link>
-                )
-                }
+                )}
                 <Divider orientation="vertical" flexItem />
             </MyList>
         </Component>

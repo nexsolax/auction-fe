@@ -256,15 +256,7 @@ export default function BookingItemNow() {
     handleCloseMenu();
   };
 
-  const handleDenyBookingItem = (bookingItemId) => {
-    denyBookingItemWaiting(bookingItemId);
-    toast.success('Từ chối đơn đăng kí thành công', {
-      position: toast.POSITION.TOP_RIGHT,
-      autoClose: 3000, // Notification will automatically close after 3 seconds (3000 milliseconds)
-    });
-    handleCloseModal();
-    handleCloseMenu();
-  };
+  
 
   const handleClick = (event, name) => {
     const selectedIndex = selected.indexOf(name);
@@ -579,15 +571,7 @@ export default function BookingItemNow() {
                           Chấp nhận
                         </Button>
                       </Grid>
-                      <Grid item md={6} xs={12}>
-                        <Button
-                          onClick={() => {
-                            handleDenyBookingItem(bookingItemDetail.bookingItemId);
-                          }}
-                        >
-                          Từ Chối
-                        </Button>
-                      </Grid>
+                      
                     </Grid>
                   </CardContent>
                 </Card>

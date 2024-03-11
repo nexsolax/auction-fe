@@ -31,8 +31,8 @@ const StaffCreateNew = () => {
     identityCardProvideDate: "",
     identityCardFrontImage: "",
     identityCardBackImage: "",
-    role:0,
-    status:0
+    role: 0,
+    status: 0,
   });
 
   const [rePassword, setRePassword] = useState("");
@@ -47,27 +47,37 @@ const StaffCreateNew = () => {
   const [frontImage, setFrontImage] = useState(null);
   const [backImage, setBackImage] = useState(null);
 
+  const handleGenderChange = (value) => {
+    setNewStaff({ ...newStaff, gender: value });
+  };
+
   const handleAvatarChange = (event) => {
     const file = event.target.files[0];
     if (file) {
-      convertImageToString(file).then((result) => setAvatar(result));
-      setNewStaff({ ...newStaff, avatar: event.target.result })
+      convertImageToString(file).then((result) => {
+        setAvatar(result);
+        setNewStaff({ ...newStaff, avatar: result });
+      });
     }
   };
 
   const handleFrontImageChange = (event) => {
     const file = event.target.files[0];
     if (file) {
-      convertImageToString(file).then((result) => setFrontImage(result));
-      setNewStaff({ ...newStaff, identityCardFrontImage: event.target.result })
+      convertImageToString(file).then((result) => {
+        setFrontImage(result);
+        setNewStaff({ ...newStaff, identityCardFrontImage: result });
+      });
     }
   };
 
   const handleBackImageChange = (event) => {
     const file = event.target.files[0];
     if (file) {
-      convertImageToString(file).then((result) => setBackImage(result));
-      setNewStaff({ ...newStaff, identityCardBackImage: event.target.result })
+      convertImageToString(file).then((result) => {
+        setBackImage(result);
+        setNewStaff({ ...newStaff, identityCardBackImage: result });
+      });
     }
   };
 
@@ -75,11 +85,13 @@ const StaffCreateNew = () => {
     return new Promise((resolve) => {
       const reader = new FileReader();
       reader.onload = () => {
-        resolve(reader.result);
+        const imageUrl = URL.createObjectURL(file);
+        resolve(imageUrl);
       };
       reader.readAsDataURL(file);
     });
   };
+  
 
   const handleCancel = () => {
     navigate("/dashboard/staff", { replace: true });
@@ -99,9 +111,9 @@ const StaffCreateNew = () => {
       !newStaff.gender ||
       // !newStaff.avatar ||
       !newStaff.identityNumber ||
-      !newStaff.identityCardProvideDate 
+      !newStaff.identityCardProvideDate
       // !newStaff.identityCardBackImage ||
-      // !newStaff.identityCardFrontImage 
+      // !newStaff.identityCardFrontImage
     ) {
       setError("Không Được Bỏ Trống");
       return;
@@ -126,30 +138,55 @@ const StaffCreateNew = () => {
       return;
     }
 
-    const date = format(new Date(newStaff.dateOfBirth), "MM-dd-yyyy");
-
     try {
-      createStaff(newStaff);
-      navigate("/dashboard/staff", { replace: true });
-      setNewStaff({
+      const formattedDateOfBirth = format(
+        new Date(newStaff.dateOfBirth),
+        "yyyy-MM-ddTHH:mm:ss.SSSz"
+        );
+
+      const formattedIdentityCardProvideDate = format(
+        new Date(newStaff.identityCardProvideDate),
+        "yyyy-MM-ddTHH:mm:ss.SSSSSz" // Change the format to match the API
+      );
+
+      const requestData = {
         name: newStaff.name,
-        username: newStaff.username,
         email: newStaff.email,
-        password: newStaff.password,
-        address: newStaff.address,
         phoneNumber: newStaff.phoneNumber,
-        dateOfBirth: newStaff.dateOfBirth,
-        gender: newStaff.gender,
-        identityNumber: newStaff.identityCardProvideDate,
-        avatar: newStaff.avatar,
-        identityCardProvideDate: newStaff.identityCardProvideDate,
-        identityCardFrontImage:newStaff.identityCardFrontImage,
-        identityCardBackImage: newStaff.identityCardBackImage,
-        role:0,
-        status:0
+        userName: newStaff.username,
+        password: newStaff.password,
+        gender: parseInt(newStaff.gender),
+        address: newStaff.address,
+        identityNumber: "string",
+        identityCardProvideDate: formattedIdentityCardProvideDate,
+        identityCardFrontImage: "string",
+        identityCardBackImage: "string",
+        avatar: "string",
+        role: 0, // Ensure role is an integer
+        status: 0 // Ensure status is an integer
+      };
+
+      await createStaff(requestData);
+      navigate("/dashboard/staff", { replace: true });
+      setSuccessDialogOpen(true);
+      setNewStaff({
+        name: "",
+        username: "",
+        email: "",
+        password: "",
+        address: "",
+        phoneNumber: "",
+        dateOfBirth: "",
+        gender: 0,
+        identityNumber: "",
+        avatar: "",
+        identityCardProvideDate: "",
+        identityCardFrontImage: "",
+        identityCardBackImage: "",
+        role: 0,
+        status: 0,
       });
       setRePassword("");
-      setSuccessDialogOpen(true);
       setError("");
       toast.success("Tạo nhân viên thành công", {
         position: toast.POSITION.TOP_RIGHT,
@@ -190,9 +227,7 @@ const StaffCreateNew = () => {
         label="Họ và tên"
         type="text"
         value={newStaff.name}
-        onChange={(e) =>
-          setNewStaff({ ...newStaff, name: e.target.value })
-        }
+        onChange={(e) => setNewStaff({ ...newStaff, name: e.target.value })}
         margin="normal"
         required
         sx={{ width: "100%" }}
@@ -202,9 +237,7 @@ const StaffCreateNew = () => {
         label="User name"
         type="text"
         value={newStaff.username}
-        onChange={(e) =>
-          setNewStaff({ ...newStaff, username: e.target.value })
-        }
+        onChange={(e) => setNewStaff({ ...newStaff, username: e.target.value })}
         margin="normal"
         required
         sx={{ width: "100%" }}
@@ -218,9 +251,7 @@ const StaffCreateNew = () => {
               type="radio"
               value="0"
               checked={newStaff.gender === "0"}
-              onChange={(e) =>
-                setNewStaff({ ...newStaff, gender: e.target.value })
-              }
+              onChange={() => handleGenderChange("0")}
             />
             Nam
           </label>
@@ -229,9 +260,7 @@ const StaffCreateNew = () => {
               type="radio"
               value="1"
               checked={newStaff.gender === "1"}
-              onChange={(e) =>
-                setNewStaff({ ...newStaff, gender: e.target.value })
-              }
+              onChange={() => handleGenderChange("1")}
             />
             Nữ
           </label>
@@ -240,9 +269,7 @@ const StaffCreateNew = () => {
               type="radio"
               value="2"
               checked={newStaff.gender === "2"}
-              onChange={(e) =>
-                setNewStaff({ ...newStaff, gender: e.target.value })
-              }
+              onChange={() => handleGenderChange("2")}
             />
             Other
           </label>
@@ -267,9 +294,8 @@ const StaffCreateNew = () => {
         required
         sx={{ width: "100%" }}
         id="password"
-        
       />
-      
+
       <TextField
         label="Nhập Lại Mật Khẩu"
         type="password"
@@ -294,7 +320,9 @@ const StaffCreateNew = () => {
         label="Số Điện Thoại"
         type="tel"
         value={newStaff.phoneNumber}
-        onChange={(e) => setNewStaff({ ...newStaff, phoneNumber: e.target.value })}
+        onChange={(e) =>
+          setNewStaff({ ...newStaff, phoneNumber: e.target.value })
+        }
         margin="normal"
         required
         sx={{ width: "100%" }}
@@ -328,9 +356,13 @@ const StaffCreateNew = () => {
         />
       </label>
       {avatar && (
-        <img src={avatar} alt="Avatar" style={{ width: "100px", height: "100px", marginBottom: "10px" }} />
+        <img
+          src={avatar}
+          alt="Avatar"
+          style={{ width: "100px", height: "100px", marginBottom: "10px" }}
+        />
       )}
-      
+
       <TextField
         label="Số CMND"
         type="text"
@@ -348,7 +380,10 @@ const StaffCreateNew = () => {
         type="date"
         value={newStaff.identityCardProvideDate}
         onChange={(e) =>
-          setNewStaff({ ...newStaff, identityCardProvideDate: e.target.value })
+          setNewStaff({
+            ...newStaff,
+            identityCardProvideDate: e.target.value,
+          })
         }
         margin="normal"
         required
@@ -358,7 +393,7 @@ const StaffCreateNew = () => {
           shrink: true,
         }}
       />
-       <label htmlFor="frontImageInput">
+      <label htmlFor="frontImageInput">
         <Button variant="outlined" component="span">
           Chọn Ảnh Mặt Trước CMND
         </Button>
@@ -370,7 +405,11 @@ const StaffCreateNew = () => {
         />
       </label>
       {frontImage && (
-        <img src={frontImage} alt="Front Image" style={{ width: "100px", height: "100px", marginBottom: "10px" }} />
+        <img
+          src={frontImage}
+          alt="Front Image"
+          style={{ width: "100px", height: "100px", marginBottom: "10px" }}
+        />
       )}
       <label htmlFor="backImageInput">
         <Button variant="outlined" component="span">
@@ -384,7 +423,11 @@ const StaffCreateNew = () => {
         />
       </label>
       {backImage && (
-        <img src={backImage} alt="Back Image" style={{ width: "100px", height: "100px", marginBottom: "10px" }} />
+        <img
+          src={backImage}
+          alt="Back Image"
+          style={{ width: "100px", height: "100px", marginBottom: "10px" }}
+        />
       )}
       {error && (
         <Typography variant="body2" color="error" sx={{ marginTop: "10px" }}>

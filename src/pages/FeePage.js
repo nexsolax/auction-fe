@@ -158,10 +158,15 @@ export default function FeePage() {
 
   // lay du lieu tat ca user
   useEffect(() => {
-    getAllFee().then((response) => {
-      setFee(response.data);
-      console.log(response.data);
-    });
+    getAllFee()
+      .then((response) => {
+        const data = Array.isArray(response.data) ? response.data : [];
+        setFee(data);
+        console.log(data);
+      })
+      .catch((error) => {
+        console.error('Error fetching fees:', error);
+      });
   }, []);
 
   const handleOpenMenu = (event, userId) => {

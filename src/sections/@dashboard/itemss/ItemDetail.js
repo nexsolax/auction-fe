@@ -30,7 +30,6 @@ import {
 } from '@mui/material';
 import { ArrowBack as ArrowBackIcon, ArrowForward as ArrowForwardIcon } from '@mui/icons-material';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getItemById } from '../../../services/item-actions';
 import axiosInstance from '../../../services/axios-instance';
 
 const ItemDetail = () => {
@@ -81,11 +80,11 @@ const ItemDetail = () => {
   };
 
   const handlePrevImage = () => {
-    setCurrentImageIndex((prevIndex) => (prevIndex - 1 + itemDetail[0].images.length) % itemDetail[0].images.length);
+    setCurrentImageIndex((prevIndex) => (prevIndex - 1 + itemDetail.images.length) % itemDetail.images.length);
   };
 
   const handleNextImage = () => {
-    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % itemDetail[0].images.length);
+    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % itemDetail.images.length);
   };
 
 
@@ -103,14 +102,13 @@ const ItemDetail = () => {
   useEffect(() => {
     (async () => {
       try {
-        const response = await axiosInstance.get('https://reasapiv2.azurewebsites.net/api/items/by_id', {
-        params: { id: itemId },
-      });
-      console.log(response);
-      setItemDetail(response.data);
-      setLoading(false);
-      }
-      catch (error) {
+        const response = await axiosInstance.get('https://reasapiv2.azurewebsites.net/api/RealEstate/by_id', {
+          params: { id: itemId },
+        });
+        console.log(response);
+        setItemDetail(response.data);
+        setLoading(false);
+      } catch (error) {
         console.log(error);
       }
     })();
@@ -127,152 +125,139 @@ const ItemDetail = () => {
         <CardHeader title="Thông tin chi tiết sản phẩm" />
         <CardContent>
           <Box sx={{ p: 2 }}>
-            {itemDetail.map((item) => (
-              <div key={item.itemId}>
-                <Grid container spacing={2}>
-                  <Grid item xs={12} sm={6}>
-                    <TextField
-                      fullWidth
-                      label="Tên sản phẩm"
-                      defaultValue={item.itemName}
-                      variant="outlined"
-                      sx={{ marginBottom: '20px' }}
-                    />
-                  </Grid>
-                  <Grid item xs={12} sm={6}>
-                    <TextField
-                      fullWidth
-                      label="Tên tài khoản"
-                      defaultValue={item.userName}
-                      variant="outlined"
-                      sx={{ marginBottom: '20px' }}
-                    />
-                  </Grid>
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  fullWidth
+                  label="Tên sản phẩm"
+                  defaultValue={itemDetail.itemName}
+                  variant="outlined"
+                  sx={{ marginBottom: '20px' }}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  fullWidth
+                  label="Tên tài khoản"
+                  defaultValue={itemDetail.userName}
+                  variant="outlined"
+                  sx={{ marginBottom: '20px' }}
+                />
+              </Grid>
+            </Grid>
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={4}>
+                <TextField
+                  fullWidth
+                  label="Loại sản phẩm"
+                  defaultValue={itemDetail.categoryName}
+                  variant="outlined"
+                  sx={{ marginBottom: '20px' }}
+                />
+              </Grid>
+              <Grid item xs={12} sm={4}>
+                <TextField
+                  fullWidth
+                  label="Phí đặt cọc"
+                  defaultValue={itemDetail.deposit ? 'Có' : 'Không'}
+                  variant="outlined"
+                  sx={{ marginBottom: '20px' }}
+                />
+              </Grid>             
+            </Grid>
+            <Grid container spacing={2}>
+              <Grid item md={12} xs={12}>
+                <TextField
+                  fullWidth
+                  multiline
+                  label="Mô tả chi tiết"
+                  defaultValue={itemDetail.descriptionDetail}
+                  variant="outlined"
+                  sx={{ marginBottom: '20px' }}
+                />
+              </Grid>
+            </Grid>
+            <Grid container spacing={2}>
+              {itemDetail.descriptions.map((desc, index) => (
+                <Grid item xs={12} sm={6} key={index}>
+                  <TextField
+                    fullWidth
+                    label={desc.description}
+                    defaultValue={desc.detail}
+                    variant="outlined"
+                    sx={{ marginBottom: '30px' }}
+                  />
                 </Grid>
-                <Grid container spacing={2}>
-                  <Grid item xs={12} sm={4}>
-                    <TextField
-                      fullWidth
-                      label="Loại sản phẩm"
-                      defaultValue={item.categoryName}
-                      variant="outlined"
-                      sx={{ marginBottom: '20px' }}
-                    />
-                  </Grid>
-                  <Grid item xs={12} sm={4}>
-                    <TextField
-                      fullWidth
-                      label="Phí đặt cọc"
-                      defaultValue={item.deposit ? 'Có' : 'Không'}
-                      variant="outlined"
-                      sx={{ marginBottom: '20px' }}
-                    />
-                  </Grid>
-                  <Grid item xs={12} sm={4}>
-                    <TextField
-                      fullWidth
-                      label="Số lượng"
-                      defaultValue={item.quantity}
-                      variant="outlined"
-                      sx={{ marginBottom: '20px' }}
-                    />
-                  </Grid>
-                </Grid>
-                <Grid container spacing={2}>
-                  <Grid item md={12} xs={12}>
-                    <TextField
-                      fullWidth
-                      multiline
-                      label="Mô tả chi tiết"
-                      defaultValue={item.descriptionDetail}
-                      variant="outlined"
-                      sx={{ marginBottom: '20px' }}
-                    />
-                  </Grid>
-                </Grid>
-                <Grid container spacing={2}>
-                  {item.descriptions.map((desc, index) => (
-                    <Grid item xs={12} sm={6} key={index}>
-                      <TextField
-                        fullWidth
-                        label={desc.description}
-                        defaultValue={desc.detail}
-                        variant="outlined"
-                        sx={{ marginBottom: '30px' }}
-                      />
-                    </Grid>
-                  ))}
-                </Grid>
-                <Grid container spacing={2}>
-                  {/* Single big view for the selected image */}
-                  {/* <Grid item xs={12} sm={12}>
-            <Button onClick={() => handleSelectImage(selectedImage)}>
-              <CardMedia
-                component="img"
-                src={selectedImage && selectedImage.detail}
-                alt="Selected Image"
-                className={classes.bigCardMedia}
-              />
-            </Button>
-          </Grid> */}
+              ))}
+            </Grid>
+            <Grid container spacing={2}>
+              {/* Single big view for the selected image */}
+              {/* <Grid item xs={12} sm={12}>
+              <Button onClick={() => handleSelectImage(selectedImage)}>
+                <CardMedia
+                  component="img"
+                  src={selectedImage && selectedImage.detail}
+                  alt="Selected Image"
+                  className={classes.bigCardMedia}
+                />
+              </Button>
+            </Grid> */}
 
-                  {/* Three small views for other images */}
-                  {item.images.map((imageObj, index) => (
-                    <Grid item xs={12} sm={3} key={index}>
-                      {/* Button to select the image */}
-                      <Button onClick={() => handleSelectImage(imageObj)}>
-                        <CardMedia
-                          component="img"
-                          src={imageObj.detail}
-                          alt={`Image ${index + 1}`}
-                          className={classes.smallCardMedia}
-                        />
-                      </Button>
-                    </Grid>
-                  ))}
+              {/* Three small views for other images */}
+              {itemDetail.images.map((imageObj, index) => (
+                <Grid item xs={12} sm={3} key={index}>
+                  {/* Button to select the image */}
+                  <Button onClick={() => handleSelectImage(imageObj)}>
+                    <CardMedia
+                      component="img"
+                      src={imageObj.detail}
+                      alt={`Image ${index + 1}`}
+                      className={classes.smallCardMedia}
+                    />
+                  </Button>
                 </Grid>
-                <Grid container spacing={2}>
-                  <Grid item xs={12} sm={6}>
-                    <TextField
-                      fullWidth
-                      label="Giá khởi điểm"
-                      defaultValue={item.firstPrice.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}
-                      variant="outlined"
-                      sx={{ marginBottom: '20px', marginTop: '20px' }}
-                    />
-                  </Grid>
-                  <Grid item xs={12} sm={6}>
-                    <TextField
-                      fullWidth
-                      label="Bước nhảy"
-                      defaultValue={item.stepPrice.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}
-                      variant="outlined"
-                      sx={{ marginBottom: '20px', marginTop: '20px' }}
-                    />
-                  </Grid>
-                </Grid>
-                <Grid container spacing={2}>
-                  <Grid item xs={12} sm={6}>
-                    <TextField
-                      fullWidth
-                      label="Ngày cập nhật"
-                      defaultValue={formatDate(item.updateDate)}
-                      variant="outlined"
-                      sx={{ marginBottom: '20px' }}
-                    />
-                  </Grid>
-                  <Grid item xs={12} sm={6}>
-                    <TextField
-                      fullWidth
-                      label="Ngày tạo"
-                      defaultValue={formatDate(item.createDate)}
-                      variant="outlined"
-                      sx={{ marginBottom: '20px' }}
-                    />
-                  </Grid>
-                </Grid>
-              </div>
-            ))}
+              ))}
+            </Grid>
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  fullWidth
+                  label="Giá khởi điểm"
+                  defaultValue={itemDetail.firstPrice.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}
+                  variant="outlined"
+                  sx={{ marginBottom: '20px', marginTop: '20px' }}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  fullWidth
+                  label="Bước nhảy"
+                  defaultValue={itemDetail.stepPrice.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}
+                  variant="outlined"
+                  sx={{ marginBottom: '20px', marginTop: '20px' }}
+                />
+              </Grid>
+            </Grid>
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  fullWidth
+                  label="Ngày cập nhật"
+                  defaultValue={formatDate(itemDetail.updateDate)}
+                  variant="outlined"
+                  sx={{ marginBottom: '20px' }}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  fullWidth
+                  label="Ngày tạo"
+                  defaultValue={formatDate(itemDetail.createDate)}
+                  variant="outlined"
+                  sx={{ marginBottom: '20px' }}
+                />
+              </Grid>
+            </Grid>
           </Box>
         </CardContent>
       </Card>
@@ -289,16 +274,16 @@ const ItemDetail = () => {
                   mb: '10px',
                 }}
               >
-                <IconButton onClick={handlePrevImage} disabled={itemDetail[0].images.length <= 1}>
+                <IconButton onClick={handlePrevImage} disabled={itemDetail.images.length <= 1}>
                   <ArrowBackIcon />
                 </IconButton>
                 <CardMedia
                   component="img"
-                  src={itemDetail[0].images[currentImageIndex].detail}
+                  src={itemDetail.images[currentImageIndex].detail}
                   alt="Selected Image"
                   className={classes.modalCardMedia}
                 />
-                <IconButton onClick={handleNextImage} disabled={itemDetail[0].images.length <= 1}>
+                <IconButton onClick={handleNextImage} disabled={itemDetail.images.length <= 1}>
                   <ArrowForwardIcon />
                 </IconButton>
               </Box>

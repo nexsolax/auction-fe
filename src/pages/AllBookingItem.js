@@ -225,11 +225,7 @@ export default function AllBookingItem() {
     handleCloseMenu();
   };
 
-  const handleDenyBookingItem = (bookingItemId) => {
-    denyBookingItemWaiting(bookingItemId);
-    handleCloseModal();
-    handleCloseMenu();
-  };
+  
 
   const handleClick = (event, name) => {
     const selectedIndex = selected.indexOf(name);

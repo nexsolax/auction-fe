@@ -35,13 +35,7 @@ const MyProductForm = () => {
     }
     const navigate = useNavigate();
 
-
-
-
-    const apiUrlWaiting = ``;
-    const apiUrlApproved = ``;
-    const apiUrlWaitingSession = ``;
-    const apiUrlCancelled = ``;
+    const apiUrl = 'https://reasapiv2.azurewebsites.net/api/RealEstate';
 
     useEffect(() => {
         loadItems(option);
@@ -79,49 +73,26 @@ const MyProductForm = () => {
         }
     };
 
-    const loadItems = (selectedOption) => {
-        
+    const loadItems = () => {
         setIsLoading(true);
-        if (cancelToken) {
-            cancelToken.cancel('Operation canceled by the user.');
-          }
-        
-          // Create a new cancel token for the current request
-          const source = CancelToken.source();
-          setCancelToken(source);
-        let apiUrl;
-
-        if (selectedOption === 'waiting') {
-            apiUrl = apiUrlWaiting;
-        } else if (selectedOption === 'approved') {
-            apiUrl = apiUrlApproved;
-        } else if (selectedOption === 'waiting-session') {
-            apiUrl = apiUrlWaitingSession;
-        } else if (selectedOption === 'cancelled') {
-            apiUrl = apiUrlCancelled;
-        }
-
+        setLoading(true);
         axios
-            .get(apiUrl, { headers: { Authorization: `Bearer ${token}` } ,cancelToken: source.token,})
+            .get(apiUrl, { headers: { Authorization: `Bearer ${token}` } })
             .then(response => {
                 setIsLoading(false);
-                setItems(response.data);
+                setItems(response.data.filter(item => item.status === option));
             })
-            .catch((error) => {
-                if (axios.isCancel(error)) {
-                    // Request was canceled, no need to handle this as an error
-                    console.log('Request canceled:', error.message);
-                    setIsLoading(false);
-                  } else {
-                    console.error('Error fetching items:', error);
-                    setIsLoading(false);
-                  }
+            .catch(error => {
+                console.error('Error fetching items:', error);
+                setIsLoading(false);
             })
             .finally(() => {
-                setLoading(false); // Hide loading spinner after data is fetched
+                setLoading(false);
             });
     };
 
+
+    
     const formatCreateDate = (createDate) => {
         return moment(createDate).format('YYYY-MM-DD HH:mm:ss'); // Adjust the format as per your requirement
     };
@@ -268,19 +239,12 @@ const MyProductForm = () => {
                     }}
                 >
                     <List>
-                        <ListOptionItem button selected={selectedOption === 'waiting'} onClick={() => setSelectedOption('waiting')}>
+                        <ListItem button selected={option === 'waiting'} onClick={() => setOption('waiting')}>
                             <ListItemText primary="Sản Phẩm Chờ Duyệt" />
-                        </ListOptionItem>
-                        <ListOptionItem button selected={selectedOption === 'waiting-session'} onClick={() => setSelectedOption('waiting-session')}>
-                            <ListItemText primary="Sản Phẩm Chưa Lên Sàn" />
-                        </ListOptionItem>
-                        <ListOptionItem button selected={selectedOption === 'approved'} onClick={() => setSelectedOption('approved')}>
-                            <ListItemText primary="Sản Phẩm Đã Lên Sàn" />
-                        </ListOptionItem>
-
-                        <ListOptionItem button selected={selectedOption === 'cancelled'} onClick={() => setSelectedOption('cancelled')}>
-                            <ListItemText primary="Sản Phẩm Đã Bị Hủy" />
-                        </ListOptionItem>
+                        </ListItem>
+                        <ListItem button selected={option === 'Approved'} onClick={() => setOption('Approved')}>
+                            <ListItemText primary="Sản Phẩm Đã Duyệt" />
+                        </ListItem>
                     </List>
                 </Paper>
                 <Paper elevation={5} sx={{ height: '100%', width: isScreenMd ? '100%' : '100%', ml: isScreenMd ? 0 : '1%', mt: '20px' }}>

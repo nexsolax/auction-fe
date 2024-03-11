@@ -19,12 +19,14 @@ export async function getBookingItemById(id) {
 }
 
 export async function getBookingItemWaiting(id) {
-  const url = `${BASE_URL}/RealEstate/by_id?id=${id}/approve`;
- 
+  const url = `${BASE_URL}/RealEstate/by_id?id=${id}`;
+
   try {
-    await axiosInstance.get(url);
+    const response = await axiosInstance.get(url, { params: { isApprove: false } });
+    return response.data; // Assuming you want to return the response data
   } catch (error) {
-    console.log(error);
+    console.error('Error fetching booking item:', error);
+    throw error; // Rethrow the error to handle it elsewhere if needed
   }
 }
 
@@ -39,26 +41,14 @@ export async function getBookingItemNoSesssion(id) {
 }
 
 export async function acceptBookingItemWaiting(id) {
-  const url = `${BASE_URL}/RealEstate/by_id?id=${id}`;
+  const url = `${BASE_URL}/RealEstate/by_id/${id}`; // Assuming id is used to specify the resource ID
   try {
-    axiosInstance.put(url, { data: { id } });
-    console.log(`Accept BookingItem: ${id}`);
+    // Send a PUT request to update the isApprove status
+    await axiosInstance.put(url, { isApprove: true }); // Assuming isApprove is the key to update the status
+    console.log(`Accepted BookingItem: ${id}`);
   } catch (error) {
-    console.log(error);
-  }
-}
-
-export async function denyBookingItemWaiting(id) {
-  const url = `${BASE_URL}/RealEstate/by_id?id=${id}`;
-  const data = {
-    id
-
-  };
-  try {
-    axiosInstance.put(url, data);
-    console.log(`Deny BookingItem: ${id}`);
-  } catch (error) {
-    console.log(error);
+    console.error('Error accepting booking item:', error);
+    throw error; // Rethrow the error to handle it elsewhere if needed
   }
 }
 
@@ -68,14 +58,6 @@ export function getStatusInfo(status) {
       return { text: 'Đang chờ duyệt', color: '#FA8D24' }; // Red color
     case 'Accepted':
       return { text: 'Đã chấp nhận', color: '#00FF00' }; // Green color
-    case 'Denied':
-      return { text: 'Từ chối', color: '#FF0000' }; // Blue color
-    case 'Unactive':
-      return { text: 'Không hoạt động', color: '#FF0000' };
-    case 'NotCreateSessionYet':
-      return { text: 'Chưa có phiên', color: '#FF0000' };
-    case 'SessionWaiting':
-      return { text: 'Chờ duyệt', color: '#FA8D24' };
     default:
       return { text: 'Unknown', color: '#000000' }; // Black color for unknown status
   }

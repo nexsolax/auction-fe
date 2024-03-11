@@ -8,15 +8,15 @@ export async function getAllUser() {
   return axiosInstance.get(url);
 }
 
-export async function getUserNotificationById(id) {
-  const url = `${BASE_URL}/Notification/by_id?=${id}`;
-  try {
-    axiosInstance.get(url, { data: { id } });
-  } catch (error) {
-    console.log(error);
-  }
-  return axiosInstance.get(url);
-}
+// export async function getUserNotificationById(id) {
+//   const url = `${BASE_URL}/Notification/by_id?=${id}`;
+//   try {
+//     axiosInstance.get(url, { data: { id } });
+//   } catch (error) {
+//     console.log(error);
+//   }
+//   return axiosInstance.get(url);
+// }
 
 export async function getUserById(id) {
   const url = `${BASE_URL}/User/by_id`;

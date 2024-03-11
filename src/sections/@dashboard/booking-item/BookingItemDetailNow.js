@@ -35,7 +35,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import {
   getBookingItemById,
   acceptBookingItemWaiting,
-  denyBookingItemWaiting,
   getStatusInfo,
   getStatusLabel,
 } from '../../../services/booking-item-actions';
@@ -172,15 +171,7 @@ const BookingItemDetailNow = () => {
     navigate(`/dashboard/session-create-now/${selectedBookingItem.itemId}`);
   };
 
-  const handleDenyBookingItem = (bookingItemId, reason) => {
-    denyBookingItemWaiting(bookingItemId, reason);
-    setIsInputModalOpen(false)
-    toast.success('Từ chối đơn đăng kí thành công', {
-      position: toast.POSITION.TOP_RIGHT,
-      autoClose: 3000, // Notification will automatically close after 3 seconds (3000 milliseconds)
-    });
-    navigate('/dashboard/booking-item-now');
-  };
+
 
   useEffect(() => {
     getBookingItemById(bookingItemId).then((res) => {
@@ -359,22 +350,7 @@ const BookingItemDetailNow = () => {
                       </Grid>
                     </>
                   )}
-                  <Modal open={isInputModalOpen} onClose={handleInputModalClose}>
-                    <Box sx={styleModal}>
-                      <TextField
-                        label="Nhập lý do từ chối đơn đăng kí"
-                        variant="outlined"
-                        value={reason}
-                        onChange={handleInputChange}
-                        fullWidth
-                        multiline
-                        rows={4}
-                        sx={{ marginBottom: '20px' }}
-                      />
-                      <Button onClick={() => handleDenyBookingItem(item.bookingItemId, reason)}>Xong</Button>
-                      <Button onClick={handleInputModalClose}>Hủy</Button>
-                    </Box>
-                  </Modal>
+                  
                 </Grid>
               </div>
             ))}

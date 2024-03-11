@@ -247,11 +247,6 @@ export default function BookingItems() {
     handleCloseMenu();
   };
 
-  const handleDenyBookingItem = (bookingItemId) => {
-    denyBookingItemWaiting(bookingItemId);
-    handleCloseModal();
-    handleCloseMenu();
-  };
 
   const handleClick = (event, name) => {
     const selectedIndex = selected.indexOf(name);
@@ -566,15 +561,7 @@ export default function BookingItems() {
                           Chấp nhận
                         </Button>
                       </Grid>
-                      <Grid item md={6} xs={12}>
-                        <Button
-                          onClick={() => {
-                            handleDenyBookingItem(bookingItemDetail.bookingItemId);
-                          }}
-                        >
-                          Từ Chối
-                        </Button>
-                      </Grid>
+                      
                     </Grid>
                   </CardContent>
                 </Card>
