@@ -5,7 +5,7 @@ import axios from "axios";
 
 import { Colors } from "../../style/theme";
 import { useUIContext } from "../../context/ui";
-
+import { jwtDecode } from "jwt-decode";
 
 export default function Cart() {
 
@@ -16,24 +16,24 @@ export default function Cart() {
     const jsonUser = JSON.parse(user);
     const [sessionData, setSessionData] = useState([]);
     const token = localStorage.getItem('token');
-    
+    const decoded = jwtDecode(token);
 
 
-    // const api = `https://reasapiv2.azurewebsites.net/api/Sessions/by_user_for_payment?id=${jsonUser?.Id}`
-    // const fetchSessionData = () => {
-    //     // Fetch data from the API link using Axios
-    //     axios.get(api , { headers: { Authorization: `Bearer ${token}` } })
-    //         .then(response => {
-    //             setSessionData(response.data); // Set the fetched data to the state
-    //         })
-    //         .catch(error => {
-    //             console.error("Error fetching data:", error);
-    //         });
-    // };
+    const api = `https://reasapiv2.azurewebsites.net/api/Auction/${jsonUser?.Id}`
+    const fetchSessionData = () => {
+        // Fetch data from the API link using Axios
+        axios.get(api , { headers: { Authorization: `Bearer ${decoded}` } })
+            .then(response => {
+                setSessionData(response.data); // Set the fetched data to the state
+            })
+            .catch(error => {
+                console.error("Error fetching data:", error);
+            });
+    };
 
-    // useEffect(() => {
-    //     fetchSessionData();
-    // }, []);
+    useEffect(() => {
+        fetchSessionData();
+    }, []);
 
     const cartContent = sessionData.map(session => (
         <Box key={session.sessionId}>

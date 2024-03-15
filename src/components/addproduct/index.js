@@ -20,6 +20,7 @@ import {
   Grid,
 } from "@mui/material";
 import axios from "axios";
+import { jwtDecode } from 'jwt-decode';
 
 const AddProductForm = () => {
   const [itemName, setItemName] = useState("");
@@ -36,11 +37,12 @@ const AddProductForm = () => {
   const user = localStorage.getItem("loginUser");
   const jsonUser = JSON.parse(user);
   const theme = useTheme();
+  const decode = jwtDecode(token);
 
   useEffect(() => {
     axios
       .get("https://reasapiv2.azurewebsites.net/api/Category", {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { Authorization: `Bearer ${decode}` },
       })
       .then((response) => {
         setCategories(response.data);
@@ -48,11 +50,13 @@ const AddProductForm = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, [token]);
+  }, [decode]);
 
   const handleCategoryChange = (event) => {
     setCategoryId(event.target.value);
   };
+ 
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -66,9 +70,17 @@ const AddProductForm = () => {
       formData.append("image", img);
     });
 
+    // Find the category with the matching categoryId
+  const selectedCategory = categories.find((category) => category.id === categoryId);
+
+  // Get the category name
+  const categoryName = selectedCategory ? selectedCategory.name : null;
+
+  // Print the category name
+  console.log(`Selected category name: ${categoryName}`);
     axios
       .post("https://reasapiv2.azurewebsites.net/api/RealEstate", formData, {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { Authorization: `Bearer ${decode}` },
       })
       .then((response) => {
         setSuccessDialogOpen(true);
