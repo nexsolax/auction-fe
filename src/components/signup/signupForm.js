@@ -13,7 +13,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { useTheme } from "@mui/material/styles";
 
 const SignUpForm = () => {
-  const [userName, setUsername] = useState('');
+  const [userName, setUserName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rePassword, setRePassword] = useState('');
@@ -315,7 +315,7 @@ const SignUpForm = () => {
       setSuccessDialogOpen(true);
 
       // Reset form fields
-      setUsername('');
+      setUserName('');
       setEmail('');
       setPassword('');
       setRePassword('');
@@ -387,7 +387,7 @@ const SignUpForm = () => {
             label="Tên Tài Khoản"
             type="text"
             value={userName}
-            onChange={(e) => setUsername(e.target.value)}
+            onChange={(e) => setUserName(e.target.value)}
             margin="normal"
             required
             sx={{ width: '100%' }}

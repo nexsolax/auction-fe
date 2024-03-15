@@ -427,7 +427,7 @@ export default function UserPage() {
                         <TextField label="Mã tài khoản" defaultValue={upUser.userId} disabled />
                       </Grid> */}
                       <Grid item md={6} xs={12}>
-                        <TextField label="Họ và tên" defaultValue={userDetail.userName} />
+                        <TextField label="Họ và tên" defaultValue={userDetail.unique_name} />
                       </Grid>
                       <Grid item md={6} xs={12}>
                         <TextField label="Số CCCD" defaultValue={userDetail.cccdnumber} />

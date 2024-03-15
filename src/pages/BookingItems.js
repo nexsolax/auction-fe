@@ -173,7 +173,7 @@ export default function BookingItems() {
     (async () => {
       try {
         const response = await axiosInstance.get('https://reasapiv2.azurewebsites.net/api/User', {
-        params: { userName: user.UserName },
+        params: { userName: user.unique_name },
       });
       console.log(response);
       setBookingItem(response.data);
@@ -182,7 +182,7 @@ export default function BookingItems() {
         console.log(error);
       }
     })();
-  }, [user.UserName]);
+  }, [user.userName]);
   // useEffect(() => {
   //   getBookingItemWaiting(user.Email).then((response) => {
   //     setBookingItem(response.data);
@@ -507,7 +507,7 @@ export default function BookingItems() {
                         <TextField label="Loại" defaultValue={bookingItemDetail.categoryName} />
                       </Grid>
                       <Grid item md={6} xs={12}>
-                        <TextField label="Tên tài khoản" defaultValue={bookingItemDetail.userName} />
+                        <TextField label="Tên tài khoản" defaultValue={bookingItemDetail.unique_name} />
                       </Grid>
                       <Grid item md={6} xs={12}>
                         <TextField label="Số lượng" defaultValue={bookingItemDetail.quantity} />

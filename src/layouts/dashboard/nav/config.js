@@ -15,6 +15,18 @@ const navConfig = [
     role: ['Admin', 'Staff'],
   },
   {
+    title: 'Profile',
+    path: '/profile',
+    icon: icon('ic_analytics'),
+    role: ['Admin', 'Staff','Member'],
+  },
+  {
+    title: 'Thêm tài sản',
+    path: '/additem',
+    icon: icon('ic_analytics'),
+    role: ['Admin', 'Staff','Member'],
+  },
+  {
     title: 'Người dùng',
     path: '/dashboard/user',
     icon: <AccountCircleTwoToneIcon />,

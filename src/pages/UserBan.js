@@ -442,7 +442,7 @@ export default function UserBan() {
                         <TextField label="Mã tài khoản" defaultValue={upUser.userId} disabled />
                       </Grid> */}
                       <Grid item md={6} xs={12}>
-                        <TextField label="Họ và tên" defaultValue={upUser.userName} />
+                        <TextField label="Họ và tên" defaultValue={upUser.unique_name} />
                       </Grid>
                       <Grid item md={6} xs={12}>
                         <TextField label="Số CCCD" defaultValue={upUser.cccdnumber} />

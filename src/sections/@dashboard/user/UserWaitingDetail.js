@@ -191,7 +191,7 @@ const UserWaitingDetail = () => {
                 <TextField
                   fullWidth
                   label="Tên người dùng"
-                  defaultValue={userDetail.userName}
+                  defaultValue={userDetail.unique_name}
                   variant="outlined"
                   sx={{ marginBottom: '20px' }}
                 />

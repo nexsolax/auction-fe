@@ -20,7 +20,7 @@ import {
   Grid,
 } from "@mui/material";
 import axios from "axios";
-import { jwtDecode } from 'jwt-decode';
+import { jwtDecode } from "jwt-decode";
 
 const AddProductForm = () => {
   const [itemName, setItemName] = useState("");
@@ -45,18 +45,34 @@ const AddProductForm = () => {
         headers: { Authorization: `Bearer ${decode}` },
       })
       .then((response) => {
-        setCategories(response.data);
+        if (Array.isArray(response.data)) {
+          // Assuming the data structure contains category objects with 'id' and 'name'
+          const categoriesData = response.data.reduce((acc, category) => {
+            if (category.id && category.name) {
+              acc[category.id] = category.name;
+            } else {
+              console.error("Invalid category data:", category);
+            }
+            return acc;
+          }, {});
+          setCategories(categoriesData);
+       
+        } else {
+          console.log(response);
+          console.error("Invalid response data format:", response.data);
+          setError("Invalid response data format. Please try again later.");
+        }
       })
       .catch((error) => {
-        console.log(error);
-      });
-  }, [decode]);
+        console.error("Error fetching categories:", error);
+        setError("Error fetching categories. Please try again later.");
+      })
+      .finally(() => setLoading(false));
+  }, []);
 
   const handleCategoryChange = (event) => {
     setCategoryId(event.target.value);
   };
- 
-
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -71,13 +87,15 @@ const AddProductForm = () => {
     });
 
     // Find the category with the matching categoryId
-  const selectedCategory = categories.find((category) => category.id === categoryId);
+    const selectedCategory = categories.find(
+      (category) => category.id === categoryId
+    );
 
-  // Get the category name
-  const categoryName = selectedCategory ? selectedCategory.name : null;
+    // Get the category name
+    const categoryName = selectedCategory ? selectedCategory.name : null;
 
-  // Print the category name
-  console.log(`Selected category name: ${categoryName}`);
+    // Print the category name
+    console.log(`Selected category name: ${categoryName}`);
     axios
       .post("https://reasapiv2.azurewebsites.net/api/RealEstate", formData, {
         headers: { Authorization: `Bearer ${decode}` },
@@ -156,10 +174,10 @@ const AddProductForm = () => {
       <FormControl fullWidth required margin="normal">
         <InputLabel>Category</InputLabel>
         <Select value={categoryId} onChange={handleCategoryChange}>
-          {categories.length > 0 ? (
-            categories.map((category) => (
-              <MenuItem key={category.id} value={category.id}>
-                {category.name}
+          {Object.keys(categories).length > 0 ? (
+            Object.keys(categories).map((categoryId) => (
+              <MenuItem key={categoryId} value={categoryId}>
+                {categories[categoryId]} {/* Displaying category name */}
               </MenuItem>
             ))
           ) : (
@@ -167,6 +185,7 @@ const AddProductForm = () => {
           )}
         </Select>
       </FormControl>
+
       <input
         type="file"
         onChange={(event) => setImage([...event.target.files])}
