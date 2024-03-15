@@ -28,7 +28,7 @@ export default function LoginForm() {
   const errRef = useRef();
   const reEmail = useRef();
   const [user, setUser] = useState('');
-  const [username, setUsername] = useState('');
+  const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [errMsg, setErrMsg] = useState('');
   const [success, setSuccess] = useState(false);
@@ -42,8 +42,8 @@ export default function LoginForm() {
   const [errorDialogOpen, setErrorDialogOpen] = useState(false);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [dialogMessage, setDialogMessage] = useState('');
-  const handleUsernameChange = (e) => {
-    setUsername(e.target.value);
+  const handleUserNameChange = (e) => {
+    setUserName(e.target.value);
   };
 
   const handlePasswordChange = (e) => {
@@ -114,7 +114,7 @@ export default function LoginForm() {
 
       const response = await axiosInstance.post(
         'https://reasapiv2.azurewebsites.net/api/User/login',
-        JSON.stringify({ username, password }),
+        JSON.stringify({ userName: user.unique_name, password }),
         {
           headers: { 'Content-Type': 'application/json' },
           // withCredentials: true,
@@ -129,14 +129,14 @@ export default function LoginForm() {
       const role = decoded.role;
       console.log(role);
       // setAuth({ email, password, role, token });
-      setUsername('');
+      setUserName('');
       setPassword('');
       setSuccess(true);
       switch (role) {
         case 'Admin':
           return navigate('/dashboard/app', { replace: true });
         case 'Member':
-          return navigate('/home', { replace: true });
+          return navigate('/dashboard', { replace: true });
         case 'Staff':
           return navigate('/dashboard/app', { replace: true });
         default:
@@ -149,7 +149,7 @@ export default function LoginForm() {
       } else if (err.response?.status === 400) {
         setError('Tài khoản hoặc mặt khẩu không đúng');
         setErrorDialogOpen(true);
-        console.log('Wrong Username or Password');
+        console.log('Wrong userName or Password');
       } else if (err.response?.status === 401) {
         setError('Không có quyền đăng nhập');
         setErrorDialogOpen(true);
@@ -185,7 +185,7 @@ export default function LoginForm() {
           <p style={errorStyle} ref={errRef} className={errMsg ? 'errmsg' : 'offscreen'} aria-live="assertive">
             {errMsg}
           </p>
-          <TextField required name="username" label="User Name" value={username} onChange={handleUsernameChange} />
+          <TextField required name="userName" label="User Name" value={userName} onChange={handleUserNameChange} />
 
           <TextField
             name="password"

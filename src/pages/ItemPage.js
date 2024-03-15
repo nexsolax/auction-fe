@@ -466,7 +466,7 @@ export default function ItemPage() {
                         <TextField label="Số lượng" defaultValue={itemDetail.quantity} />
                       </Grid>
                       <Grid item md={6} xs={12}>
-                        <TextField label="Tên tài khoản" defaultValue={itemDetail.userName} />
+                        <TextField label="Tên tài khoản" defaultValue={itemDetail.unique_name} />
                       </Grid>
                       <Grid item md={6} xs={12}>
                         <TextField label="Phí đặt cọc" defaultValue={itemDetail.deposit ? 'Có' : 'Không'} />

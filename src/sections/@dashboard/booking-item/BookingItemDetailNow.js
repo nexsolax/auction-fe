@@ -215,7 +215,7 @@ const BookingItemDetailNow = () => {
                       fullWidth
                       disabled
                       label="Tên tài khoản"
-                      defaultValue={item.userName}
+                      defaultValue={item.unique_name}
                       variant="outlined"
                       sx={{ marginBottom: '20px' }}
                     />

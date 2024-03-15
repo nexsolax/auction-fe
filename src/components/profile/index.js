@@ -6,6 +6,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import axios from 'axios';
 import styled from '@emotion/styled';
+import { jwtDecode } from 'jwt-decode';
 
 const ProfilePage = () => {
     const [profileData, setProfileData] = useState({});
@@ -28,11 +29,11 @@ const ProfilePage = () => {
     const rePaypalAccount = useRef('');
     const [maxWidth, setMaxWidth] = React.useState('sm');
     const [isUpdating, setIsUpdating] = useState(false);
+    const decoded = jwtDecode(token);
 
-
-    // const ChangePasswordApi = `https://reasapiv2.azurewebsites.net/api/Users/update_password`
-    // const api = `https://reasapiv2.azurewebsites.net/api/Users/by_id?id=${jsonUser.Id}`
-    // const apiUpdateInfo = `https://reasapiv2.azurewebsites.net/api/Users`
+    // const ChangePasswordApi = `https://reasapiv2.azurewebsites.net/api/User/update_password`
+    const api = `https://reasapiv2.azurewebsites.net/api/User/${jsonUser.id}`
+    const apiUpdateInfo = `https://reasapiv2.azurewebsites.net/api/User/${jsonUser.id}`
     // const apiUpdatePaypal = `https://reasapiv2.azurewebsites.net/api/UserPaymentInformation`
 
 
@@ -51,7 +52,6 @@ const ProfilePage = () => {
             width: '100%',
         },
     }));
-
 
 
     const handleErrorDialogClose = () => {
@@ -73,11 +73,11 @@ const ProfilePage = () => {
         setDialogOpen(true);
     };
 
-    // const handleCloseSuccessDialog = () => {
-    //     fetchProfileData();
-    //     setDialogOpen(false);
-    //     // setPasswordError(false);
-    // };
+    const handleCloseSuccessDialog = () => {
+        fetchProfileData();
+        setDialogOpen(false);
+        // setPasswordError(false);
+    };
 
     const styles = {
         TaskAltIcon: {
@@ -135,7 +135,7 @@ const ProfilePage = () => {
     //     };
     //     axios
     //         .put(apiUpdateInfo, requestBody, {
-    //             headers: { Authorization: `Bearer ${token}` },
+    //             headers: { Authorization: `Bearer ${decoded}` },
     //         })
     //         .then((response) => {
     //             // Handle the response (success or failure)
@@ -181,27 +181,28 @@ const ProfilePage = () => {
         return `${year}-${month}-${day}`;
     };
 
-    // useEffect(() => {
-    //     fetchProfileData();
-    // }, []);
+    const fetchProfileData = async () => {
+        try {
+            const response = await axios.get(api, { headers: { Authorization: `Bearer ${decoded}` } });
+            if (response && response.data) {
+                console.log('Profile data:', response.data);
+                setProfileData(response.data);
+            } else {
+                console.log('Empty response or data from the server');
+            }
+        } catch (error) {
+            console.log('Error fetching profile data:', error);
+            // Handle the error state, such as displaying an error message to the user
+        }
+    };
 
-    // const fetchProfileData = async () => {
-    //     // try {
-    //     //     const response = await axios.get(api, {headers: { Authorization: `Bearer ${token}` },});
-    //     //     setProfileData(response.data);
-    //     // } catch (error) {
-    //     //     console.log('Error fetching profile data:', error);
-    //     // }
+    useEffect(() => {
+        fetchProfileData();
+        console.log(jsonUser.id);
+        console.log(decoded);
+    }, []);
 
-    //     try {
-    //         const response = await axios.get(api, { headers: { Authorization: `Bearer ${token}` }, });
-    //         const formattedData = formatProfileData(response.data);
-    //         setProfileData(formattedData);
-    //     } catch (error) {
-    //         console.log('Error fetching profile data:', error);
-    //     }
-    // };
-
+    
 
 
 
@@ -270,7 +271,7 @@ const ProfilePage = () => {
                             <TextField inputRef={reUserName}
                                 label="Tên Tài Khoản"
                                 fullWidth
-                                defaultValue={profileData.userName || ''} />
+                                defaultValue={profileData.name || ''} />
                         </Grid>
                         <Grid item xs={6}>
                             <TextField label="Email" fullWidth value={profileData.email || ''} />
@@ -304,10 +305,10 @@ const ProfilePage = () => {
                     </Grid>
 
 
-                    <Grid container sx={{marginTop:"25px" , marginLeft:"3%"}}>
+                    {/* <Grid container sx={{marginTop:"25px" , marginLeft:"3%"}}>
                         <Grid xs={8}>
                             <TextField
-                                label="Tài Khoản Paypal"
+                                label="Tài Khoản Ngan hang"
                                 fullWidth
                                 defaultValue={profileData?.payPalAccount?.[0]?.payPalAccount || ''}
                                 inputRef={rePaypalAccount}
@@ -327,7 +328,7 @@ const ProfilePage = () => {
                                 {isUpdating ? <CircularProgress size={24} color="inherit" /> : 'Cập Nhập'}
                             </Button>
                         </Grid>
-                    </Grid>
+                    </Grid> */}
 
 
                     <Grid container spacing={3} sx={{ marginTop: "5px", marginLeft: "2px" }}>
@@ -335,12 +336,12 @@ const ProfilePage = () => {
                             <TextField
                                 label="Số Điện Thoại"
                                 fullWidth
-                                defaultValue={profileData.phone || ''}
+                                defaultValue={profileData.phoneNumber || ''}
                                 inputRef={rePhone}
                             />
                         </Grid>
                         <Grid item xs={6}>
-                            <TextField label="Số CCCD" fullWidth value={profileData.cccdnumber || ''} />
+                            <TextField label="Số CCCD" fullWidth value={profileData.identityNumber || ''} />
                         </Grid>
                     </Grid>
 
@@ -364,19 +365,19 @@ const ProfilePage = () => {
 
                     <Grid item xs={12} sm={6}>
                         <img
-                            src={profileData.cccdfrontImage}
+                            src={profileData.identityCardFrontImage}
                             alt="CCCD Front"
                             style={{ width: '100%', height: '250px', border: '1px dashed #ccc', borderRadius: '4px', padding: '4px' }}
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
                         <img
-                            src={profileData.cccdbackImage}
+                            src={profileData.identityCardBackImage}
                             alt="CCCD Back"
                             style={{ width: '100%', height: '250px', border: '1px dashed #ccc', borderRadius: '4px', padding: '4px' }}
                         />
                     </Grid>
-                    <Grid item xs={12}>
+                    {/* <Grid item xs={12}>
                         <Button
                             // onClick={handleUpdateInfo}
                             sx={{ marginLeft: "40%" }}
@@ -387,7 +388,7 @@ const ProfilePage = () => {
                         >
                             {isUpdating ? <CircularProgress size={24} color="inherit" /> : 'Cập Nhập'}
                         </Button>
-                    </Grid>
+                    </Grid> */}
 
                 </Grid>
             </CardContent>

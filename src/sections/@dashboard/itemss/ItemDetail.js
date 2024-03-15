@@ -139,7 +139,7 @@ const ItemDetail = () => {
                 <TextField
                   fullWidth
                   label="Tên tài khoản"
-                  defaultValue={itemDetail.userName}
+                  defaultValue={itemDetail.unique_name}
                   variant="outlined"
                   sx={{ marginBottom: '20px' }}
                 />

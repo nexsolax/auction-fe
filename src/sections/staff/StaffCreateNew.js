@@ -19,7 +19,7 @@ import { createStaff } from "../../services/staff-actions";
 const StaffCreateNew = () => {
   const [newStaff, setNewStaff] = useState({
     name: "",
-    username: "",
+    userName: "",
     email: "",
     password: "",
     address: "",
@@ -102,7 +102,7 @@ const StaffCreateNew = () => {
 
     if (
       !newStaff.name ||
-      !newStaff.username ||
+      !newStaff.userName ||
       !newStaff.email ||
       !newStaff.password ||
       !newStaff.address ||
@@ -153,7 +153,7 @@ const StaffCreateNew = () => {
         name: newStaff.name,
         email: newStaff.email,
         phoneNumber: newStaff.phoneNumber,
-        userName: newStaff.username,
+        userName: newStaff.userName,
         password: newStaff.password,
         gender: parseInt(newStaff.gender),
         address: newStaff.address,
@@ -171,7 +171,7 @@ const StaffCreateNew = () => {
       setSuccessDialogOpen(true);
       setNewStaff({
         name: "",
-        username: "",
+        userName: "",
         email: "",
         password: "",
         address: "",
@@ -236,12 +236,12 @@ const StaffCreateNew = () => {
       <TextField
         label="User name"
         type="text"
-        value={newStaff.username}
-        onChange={(e) => setNewStaff({ ...newStaff, username: e.target.value })}
+        value={newStaff.userName}
+        onChange={(e) => setNewStaff({ ...newStaff, userName: e.target.value })}
         margin="normal"
         required
         sx={{ width: "100%" }}
-        id="username"
+        id="userName"
       />
       <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
         <Typography sx={{ marginRight: "10px" }}>Giới Tính:</Typography>

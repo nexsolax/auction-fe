@@ -56,13 +56,13 @@ export default function DashboardAppPage() {
   const [endDate, setEndDate] = useState(null);
   const [startDateUser, setStartDateUser] = useState(null);
   const [endDateUser, setEndDateUser] = useState(null);
-  // const [startDatePayment, setStartDatePayment] = useState(null);
-  // const [endDatePayment, setEndDatePayment] = useState(null);
+  const [startDatePayment, setStartDatePayment] = useState(null);
+  const [endDatePayment, setEndDatePayment] = useState(null);
   const [total, setTotal] = useState({});
-  // const [totalPayment, setTotalPayment] = useState({});
+  const [totalPayment, setTotalPayment] = useState({});
   // const [totalCategory, setTotalCategory] = useState({});
   const [totalUser, setTotalUser] = useState({});
-  // const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [chartData, setChartData] = useState([]);
   // const [chartCategoryData, setChartCategoryData] = useState([]);
   const [chartUserData, setChartUserData] = useState([]);
@@ -149,24 +149,24 @@ export default function DashboardAppPage() {
   }, []);
   
 
-  // useEffect(() => {
-  //   (async () => {
-  //     setIsLoading(true);
-  //     try {
-  //       const response = await axiosInstance.get('https://reasapiv2.azurewebsites.net/api/Category');
-  //       console.log(response);
-  //       if (Array.isArray(response.data)) {
-  //         setCategories(response.data);
-  //       } else {
-  //         console.log('Response data is not an array:', response.data);
-  //       }
-  //       setIsLoading(false);
-  //     } catch (error) {
-  //       setIsLoading(false);
-  //       console.log('Failed to fetch: ', error);
-  //     }
-  //   })();
-  // }, []);
+  useEffect(() => {
+    (async () => {
+      setIsLoading(true);
+      try {
+        const response = await axiosInstance.get('https://reasapiv2.azurewebsites.net/api/Category');
+        console.log(response);
+        if (Array.isArray(response.data)) {
+          setCategories(response.data);
+        } else {
+          console.log('Response data is not an array:', response.data);
+        }
+        setIsLoading(false);
+      } catch (error) {
+        setIsLoading(false);
+        console.log('Failed to fetch: ', error);
+      }
+    })();
+  }, []);
   
 
   const styles = {
@@ -200,122 +200,122 @@ export default function DashboardAppPage() {
   //   }
   // }, [selectedCategoryId, startDate, endDate]);
 
-  // useEffect(() => {
-  //   (async () => {
-  //     try {
-  //       // Calculate the start and end dates based on the selected menu item
-  //       const currentDate = new Date();
-  //       const currentYear = currentDate.getFullYear();
-  //       let startMonth;
-  //       let endMonth;
+  useEffect(() => {
+    (async () => {
+      try {
+        // Calculate the start and end dates based on the selected menu item
+        const currentDate = new Date();
+        const currentYear = currentDate.getFullYear();
+        let startMonth;
+        let endMonth;
 
-  //       switch (selectedMenuItem) {
-  //         case 'Quy1':
-  //           startMonth = 0; // January
-  //           endMonth = 2; // March
-  //           break;
-  //         case 'Quy2':
-  //           startMonth = 3; // April
-  //           endMonth = 5; // June
-  //           break;
-  //         case 'Quy3':
-  //           startMonth = 6; // July
-  //           endMonth = 8; // September
-  //           break;
-  //         case 'Quy4':
-  //           startMonth = 9; // October
-  //           endMonth = 11; // December
-  //           break;
-  //         default:
-  //           startMonth = 0;
-  //           endMonth = 11;
-  //       }
+        switch (selectedMenuItem) {
+          case 'Quy1':
+            startMonth = 0; // January
+            endMonth = 2; // March
+            break;
+          case 'Quy2':
+            startMonth = 3; // April
+            endMonth = 5; // June
+            break;
+          case 'Quy3':
+            startMonth = 6; // July
+            endMonth = 8; // September
+            break;
+          case 'Quy4':
+            startMonth = 9; // October
+            endMonth = 11; // December
+            break;
+          default:
+            startMonth = 0;
+            endMonth = 11;
+        }
 
-  //       const startDate = new Date(currentYear, startMonth, 1);
-  //       const endDate = new Date(currentYear, endMonth + 1, 0);
+        const startDate = new Date(currentYear, startMonth, 1);
+        const endDate = new Date(currentYear, endMonth + 1, 0);
 
-  //       const response = await axiosInstance.get(
-  //         `'https://reasapiv2.azurewebsites.net/api/Auction`,
-  //         {
-  //           params: {
-  //             startDate: startDate.toISOString(),
-  //             endDate: endDate.toISOString(),
-  //           },
-  //         }
-  //       );
+        const response = await axiosInstance.get(
+          `'https://reasapiv2.azurewebsites.net/api/Auction`,
+          {
+            params: {
+              startDate: startDate.toISOString(),
+              endDate: endDate.toISOString(),
+            },
+          }
+        );
 
-  //       console.log(response);
-  //       setTotalPayment(response.data);
-  //       const updatedChartData = [
-  //         { label: 'totalCountNotStart', value: response.data.totalCountNotStart },
-  //         { label: 'totalCountInStage', value: response.data.totalCountInStage },
-  //         { label: 'totalCountHaventTranfer', value: response.data.totalCountHaventTranfer },
-  //         { label: 'totalCountComplete', value: response.data.totalCountComplete },
-  //         { label: 'totalCountFail', value: response.data.totalCountFail },
-  //         { label: 'totalCountReceived', value: response.data.totalCountReceived },
-  //         { label: 'totalCountErrorItem', value: response.data.totalCountErrorItem },
-  //         { label: 'totalCountDelete', value: response.data.totalCountDelete },
-  //       ];
+        console.log(response);
+        setTotalPayment(response.data);
+        const updatedChartData = [
+          { label: 'totalCountNotStart', value: response.data.totalCountNotStart },
+          { label: 'totalCountInStage', value: response.data.totalCountInStage },
+          { label: 'totalCountHaventTranfer', value: response.data.totalCountHaventTranfer },
+          { label: 'totalCountComplete', value: response.data.totalCountComplete },
+          { label: 'totalCountFail', value: response.data.totalCountFail },
+          { label: 'totalCountReceived', value: response.data.totalCountReceived },
+          { label: 'totalCountErrorItem', value: response.data.totalCountErrorItem },
+          { label: 'totalCountDelete', value: response.data.totalCountDelete },
+        ];
 
-  //       setChartData(updatedChartData);
-  //     } catch (error) {
-  //       console.log('Failed to fetch: ', error);
-  //     }
-  //   })();
-  // }, [selectedMenuItem]);
+        setChartData(updatedChartData);
+      } catch (error) {
+        console.log('Failed to fetch: ', error);
+      }
+    })();
+  }, [selectedMenuItem]);
 
 
   const handleCloseErrorDialog = () => {
     setErrorDialogOpen(false);
   };
 
-  // const handleSubmitPayment = async (event) => {
-  //   event.preventDefault();
-  //   setIsLoading(true);
+  const handleSubmitPayment = async (event) => {
+    event.preventDefault();
+    setIsLoading(true);
 
-  //   try {
+    try {
 
-  //     if (!startDatePayment || !endDatePayment) {
-  //       setErrorMessage('Ngày Bắt Đầu Hoặc Kết Thúc Không Được Bỏ Trống');
-  //       setErrorDialogOpen(true);
-  //       setIsLoading(false);
-  //       return; // Exit the function early to prevent the API request
-  //     }
+      if (!startDatePayment || !endDatePayment) {
+        setErrorMessage('Ngày Bắt Đầu Hoặc Kết Thúc Không Được Bỏ Trống');
+        setErrorDialogOpen(true);
+        setIsLoading(false);
+        return; // Exit the function early to prevent the API request
+      }
   
-  //     // Check if end date is not greater than start date
-  //     if (endDatePayment <= startDatePayment) {
-  //       setErrorMessage('Ngày Kết Thúc Phải bằng Hoặc Lớn Hơn Ngày Bắt Đầu');
-  //       setErrorDialogOpen(true);
-  //       setIsLoading(false);
-  //       return; // Exit the function early to prevent the API request
-  //     }
+      // Check if end date is not greater than start date
+      if (endDatePayment <= startDatePayment) {
+        setErrorMessage('Ngày Kết Thúc Phải bằng Hoặc Lớn Hơn Ngày Bắt Đầu');
+        setErrorDialogOpen(true);
+        setIsLoading(false);
+        return; // Exit the function early to prevent the API request
+      }
   
-  //     const response = await axiosInstance.get('https://reasapiv2.azurewebsites.net/api/Transaction', {
-  //       params: {
-  //         startDate: startDatePayment.toISOString(),
-  //         endDate: endDatePayment.toISOString()
-  //       }
-  //     });
-  //     console.log(response)
-  //     setTotalPayment(response.data);
-  //     setIsLoading(false);
-  //     // const updatedChartData = [
-  //     //   { label: 'Chưa bắt đầu', value: response.data.totalCountNotStart },
-  //     //   { label: 'Đang diễn ra', value: response.data.totalCountInStage },
-  //     //   { label: 'Chưa thanh toán', value: response.data.totalCountHaventTranfer },
-  //     //   { label: 'Thành công', value: response.data.totalCountComplete },
-  //     //   { label: 'Thất bại', value: response.data.totalCountFail },
-  //     //   { label: 'Đã nhận hàng', value: response.data.totalCountReceived },
-  //     //   { label: 'Nhận hàng lỗi', value: response.data.totalCountErrorItem },
-  //     //   { label: 'Đã xóa', value: response.data.totalCountDelete },
-  //     // ];
-  //     // setChartData(updatedChartData);
-  //   }
-  //   catch (error) {
-  //     setIsLoading(false);
-  //     console.log('Failed to fetch: ', error);
-  //   }
-  // }
+      const response = await axiosInstance.get('https://reasapiv2.azurewebsites.net/api/Transaction', {
+        params: {
+          startDate: startDatePayment.toISOString(),
+          endDate: endDatePayment.toISOString()
+        }
+      });
+      console.log(response)
+      setTotalPayment(response.data);
+      setIsLoading(false);
+      const updatedChartData = [
+        { label: 'Chưa bắt đầu', value: response.data.totalCountNotStart },
+        { label: 'Đang diễn ra', value: response.data.totalCountInStage },
+        { label: 'Chưa thanh toán', value: response.data.totalCountHaventTranfer },
+        { label: 'Thành công', value: response.data.totalCountComplete },
+        { label: 'Thất bại', value: response.data.totalCountFail },
+        { label: 'Đã nhận hàng', value: response.data.totalCountReceived },
+        { label: 'Nhận hàng lỗi', value: response.data.totalCountErrorItem },
+        { label: 'Đã xóa', value: response.data.totalCountDelete },
+      ];
+      setChartData(updatedChartData);
+    }
+    catch (error) {
+      setIsLoading(false);
+      console.log('Failed to fetch: ', error);
+    }
+  }
 
   // const handleSubmitCategory = async (e) => {
   //   e.preventDefault();
@@ -441,7 +441,7 @@ export default function DashboardAppPage() {
             <AppWidgetSummary title="Tổng tiền gửi cho người dùng" total={total.totalSend} color="warning" icon={'ph:package'} />
           </Grid>
 
-          {/* <Grid item xs={12} md={6} lg={8}>
+          <Grid item xs={12} md={6} lg={8}>
             <AppWebsiteVisits
               title="Website Visits"
               subheader="(+43%) than last year"
@@ -479,7 +479,7 @@ export default function DashboardAppPage() {
                 },
               ]}
             />
-          </Grid> */}
+          </Grid>
           {/* <Grid item xs={12} md={12}>
             <form onSubmit={handleSubmitPayment} >
               <LocalizationProvider dateAdapter={AdapterMoment}>
@@ -621,23 +621,6 @@ export default function DashboardAppPage() {
               </Select>
             </FormControl>
           </Grid> */}
-          {/* <Grid item xs={12} md={6}>
-            <AppCurrentVisits
-              title="Current Visits"
-              chartData={[
-                { label: 'America', value: 4344 },
-                { label: 'Asia', value: 5435 },
-                { label: 'Europe', value: 1443 },
-                { label: 'Africa', value: 4443 },
-              ]}
-              chartColors={[
-                theme.palette.primary.main,
-                theme.palette.info.main,
-                theme.palette.warning.main,
-                theme.palette.error.main,
-              ]}
-            />
-          </Grid>
           <Grid item xs={12} md={6}>
             <AppCurrentVisits
               title="Current Visits"
@@ -655,25 +638,9 @@ export default function DashboardAppPage() {
               ]}
             />
           </Grid>
-          <Grid item xs={12} md={6}>
-            <AppCurrentVisits
-              title="Current Visits"
-              chartData={[
-                { label: 'America', value: 4344 },
-                { label: 'Asia', value: 5435 },
-                { label: 'Europe', value: 1443 },
-                { label: 'Africa', value: 4443 },
-              ]}
-              chartColors={[
-                theme.palette.primary.main,
-                theme.palette.info.main,
-                theme.palette.warning.main,
-                theme.palette.error.main,
-              ]}
-            />
-          </Grid> */}
+         
 
-          {/* <Grid item xs={12} md={6} lg={8}>
+          <Grid item xs={12} md={6} lg={8}>
             <AppConversionRates
               title="Conversion Rates"
               subheader="(+43%) than last year"
@@ -690,12 +657,12 @@ export default function DashboardAppPage() {
                 { label: 'United Kingdom', value: 1380 },
               ]}
             />
-          </Grid> */}
+          </Grid>
 
-          {/* <Grid item xs={12} md={6} lg={4}>
+          <Grid item xs={12} md={6} lg={4}>
             <AppCurrentSubject
-              title="Current Subject"
-              chartLabels={['English', 'History', 'Physics', 'Geography', 'Chinese', 'Math']}
+              title="Current City"
+              chartLabels={['A', 'B', 'C', 'D', 'E', 'F']}
               chartData={[
                 { name: 'Series 1', data: [80, 50, 30, 40, 100, 20] },
                 { name: 'Series 2', data: [20, 30, 40, 80, 20, 80] },
@@ -703,26 +670,26 @@ export default function DashboardAppPage() {
               ]}
               chartColors={[...Array(6)].map(() => theme.palette.text.secondary)}
             />
-          </Grid> */}
+          </Grid>
 
-          {/* <Grid item xs={12} md={6} lg={8}>
+          <Grid item xs={12} md={6} lg={8}>
             <AppNewsUpdate
               title="News Update"
               list={[...Array(5)].map((_, index) => ({
-                id: faker.datatype.uuid(),
-                title: faker.name.jobTitle(),
-                description: faker.name.jobTitle(),
+                id: "test",
+                title: "test",
+                description: "test",
                 image: `/assets/images/covers/cover_${index + 1}.jpg`,
-                postedAt: faker.date.recent(),
+              
               }))}
             />
-          </Grid> */}
+          </Grid>
 
-          {/* <Grid item xs={12} md={6} lg={4}>
+          <Grid item xs={12} md={6} lg={4}>
             <AppOrderTimeline
               title="Order Timeline"
               list={[...Array(5)].map((_, index) => ({
-                id: faker.datatype.uuid(),
+                id: "test",
                 title: [
                   '1983, orders, $4220',
                   '12 Invoices have been paid',
@@ -731,7 +698,7 @@ export default function DashboardAppPage() {
                   'New order placed #XF-2346',
                 ][index],
                 type: `order${index + 1}`,
-                time: faker.date.past(),
+                
               }))}
             />
           </Grid>
@@ -775,7 +742,7 @@ export default function DashboardAppPage() {
                 { id: '5', label: 'Sprint Showcase' },
               ]}
             />
-          </Grid> */}
+          </Grid>
         </Grid>
       </Container>
 

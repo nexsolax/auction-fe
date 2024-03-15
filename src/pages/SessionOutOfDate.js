@@ -86,7 +86,7 @@ function applySortFilter(array, comparator, query) {
     return a[1] - b[1];
   });
   if (query) {
-    return filter(array, (_user) => _user.userName.toLowerCase().indexOf(query.toLowerCase()) !== -1);
+    return filter(array, (_user) => _user.unique_name.toLowerCase().indexOf(query.toLowerCase()) !== -1);
   }
   return stabilizedThis.map((el) => el[0]);
 }
@@ -427,7 +427,7 @@ export default function SessionOutOfDate() {
                         <TextField label="Mã tài khoản" defaultValue={upUser.userId} disabled />
                       </Grid> */}
                       <Grid item md={6} xs={12}>
-                        <TextField label="Họ và tên" defaultValue={upSession.userName} />
+                        <TextField label="Họ và tên" defaultValue={upSession.unique_name} />
                       </Grid>
                       <Grid item md={6} xs={12}>
                         <TextField label="Số CCCD" defaultValue={upSession.cccdnumber} />
