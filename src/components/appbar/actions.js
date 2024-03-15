@@ -13,7 +13,7 @@ import LogoutFuncion from "../../services/LogoutFunction";
 import { MyList, ActionIconsContainerMobile, ActionIconsContainerDesktop } from "../../style/appbar";
 import { Colors } from "../../style/theme";
 import { useUIContext } from "../../context/ui";
-
+import { jwtDecode } from 'jwt-decode';
 
 export default function Actions({ matches }) {
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -23,18 +23,20 @@ export default function Actions({ matches }) {
     const [profileData, setProfileData] = useState({});
     const user = localStorage.getItem('loginUser');
     const jsonUser = JSON.parse(user);
-    const userEmail = !!jsonUser && !!jsonUser.Email;
+    const userName = !!jsonUser && !!jsonUser.userName;
     const role = jsonUser?.Role;
     const { cart, setShowCart } = useUIContext();
     const [sessionData, setSessionData] = useState([]);
     const token = localStorage.getItem('token');
-
-    const apiProfile = `https://reasapiv2.azurewebsites.net/api/User/by_id?id=${jsonUser?.Id}`
-    const apiSession = `https://reasapiv2.azurewebsites.net/api/User?id=${jsonUser?.Id}`
-
+    
+    const decoded = jwtDecode(token);
+    const apiProfile = `https://reasapiv2.azurewebsites.net/api/User/${jsonUser?.id}`;
+    const apiSession = `https://reasapiv2.azurewebsites.net/api/User?id=${jsonUser?.id}`;
+    
     const fetchProfileData = async () => {
+        
         try {
-            const response = await axios.get(apiProfile, { headers: { Authorization: `Bearer ${token}` }, });
+            const response = await axios.get(apiProfile, { headers: { Authorization: `Bearer ${decoded}` }, });
             setProfileData(response.data);
         } catch (error) {
             console.log('Error fetching profile data:', error);
@@ -42,7 +44,7 @@ export default function Actions({ matches }) {
     };
 
     const fetchSessionData = () => {
-        axios.get(apiSession, { headers: { Authorization: `Bearer ${token}` } })
+        axios.get(apiSession, { headers: { Authorization: `Bearer ${decoded}` } })
             .then(response => {
                 setSessionData(response.data);
             })
@@ -73,7 +75,7 @@ export default function Actions({ matches }) {
             <MyList type="row">
                 <Divider orientation="vertical" flexItem />
 
-                {userEmail ? (
+                {userName ? (
                     <>
                         <ListItemButton sx={{ justifycontent: 'center' }}>
                             <ListItemIcon sx={{ display: 'flex', justifycontent: 'center', color: matches && Colors.white }}>
@@ -140,7 +142,7 @@ export default function Actions({ matches }) {
                                             <MenuItem onClick={handleClose} sx={{ display: "flex", alignItems: "center" }}>
                                                 <Avatar src={profileData.avatar} />
                                                 <Link to="/profile" style={{ textDecoration: "none", color: "inherit" }}>
-                                                    <Typography sx={{ marginLeft: 1 }}>{jsonUser.Email}</Typography>
+                                                    <Typography sx={{ marginLeft: 1 }}>{jsonUser.userName}</Typography>
                                                 </Link>
                                             </MenuItem>
                                             <Divider />
@@ -182,7 +184,7 @@ export default function Actions({ matches }) {
                                                 <ListItemIcon>
                                                     <AlternateEmailIcon fontSize="small" />
                                                 </ListItemIcon>
-                                                {jsonUser.Email}
+                                                {jsonUser.userName}
                                             </MenuItem>
                                             <MenuItem onClick={handleClose}>
                                                 <ListItemIcon>

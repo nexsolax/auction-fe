@@ -43,7 +43,7 @@ import { Product, ProductDetailImage, ProductImage } from "../../style/Products"
 import Scrollbar from '../scrollbar/Scrollbar';
 import startConnection from './signalr';
 import { Notify } from './sampleSignalr';
-
+import { jwtDecode } from 'jwt-decode';
 
 const BidDialogContext = createContext();
 
@@ -89,12 +89,10 @@ const AuctionForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-
-  const api = `https://reasapiv2.azurewebsites.net/api/Sessions/by_id?id=${sessionId}`
-  const IncreaseApi = `https://reasapiv2.azurewebsites.net/api/SessionDetails/increase_price`
-  const NotPayApi = `https://reasapiv2.azurewebsites.net/api/Sessions/session_status_to_haven't_pay`
-  const sessionDetailAPI = `https://reasapiv2.azurewebsites.net/api/SessionDetails/by_session?id=${sessionId}`
-  const paymentAPI = `https://reasapiv2.azurewebsites.net/api/Login/payment_joinning?sessionId=${sessionId}&payerId=${jsonUser?.Id}&urlSuccess=https://capstone-bid-fe.vercel.app/payment-success&urlhttps://capstone-bid-fe.vercel.app/payment-fail`
+  const decoded = jwtDecode(token);
+  const api = `https://reasapiv2.azurewebsites.net/api/Auction/${sessionId}`
+  const IncreaseApi = `https://reasapiv2.azurewebsites.net/api/Auction/${sessionId}/place-bid`
+  const sessionDetailAPI = `https://reasapiv2.azurewebsites.net/api/Auction/${sessionId}`
 
   // useEffect(() => {
   //   const interval = setInterval(() => {
@@ -210,29 +208,29 @@ const AuctionForm = () => {
     return price?.toLocaleString("vi-VN", { style: "currency", currency: "VND" });
   }
 
-  const handlePayment = async () => {
+  // const handlePayment = async () => {
 
-    try {
-      const response = await axios.post(paymentAPI, null, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+  //   try {
+  //     const response = await axios.post(paymentAPI, null, {
+  //       headers: { Authorization: `Bearer ${token}` }
+  //     });
 
-      // Assuming the API response contains the payment link
-      const paymentLink = response.data;
-      setPaymentlink(paymentLink);
-      // Redirect the user to the payment link
-      window.location.href = paymentLink;
+  //     // Assuming the API response contains the payment link
+  //     const paymentLink = response.data;
+  //     setPaymentlink(paymentLink);
+  //     // Redirect the user to the payment link
+  //     window.location.href = paymentLink;
 
-    } catch (error) {
-      console.error('Error processing payment:', error);
-      // Handle error, show a message to the user, etc.
-    }
+  //   } catch (error) {
+  //     console.error('Error processing payment:', error);
+  //     // Handle error, show a message to the user, etc.
+  //   }
 
-  };
+  // };
 
   const fetchSessionDetails = async () => {
     try {
-      const response = await axios.get(sessionDetailAPI, { headers: { Authorization: `Bearer ${token}` } });
+      const response = await axios.get(sessionDetailAPI, { headers: { Authorization: `Bearer ${decoded}` } });
       setSessionDetails(response.data);
     } catch (error) {
       console.error('Error fetching session details:', error);
@@ -242,7 +240,7 @@ const AuctionForm = () => {
 
   const fetchAuctionData = async () => {
     try {
-      const response = await axios.get(api, { headers: { Authorization: `Bearer ${token}` } });
+      const response = await axios.get(api, { headers: { Authorization: `Bearer ${decoded}` } });
       setAuctionData(response.data);
 
       if (response.data.length > 0) {
@@ -262,7 +260,7 @@ const AuctionForm = () => {
   const makeApiCall = async () => {
     try {
       setIsLoading(true);
-      const response = await axios.post(IncreaseApi, { userId: jsonUser.Id, sessionId }, { headers: { Authorization: `Bearer ${token}` } });
+      const response = await axios.post(IncreaseApi, { userId: jsonUser.Id, sessionId }, { headers: { Authorization: `Bearer ${decoded}` } });
       setIsLoading(false);
 
     } catch (error) {
@@ -278,33 +276,33 @@ const AuctionForm = () => {
     }
   };
 
-  const handleGoBack = async () => {
-    try {
-      setIsLoading(true);
-      const response = await axios.put(NotPayApi, { sessionID: sessionId }, { headers: { Authorization: `Bearer ${token}` } });
-      console.log("API response:", response.data);
+  // const handleGoBack = async () => {
+  //   try {
+  //     setIsLoading(true);
+  //     const response = await axios.put(NotPayApi, { sessionID: sessionId }, { headers: { Authorization: `Bearer ${decoded}` } });
+  //     console.log("API response:", response.data);
 
-      // Check if the user is the winner based on the API response
-      const winnerEmail = response.data[0]?.winner?.toLowerCase(); // Convert to lowercase
-      console.log(winnerEmail);
-      const userEmail = jsonUser.Email.toLowerCase(); // Convert to lowercase
-      if (winnerEmail === userEmail) {
-        setIsWinner(true);
-      } else {
-        setIsWinner(false);
-      }
-      setIsLoading(false);
-      setWinnerData(response.data); // Store the winner data from the API response
+  //     // Check if the user is the winner based on the API response
+  //     const winnerEmail = response.data[0]?.winner?.toLowerCase(); // Convert to lowercase
+  //     console.log(winnerEmail);
+  //     const userEmail = jsonUser.Email.toLowerCase(); // Convert to lowercase
+  //     if (winnerEmail === userEmail) {
+  //       setIsWinner(true);
+  //     } else {
+  //       setIsWinner(false);
+  //     }
+  //     setIsLoading(false);
+  //     setWinnerData(response.data); // Store the winner data from the API response
 
-      // Set the flag to indicate that the server response has been received
-      setHasServerResponse(true);
+  //     // Set the flag to indicate that the server response has been received
+  //     setHasServerResponse(true);
 
-    } catch (error) {
-      setIsLoading(false);
-      console.error('Error updating session status:', error);
-      // Handle error if needed
-    }
-  };
+  //   } catch (error) {
+  //     setIsLoading(false);
+  //     console.error('Error updating session status:', error);
+  //     // Handle error if needed
+  //   }
+  // };
 
   const handleToggleDescriptions = () => {
     setShowDescriptions((prevState) => !prevState);
@@ -443,7 +441,7 @@ const AuctionForm = () => {
         const fiveMinutesBeforeEndTime = convertTimeToSeconds(moment(auctionData[0]?.endTime, "YYYY-MM-DD HH:mm:ss").subtract(convertTimeToSeconds(auctionData[0]?.freeTime), 'seconds').format("HH:mm:ss"));
 
         if (auctionEndTime.isBefore(currentTime)) {
-          handleGoBack();
+          // handleGoBack();
           setIsIntervalActive(false);
         } else if (currentTime.isAfter(fiveMinutesBeforeEndTime)) {
           // Change the interval to 3 seconds (3000 milliseconds)
@@ -1005,7 +1003,7 @@ const AuctionForm = () => {
             <Button onClick={closeDialog} color="primary">
               Thoát
             </Button>
-            <Button onClick={handlePayment} color="primary">
+            <Button color="primary">
               Thanh toán bằng PayPal
             </Button>
           </DialogActions>
@@ -1035,12 +1033,12 @@ const AuctionForm = () => {
               </DialogContent>
               <DialogActions>
                 <Link to="/home" style={{ textDecoration: 'none' }}>
-                  <Button color="primary" onClick={handleGoBack}>
+                  <Button color="primary">
                     Quay lại Trang chủ
                   </Button>
                 </Link>
                 <Link to="/shoppingcart" style={{ textDecoration: 'none' }}>
-                  <Button color="primary" onClick={handleGoBack}>
+                  <Button color="primary" >
                     Thanh Toán Ngay
                   </Button>
                 </Link>
@@ -1057,7 +1055,7 @@ const AuctionForm = () => {
               </DialogContent>
               <DialogActions>
                 <Link to="/home" style={{ textDecoration: 'none' }}>
-                  <Button color="primary" onClick={handleGoBack}>
+                  <Button color="primary">
                     Quay lại Trang chủ
                   </Button>
                 </Link>
