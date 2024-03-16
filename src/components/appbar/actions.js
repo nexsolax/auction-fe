@@ -42,6 +42,8 @@ export default function Actions({ matches }) {
             console.log('Error fetching profile data:', error);
         }
     };
+    const isLoggedIn = !!jsonUser.unique_name; 
+    console.log(isLoggedIn);
 
     const fetchSessionData = () => {
         axios.get(apiSession, { headers: { Authorization: `Bearer ${decoded}` } })
@@ -71,148 +73,211 @@ export default function Actions({ matches }) {
         : ActionIconsContainerDesktop;
 
     return (
-        <Component>
-            <MyList type="row">
-                <Divider orientation="vertical" flexItem />
+      <Component>
+        <MyList type="row">
+          <Divider orientation="vertical" flexItem />
 
-                {userName ? (
-                    <>
-                        <ListItemButton sx={{ justifycontent: 'center' }}>
-                            <ListItemIcon sx={{ display: 'flex', justifycontent: 'center', color: matches && Colors.white }}>
-                                <Badge badgeContent={sessionData && sessionData.length} color="secondary">
-                                    <ShoppingCartIcon onClick={() => setShowCart(true)} />
-                                </Badge>
-                            </ListItemIcon>
-                        </ListItemButton>
-                        <Divider orientation="vertical" flexItem />
-                        <ListItemButton sx={{ justifycontent: 'center' }}>
-                            <ListItemIcon sx={{ display: 'flex', justifycontent: 'center', color: matches && Colors.white }}>
-                                <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
-                                    <NotificationsUserPopover />
-                                    <Tooltip title="Account settings">
-                                        <IconButton
-                                            onClick={handleClick}
-                                            size="small"
-                                            sx={{ ml: 2 }}
-                                            aria-controls={open ? 'account-menu' : undefined}
-                                            aria-haspopup="true"
-                                            aria-expanded={open ? 'true' : undefined}
-                                        >
-                                            <Avatar sx={{ width: 40, height: 40 }} src={profileData?.avatar} />
-                                        </IconButton>
-                                    </Tooltip>
-                                </Box>
-                                <Menu
-                                    anchorEl={anchorEl}
-                                    id="account-menu"
-                                    open={open}
-                                    onClose={handleClose}
-                                    onClick={handleClose}
-                                    PaperProps={{
-                                        elevation: 0,
-                                        sx: {
-                                            overflow: 'visible',
-                                            filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-                                            mt: 1.5,
-                                            '& .MuiAvatar-root': {
-                                                width: 32,
-                                                height: 32,
-                                                ml: -0.5,
-                                                mr: 1,
-                                            },
-                                            '&:before': {
-                                                content: '""',
-                                                display: 'block',
-                                                position: 'absolute',
-                                                top: 0,
-                                                right: 14,
-                                                width: 10,
-                                                height: 10,
-                                                bgcolor: 'background.paper',
-                                                transform: 'translateY(-50%) rotate(45deg)',
-                                                zIndex: 0,
-                                            },
-                                        },
-                                    }}
-                                    transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-                                    anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-                                >
-                                    {role === "User" ? (
-                                        <>
-                                            <MenuItem onClick={handleClose} sx={{ display: "flex", alignItems: "center" }}>
-                                                <Avatar src={profileData.avatar} />
-                                                <Link to="/profile" style={{ textDecoration: "none", color: "inherit" }}>
-                                                    <Typography sx={{ marginLeft: 1 }}>{jsonUser.userName}</Typography>
-                                                </Link>
-                                            </MenuItem>
-                                            <Divider />
-                                            <MenuItem onClick={handleClose} sx={{ display: "flex", alignItems: "center" }}>
-                                                <Inventory2OutlinedIcon />
-                                                <Link to="/mysession" style={{ textDecoration: "none", color: "inherit" }}>
-                                                    <Typography sx={{ marginLeft: 1 }}>Phiên đấu giá của tôi</Typography>
-                                                </Link>
-                                            </MenuItem>
-                                            <MenuItem onClick={handleClose}>
-                                                <HistoryIcon />
-                                                <Link to="/payment-history" style={{ textDecoration: "none", color: "inherit" }}>
-                                                    <Typography sx={{ marginLeft: 1 }}>Lịch Sử Giao Dịch</Typography>
-                                                </Link>
-                                            </MenuItem>
-                                            <MenuItem onClick={handleClose}>
-                                                <ListItemIcon>
-                                                    <Settings fontSize="small" />
-                                                </ListItemIcon>
-                                                Cài Đặt
-                                            </MenuItem>
-                                            <MenuItem onClick={logout}>
-                                                <ListItemIcon>
-                                                    <Logout fontSize="small" />
-                                                </ListItemIcon>
-                                                Đăng Xuất
-                                            </MenuItem>
-                                        </>
-                                    ) : (
-                                        <>
-                                            <MenuItem onClick={handleClose} sx={{ display: "flex", alignItems: "center" }}>
-                                                <Avatar />
-                                                <Link to="/profile" style={{ textDecoration: "none", color: "inherit" }}>
-                                                    <Typography sx={{ marginLeft: 1 }}>Hồ Sơ Cá Nhân</Typography>
-                                                </Link>
-                                            </MenuItem>
-                                            <Divider />
-                                            <MenuItem onClick={handleClose}>
-                                                <ListItemIcon>
-                                                    <AlternateEmailIcon fontSize="small" />
-                                                </ListItemIcon>
-                                                {jsonUser.userName}
-                                            </MenuItem>
-                                            <MenuItem onClick={handleClose}>
-                                                <ListItemIcon>
-                                                    <Settings fontSize="small" />
-                                                </ListItemIcon>
-                                                Cài Đặt
-                                            </MenuItem>
-                                            <MenuItem onClick={logout}>
-                                                <ListItemIcon>
-                                                    <Logout fontSize="small" />
-                                                </ListItemIcon>
-                                                Đăng Xuất
-                                            </MenuItem>
-                                        </>
-                                    )}
-                                </Menu>
-                            </ListItemIcon>
-                        </ListItemButton>
-                    </>
-                ) : (
-                    <Link to="/login" style={{ textDecoration: "none", color: "inherit" }}>
-                        <Typography variant="button" sx={{ display: 'flex', justifycontent: 'center', color: matches && Colors.white }}>
-                            Đăng Nhập
-                        </Typography>
-                    </Link>
-                )}
-                <Divider orientation="vertical" flexItem />
-            </MyList>
-        </Component>
+          {userName ? (
+            <>
+              <ListItemButton sx={{ justifycontent: "center" }}>
+                <ListItemIcon
+                  sx={{
+                    display: "flex",
+                    justifycontent: "center",
+                    color: matches && Colors.white,
+                  }}
+                >
+                  <Badge
+                    badgeContent={sessionData && sessionData.length}
+                    color="secondary"
+                  >
+                    <ShoppingCartIcon onClick={() => setShowCart(true)} />
+                  </Badge>
+                </ListItemIcon>
+              </ListItemButton>
+              <Divider orientation="vertical" flexItem />
+              <ListItemButton sx={{ justifycontent: "center" }}>
+                <ListItemIcon
+                  sx={{
+                    display: "flex",
+                    justifycontent: "center",
+                    color: matches && Colors.white,
+                  }}
+                >
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      textAlign: "center",
+                    }}
+                  >
+                    <NotificationsUserPopover />
+                    <Tooltip title="Account settings">
+                      <IconButton
+                        onClick={handleClick}
+                        size="small"
+                        sx={{ ml: 2 }}
+                        aria-controls={open ? "account-menu" : undefined}
+                        aria-haspopup="true"
+                        aria-expanded={open ? "true" : undefined}
+                      >
+                        <Avatar
+                          sx={{ width: 40, height: 40 }}
+                          src={profileData?.avatar}
+                        />
+                      </IconButton>
+                    </Tooltip>
+                  </Box>
+                  <Menu
+                    anchorEl={anchorEl}
+                    id="account-menu"
+                    open={open}
+                    onClose={handleClose}
+                    onClick={handleClose}
+                    PaperProps={{
+                      elevation: 0,
+                      sx: {
+                        overflow: "visible",
+                        filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+                        mt: 1.5,
+                        "& .MuiAvatar-root": {
+                          width: 32,
+                          height: 32,
+                          ml: -0.5,
+                          mr: 1,
+                        },
+                        "&:before": {
+                          content: '""',
+                          display: "block",
+                          position: "absolute",
+                          top: 0,
+                          right: 14,
+                          width: 10,
+                          height: 10,
+                          bgcolor: "background.paper",
+                          transform: "translateY(-50%) rotate(45deg)",
+                          zIndex: 0,
+                        },
+                      },
+                    }}
+                    transformOrigin={{ horizontal: "right", vertical: "top" }}
+                    anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+                  >
+                    {role === "User" ? (
+                      <>
+                        <MenuItem
+                          onClick={handleClose}
+                          sx={{ display: "flex", alignItems: "center" }}
+                        >
+                          <Avatar src={profileData.avatar} />
+                          <Link
+                            to="/profile"
+                            style={{ textDecoration: "none", color: "inherit" }}
+                          >
+                            <Typography sx={{ marginLeft: 1 }}>
+                              {jsonUser.unique_name}
+                            </Typography>
+                          </Link>
+                        </MenuItem>
+                        <Divider />
+                        <MenuItem
+                          onClick={handleClose}
+                          sx={{ display: "flex", alignItems: "center" }}
+                        >
+                          <Inventory2OutlinedIcon />
+                          <Link
+                            to="/mysession"
+                            style={{ textDecoration: "none", color: "inherit" }}
+                          >
+                            <Typography sx={{ marginLeft: 1 }}>
+                              Phiên đấu giá của tôi
+                            </Typography>
+                          </Link>
+                        </MenuItem>
+                        <MenuItem onClick={handleClose}>
+                          <HistoryIcon />
+                          <Link
+                            to="/payment-history"
+                            style={{ textDecoration: "none", color: "inherit" }}
+                          >
+                            <Typography sx={{ marginLeft: 1 }}>
+                              Lịch Sử Giao Dịch
+                            </Typography>
+                          </Link>
+                        </MenuItem>
+                        <MenuItem onClick={handleClose}>
+                          <ListItemIcon>
+                            <Settings fontSize="small" />
+                          </ListItemIcon>
+                          Cài Đặt
+                        </MenuItem>
+                        <MenuItem onClick={logout}>
+                          <ListItemIcon>
+                            <Logout fontSize="small" />
+                          </ListItemIcon>
+                          Đăng Xuất
+                        </MenuItem>
+                      </>
+                    ) : (
+                      <>
+                        <MenuItem
+                          onClick={handleClose}
+                          sx={{ display: "flex", alignItems: "center" }}
+                        >
+                          <Avatar />
+                          <Link
+                            to="/profile"
+                            style={{ textDecoration: "none", color: "inherit" }}
+                          >
+                            <Typography sx={{ marginLeft: 1 }}>
+                              Hồ Sơ Cá Nhân
+                            </Typography>
+                          </Link>
+                        </MenuItem>
+                        <Divider />
+                        <MenuItem onClick={handleClose}>
+                          <ListItemIcon>
+                            <AlternateEmailIcon fontSize="small" />
+                          </ListItemIcon>
+                          {jsonUser.unique_name}
+                        </MenuItem>
+                        <MenuItem onClick={handleClose}>
+                          <ListItemIcon>
+                            <Settings fontSize="small" />
+                          </ListItemIcon>
+                          Cài Đặt
+                        </MenuItem>
+                        <MenuItem onClick={logout}>
+                          <ListItemIcon>
+                            <Logout fontSize="small" />
+                          </ListItemIcon>
+                          Đăng Xuất
+                        </MenuItem>
+                      </>
+                    )}
+                  </Menu>
+                </ListItemIcon>
+              </ListItemButton>
+            </>
+          ) : (
+            <Link
+              to={isLoggedIn ? "/profile" : "/login"}
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              <Typography
+                variant="button"
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  color: matches && Colors.white,
+                }}
+              >
+                {isLoggedIn ? jsonUser.unique_name : "Đăng Nhập"}
+              </Typography>
+            </Link>
+          )}
+          <Divider orientation="vertical" flexItem />
+        </MyList>
+      </Component>
     );
 }

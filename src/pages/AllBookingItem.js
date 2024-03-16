@@ -506,7 +506,7 @@ export default function AllBookingItem() {
                           <TextField label="Loại" defaultValue={bookingItemDetail.categoryName} />
                         </Grid>
                         <Grid item md={3} xs={12}>
-                          <TextField label="Tên tài khoản" defaultValue={bookingItemDetail.userName} />
+                          <TextField label="Tên tài khoản" defaultValue={bookingItemDetail.unique_name} />
                         </Grid>
                         <Grid item md={3} xs={12}>
                           <TextField label="Số lượng" defaultValue={bookingItemDetail.quantity} />

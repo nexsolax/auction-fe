@@ -830,7 +830,7 @@ const AuctionForm = () => {
               <TableBody>
                 {sessionDetails.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((detail, index) => (
                   <TableRow key={index}>
-                    <TableCell style={{ color: 'green' }} align="center">{detail.userName}</TableCell>
+                    <TableCell style={{ color: 'green' }} align="center">{detail.unique_name}</TableCell>
                     <TableCell align="center">{formatToVND(detail.price)}</TableCell>
                     <TableCell align="center">{formatCreateDate(detail.createDate)}</TableCell>
                     <TableCell align="center">

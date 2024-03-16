@@ -38,16 +38,16 @@ const AddProductForm = () => {
   const jsonUser = JSON.parse(user);
   const theme = useTheme();
   const decode = jwtDecode(token);
-
+  
   useEffect(() => {
     axios
       .get("https://reasapiv2.azurewebsites.net/api/Category", {
         headers: { Authorization: `Bearer ${decode}` },
       })
       .then((response) => {
-        if (Array.isArray(response.data)) {
+        if (response.data && Array.isArray(response.data.data.pagingData)) {
           // Assuming the data structure contains category objects with 'id' and 'name'
-          const categoriesData = response.data.reduce((acc, category) => {
+          const categoriesData = response.data.data.pagingData.reduce((acc, category) => {
             if (category.id && category.name) {
               acc[category.id] = category.name;
             } else {
@@ -58,7 +58,6 @@ const AddProductForm = () => {
           setCategories(categoriesData);
        
         } else {
-          console.log(response);
           console.error("Invalid response data format:", response.data);
           setError("Invalid response data format. Please try again later.");
         }
@@ -85,12 +84,9 @@ const AddProductForm = () => {
     image.forEach((img) => {
       formData.append("image", img);
     });
-
     // Find the category with the matching categoryId
-    const selectedCategory = categories.find(
-      (category) => category.id === categoryId
-    );
-
+    //const selectedCategory = categories.find(category => category.id === categoryId);
+    const selectedCategory = categories.filter(category => category.id === categoryId);
     // Get the category name
     const categoryName = selectedCategory ? selectedCategory.name : null;
 

@@ -6,6 +6,7 @@ import { AppbarContainer, AppbarHeader, MyList } from "../../style/appbar";
 import Actions from "./actions";
 import { useUIContext } from "../../context/ui";
 import { Colors } from "../../style/theme";
+import DashboardAppPage from "../../pages/DashboardAppPage";
 
 
 const StyledLink = styled(Link)`
@@ -48,6 +49,11 @@ export default function AppbarDesktop({ matches }) {
             <MyList type="row">
                 {/* <ListItemText primary="Tài Sản Đấu Giá" /> */}
                 {/* Add the dropdown for "Cuộc Đấu Giá" */}
+                <ListItemButton onClick={handleMenuOpen}>
+                    <StyledLink component="a" href="/dashboard/app" underline="none" color="inherit">
+                            Dashboard
+                    </StyledLink>
+                </ListItemButton>
                 <ListItemButton onClick={handleMenuOpen}>
                     <StyledLink >
                         <ListItemText  primary="Cuộc Đấu Giá" />
@@ -102,6 +108,7 @@ export default function AppbarDesktop({ matches }) {
                         <SearchIcon />
                     </ListItemIcon>
                 </ListItemButton>
+               
             </MyList>
             <Actions matches={matches} />
             <style>

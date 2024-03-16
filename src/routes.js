@@ -100,7 +100,7 @@ export default function Router() {
     { path: 'profile', element: (
       <Suspense>
              {/* <Profile /> */}
-        <RolesAuthRoute roles={['Member']}>
+        <RolesAuthRoute roles={['Member','Staff','Admin']}>
           <Profile />
         </RolesAuthRoute>
       </Suspense>
@@ -204,6 +204,7 @@ export default function Router() {
           path: 'user',
           element: <UserPage />,
         },
+        { path: 'additem', element:  <AddProduct />},
         { path: 'user-waiting', element: <UserWaitingApprove /> },
         { path: 'user-ban', element: <UserBan /> },
         { path: 'payment-manage', element: <PaymentManage /> },

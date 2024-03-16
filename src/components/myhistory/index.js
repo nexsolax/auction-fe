@@ -488,7 +488,7 @@ const MyHistoryForm = () => {
                                         <TableBody>
                                             {currentItemsDialog.map((item) => (
                                                 <TableRow key={item.sessionDetailId}>
-                                                    <TableCell align="center">{item?.userName}</TableCell>
+                                                    <TableCell align="center">{item?.unique_name}</TableCell>
                                                     <TableCell align="center">{item?.itemName}</TableCell>
                                                     <TableCell align="center">
                                                         {item?.price?.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }) || '-'}
@@ -611,7 +611,7 @@ const MyHistoryForm = () => {
                                         <TableBody>
                                             {currentItemsDialog.map((item) => (
                                                 <TableRow key={item.sessionDetailId}>
-                                                    <TableCell align="center">{item?.userName}</TableCell>
+                                                    <TableCell align="center">{item?.unique_name}</TableCell>
                                                     <TableCell align="center">{item?.itemName}</TableCell>
                                                     <TableCell align="center">
                                                         {item?.price?.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }) || '-'}

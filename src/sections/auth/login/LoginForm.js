@@ -114,7 +114,7 @@ export default function LoginForm() {
 
       const response = await axiosInstance.post(
         'https://reasapiv2.azurewebsites.net/api/User/login',
-        JSON.stringify({ userName: user.unique_name, password }),
+        JSON.stringify({ userName, password }),
         {
           headers: { 'Content-Type': 'application/json' },
           // withCredentials: true,

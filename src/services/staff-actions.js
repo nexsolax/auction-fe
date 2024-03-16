@@ -169,7 +169,7 @@ export async function banUser(id) {
 }
 
 export async function unBanUser(id) {
-  const url = `${BASE_URL}//User?id=${id}`;
+  const url = `${BASE_URL}/User?id=${id}`;
   try {
     return axiosInstance.put(url);
   } catch (error) {
