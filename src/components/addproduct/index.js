@@ -28,7 +28,7 @@ const AddProductForm = () => {
   const [categories, setCategories] = useState("");
   const [categoryId, setCategoryId] = useState("");
   const [address, setAddress] = useState("");
-  const [image, setImage] = useState([]);
+  // const [image, setImage] = useState([]);
   const [loading, setLoading] = useState(false);
   const [successDialogOpen, setSuccessDialogOpen] = useState(false);
   const [errorDialogOpen, setErrorDialogOpen] = useState(false);
@@ -38,11 +38,12 @@ const AddProductForm = () => {
   const jsonUser = JSON.parse(user);
   const theme = useTheme();
   const decode = jwtDecode(token);
+  const [image, setImage ] = useState("");
   
   useEffect(() => {
     axios
       .get("https://reasapiv2.azurewebsites.net/api/Category", {
-        headers: { Authorization: `Bearer ${decode}` },
+        headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
         if (response.data && Array.isArray(response.data.data.pagingData)) {
@@ -81,22 +82,33 @@ const AddProductForm = () => {
     formData.append("address", address);
     formData.append("description", description);
     formData.append("categoryId", categoryId);
-    image.forEach((img) => {
-      formData.append("image", img);
-    });
-    // Find the category with the matching categoryId
-    //const selectedCategory = categories.find(category => category.id === categoryId);
-    // const selectedCategory = categories.id;
-    // // Get the category name
-    // const categoryName = selectedCategory ? selectedCategory.name : null;
+    // image.forEach((img) => {
+    //   formData.append("image", img);
 
-    // Print the category name
-    // console.log(`Selected category name: ${categoryName}`);
+
+    // })
+    formData.append("Images", image);
+
+    // axios({
+    //   method: "post",
+    //   url: "myurl",
+    //   data: bodyFormData,
+    //   headers: { "Content-Type": "multipart/form-data" },
+    // })
+
     axios
-      .post("https://reasapiv2.azurewebsites.net/api/RealEstate", formData, {
-        headers: { Authorization: `Bearer ${decode}` },
-      })
+    ({
+      method: "post",
+      url: "https://reasapiv2.azurewebsites.net/api/RealEstate",
+      data: formData,
+      headers: { Authorization: `Bearer ${token}`, 'content-type': 'multipart/form-data' },
+    })
+      // .post("https://reasapiv2.azurewebsites.net/api/RealEstate", formData, {
+      //   headers: { Authorization: `Bearer ${token}`, 'content-type': 'multipart/form-data' },
+    
+      
       .then((response) => {
+
         setSuccessDialogOpen(true);
       })
       .catch((error) => {
@@ -183,9 +195,11 @@ const AddProductForm = () => {
       </FormControl>
 
       <input
-        type="file"
-        onChange={(event) => setImage([...event.target.files])}
+        // type="file"
+        // onChange={(event) => setImage([...event.target.files[0]])}
         multiple
+        accept="image/*"
+        type="file" onChange= {(e)=> setImage(e.target.files[0])}
       />
       <Button
         variant="contained"

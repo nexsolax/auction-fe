@@ -68,6 +68,7 @@ import PaymentUserDetail from './sections/@dashboard/user/PaymentUserDetail';
 import StaffProfile from './sections/staff/StaffProfile';
 import UpdateItem from './pages/UpdateItem';
 import ReItem from './pages/ReItem';
+import AddAuction from './pages/AddAuction';
 
 
 // ----------------------------------------------------------------------
@@ -184,7 +185,14 @@ export default function Router() {
       </Suspense>
     ), },
     { path: 'test', element: <Test /> },
-
+    { path: 'createauction', element: (
+      <Suspense>
+        <RolesAuthRoute roles={['Admin', 'Staff','Member']}>
+          <AddAuction/>
+        </RolesAuthRoute>
+      </Suspense>
+    ), },
+    { path: 'test', element: <Test /> },
     
     {
       path: '/dashboard',
@@ -198,6 +206,7 @@ export default function Router() {
       ),
       children: [
         { element: <Navigate to="/dashboard/app" />, index: true },
+        { path: 'createauction', element: <AuctionPage/> },
 
         { path: 'app', element: <DashboardAppPage /> },
         {

@@ -27,6 +27,12 @@ const navConfig = [
     role: ['Admin', 'Staff','Member'],
   },
   {
+    title: 'Tạo đấu giá',
+    path: '/createauction',
+    icon: icon('ic_analytics'),
+    role: ['Admin', 'Staff','Member'],
+  },
+  {
     title: 'Người dùng',
     path: '/dashboard/user',
     icon: <AccountCircleTwoToneIcon />,

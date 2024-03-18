@@ -163,7 +163,7 @@ export default function Actions({ matches }) {
                     transformOrigin={{ horizontal: "right", vertical: "top" }}
                     anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
                   >
-                    {role === "User" ? (
+                    {role === "Member" ? (
                       <>
                         <MenuItem
                           onClick={handleClose}

@@ -3,8 +3,6 @@
 
 import axios from 'axios';
 
-export const products = [];
-
 
 
 export const products = [
