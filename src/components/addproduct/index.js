@@ -56,7 +56,7 @@ const AddProductForm = () => {
             return acc;
           }, {});
           setCategories(categoriesData);
-       
+          console.log(categories);
         } else {
           console.error("Invalid response data format:", response.data);
           setError("Invalid response data format. Please try again later.");
@@ -86,12 +86,12 @@ const AddProductForm = () => {
     });
     // Find the category with the matching categoryId
     //const selectedCategory = categories.find(category => category.id === categoryId);
-    const selectedCategory = categories.filter(category => category.id === categoryId);
-    // Get the category name
-    const categoryName = selectedCategory ? selectedCategory.name : null;
+    // const selectedCategory = categories.id;
+    // // Get the category name
+    // const categoryName = selectedCategory ? selectedCategory.name : null;
 
     // Print the category name
-    console.log(`Selected category name: ${categoryName}`);
+    // console.log(`Selected category name: ${categoryName}`);
     axios
       .post("https://reasapiv2.azurewebsites.net/api/RealEstate", formData, {
         headers: { Authorization: `Bearer ${decode}` },

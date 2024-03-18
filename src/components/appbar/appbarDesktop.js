@@ -78,7 +78,7 @@ export default function AppbarDesktop({ matches }) {
                     
                 </Menu>
                 {/* Continue with other list items */}
-                {role === "User" ? (
+                {role === "Admin" || role === "Member" || role === "Staff"? (
                     <>
                         <ListItemButton >
                             <StyledLink component="a" href="/additem" underline="none" color="inherit">
