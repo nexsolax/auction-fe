@@ -138,8 +138,7 @@ export default function DashboardAppPage() {
         const response = await axiosInstance.get(
           'https://reasapiv2.azurewebsites.net/api/Auction'
         );
-        console.log(response);
-        setTotal(response.data);
+        setTotal(response.data.data.pagingData);
         setIsLoading(false);
       } catch (error) {
         setIsLoading(false);
@@ -148,17 +147,16 @@ export default function DashboardAppPage() {
     })();
   }, []);
   
-
   useEffect(() => {
     (async () => {
       setIsLoading(true);
       try {
         const response = await axiosInstance.get('https://reasapiv2.azurewebsites.net/api/Category');
         console.log(response);
-        if (Array.isArray(response.data)) {
-          setCategories(response.data);
+        if (response.data && Array.isArray(response.data.data.pagingData)) {
+          setCategories(response.data.data.pagingData);
         } else {
-          console.log('Response data is not an array:', response.data);
+          console.log('Response data is not an array:', response.data.data.pagingData);
         }
         setIsLoading(false);
       } catch (error) {

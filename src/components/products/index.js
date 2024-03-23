@@ -23,29 +23,31 @@ export default function Products() {
     const [currentPage, setCurrentPage] = useState(1)
 
     //   useEffect to fetch products (uncomment this when you want to fetch data)
-    // useEffect(() => {
-    //     axios.get('https://reasapiv2.azurewebsites.net/api/Sessions/by_not_start')
-    //         .then(response => {
-    //             const data = response.data;
-    //             // Map the fetched data to the products array
-    //             console.log(data);
-    //             setProducts(data);
-    //         })
-    //         .catch(error => {
-    //             console.error('Error fetching data:', error);
-    //         });
-    // }, []);
+    useEffect(() => {
+        axios.get('https://reasapiv2.azurewebsites.net/api/Auction')
+            .then(response => {
+                const data = response.data.data.pagingData;
+                // Map the fetched data to the products array
+                console.log(data);
+                setProducts(data);
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+    }, []);
 
     useEffect(() => {
         // Filter products based on searchQuery
         const filtered = products.filter((product) =>
-            product.sessionName.toLowerCase().includes(searchQuery.toLowerCase())
+            product.name && searchQuery &&
+            product.name.toLowerCase().includes(searchQuery.toLowerCase())
         );
         setFilteredProducts(filtered);
     
         // Reset currentPage to 1 when searchQuery changes
         setCurrentPage(1);
     }, [searchQuery, products]);
+    
 
     const productsPerPage = 3; // Number of products to display per page
     const pageCount = Math.ceil(filteredProducts.length / productsPerPage);
@@ -62,7 +64,7 @@ export default function Products() {
     const renderProducts = currentProducts.map((product) => (
         <Grid
             item
-            key={product.sessionId}
+            key={product.id}
             xs={3}
             sm={4}
             md={4}

@@ -49,11 +49,9 @@ export default function AppbarDesktop({ matches }) {
             <MyList type="row">
                 {/* <ListItemText primary="Tài Sản Đấu Giá" /> */}
                 {/* Add the dropdown for "Cuộc Đấu Giá" */}
-                <ListItemButton onClick={handleMenuOpen}>
-                    <Link component="a" href="/dashboard/app" underline="none" color="inherit">
+                    <ListItemButton component="a" href="/dashboard/app" underline="none" color="inherit">
                             Dashboard
-                    </Link>
-                </ListItemButton>
+                    </ListItemButton>
                 <ListItemButton onClick={handleMenuOpen}>
                     <StyledLink >
                         <ListItemText  primary="Cuộc Đấu Giá" />

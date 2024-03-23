@@ -22,15 +22,8 @@ import {
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-import dayjs from 'dayjs';
-import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
-
-import { MobileDateTimePicker } from '@mui/x-date-pickers/MobileDateTimePicker';
-import { DesktopDateTimePicker } from '@mui/x-date-pickers/DesktopDateTimePicker';
-import { StaticDateTimePicker } from '@mui/x-date-pickers/StaticDateTimePicker';
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 
 const AddAuctionForm = () => {
   //const [registrationStartDate, setRegistrationStartDate] = useState("");
@@ -223,43 +216,20 @@ const AddAuctionForm = () => {
         margin="normal"
         multiline
       />
-      {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <DateTimePicker
-          label="Ngày bắt đầu đấu giá"
-          value={startDate}
-          onChange={(newValue) => setStartDate(newValue)}
-          fullWidth
-          required
-          margin="normal"
-          sx={{ width: "100%" }}
-          renderInput={(params) => <TextField {...params} />}
-        />
-      </LocalizationProvider> */}
-     
+      <TextField
+        label="Ngày bắt đầu đấu giá"
+        value={startDate}
+        onChange={(event) => setStartDate(event.target.value)}
+        fullWidth
+        required
+        margin="normal"
+        type="datetime-local" // Thay đổi type thành "datetime-local"
+        sx={{ width: "100%" }}
+        InputLabelProps={{
+          shrink: true,
+        }}
+      />
 
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <DemoContainer
-        components={[
-          'DateTimePicker',
-          'MobileDateTimePicker',
-          'DesktopDateTimePicker',
-          'StaticDateTimePicker',
-        ]}
-      >
-        <DemoItem label="Desktop variant">
-          <DesktopDateTimePicker defaultValue={dayjs('2022-04-17T15:30')} />
-        </DemoItem>
-        <DemoItem label="Mobile variant">
-          <MobileDateTimePicker defaultValue={dayjs('2022-04-17T15:30')} />
-        </DemoItem>
-        <DemoItem label="Responsive variant">
-          <DateTimePicker defaultValue={dayjs('2022-04-17T15:30')} />
-        </DemoItem>
-        <DemoItem label="Static variant">
-          <StaticDateTimePicker defaultValue={dayjs('2022-04-17T15:30')} />
-        </DemoItem>
-      </DemoContainer>
-    </LocalizationProvider>
       <TextField
         label="Ngày kết thúc đấu giá"
         value={endDate}
@@ -267,7 +237,7 @@ const AddAuctionForm = () => {
         fullWidth
         required
         margin="normal"
-        type="date"
+        type="datetime-local" // Thay đổi type thành "datetime-local"
         sx={{ width: "100%" }}
         InputLabelProps={{
           shrink: true,

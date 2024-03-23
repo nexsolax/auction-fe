@@ -43,8 +43,6 @@ export default function Actions({ matches }) {
         }
     };
     const isLoggedIn = !!jsonUser.unique_name; 
-    console.log(isLoggedIn);
-
     const fetchSessionData = () => {
         axios.get(apiSession, { headers: { Authorization: `Bearer ${decoded}` } })
             .then(response => {

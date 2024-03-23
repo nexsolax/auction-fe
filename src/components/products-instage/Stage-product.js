@@ -23,21 +23,21 @@ export default function StageProducts() {
     const token = localStorage.getItem('token');
     const [currentPage, setCurrentPage] = useState(1)
 
-    // useEffect(() => {
+    useEffect(() => {
 
-    //     axios.get('https://reasapiv2.azurewebsites.net/api/Sessions/by_in_stage', {
-    //         headers: { Authorization: `Bearer ${token}` },
-    //     })
-    //         .then(response => {
-    //             const data = response.data;
-    //             // Map the fetched data to the products array
-    //             console.log(data)
-    //             setProductss(data)
-    //         })
-    //         .catch(error => {
-    //             console.error('Error fetching data:', error);
-    //         });
-    // }, [])
+        axios.get('https://reasapiv2.azurewebsites.net/api/Auction', {
+            headers: { Authorization: `Bearer ${token}` },
+        })
+            .then(response => {
+                const data = response.data.data.pagingData;
+                // Map the fetched data to the products array
+                console.log(data)
+                setProductss(data)
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+    }, [])
 
     useEffect(() => {
         // Filter products based on searchQuery

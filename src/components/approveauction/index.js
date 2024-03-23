@@ -23,9 +23,9 @@ import axios from "axios";
 
 const ApproveAuctionForm = () => {
   const [auctionId, setAuctionId] = useState("");
-  const [Auctions, setAuctions] = useState("");
+  const [auctions, setAuctions] = useState("");
   const [realEstateId, setRealEstateId] = useState("");
-  const [RealEstates, setRealEstates] = useState("");
+  const [realEstates, setRealEstates] = useState("");
   const [loading, setLoading] = useState(false);
   const [successDialogOpen, setSuccessDialogOpen] = useState(false);
   const [errorDialogOpen, setErrorDialogOpen] = useState(false);
@@ -73,19 +73,9 @@ const ApproveAuctionForm = () => {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
-        if (response.data && Array.isArray(response.data.data)) {
-          const auctionData = response.data.data.reduce(
-            (acc, auctionData) => {
-              if (auctionData.id ) {
-                acc[auctionData.id] = auctionData.realEstateId;
-              } else {
-                console.error("Invalid auction data:", auctionData);
-              }
-              return acc;
-            },
-            {}
-          );
-          setAuctions(auctionData);
+        if (response.data && Array.isArray(response.data.data.pagingData)) {
+   
+          setAuctions(response.data.data.pagingData);
         } else {
           console.error("Invalid response data format:", response.data);
           setError("Invalid response data format. Please try again later.");
@@ -99,7 +89,16 @@ const ApproveAuctionForm = () => {
   }, []);
 
   const handleEstateChange = (event) => {
-    setRealEstateId(event.target.value);
+    const selectedRealEstateId = event.target.value;
+    setRealEstateId(selectedRealEstateId);
+
+    // Tìm auctionId tương ứng với realEstateId được chọn
+    const selectedAuction = auctions.find(auction => auction.realEstateId === selectedRealEstateId);
+    if (selectedAuction) {
+      setAuctionId(selectedAuction.id);
+    } else {
+      setAuctionId('');
+    }
   };
 
   const handleSubmit = (event) => {
@@ -160,10 +159,10 @@ const ApproveAuctionForm = () => {
       <FormControl fullWidth required margin="normal">
         <InputLabel>RealEstate</InputLabel>
         <Select value={realEstateId} onChange={handleEstateChange}>
-          {Object.keys(RealEstates).length > 0 ? (
-            Object.keys(RealEstates).map((realEstateId) => (
+          {Object.keys(realEstates).length > 0 ? (
+            Object.keys(realEstates).map((realEstateId) => (
               <MenuItem key={realEstateId} value={realEstateId}>
-                {RealEstates[realEstateId]} {/* Displaying estate name */}
+                {realEstates[realEstateId]} {/* Displaying estate name */}
               </MenuItem>
             ))
           ) : (
