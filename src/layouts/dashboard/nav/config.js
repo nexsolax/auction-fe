@@ -27,8 +27,20 @@ const navConfig = [
     role: ['Admin', 'Staff','Member'],
   },
   {
+    title: 'Xác nhân tài sản',
+    path: '/approve-product',
+    icon: icon('ic_analytics'),
+    role: ['Admin', 'Staff','Member'],
+  },
+  {
     title: 'Tạo đấu giá',
     path: '/createauction',
+    icon: icon('ic_analytics'),
+    role: ['Admin', 'Staff','Member'],
+  },
+  {
+    title: 'Xác nhận đấu giá',
+    path: '/approve-auction',
     icon: icon('ic_analytics'),
     role: ['Admin', 'Staff','Member'],
   },

@@ -69,6 +69,8 @@ import StaffProfile from './sections/staff/StaffProfile';
 import UpdateItem from './pages/UpdateItem';
 import ReItem from './pages/ReItem';
 import AddAuction from './pages/AddAuction';
+import ApproveProduct from './pages/ApproveProduct';
+import ApproveAuction from './pages/ApproveAuction';
 
 
 // ----------------------------------------------------------------------
@@ -103,6 +105,22 @@ export default function Router() {
              {/* <Profile /> */}
         <RolesAuthRoute roles={['Member','Staff','Admin']}>
           <Profile />
+        </RolesAuthRoute>
+      </Suspense>
+    ), },
+    { path: 'approve-product', element: (
+      <Suspense>
+             {/* <Profile /> */}
+        <RolesAuthRoute roles={['Member','Staff','Admin']}>
+          <ApproveProduct />
+        </RolesAuthRoute>
+      </Suspense>
+    ), },
+    { path: 'approve-auction', element: (
+      <Suspense>
+             {/* <Profile /> */}
+        <RolesAuthRoute roles={['Member','Staff','Admin']}>
+          <ApproveAuction />
         </RolesAuthRoute>
       </Suspense>
     ), },
@@ -206,14 +224,13 @@ export default function Router() {
       ),
       children: [
         { element: <Navigate to="/dashboard/app" />, index: true },
-        { path: 'createauction', element: <AuctionPage/> },
+
 
         { path: 'app', element: <DashboardAppPage /> },
         {
           path: 'user',
           element: <UserPage />,
         },
-        { path: 'additem', element:  <AddProduct />},
         { path: 'user-waiting', element: <UserWaitingApprove /> },
         { path: 'user-ban', element: <UserBan /> },
         { path: 'payment-manage', element: <PaymentManage /> },

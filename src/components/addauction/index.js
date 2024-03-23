@@ -21,22 +21,32 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
-import { format } from "date-fns";
+
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import dayjs from 'dayjs';
+import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
+
+import { MobileDateTimePicker } from '@mui/x-date-pickers/MobileDateTimePicker';
+import { DesktopDateTimePicker } from '@mui/x-date-pickers/DesktopDateTimePicker';
+import { StaticDateTimePicker } from '@mui/x-date-pickers/StaticDateTimePicker';
 
 const AddAuctionForm = () => {
-  const [registrationStartDate, setRegistrationStartDate] = useState("");
-  const [registrationEndDate, setRegistrationEndDate] = useState("");
+  //const [registrationStartDate, setRegistrationStartDate] = useState("");
+  //const [registrationEndDate, setRegistrationEndDate] = useState("");
   const [bidIncrement, setBidIncrement] = useState("");
   const [maxBidIncrement, setMaxBidIncrement] = useState("");
-  const [registrationFee, setRegistrationFee] = useState("");
+  //const [registrationFee, setRegistrationFee] = useState("");
   const [startingPrice, setStartingPrice] = useState("");
-  const [deposit, setDeposit] = useState("");
+  //const [deposit, setDeposit] = useState("");
   const [startDate, setStartDate] = useState("");
+  const [startTime, setStartTime] = useState("");
   const [endDate, setEndDate] = useState("");
-  const [approveTime, setApproveTime] = useState("");
-  const [status, setStatus] = useState("");
-  const [createByUserId, setCreateByUserId] = useState("");
-  const [approveByUserId, setApproveByUserId] = useState("");
+  //const [approveTime, setApproveTime] = useState("");
+  //const [status, setStatus] = useState("");
+  //const [createByUserId, setCreateByUserId] = useState("");
+  //const [approveByUserId, setApproveByUserId] = useState("");
   const [realEstateId, setRealEstateId] = useState("");
   const [RealEstates, setRealEstates] = useState("");
 
@@ -49,7 +59,6 @@ const AddAuctionForm = () => {
   const jsonUser = JSON.parse(user);
   const theme = useTheme();
   const decode = jwtDecode(token);
-  
 
   useEffect(() => {
     axios
@@ -82,8 +91,6 @@ const AddAuctionForm = () => {
       .finally(() => setLoading(false));
   }, []);
 
-
-
   const handleEstateChange = (event) => {
     setRealEstateId(event.target.value);
   };
@@ -99,16 +106,12 @@ const AddAuctionForm = () => {
   function addIfValidDate(formData, key, value) {
     const date = new Date(value);
     if (!isNaN(date.getTime())) {
-      const formattedDate = format(
-        date,
-        "yyyy-MM-dd"
-        );
+      let formattedDate = date.toISOString(); // Corrected from startDate to date
       formData.append(key, formattedDate);
     } else {
       console.error(
         `Giá trị cho ${key} không phải là một ngày hợp lệ: ${value}`
       );
-
     }
   }
 
@@ -116,28 +119,28 @@ const AddAuctionForm = () => {
     event.preventDefault();
     setLoading(true);
     const formData = new FormData();
-    addIfValidDate(formData, "registrationStartDate", registrationStartDate);
-    addIfValidDate(formData, "registrationEndDate", registrationEndDate);
+    // addIfValidDate(formData, "registrationStartDate", registrationStartDate);
+    // addIfValidDate(formData, "registrationEndDate", registrationEndDate);
     addIfNumber(formData, "startingPrice", startingPrice);
     addIfNumber(formData, "bidIncrement", bidIncrement);
     addIfNumber(formData, "maxBidIncrement", maxBidIncrement);
-    addIfNumber(formData, "registrationFee", registrationFee);
-    addIfNumber(formData, "deposit", deposit);
+    // addIfNumber(formData, "registrationFee", registrationFee);
+    // addIfNumber(formData, "deposit", deposit);
     addIfValidDate(formData, "startDate", startDate);
     addIfValidDate(formData, "endDate", endDate);
-    addIfValidDate(formData, "approveTime", approveTime);
-    formData.append("status", 0);
-    formData.append("createByUserId", jsonUser.id);
-    formData.append("approveByUserId", jsonUser.id);
+    // addIfValidDate(formData, "approveTime", approveTime);
+    // formData.append("status", 0);
+    // formData.append("createByUserId", jsonUser.id);
+    // formData.append("approveByUserId", jsonUser.id);
     formData.append("realEstateId", realEstateId);
 
     axios({
       method: "post",
-      url: "https://reasapiv2.azurewebsites.net/api/Auction",
+      url: "https://reasapiv2.azurewebsites.net/api/Auction/create-request",
       data: formData,
       headers: {
         Authorization: `Bearer ${token}`,
-        "content-type": "multipart/form-data",
+        "content-type": "application/json",
       },
     })
       .then((response) => {
@@ -155,18 +158,18 @@ const AddAuctionForm = () => {
   const handleSuccessDialogClose = () => {
     setSuccessDialogOpen(false);
     // Reset form fields after successful submission if needed
-    setRegistrationStartDate("");
-    setRegistrationEndDate("");
+    // setRegistrationStartDate("");
+    // setRegistrationEndDate("");
     setStartingPrice(0);
     setBidIncrement(0);
     setMaxBidIncrement(0);
-    setRegistrationFee(0);
-    setDeposit(0);
+    // setRegistrationFee(0);
+    // setDeposit(0);
     setStartDate("");
-    setApproveTime("");
-    setStatus(0);
-    setCreateByUserId("");
-    setApproveByUserId("");
+    // setApproveTime("");
+    // setStatus(0);
+    // setCreateByUserId("");
+    // setApproveByUserId("");
     setRealEstateId("");
   };
 
@@ -193,33 +196,6 @@ const AddAuctionForm = () => {
       }}
       onSubmit={handleSubmit}
     >
-      
-      <TextField
-        label="Ngày bắt đầu đăng ký"
-        value={registrationStartDate}
-        onChange={(event) => setRegistrationStartDate(event.target.value)}
-        fullWidth
-        required
-        margin="normal"
-        type="date"
-        sx={{ width: "100%" }}    
-        InputLabelProps={{
-          shrink: true,
-        }}
-      />
-      <TextField
-        label="Ngày kết thúc đăng ký"
-        value={registrationEndDate}
-        onChange={(event) => setRegistrationEndDate(event.target.value)}
-        fullWidth
-        required
-        margin="normal"
-        type="date"
-        sx={{ width: "100%" }}    
-        InputLabelProps={{
-          shrink: true,
-        }}
-      />
       <TextField
         label="Giá khởi điểm"
         value={startingPrice}
@@ -247,37 +223,43 @@ const AddAuctionForm = () => {
         margin="normal"
         multiline
       />
-      <TextField
-        label="Phí tham gia"
-        value={registrationFee}
-        onChange={(event) => setRegistrationFee(event.target.value)}
-        fullWidth
-        required
-        margin="normal"
-        multiline
-      />
-      <TextField
-        label="Tiền đặt cọc"
-        value={deposit}
-        onChange={(event) => setDeposit(event.target.value)}
-        fullWidth
-        required
-        margin="normal"
-        multiline
-      />
-      <TextField
-        label="Ngày bắt đầu đấu giá"
-        value={startDate}
-        onChange={(event) => setStartDate(event.target.value)}
-        fullWidth
-        required
-        margin="normal"
-        type="date"
-        sx={{ width: "100%" }}    
-        InputLabelProps={{
-          shrink: true,
-        }}
-      />
+      {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <DateTimePicker
+          label="Ngày bắt đầu đấu giá"
+          value={startDate}
+          onChange={(newValue) => setStartDate(newValue)}
+          fullWidth
+          required
+          margin="normal"
+          sx={{ width: "100%" }}
+          renderInput={(params) => <TextField {...params} />}
+        />
+      </LocalizationProvider> */}
+     
+
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <DemoContainer
+        components={[
+          'DateTimePicker',
+          'MobileDateTimePicker',
+          'DesktopDateTimePicker',
+          'StaticDateTimePicker',
+        ]}
+      >
+        <DemoItem label="Desktop variant">
+          <DesktopDateTimePicker defaultValue={dayjs('2022-04-17T15:30')} />
+        </DemoItem>
+        <DemoItem label="Mobile variant">
+          <MobileDateTimePicker defaultValue={dayjs('2022-04-17T15:30')} />
+        </DemoItem>
+        <DemoItem label="Responsive variant">
+          <DateTimePicker defaultValue={dayjs('2022-04-17T15:30')} />
+        </DemoItem>
+        <DemoItem label="Static variant">
+          <StaticDateTimePicker defaultValue={dayjs('2022-04-17T15:30')} />
+        </DemoItem>
+      </DemoContainer>
+    </LocalizationProvider>
       <TextField
         label="Ngày kết thúc đấu giá"
         value={endDate}
@@ -286,20 +268,7 @@ const AddAuctionForm = () => {
         required
         margin="normal"
         type="date"
-        sx={{ width: "100%" }}    
-        InputLabelProps={{
-          shrink: true,
-        }}
-      />
-      <TextField
-        label="Ngày chấp thuận"
-        value={approveTime}
-        onChange={(event) => setApproveTime(event.target.value)}
-        fullWidth
-        required
-        margin="normal"
-        type="date"
-        sx={{ width: "100%" }}    
+        sx={{ width: "100%" }}
         InputLabelProps={{
           shrink: true,
         }}
@@ -311,7 +280,7 @@ const AddAuctionForm = () => {
           {Object.keys(RealEstates).length > 0 ? (
             Object.keys(RealEstates).map((realEstateId) => (
               <MenuItem key={realEstateId} value={realEstateId}>
-                {RealEstates[realEstateId]} {/* Displaying category name */}
+                {RealEstates[realEstateId]} {/* Displaying estate name */}
               </MenuItem>
             ))
           ) : (
