@@ -34,16 +34,14 @@ import { Colors } from "../../style/theme";
 import { Product, ProductDetailImage, ProductImage } from "../../style/Products";
 import AuctionForm from "../auction";
 
-function getTimeRemaining(endTime) {
-    const total = Date.parse(endTime) - Date.now();
+function getTimeRemaining(endDate) {
+    const total = Date.parse(endDate) - Date.now();
     const remainingTime = total > 0 ? total : 0;
 
     const seconds = Math.floor((remainingTime / 1000) % 60);
     const minutes = Math.floor((remainingTime / 1000 / 60) % 60);
     const hours = Math.floor((remainingTime / (1000 * 60 * 60)) % 24);
     const days = Math.floor(remainingTime / (1000 * 60 * 60 * 24));
-
-
     return {
         total: remainingTime,
         days,
@@ -100,7 +98,7 @@ export default function ProductDetail({ open, onClose, product }) {
     const Image = "https://images.unsplash.com/photo-1528127269322-539801943592?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDJ8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=500&q=60"
     const [AuctionDetailDialog, showAuctionDetailDialog, closeProductDialog] =
         useDialogModal(AuctionForm);
-    const [countdown, setCountdown] = useState(getTimeRemaining(product.beginTime));
+    const [countdown, setCountdown] = useState(getTimeRemaining(product.startDate));
     const [showDescriptions, setShowDescriptions] = useState(false);
     const [feeDialogOpen, setFeeDialogOpen] = useState(false);
     const [maxWidth, setMaxWidth] = React.useState('sm');
@@ -115,13 +113,8 @@ export default function ProductDetail({ open, onClose, product }) {
     const token = localStorage.getItem('token');
     const user = localStorage.getItem('loginUser');
     const jsonUser = JSON.parse(user);
-    const isLoggedIn = !!jsonUser && !!jsonUser.Email;
+    const isLoggedIn = !!jsonUser && !!jsonUser.name;
 
-    // const apiUrl = 'https://reasapiv2.azurewebsites.net/api/SessionDetails/joinning';
-    // const autoApi = 'https://reasapiv2.azurewebsites.net/api/Sessions/session_status_to_in_stage';
-    // const paymentAPI = `https://reasapiv2.azurewebsites.net/api/Login/payment_joinning?sessionId=${selectedItem?.sessionId}&payerId=${jsonUser?.Id}&urlSuccess=https://capstone-bid-fe.vercel.app/payment-success&urlFail=https://capstone-bid-fe.vercel.app/payment-fail`
-
-    // const [link, setPaymentlink] = useState();
 
 
     const closeDialog = () => {
@@ -129,153 +122,103 @@ export default function ProductDetail({ open, onClose, product }) {
     };
     useEffect(() => {
         const interval = setInterval(() => {
-            setCountdown(getTimeRemaining(product.beginTime));
+            setCountdown(getTimeRemaining(product.startDate));
         }, 1000);
-
-        // Cleanup the interval on unmount
         return () => {
             clearInterval(interval);
         };
-    }, [product.beginTime]);
-
-    // const closeJonningDialog = () => {
-
-    //     setSelectedItem(product);
-    //     setFeeDialogOpen(true); // Set the selected item first
-    //     handlePayment();
-    //     setIsErrorDialogOpen(false)
-    // };
+    }, [product.startDate]);
 
     const handleImageClick = (image) => {
         setSelectedImage(image);
     };
 
-    // const joinAuction = () => {
-    //     setLoading(true);
-    //     const requestData = {
-    //         sessionId: product.sessionId,
-    //         userId: jsonUser.Id
-    //     };
+    const joinAuction = () => {
+        setLoading(true);
+        const requestData = {
+            sessionId: product.id,
+            userId: jsonUser.Id
+        };
 
-    //     axios.post(apiUrl, requestData, { headers: { Authorization: `Bearer ${token}` } })
-    //         .then(response => {
-    //             // Handle the response from the API if needed.
-    //             // For example, you can show a success message or refresh the page.
-    //             setLoading(false);
+        axios.post("https://reasapiv2.azurewebsites.net/api/User", requestData, { headers: { Authorization: `Bearer ${token}` } })
+            .then(response => {
+                setLoading(false);
 
-    //         })
-    //         .catch(error => {
-    //             console.error('Error joining the auction:', error);
-    //             if (error.response && error.response.status === 400 && error.response.data) {
+            })
+            .catch(error => {
+                console.error('Error joining the auction:', error);
+                if (error.response && error.response.status === 400 && error.response.data) {
 
-    //                 if (error.response.data === "Bạn đã tham gia vào cuộc đấu giá này trước đó, vui lòng kiểm tra lại email để nắm bắt thông tin của cuộc đấu giá.") {
-    //                     setIsSuccessDialogOpen(true)
-    //                     setSuccessDialogMessage(error.response.data)
-    //                     setLoading(false);
-    //                 } else {
-    //                     setIsErrorDialogOpen(true);
-    //                     setDialogMessage(error.response.data);
-    //                     setLoading(false);
-    //                 }
+                    if (error.response.data === "Bạn đã tham gia vào cuộc đấu giá này trước đó, vui lòng kiểm tra lại email để nắm bắt thông tin của cuộc đấu giá.") {
+                        setIsSuccessDialogOpen(true)
+                        setSuccessDialogMessage(error.response.data)
+                        setLoading(false);
+                    } else {
+                        setIsErrorDialogOpen(true);
+                        setDialogMessage(error.response.data);
+                        setLoading(false);
+                    }
 
-    //             } else {
-    //                 setIsErrorDialogOpen(true);
-    //                 setDialogMessage("Đã có lỗi xảy ra");
-    //                 setLoading(false);
-    //             }
-    //         });
-    // };
+                } else {
+                    setIsErrorDialogOpen(true);
+                    setDialogMessage("Đã có lỗi xảy ra");
+                    setLoading(false);
+                }
+            });
+    };
 
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCountdown(getTimeRemaining(product.startDate));
 
-    // const handlePayment = async () => {
-    //     if (selectedItem) {
-    //         try {
-    //             console.log("check")
-    //             console.log(selectedItem?.sessionId)
-    //             const response = await axios.post(paymentAPI, null, {
-    //                 headers: { Authorization: `Bearer ${token}` }
-    //             });
+            // Check if the countdown has reached 0
+            if (countdown.total <= 0) {
+                // Make the API call when the countdown reaches 0
+                axios.put("https://reasapiv2.azurewebsites.net/api/Auction", { sessionID: product.id }, { headers: { Authorization: `Bearer ${token}` } },)
+                    .then(response => {
 
-    //             // Assuming the API response contains the payment link
-    //             const paymentLink = response.data;
-    //             setPaymentlink(paymentLink);
-    //             // Redirect the user to the payment link
-    //             window.location.href = paymentLink;
+                    })
+                    .catch(error => {
+                        console.error('Error making the API call:', error);
+                    });
 
-    //         } catch (error) {
-    //             console.error('Error processing payment:', error);
-    //             // Handle error, show a message to the user, etc.
-    //         }
-    //     }
-    // };
+                clearInterval(interval);
+            }
+        }, 1000);
 
-    // useEffect(() => {
-    //     const interval = setInterval(() => {
-    //         setCountdown(getTimeRemaining(product.beginTime));
-
-    //         // Check if the countdown has reached 0
-    //         if (countdown.total <= 0) {
-    //             // Make the API call when the countdown reaches 0
-    //             axios.put(autoApi, { sessionID: product.sessionId }, { headers: { Authorization: `Bearer ${token}` } },)
-    //                 .then(response => {
-    //                     // Handle the API response if needed.
-    //                     // For example, you can update the state based on the response.
-    //                     // You can also show a success message to the user.
-    //                 })
-    //                 .catch(error => {
-    //                     // Handle errors, such as displaying an error message to the user.
-    //                     console.error('Error making the API call:', error);
-    //                 });
-
-    //             // Stop the interval after making the API call to prevent further calls
-    //             clearInterval(interval);
-    //         }
-    //     }, 1000);
-
-    //     // Cleanup the interval on unmount
-    //     return () => {
-    //         clearInterval(interval);
-    //     };
-    // }, [countdown.total, product.beginTime, product.sessionId]);
+        return () => {
+            clearInterval(interval);
+        };
+    }, [countdown.total, product.startDate, product.id]);
 
     function formatToVND(price) {
         return price.toLocaleString("vi-VN", { style: "currency", currency: "VND" });
     }
+    const handleAuctionButtonClick = () => {
+        localStorage.setItem("sessionId", product.sessionId);
+        if (isLoggedIn) {
+            joinAuction();
+        } else {
+            setDialogOpen(true);
+        }
+    };
 
+    const openDialog = (product) => {
 
-    // Function to handle the auction button click
-    // const handleAuctionButtonClick = () => {
-    //     localStorage.setItem("sessionId", product.sessionId);
-    //     if (isLoggedIn) {
-    //         joinAuction();
-    //     } else {
-    //         // If the user is not logged in, show the custom dialog.
-    //         setDialogOpen(true);
-    //     }
-    // };
-
-    // const openDialog = (product) => {
-
-    //     localStorage.setItem("sessionId", product.sessionId);
-    //     if (isLoggedIn) {
-    //         joinAuction();
-    //         // Wait for the payment processing
-    //     } else {
-    //         // If the user is not logged in, show the custom dialog.
-    //         setDialogOpen(true);
-    //     }
-    //     // Finally, open the dialog
-    // };
+        localStorage.setItem("sessionId", product.sessionId);
+        if (isLoggedIn) {
+            joinAuction();
+        } else {
+            setDialogOpen(true);
+        }
+    };
     const handleDialogClose = () => {
         setDialogOpen(false);
     };
     const handleToggleDescriptions = () => {
         setShowDescriptions((prevState) => !prevState);
     };
-
-    const handleLogin = () => {
-        // Redirect to the login page or perform other login actions.
-        window.location.href = "/login"; // Replace "/login" with your actual login page URL.
+    const handleLogin = () => {        window.location.href = "/login"; // Replace "/login" with your actual login page URL.
     };
     return (
         <>
@@ -294,7 +237,7 @@ export default function ProductDetail({ open, onClose, product }) {
                         justifycontent={"space-between"}
 
                     >
-                        <Typography fontSize={"25px"} >Tên Sản Phẩm : {product.itemName}</Typography>
+                        <Typography fontSize={"25px"} >Tên Sản Phẩm : {product.realEstates.name}</Typography>
                         <IconButton onClick={onClose}>
                             <CloseIcon />
                         </IconButton>
@@ -344,7 +287,7 @@ export default function ProductDetail({ open, onClose, product }) {
                         <ProductDetailInfoWrapper>
 
                             {/* <Typography sx={{ lineHeight: 4 }} variant="h4">
-                                Tên Sản Phẩm : {product.itemName}
+                                Tên Sản Phẩm : {product.realEstates.name}
                             </Typography> */}
                             <Typography margin={"1%"} color={"#696969"}>Thời gian đếm ngược bắt đầu trả giá:</Typography>
                             <Box sx={{ boxShadow: 3 }}>
@@ -404,7 +347,6 @@ export default function ProductDetail({ open, onClose, product }) {
                                 sx={{
                                     boxShadow: 12,
                                     padding: 2,
-
                                 }}
                             >
                                 <Typography sx={{
@@ -419,7 +361,7 @@ export default function ProductDetail({ open, onClose, product }) {
                                     justifycontent: "space-between",
                                 }}>
                                     <Typography margin={'1%'} color={"#696969"} align="left" variant="subtitle">Giá khởi Điểm :  </Typography>
-                                    <Typography margin={'1%'} align="right" color={"#B41712"} variant="subtitle"> {formatToVND(product.firstPrice)} </Typography>
+                                    <Typography margin={'1%'} align="right" color={"#B41712"} variant="subtitle"> {formatToVND(product.startingPrice)} </Typography>
                                 </Typography>
                                 <Typography sx={{
                                     display: "flex",
@@ -431,7 +373,7 @@ export default function ProductDetail({ open, onClose, product }) {
                                     <Typography margin={'1%'} align="right" color={"#B41712"} variant="subtitle">
                                         {formatToVND(
                                             Math.min(
-                                                Math.max(product.participationFee * product.firstPrice, 10000),
+                                                Math.max(product.participationFee * product.startingPrice, 10000),
                                                 200000
                                             )
                                         )}
@@ -442,14 +384,14 @@ export default function ProductDetail({ open, onClose, product }) {
                                     justifycontent: "space-between",
                                 }}>
                                     <Typography margin={'1%'} color={"#696969"} align="left" variant="subtitle">Tiền Đặt Cọc:  </Typography>
-                                    <Typography margin={'1%'} align="right" color={"#B41712"} variant="subtitle">{product.deposit ? (formatToVND(product.depositFee * product.firstPrice)):("0")}  </Typography>
+                                    <Typography margin={'1%'} align="right" color={"#B41712"} variant="subtitle">{product.deposit ? (formatToVND(product.depositFee * product.startingPrice)):("0")}  </Typography>
                                 </Typography>
                                 <Typography sx={{
                                     display: "flex",
                                     justifycontent: "space-between",
                                 }}>
                                     <Typography margin={'1%'} color={"#696969"} align="left" variant="subtitle">Bước Giá :  </Typography>
-                                    <Typography margin={'1%'} align="right" color={"#B41712"} variant="subtitle"> {formatToVND(product.stepPrice)} </Typography>
+                                    <Typography margin={'1%'} align="right" color={"#B41712"} variant="subtitle"> {formatToVND(product.bidIncrement)} </Typography>
                                 </Typography>
                                 <Typography sx={{
                                     display: "flex",
@@ -484,7 +426,7 @@ export default function ProductDetail({ open, onClose, product }) {
                                     justifycontent: "space-between",
                                 }}>
                                     <Typography margin={'1%'} color={"#696969"} align="left" variant="subtitle">Thời gian bắt đầu :  </Typography>
-                                    <Typography margin={'1%'} align="right" color={"#B41712"} variant="subtitle"> {formatCreateDate(product.beginTime)} </Typography>
+                                    <Typography margin={'1%'} align="right" color={"#B41712"} variant="subtitle"> {formatCreateDate(product.startDate)} </Typography>
                                 </Typography>
                                 <Typography sx={{
                                     display: "flex",
@@ -492,13 +434,13 @@ export default function ProductDetail({ open, onClose, product }) {
                                     margin: '1%'
                                 }}>
                                     <Typography color={"#696969"} align="left" variant="subtitle">Thời gian Kết thúc :  </Typography>
-                                    <Typography align="right" color={"#B41712"} variant="subtitle"> {formatCreateDate(product.endTime)} </Typography>
+                                    <Typography align="right" color={"#B41712"} variant="subtitle"> {formatCreateDate(product.endDate)} </Typography>
                                 </Typography>
-                                {/* <Typography margin={'1%'} variant="subtitle">Giá khởi Điểm : {formatToVND(product.firstPrice)}</Typography>
-                                <Typography margin={'1%'} variant="subtitle">Bước Giá : {formatToVND(product.stepPrice)}</Typography>
-                                <Typography margin={'1%'} variant="subtitle">Giá hiện tại : {formatToVND(product.finalPrice)}</Typography>
-                                <Typography margin={'1%'} variant="subtitle">Thời gian bắt đầu : {formatCreateDate(product.beginTime)}</Typography>
-                                <Typography margin={'1%'} variant="subtitle">Thời gian Kết thúc : {formatCreateDate(product.endTime)}</Typography> */}
+                                <Typography margin={'1%'} variant="subtitle">Giá khởi Điểm : {formatToVND(product.startingPrice)}</Typography>
+                                <Typography margin={'1%'} variant="subtitle">Bước Giá : {formatToVND(product.bidIncrement)}</Typography>
+                                
+                                <Typography margin={'1%'} variant="subtitle">Thời gian bắt đầu : {formatCreateDate(product.startDate)}</Typography>
+                                <Typography margin={'1%'} variant="subtitle">Thời gian Kết thúc : {formatCreateDate(product.endDate)}</Typography>
 
                                 {
                                     product.descriptions.map((description, index) => (
@@ -551,7 +493,7 @@ export default function ProductDetail({ open, onClose, product }) {
                                     {isLoading ? <CircularProgress size={24} color="inherit" /> : "Đăng Kí Đấu Giá."}
                                 </Button>
                             </Stack>
-                            {/* <Box
+                            <Box
                                 sx={{
                                     display: "flex",
                                     justifycontent: "flex-start",
@@ -569,9 +511,8 @@ export default function ProductDetail({ open, onClose, product }) {
                                         {description.description}: {description.detail}<br />
                                     </Typography>
                                 ))}
-                            </Box> */}
-
-                            {/* <Box
+                            </Box>
+                            <Box
                                 sx={{ mt: 4 }}
                                 display="flex"
                                 alignItems="center"
@@ -580,11 +521,10 @@ export default function ProductDetail({ open, onClose, product }) {
                                 <Button color="primary" variant="contained" onClick={handleAuctionButtonClick}>
                                     Đăng Kí Đấu Giá.
                                 </Button>
-                            </Box> */}
+                            </Box>
 
                         </ProductDetailInfoWrapper>
                     </ProductDetailWrapper>
-
                 </DialogContent>
             </Dialog>
             <AuctionDetailDialog product={product} />
@@ -607,7 +547,6 @@ export default function ProductDetail({ open, onClose, product }) {
                     </Button>
                 </DialogActions>
             </Dialog>
-
             <Dialog fullWidth maxWidth={maxWidth} open={isSuccessDialogOpen} onClose={() => setIsSuccessDialogOpen(false)}>
                 <DialogTitle sx={{ textAlign: 'center' }}>
                     <ErrorOutlineOutlinedIcon style={styles.errorIcon} />
@@ -624,7 +563,6 @@ export default function ProductDetail({ open, onClose, product }) {
                     </Button>
                 </DialogActions>
             </Dialog>
-
             <Dialog fullWidth maxWidth={maxWidth} open={isErrorDialogOpen} onClose={() => setIsErrorDialogOpen(false)}>
                 <DialogTitle sx={{ textAlign: 'center' }}>
                     <ErrorOutlineOutlinedIcon style={styles.errorIcon} />
@@ -641,7 +579,6 @@ export default function ProductDetail({ open, onClose, product }) {
                     </Button> */}
                 </DialogActions>
             </Dialog>
-
             <Dialog fullWidth maxWidth={maxWidth} open={feeDialogOpen} onClose={closeDialog}>
                 <DialogTitle variant="h4" align="center">Chi tiết đơn hàng</DialogTitle>
                 <DialogContent>
@@ -654,18 +591,16 @@ export default function ProductDetail({ open, onClose, product }) {
 
                                     {formatToVND(
                                             Math.min(
-                                                Math.max(product?.participationFee * product?.firstPrice, 10000),
+                                                Math.max(product?.participationFee * product?.startingPrice, 10000),
                                                 200000
                                             )
-                                        )}
-                                        
-
+                                        )}                                   
                                     </Typography>
                                 </Typography>
                                 <Typography sx={{ mt: 1, mb: 1, display: "flex", justifycontent: "space-between" }}>
                                     <Typography margin={'1%'} align="inherit" variant="subtitle1">Phí Đặt Cọc</Typography>
                                     <Typography margin={'1%'} align="right" variant="subtitle1"> {selectedItem?.deposit ? (
-                                        (selectedItem?.firstPrice * selectedItem?.depositFee).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })
+                                        (selectedItem?.startingPrice * selectedItem?.depositFee).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })
                                     ) : (
                                         "--"
                                     )}</Typography>
@@ -680,21 +615,18 @@ export default function ProductDetail({ open, onClose, product }) {
                                     {product?.deposit ? (
                                         formatToVND(
                                             Math.min(
-                                                Math.max(product.participationFee * product.firstPrice, 10000),
+                                                Math.max(product.participationFee * product.startingPrice, 10000),
                                                 200000
-                                            ) + (selectedItem?.depositFee * selectedItem?.firstPrice)
+                                            ) + (selectedItem?.depositFee * selectedItem?.startingPrice)
                                         )
                                     ) : (
                                         formatToVND(
                                             Math.min(
-                                                Math.max(product.participationFee * product.firstPrice, 10000),
+                                                Math.max(product.participationFee * product.startingPrice, 10000),
                                                 200000
                                             ) 
                                         )
                                     )}
-
-                                        
-
                                     </Typography>
                                 </Typography>
                                 <Typography sx={{ mt: 1, mb: 1, display: "flex", justifycontent: "space-between" }}>
@@ -718,14 +650,14 @@ export default function ProductDetail({ open, onClose, product }) {
                                 {product?.deposit ? (
                                          formatToVND(
                                             Math.min(
-                                                Math.max(product?.participationFee * product?.firstPrice, 10000),
+                                                Math.max(product?.participationFee * product?.startingPrice, 10000),
                                                 200000
-                                            ) + (selectedItem?.depositFee * selectedItem?.firstPrice)
+                                            ) + (selectedItem?.depositFee * selectedItem?.startingPrice)
                                         )
                                     ) : (
                                         formatToVND(
                                             Math.min(
-                                                Math.max(product.participationFee * product.firstPrice, 10000),
+                                                Math.max(product.participationFee * product.startingPrice, 10000),
                                                 200000
                                             )
                                         )

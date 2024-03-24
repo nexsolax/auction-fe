@@ -239,8 +239,8 @@ export default function Router() {
         { path: 'user-waiting-detail/:userId', element: <UserWaitingDetail /> },
         { path: 'user-ban-detail/:userId', element: <UserBanDetail /> },
         { path: 'staff-profile', element: <StaffProfile /> },
-        // { path: 'products', element: <ProductsPage /> },
-        // { path: 'blog', element: <BlogPage /> },
+        { path: 'products', element: <ProductsPage /> },
+        { path: 'blog', element: <BlogPage /> },
         {
           path: 'staff',
           element: (

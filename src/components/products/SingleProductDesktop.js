@@ -17,13 +17,13 @@ import {
 
 
 const defaultImageSource = "/assets/images/covers/auction-hammer.jpg";
-export default function SingleProductDesktop({ product, matches }) {
+export default function SingleProductDesktop({ products, matches }) {
     const [ProductDetailDialog, showProductDetailDialog, closeProductDialog] =
         useDialogModal(ProductDetail);
-
+console.log(products);
     const [showOptions, setShowOptions] = useState(false);
-    const firstImageURL = product.images && product.images.length > 0 ? product.images[0].detail : null;
-    const imageSource = firstImageURL || defaultImageSource;
+    // const firstImageURL = product.images && product.images.length > 0 ? product.images[0].detail : null;
+    // const imageSource = firstImageURL || defaultImageSource;
 
     const handleMouseEnter = () => {
         setShowOptions(true);
@@ -31,11 +31,12 @@ export default function SingleProductDesktop({ product, matches }) {
     const handleMouseLeave = () => {
         setShowOptions(false);
     };
+    console.log(products);
     return (
         <>
             <Product onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-            
-            <ProductImage src={imageSource} /> {/* Display the first image or the default image */}
+            {/* <ProductImage src={imageSource} />  */}
+            <ProductImage  /> {/* Display the first image or the default image */}
                 {/* <ProductFavButton isfav={0}>
                     <FavoriteIcon />
                 </ProductFavButton> */}
@@ -59,8 +60,8 @@ export default function SingleProductDesktop({ product, matches }) {
                     </Stack>
                 </ProductActionsWrapper>
             </Product>
-            <ProductMeta product={product} />
-            <ProductDetailDialog product={product} />
+            <ProductMeta product={products} />
+            <ProductDetailDialog product={products} />
         </>
     );
 }

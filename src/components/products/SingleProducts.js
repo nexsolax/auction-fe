@@ -11,7 +11,7 @@ import ProductDetail from "../productdetail";
 
 import { Colors } from "../../style/theme";
 
-export default function SingleProducts({ product, matches }) {
+export default function SingleProducts({ products, matches }) {
     const [ProductDetailDialog, showProductDetailDialog, closeProductDialog] =
         useDialogModal(ProductDetail);
 
@@ -42,16 +42,17 @@ export default function SingleProducts({ product, matches }) {
     }));
     useEffect(() => {
         // Extract the first image URL from the server response
-        if (product.images && product.images.length > 0) {
-            setFirstImage(product.images[0].detail);
-        }
-    }, [product]);
+        // if (product.images && product.images.length > 0) {
+        //     setFirstImage(product.images[0].detail);
+        // }
+    }, [products]);
+    console.log(products);
     return (
         <>
             <Product onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
                 
             {firstImage && <HomeProductImage src={firstImage} />}
-                <ProductMeta product={product} matches={matches} />
+                <ProductMeta product={products} matches={matches} />
                 <ProductActionsWrapper>
                     <Stack direction={matches ? "row" : "column"}>
                         <ProductFavButton isFav={0}>
@@ -71,7 +72,7 @@ export default function SingleProducts({ product, matches }) {
                 </ProductActionsWrapper>
             </Product>
             <ProductAddToCart onClick={() => showProductDetailDialog()} variant="contained">Thông Tin Chi Tiết</ProductAddToCart>
-            <ProductDetailDialog product={product} />
+            <ProductDetailDialog product={products} />
         </>
     );
 }
