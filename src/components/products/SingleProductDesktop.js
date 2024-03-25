@@ -17,10 +17,18 @@ import {
 
 
 const defaultImageSource = "/assets/images/covers/auction-hammer.jpg";
-export default function SingleProductDesktop({ products, matches }) {
+export default function SingleProductDesktop({
+    products,
+    id,
+    productName,
+    productImage,
+    endDate,
+    startDate,
+    matches
+}) {
     const [ProductDetailDialog, showProductDetailDialog, closeProductDialog] =
         useDialogModal(ProductDetail);
-console.log(products);
+    console.log(productName, productImage, startDate, endDate);
     const [showOptions, setShowOptions] = useState(false);
     // const firstImageURL = product.images && product.images.length > 0 ? product.images[0].detail : null;
     // const imageSource = firstImageURL || defaultImageSource;
@@ -31,12 +39,15 @@ console.log(products);
     const handleMouseLeave = () => {
         setShowOptions(false);
     };
-    console.log(products);
+
     return (
         <>
             <Product onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-            {/* <ProductImage src={imageSource} />  */}
-            <ProductImage  /> {/* Display the first image or the default image */}
+                <ProductImage src={productImage} />
+                {productName}
+                {endDate}
+                {startDate}
+                {/* <ProductImage /> Display the first image or the default image */}
                 {/* <ProductFavButton isfav={0}>
                     <FavoriteIcon />
                 </ProductFavButton> */}

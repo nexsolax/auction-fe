@@ -30,13 +30,14 @@ export default function Products() {
         const data = response.data.data.pagingData.map((item) => {
           // Perform null/undefined checks before accessing nested properties
           const name = item.realEstates ? item.realEstates.name : "Unknown Name";
-          
-          const image = item.realEstates && item.realEstates.realEstateImages ? item.realEstates.realEstateImages.image : "Unknown Image";
+          const image = item.realEstates && item.realEstates.realEstateImages ? item.realEstates.realEstateImages[0].image : "Unknown Image";
+          const startDate = item.startDate;
+          const endDate = item.endDate;
           // products.forEach((product) => {
           //   console.log(product.name);
           //   console.log(product.image);
           // });
-          return { name, image };
+          return { name, image, startDate, endDate };
         });
         // Map the fetched data to the products array
 
@@ -65,8 +66,8 @@ export default function Products() {
           product.name.toLowerCase().includes(searchQuery.toLowerCase())
       );
       console.log(filtered);
-        setFilteredProducts(products);
-        // setSearchQuery(filtered);
+      setFilteredProducts(products);
+      // setSearchQuery(filtered);
     }
 
     // Reset currentPage to 1 when searchQuery changes
@@ -113,16 +114,17 @@ export default function Products() {
           productName={product.name}
           endDate={product.endDate}
           startDate={product.startDate}
-        //   startingPrice={product.startingPrice}
+          //   startingPrice={product.startingPrice}
           matches={matches}
         />
       ) : (
         <SingleProductDesktops
           id={product.id}
           productName={product.name}
+          productImage={product.image}
           endDate={product.endDate}
           startDate={product.startDate}
-        //   startingPrice={product.startingPrice}
+          //   startingPrice={product.startingPrice}
           matches={matches}
         />
       )}
