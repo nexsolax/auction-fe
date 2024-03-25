@@ -73,18 +73,7 @@ export default function Products() {
     // Reset currentPage to 1 when searchQuery changes
     setCurrentPage(1);
   }, [searchQuery, products]);
-  //   if (products.length > 0) {
-  //     products.forEach((product) => {
-  //       const filtered = products.filter(
-  //         (product) =>
-  //           product.name &&
-  //           searchQuery &&
-  //           product.name.toLowerCase().includes(searchQuery.toLowerCase())
-  //       );
-  //       console.log(filtered);
-  //       setFilteredProducts(filtered);
-  //     });
-  //   }
+  
   const productsPerPage = 3; // Number of products to display per page
   const pageCount = Math.ceil(filteredProducts.length / productsPerPage);
 
