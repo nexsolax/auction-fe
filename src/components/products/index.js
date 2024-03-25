@@ -29,17 +29,17 @@ export default function Products() {
         console.log(response.data.data.pagingData[0].realEstates.realEstateImages[0].image);
         const data = response.data.data.pagingData.map((item) => {
           // Perform null/undefined checks before accessing nested properties
-          const id = item.realEstates ? item.realEstates.id : "unkown";
           const name = item.realEstates ? item.realEstates.name : "Unknown Name";
           const image = item.realEstates && item.realEstates.realEstateImages ? item.realEstates.realEstateImages[0].image : "Unknown Image";
           const startDate = item.startDate;
+          const id = item.id;
+          const status = item.status;
           const endDate = item.endDate;
-          const startingPrice = item.startingPrice;
           // products.forEach((product) => {
           //   console.log(product.name);
           //   console.log(product.image);
           // });
-          return {id, name, image, startDate, endDate, startingPrice };
+          return { name, id, status, image, startDate, endDate };
         });
         // Map the fetched data to the products array
 
@@ -75,7 +75,18 @@ export default function Products() {
     // Reset currentPage to 1 when searchQuery changes
     setCurrentPage(1);
   }, [searchQuery, products]);
-  
+  //   if (products.length > 0) {
+  //     products.forEach((product) => {
+  //       const filtered = products.filter(
+  //         (product) =>
+  //           product.name &&
+  //           searchQuery &&
+  //           product.name.toLowerCase().includes(searchQuery.toLowerCase())
+  //       );
+  //       console.log(filtered);
+  //       setFilteredProducts(filtered);
+  //     });
+  //   }
   const productsPerPage = 3; // Number of products to display per page
   const pageCount = Math.ceil(filteredProducts.length / productsPerPage);
 
@@ -88,6 +99,7 @@ export default function Products() {
   const endIndex = startIndex + productsPerPage;
   const currentProducts = filteredProducts.slice(startIndex, endIndex);
 
+
   const renderProducts = currentProducts.map((product) => (
     <Grid
       item
@@ -95,9 +107,9 @@ export default function Products() {
       xs={3}
       sm={4}
       md={4}
-      display="flex"
-      flexDirection={"column"}
-      alignItems="center"
+      display='flex'
+      flexDirection={'column'}
+      alignItems='center'
     >
       {matches ? (
         <SingleProducts
@@ -105,17 +117,18 @@ export default function Products() {
           productName={product.name}
           endDate={product.endDate}
           startDate={product.startDate}
-          startingPrice={product.startingPrice}
+          //   startingPrice={product.startingPrice}
           matches={matches}
         />
       ) : (
         <SingleProductDesktops
           id={product.id}
+          status={product.status}
           productName={product.name}
           productImage={product.image}
           endDate={product.endDate}
           startDate={product.startDate}
-          startingPrice={product.startingPrice}
+          //   startingPrice={product.startingPrice}
           matches={matches}
         />
       )}

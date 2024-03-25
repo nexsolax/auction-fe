@@ -71,8 +71,10 @@ import ReItem from './pages/ReItem';
 import AddAuction from './pages/AddAuction';
 import ApproveProduct from './pages/ApproveProduct';
 import ApproveAuction from './pages/ApproveAuction';
+import AutionDetail from './pages/dev/AutionDetail';
+import OpenAuction from './pages/OpenAuction';
+import CloseAuction from './pages/CloseAuction';
 import ViewEstate from './pages/ViewEstate';
-
 
 // ----------------------------------------------------------------------
 
@@ -85,15 +87,18 @@ export default function Router() {
     //   //   </RolesAuthRoute>
     //   // </Suspense>
     // ), },
-    { path: 'auction', element: (
-      <Suspense>
-        <RolesAuthRoute roles={['Admin', 'Staff', 'Member']}>
-          <AuctionPage />
-        </RolesAuthRoute>
-      </Suspense>
-    ), },
+    {
+      path: 'auction/:sessionId',
+      element: (
+        <Suspense>
+          <RolesAuthRoute roles={['Admin', 'Staff', 'Member']}>
+            <AuctionPage />
+          </RolesAuthRoute>
+        </Suspense>
+      ),
+    },
     { path: 'signup', element: <SignUp /> },
-    { path: 'additem', element:  <AddProduct />},
+    { path: 'additem', element: <AddProduct /> },
     { path: 'viewitem', element: <ViewEstate/>},
     //  (
     //   <Suspense>
@@ -102,131 +107,202 @@ export default function Router() {
     //     </RolesAuthRoute>
     //   </Suspense>
     // ), },
-    { path: 'profile', element: (
-      <Suspense>
-             {/* <Profile /> */}
-        <RolesAuthRoute roles={['Member','Staff','Admin']}>
-          <Profile />
-        </RolesAuthRoute>
-      </Suspense>
-    ), },
-    { path: 'approve-product', element: (
-      <Suspense>
-             {/* <Profile /> */}
-        <RolesAuthRoute roles={['Member','Staff','Admin']}>
-          <ApproveProduct />
-        </RolesAuthRoute>
-      </Suspense>
-    ), },
-    { path: 'approve-auction', element: (
-      <Suspense>
-             {/* <Profile /> */}
-        <RolesAuthRoute roles={['Member','Staff','Admin']}>
-          <ApproveAuction />
-        </RolesAuthRoute>
-      </Suspense>
-    ), },
-    { path: 'home', element: <HomePage />},
-    { path: 'prepare', element: <PrepareSession />},
-    { path: 'instage',element: (
-      <Suspense>
-        {/* <InstageSession /> */}
-        <RolesAuthRoute roles={[ 'Member']}>
-          <InstageSession />
-        </RolesAuthRoute>
-      </Suspense>
-    ),},
-    { path: 'finish', element: <FinishSession />},
-    { path: 'myitem',element: (
-      <Suspense>
-         {/* <MyProductPage /> */}
-        <RolesAuthRoute roles={[ 'Member']}>
-          <MyProductPage />
-        </RolesAuthRoute>
-      </Suspense>
-    ),},
-    { path: 'mysession', element: (
-      <Suspense>
-         {/* <MySessionPage /> */}
-        <RolesAuthRoute roles={[ 'Member']}>
-          <MySessionPage />
-        </RolesAuthRoute>
-      </Suspense>
-    ),},
-    { path: 'myhistory', element: (
-      <Suspense>
-      //    <MyHistoryPage />
-        <RolesAuthRoute roles={[ 'Member']}>
-          <MyHistoryPage />
-        </RolesAuthRoute>
-      </Suspense>
-    ),},
-    { path: 'shoppingcart', element: (
-      <Suspense>
-        {/* <ShoppingCartPage /> */}
-        <RolesAuthRoute roles={[ 'Member']}>
-          <ShoppingCartPage />
-        </RolesAuthRoute>
-      </Suspense>
-    ),},
-    { path: 'payment-join-success', element: <PaymentSuccessJoinPage />},
-    { path: 'payment-success', element: <PaymentSuccessPage />},
-    { path: 'payment-fail', element: <PaymentFailPage />},
-    { path: 'payment-history', element: (
-      <Suspense>
-        {/* <TransactionHistoryPage /> */}
-        <RolesAuthRoute roles={[ 'Member']}>
-          <TransactionHistoryPage />
-        </RolesAuthRoute>
-      </Suspense>
-    ),},
-    { path: 're-auction/:itemId', element: (
-      <Suspense>
-         {/* <Reauction /> */}
-        <RolesAuthRoute roles={[ 'Member']}>
-          <Reauction />
-        </RolesAuthRoute>
-      </Suspense>
-    ), },
-    { path: 'update-item/:itemId', element: (
-      <Suspense>
-        {/* <UpdateItem /> */}
-        <RolesAuthRoute roles={[ 'Member']}>
-          <UpdateItem />
-        </RolesAuthRoute>
-      </Suspense>
-    ), },
-    { path: 're-item/:itemId', element: (
-      <Suspense>
-        {/* <ReItem /> */}
-        <RolesAuthRoute roles={[ 'Member']}>
-          <ReItem />
-        </RolesAuthRoute>
-      </Suspense>
-    ), },
+    {
+      path: 'profile',
+      element: (
+        <Suspense>
+          {/* <Profile /> */}
+          <RolesAuthRoute roles={['Member', 'Staff', 'Admin']}>
+            <Profile />
+          </RolesAuthRoute>
+        </Suspense>
+      ),
+    },
+    {
+      path: 'approve-product',
+      element: (
+        <Suspense>
+          {/* <Profile /> */}
+          <RolesAuthRoute roles={['Member', 'Staff', 'Admin']}>
+            <ApproveProduct />
+          </RolesAuthRoute>
+        </Suspense>
+      ),
+    },
+    {
+      path: 'approve-auction',
+      element: (
+        <Suspense>
+          {/* <Profile /> */}
+          <RolesAuthRoute roles={['Member', 'Staff', 'Admin']}>
+            <ApproveAuction />
+          </RolesAuthRoute>
+        </Suspense>
+      ),
+    },
+    {
+      path: 'open-auction',
+      element: (
+        <Suspense>
+          {/* <Profile /> */}
+          <RolesAuthRoute roles={['Member', 'Staff', 'Admin']}>
+            <OpenAuction />
+          </RolesAuthRoute>
+        </Suspense>
+      ),
+    },
+    {
+      path: 'close-auction',
+      element: (
+        <Suspense>
+          {/* <Profile /> */}
+          <RolesAuthRoute roles={['Member', 'Staff', 'Admin']}>
+            <CloseAuction />
+          </RolesAuthRoute>
+        </Suspense>
+      ),
+    },
+    { path: 'home', element: <HomePage /> },
+    { path: 'prepare', element: <PrepareSession /> },
+    {
+      path: 'instage',
+      element: (
+        <Suspense>
+          {/* <InstageSession /> */}
+          <RolesAuthRoute roles={['Member']}>
+            <InstageSession />
+          </RolesAuthRoute>
+        </Suspense>
+      ),
+    },
+    { path: 'finish', element: <FinishSession /> },
+    {
+      path: 'myitem',
+      element: (
+        <Suspense>
+          {/* <MyProductPage /> */}
+          <RolesAuthRoute roles={['Member']}>
+            <MyProductPage />
+          </RolesAuthRoute>
+        </Suspense>
+      ),
+    },
+    {
+      path: 'mysession',
+      element: (
+        <Suspense>
+          {/* <MySessionPage /> */}
+          <RolesAuthRoute roles={['Member']}>
+            <MySessionPage />
+          </RolesAuthRoute>
+        </Suspense>
+      ),
+    },
+    {
+      path: 'myhistory',
+      element: (
+        <Suspense>
+          // <MyHistoryPage />
+          <RolesAuthRoute roles={['Member']}>
+            <MyHistoryPage />
+          </RolesAuthRoute>
+        </Suspense>
+      ),
+    },
+    {
+      path: 'shoppingcart',
+      element: (
+        <Suspense>
+          {/* <ShoppingCartPage /> */}
+          <RolesAuthRoute roles={['Member']}>
+            <ShoppingCartPage />
+          </RolesAuthRoute>
+        </Suspense>
+      ),
+    },
+    { path: 'payment-join-success', element: <PaymentSuccessJoinPage /> },
+    { path: 'payment-success', element: <PaymentSuccessPage /> },
+    { path: 'payment-fail', element: <PaymentFailPage /> },
+    {
+      path: 'payment-history',
+      element: (
+        <Suspense>
+          {/* <TransactionHistoryPage /> */}
+          <RolesAuthRoute roles={['Member']}>
+            <TransactionHistoryPage />
+          </RolesAuthRoute>
+        </Suspense>
+      ),
+    },
+    {
+      path: 're-auction/:itemId',
+      element: (
+        <Suspense>
+          {/* <Reauction /> */}
+          <RolesAuthRoute roles={['Member']}>
+            <Reauction />
+          </RolesAuthRoute>
+        </Suspense>
+      ),
+    },
+    {
+      path: 'update-item/:itemId',
+      element: (
+        <Suspense>
+          {/* <UpdateItem /> */}
+          <RolesAuthRoute roles={['Member']}>
+            <UpdateItem />
+          </RolesAuthRoute>
+        </Suspense>
+      ),
+    },
+    {
+      path: 're-item/:itemId',
+      element: (
+        <Suspense>
+          {/* <ReItem /> */}
+          <RolesAuthRoute roles={['Member']}>
+            <ReItem />
+          </RolesAuthRoute>
+        </Suspense>
+      ),
+    },
     { path: 'test', element: <Test /> },
-    { path: 'createauction', element: (
-      <Suspense>
-        <RolesAuthRoute roles={['Admin', 'Staff','Member']}>
-          <AddAuction/>
-        </RolesAuthRoute>
-      </Suspense>
-    ), },
+    {
+      path: 'createauction',
+      element: (
+        <Suspense>
+          <RolesAuthRoute roles={['Admin', 'Staff', 'Member']}>
+            <AddAuction />
+          </RolesAuthRoute>
+        </Suspense>
+      ),
+    },
     { path: 'test', element: <Test /> },
-    
+    {
+      path: 'aution-detail/:autionId',
+      element: (
+        <Suspense>
+          <RolesAuthRoute roles={['Admin', 'Staff', 'Member']}>
+            <AutionDetail />
+          </RolesAuthRoute>
+        </Suspense>
+      ),
+    },
+    // { path: 'aution-detail/:autionId', element: <AutionDetail /> },
+
     {
       path: '/dashboard',
       element: (
         <Suspense>
           {/* <DashboardLayout /> */}
-          <RolesAuthRoute roles={['Admin', 'Staff','Member']}>
+          <RolesAuthRoute roles={['Admin', 'Staff', 'Member']}>
             <DashboardLayout />
           </RolesAuthRoute>
         </Suspense>
       ),
       children: [
-        { element: <Navigate to="/dashboard/app" />, index: true },
-
+        { element: <Navigate to='/dashboard/app' />, index: true },
 
         { path: 'app', element: <DashboardAppPage /> },
         {
@@ -247,7 +323,6 @@ export default function Router() {
           path: 'staff',
           element: (
             <Suspense>
-           
               <RolesAuthRoute roles={['Admin']}>
                 <StaffPage />
               </RolesAuthRoute>
@@ -258,7 +333,6 @@ export default function Router() {
           path: 'staff-create',
           element: (
             <Suspense>
-                 
               <RolesAuthRoute roles={['Admin']}>
                 <StaffCreateNew />
               </RolesAuthRoute>
@@ -269,7 +343,6 @@ export default function Router() {
           path: 'category',
           element: (
             <Suspense>
-          
               <RolesAuthRoute roles={['Admin']}>
                 <CategoryPage />
               </RolesAuthRoute>
@@ -280,7 +353,7 @@ export default function Router() {
           path: 'session-rule',
           element: (
             <Suspense>
-               {/* <SessionRulePage /> */}
+              {/* <SessionRulePage /> */}
               <RolesAuthRoute roles={['Admin']}>
                 <SessionRulePage />
               </RolesAuthRoute>
@@ -292,7 +365,7 @@ export default function Router() {
           path: 'fee',
           element: (
             <Suspense>
-               {/* <FeePage /> */}
+              {/* <FeePage /> */}
               <RolesAuthRoute roles={['Admin']}>
                 <FeePage />
               </RolesAuthRoute>
@@ -315,14 +388,19 @@ export default function Router() {
         { path: 'session-create-now/:itemId', element: <SessionCreateNow /> },
         { path: 'items', element: <ItemPage /> },
         { path: 'item-detail/:itemId', element: <ItemDetail /> },
-        { path: 'booking-item-detail/:bookingItemId', element: <BookingItemDetail /> },
-        { path: 'booking-item-detail-now/:bookingItemId', element: <BookingItemDetailNow /> },
+        {
+          path: 'booking-item-detail/:bookingItemId',
+          element: <BookingItemDetail />,
+        },
+        {
+          path: 'booking-item-detail-now/:bookingItemId',
+          element: <BookingItemDetailNow />,
+        },
         {
           path: 'booking-items',
           element: (
-            
             <Suspense>
-               {/* <BookingItemsPage /> */}
+              {/* <BookingItemsPage /> */}
               <RolesAuthRoute roles={['Staff']}>
                 <BookingItemsPage />
               </RolesAuthRoute>
@@ -333,7 +411,7 @@ export default function Router() {
           path: 'booking-item-no-session',
           element: (
             <Suspense>
-               {/* <BookingItemNoSe /> */}
+              {/* <BookingItemNoSe /> */}
               <RolesAuthRoute roles={['Staff']}>
                 <BookingItemNoSe />
               </RolesAuthRoute>
@@ -344,7 +422,7 @@ export default function Router() {
           path: 'booking-item-now',
           element: (
             <Suspense>
-               {/* <BookingItemNow /> */}
+              {/* <BookingItemNow /> */}
               <RolesAuthRoute roles={['Staff']}>
                 <BookingItemNow />
               </RolesAuthRoute>
@@ -371,14 +449,14 @@ export default function Router() {
     {
       element: <SimpleLayout />,
       children: [
-        { element: <Navigate to="/home" />, index: true },
+        { element: <Navigate to='/home' />, index: true },
         { path: '404', element: <Page404 /> },
-        { path: '*', element: <Navigate to="/404" /> },
+        { path: '*', element: <Navigate to='/404' /> },
       ],
     },
     {
       path: '*',
-      element: <Navigate to="/404" replace />,
+      element: <Navigate to='/404' replace />,
     },
   ]);
 
