@@ -51,7 +51,7 @@ export default function SingleProductDesktop({
                 </ProductFavButton> */}
         {(showOptions || matches) && (
           <ProductAddToCart
-
+            
             onClick={() => showProductDetailDialog()}
             show={showOptions}
             variant="contained"
@@ -74,7 +74,7 @@ export default function SingleProductDesktop({
           </Stack>
         </ProductActionsWrapper>
       </Product>
-      <ProductMeta product={products} />
+      <ProductMeta product={products } />
       <ProductDetailDialog product={products} />
     </>
   );

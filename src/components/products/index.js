@@ -29,15 +29,17 @@ export default function Products() {
         console.log(response.data.data.pagingData[0].realEstates.realEstateImages[0].image);
         const data = response.data.data.pagingData.map((item) => {
           // Perform null/undefined checks before accessing nested properties
+          const id = item.realEstates ? item.realEstates.id : "unkown";
           const name = item.realEstates ? item.realEstates.name : "Unknown Name";
           const image = item.realEstates && item.realEstates.realEstateImages ? item.realEstates.realEstateImages[0].image : "Unknown Image";
           const startDate = item.startDate;
           const endDate = item.endDate;
+          const startingPrice = item.startingPrice;
           // products.forEach((product) => {
           //   console.log(product.name);
           //   console.log(product.image);
           // });
-          return { name, image, startDate, endDate };
+          return {id, name, image, startDate, endDate, startingPrice };
         });
         // Map the fetched data to the products array
 
@@ -103,7 +105,7 @@ export default function Products() {
           productName={product.name}
           endDate={product.endDate}
           startDate={product.startDate}
-          //   startingPrice={product.startingPrice}
+          startingPrice={product.startingPrice}
           matches={matches}
         />
       ) : (
@@ -113,7 +115,7 @@ export default function Products() {
           productImage={product.image}
           endDate={product.endDate}
           startDate={product.startDate}
-          //   startingPrice={product.startingPrice}
+          startingPrice={product.startingPrice}
           matches={matches}
         />
       )}

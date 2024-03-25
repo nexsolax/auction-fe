@@ -85,7 +85,7 @@ export default function Router() {
     //   //   </RolesAuthRoute>
     //   // </Suspense>
     // ), },
-    { path: 'auction/:sessionId', element: (
+    { path: 'auction', element: (
       <Suspense>
         <RolesAuthRoute roles={['Admin', 'Staff', 'Member']}>
           <AuctionPage />

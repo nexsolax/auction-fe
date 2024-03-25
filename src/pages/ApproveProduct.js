@@ -27,9 +27,9 @@ export default function approveProduct(){
                 <Box display={"flex"} justifycontent={"center"} sx={{ p: 0.5 }}>
                     <Typography variant="h7"> </Typography>
                 </Box>
-                <Footer />
+                {/* <Footer />
                 <AppDrawer />
-                <SearchBox />
+                <SearchBox /> */}
             </UIProvider>
 
         </Container>
