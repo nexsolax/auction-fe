@@ -92,16 +92,7 @@ const AuctionForm = () => {
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
 
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     fetchAuctionData();
-  //     fetchSessionDetails();
-  //   }, 5000);
-
-  //   return () => {
-  //     clearInterval(interval);
-  //   };
-  // }, []);
+  
 
   useEffect(() => {
     // sendMessage();
@@ -112,57 +103,6 @@ const AuctionForm = () => {
     localStorage.setItem("currentDelayTime", currentDelayTime);
   }, [currentDelayTime]);
 
-  // useEffect(() => {
-  //   const connection = startConnection((data) => {
-  //     setAuctionData(data);
-  //   });
-
-  //   // Fetch initial data
-  //   fetchAuctionData();
-  //   fetchSessionDetails();
-
-  //   return () => {
-  //     connection.stop();
-  //   };
-  // }, []);
-
-  // Real time
-
-  // useEffect(() => {
-  //   const connect = new HubConnectionBuilder()
-  //     .withUrl("https://reasapiv2.azurewebsites.net/sessiondetailhub")
-  //     .withAutomaticReconnect()
-  //     .build();
-
-  //   setConnection(connect);
-  // }, []);
-
-  // useEffect(() => {
-  //   if (connection) {
-  //     connection
-  //       .start()
-  //       .then(async () => {
-  //         await connection.on("ReceiveMessage", async (message) => {
-  //           console.log("check2")
-  //           await fetchSessionDetails();
-  //           await fetchAuctionData();
-  //           console.log(message)
-
-  //         });
-  //       })
-  //       .catch((error) => console.log(error));
-  //   }
-  // }, [connection]);
-
-  // const sendMessage = async () => {
-  //   if (connection) {
-  //     await connection.send("SendMessage", inputText);
-  //     console.log("check1");
-  //     setInputText("send message");
-  //   }
-  // };
-
-  // end realtime
 
   const highestPriceDetail = sessionDetails.reduce(
     (maxDetail, detail) => {
