@@ -15,12 +15,12 @@ export default function ProductMeta({ product, matches }) {
       <ProductMetaWrapper>
         
         {/* <Typography variant={matches ? "h6" : "h5"} lineHeight={2}>
-          {product.sessionName}
-        </Typography> */}
-        {/* <Typography variant={matches ? "caption" : "body1"}>
+          {product.name}
+        </Typography>
+        <Typography variant={matches ? "caption" : "body1"}>
         Giá khởi Điểm : {product.startingPrice}
-        </Typography> */}
-        {/* <Typography variant={matches ? "caption" : "body1"}>
+        </Typography>
+        <Typography variant={matches ? "caption" : "body1"}>
         Thời Gian Bắt Đầu :  {formatCreateDate(product.startDate)}
         </Typography> */}
       </ProductMetaWrapper>

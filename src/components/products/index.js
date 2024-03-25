@@ -32,12 +32,14 @@ export default function Products() {
           const name = item.realEstates ? item.realEstates.name : "Unknown Name";
           const image = item.realEstates && item.realEstates.realEstateImages ? item.realEstates.realEstateImages[0].image : "Unknown Image";
           const startDate = item.startDate;
+          const id = item.id;
+          const status = item.status;
           const endDate = item.endDate;
           // products.forEach((product) => {
           //   console.log(product.name);
           //   console.log(product.image);
           // });
-          return { name, image, startDate, endDate };
+          return { name, id, status, image, startDate, endDate };
         });
         // Map the fetched data to the products array
 
@@ -97,6 +99,7 @@ export default function Products() {
   const endIndex = startIndex + productsPerPage;
   const currentProducts = filteredProducts.slice(startIndex, endIndex);
 
+
   const renderProducts = currentProducts.map((product) => (
     <Grid
       item
@@ -104,9 +107,9 @@ export default function Products() {
       xs={3}
       sm={4}
       md={4}
-      display="flex"
-      flexDirection={"column"}
-      alignItems="center"
+      display='flex'
+      flexDirection={'column'}
+      alignItems='center'
     >
       {matches ? (
         <SingleProducts
@@ -120,6 +123,7 @@ export default function Products() {
       ) : (
         <SingleProductDesktops
           id={product.id}
+          status={product.status}
           productName={product.name}
           productImage={product.image}
           endDate={product.endDate}

@@ -4,11 +4,11 @@ import Footer from "../components/footer";
 import { UIProvider } from '../context/ui';
 import AppDrawer from "../components/drawer";
 import SearchBox from "../components/search";
-import ApproveProductForm from "../components/approveproduct";
+import ViewEstateForm from "../components/view-estate";
 
 
 
-export default function approveProduct(){
+export default function viewEstate(){
     return(
         <Container
             maxWidth="xl"
@@ -20,16 +20,16 @@ export default function approveProduct(){
                 <Appbar />
 
                 <Box display={"flex"} flexDirection={'column'} alignItems="center" justifycontent={"center"} sx={{ p: 4 }}>
-                    <Typography variant="h4">Xác nhận nhà đất</Typography>
+                    <Typography variant="h4">Danh sách tài sản </Typography>
 
                 </Box>
-                <ApproveProductForm/>
+                <ViewEstateForm/>
                 <Box display={"flex"} justifycontent={"center"} sx={{ p: 0.5 }}>
                     <Typography variant="h7"> </Typography>
                 </Box>
-                {/* <Footer />
+                <Footer />
                 <AppDrawer />
-                <SearchBox /> */}
+                <SearchBox />
             </UIProvider>
 
         </Container>

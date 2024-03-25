@@ -35,3 +35,9 @@ function result(format, key = '.00') {
 
   return isInteger ? format.replace(key, '') : format;
 }
+
+export function moneyParser(money) {
+  // if (money === undefined || money === null) return '-';
+  const moneyString = money?.toString();
+  return moneyString?.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+}

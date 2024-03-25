@@ -33,31 +33,26 @@ const AutionDetailPage = () => {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [approveTime, setApproveTime] = useState("");
-  const [status, setStatus] = useState("");
+  // const [status, setStatus] = useState("");
   const [createByUserId, setCreateByUserId] = useState("");
   const [approveByUserId, setApproveByUserId] = useState("");
   const [realEstateId, setRealEstateId] = useState("");
   const [userBids, setUserBids] = useState([]);
-  const [realEstates, setRealEstates] = useState({
-    name: "",
-    address: "",
-    description: "",
-    approveTime: "",
-    status: "",
-    categoryId: "",
-    userId: "",
-    approveByUserId: "",
-    realEstateImages: [],
-    id: "",
-  });
+  const [name, setName] = useState("");
+  const [address, setAddress] = useState("");
+  const [description, setDescription] = useState("");
+  // const [approveTime, setApproveTime] = useState("");
+  const [status, setStatus] = useState("");
+  const [categoryId, setCategoryId] = useState("");
+  const [userId, setUserId] = useState("");
+  // const [approveByUserId, setApproveByUserId] = useState("");
+  const [realEstateImages, setRealEstateImages] = useState([]);
   const [id, setId] = useState("");
 
   const token = localStorage.getItem("token");
   const [error, setError] = useState();
   const [errorDialogOpen, setErrorDialogOpen] = useState(false);
   const [maxWidth, setMaxWidth] = React.useState("sm");
-
-  const api = `https://reasapiv2.azurewebsites.net/api/Aution/id`;
 
   const Product = styled(Card)(({ theme }) => ({
     display: "flex",
@@ -91,7 +86,7 @@ const AutionDetailPage = () => {
 
   const fetchAuctionData = async () => {
     try {
-      const response = await axios.get(api, {
+      const response = await axios.get(`https://reasapiv2.azurewebsites.net/api/Aution/id`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (response && response.data) {
@@ -286,7 +281,7 @@ const AutionDetailPage = () => {
                 </Grid>
               </Grid>
             </Grid>
-            <Grid container spacing={3}>
+            {/* <Grid container spacing={3}>
               {Object.entries(realEstates).map(([key, value]) => (
                 <Grid item xs={6} key={key}>
                   <TextField
@@ -302,7 +297,7 @@ const AutionDetailPage = () => {
                   />
                 </Grid>
               ))}
-            </Grid>
+            </Grid> */}
           </CardContent>
           <Dialog
             fullWidth
