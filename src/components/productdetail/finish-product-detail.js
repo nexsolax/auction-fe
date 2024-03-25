@@ -24,8 +24,8 @@ import AuctionForm from "../auction";
 
 
 
-function getTimeRemaining(endTime) {
-    const total = Date.parse(endTime) - Date.now();
+function getTimeRemaining(endDate) {
+    const total = Date.parse(endDate) - Date.now();
     const remainingTime = total > 0 ? total : 0;
 
     const seconds = Math.floor((remainingTime / 1000) % 60);
@@ -72,17 +72,17 @@ export default function FinishProductDetail({ open, onClose, product }) {
     const [isDialogOpen, setDialogOpen] = useState(false);
     const [AuctionDetailDialog, showAuctionDetailDialog, closeProductDialog] =
         useDialogModal(AuctionForm);
-    const [countdown, setCountdown] = useState(getTimeRemaining(product.beginTime));
+    const [countdown, setCountdown] = useState(getTimeRemaining(product.startingDate));
     useEffect(() => {
         const interval = setInterval(() => {
-            setCountdown(getTimeRemaining(product.beginTime));
+            setCountdown(getTimeRemaining(product.startingDate));
         }, 1000);
 
         // Cleanup the interval on unmount
         return () => {
             clearInterval(interval);
         };
-    }, [product.beginTime]);
+    }, [product.startingDate]);
 
     const user = localStorage.getItem('loginUser');
     const jsonUser = JSON.parse(user);
@@ -135,14 +135,13 @@ export default function FinishProductDetail({ open, onClose, product }) {
                         <ProductDetailInfoWrapper>
 
                             <Typography sx={{ lineHeight: 4 }} variant="h4">
-                                Tên Sản Phẩm : {product.itemName}
+                                Tên Sản Phẩm : {product.realEstates.name}
                             </Typography>
                             
-                            <Typography margin={'1%'} variant="subtitle">Mô tả : {product.description} VND</Typography>
-                            <Typography margin={'1%'} variant="subtitle">Giá Cuối Cùng : {formatToVND(product.finalPrice)}</Typography>
-                            <Typography margin={'1%'} variant="subtitle">Thời gian bắt đầu : {formatCreateDate(product.beginTime)}</Typography>
-                            <Typography margin={'1%'} variant="subtitle">Thời gian đấu giá : {formatCreateDate(product.auctionTime)}</Typography>
-                            <Typography margin={'1%'} variant="subtitle">Thời gian Kết thúc : {formatCreateDate(product.endTime)}</Typography>
+                            {/* <Typography margin={'1%'} variant="subtitle">Mô tả : {product.description} VND</Typography>
+                            <Typography margin={'1%'} variant="subtitle">Giá Cuối Cùng : {formatToVND(product.finalPrice)}</Typography> */}
+                            <Typography margin={'1%'} variant="subtitle">Thời gian bắt đầu : {formatCreateDate(product.startingDate)}</Typography>
+                            <Typography margin={'1%'} variant="subtitle">Thời gian Kết thúc : {formatCreateDate(product.endDate)}</Typography>
 
                         
                             

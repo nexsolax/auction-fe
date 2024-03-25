@@ -79,12 +79,12 @@ import {
               <Typography variant="subtitle">SKU: 123</Typography>
               <Typography variant="subtitle">Availability: 5 in stock</Typography>
               <Typography sx={{ lineHeight: 2 }} variant="h4">
-                {product?.itemName}
+                {product?.startingPrice}
               </Typography>
               <Typography variant="body">
-                {product?.quantity}
-                {product?.description}
-                {product?.description}
+              {product?.realEstates.name}
+                {product?.starDate}
+                {product?.endDate}
               </Typography>
               <Box
                 sx={{ mt: 4 }}

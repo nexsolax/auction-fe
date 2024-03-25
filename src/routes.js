@@ -68,6 +68,9 @@ import PaymentUserDetail from './sections/@dashboard/user/PaymentUserDetail';
 import StaffProfile from './sections/staff/StaffProfile';
 import UpdateItem from './pages/UpdateItem';
 import ReItem from './pages/ReItem';
+import AddAuction from './pages/AddAuction';
+import ApproveProduct from './pages/ApproveProduct';
+import ApproveAuction from './pages/ApproveAuction';
 
 
 // ----------------------------------------------------------------------
@@ -100,8 +103,24 @@ export default function Router() {
     { path: 'profile', element: (
       <Suspense>
              {/* <Profile /> */}
-        <RolesAuthRoute roles={['Member']}>
+        <RolesAuthRoute roles={['Member','Staff','Admin']}>
           <Profile />
+        </RolesAuthRoute>
+      </Suspense>
+    ), },
+    { path: 'approve-product', element: (
+      <Suspense>
+             {/* <Profile /> */}
+        <RolesAuthRoute roles={['Member','Staff','Admin']}>
+          <ApproveProduct />
+        </RolesAuthRoute>
+      </Suspense>
+    ), },
+    { path: 'approve-auction', element: (
+      <Suspense>
+             {/* <Profile /> */}
+        <RolesAuthRoute roles={['Member','Staff','Admin']}>
+          <ApproveAuction />
         </RolesAuthRoute>
       </Suspense>
     ), },
@@ -184,7 +203,14 @@ export default function Router() {
       </Suspense>
     ), },
     { path: 'test', element: <Test /> },
-
+    { path: 'createauction', element: (
+      <Suspense>
+        <RolesAuthRoute roles={['Admin', 'Staff','Member']}>
+          <AddAuction/>
+        </RolesAuthRoute>
+      </Suspense>
+    ), },
+    { path: 'test', element: <Test /> },
     
     {
       path: '/dashboard',
@@ -199,6 +225,7 @@ export default function Router() {
       children: [
         { element: <Navigate to="/dashboard/app" />, index: true },
 
+
         { path: 'app', element: <DashboardAppPage /> },
         {
           path: 'user',
@@ -212,8 +239,8 @@ export default function Router() {
         { path: 'user-waiting-detail/:userId', element: <UserWaitingDetail /> },
         { path: 'user-ban-detail/:userId', element: <UserBanDetail /> },
         { path: 'staff-profile', element: <StaffProfile /> },
-        // { path: 'products', element: <ProductsPage /> },
-        // { path: 'blog', element: <BlogPage /> },
+        { path: 'products', element: <ProductsPage /> },
+        { path: 'blog', element: <BlogPage /> },
         {
           path: 'staff',
           element: (

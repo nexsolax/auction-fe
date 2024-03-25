@@ -7,10 +7,42 @@ import ThemeProvider from './theme';
 // components
 import { StyledChart } from './components/chart';
 import ScrollToTop from './components/scroll-to-top';
+import React, { useState, useEffect } from 'react';
 
 // ----------------------------------------------------------------------
 
 export default function App() {
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // useEffect(() => {
+  //   const checkLoginStatus = () => {
+  //     // Kiểm tra xem đã lưu token đăng nhập trong local storage chưa
+  //     const storedToken = localStorage.getItem('loginUser');
+  //     if (storedToken) {
+  //       setIsLoggedIn(true);
+  //     }
+  //   };
+
+  //   // Kiểm tra trạng thái đăng nhập khi component được load
+  //   checkLoginStatus();
+
+  //   const handleBeforeUnload = () => {
+  //     // Nếu đăng nhập thành công và người dùng đang tắt trang, thì xóa token và đăng xuất
+  //     if (isLoggedIn) {
+  //       localStorage.removeItem('loginUser');
+  //       setIsLoggedIn(false);
+  //     }
+  //   };
+
+  //   window.addEventListener('beforeunload', handleBeforeUnload);
+
+  //   return () => {
+  //     window.removeEventListener('beforeunload', handleBeforeUnload);
+  //   };
+  // }, [isLoggedIn]);
+
+  // Hàm xử lý logout
+  
   return (
     <HelmetProvider>
       <BrowserRouter>

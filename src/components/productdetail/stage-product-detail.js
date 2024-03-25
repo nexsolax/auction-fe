@@ -311,7 +311,7 @@ export default function StageProductDetail({ open, onClose, product }) {
                                     justifycontent: "space-between",
                                 }}>
                                     <Typography margin={'1%'} color={"#696969"} align="left" variant="subtitle">Giá khởi Điểm :  </Typography>
-                                    <Typography margin={'1%'} align="right" color={"#B41712"} variant="subtitle"> {formatToVND(product.firstPrice)} </Typography>
+                                    <Typography margin={'1%'} align="right" color={"#B41712"} variant="subtitle"> {formatToVND(product.startingPrice)} </Typography>
                                 </Typography>
                                 <Typography sx={{
                                     display: "flex",
@@ -320,7 +320,7 @@ export default function StageProductDetail({ open, onClose, product }) {
                                     <Typography margin={'1%'} color={"#696969"} align="left" variant="subtitle">Phí Tham Gia Đấu Giá:  </Typography>
                                     <Typography margin={'1%'} align="right" color={"#B41712"} variant="subtitle"> {formatToVND(
                                         Math.min(
-                                            Math.max(product.participationFee * product.firstPrice, 10000),
+                                            Math.max(product.participationFee * product.startingPrice, 10000),
                                             200000
                                         )
                                     )} </Typography>
@@ -330,7 +330,7 @@ export default function StageProductDetail({ open, onClose, product }) {
                                     justifycontent: "space-between",
                                 }}>
                                     <Typography margin={'1%'} color={"#696969"} align="left" variant="subtitle">Tiền Đặt Cọc:  </Typography>
-                                    <Typography margin={'1%'} align="right" color={"#B41712"} variant="subtitle">{ product.deposit ? (formatToVND(product.depositFee * product.firstPrice)):("0")}</Typography>
+                                    <Typography margin={'1%'} align="right" color={"#B41712"} variant="subtitle">{ product.deposit ? (formatToVND(product.depositFee * product.startingPrice)):("0")}</Typography>
                                 </Typography>
                                 <Typography sx={{
                                     display: "flex",
@@ -382,7 +382,7 @@ export default function StageProductDetail({ open, onClose, product }) {
                                     <Typography color={"#696969"} align="left" variant="subtitle">Thời gian Kết thúc :  </Typography>
                                     <Typography align="right" color={"#B41712"} variant="subtitle"> {formatCreateDate(product.endTime)} </Typography>
                                 </Typography>
-                                {/* <Typography margin={'1%'} variant="subtitle">Giá khởi Điểm : {formatToVND(product.firstPrice)}</Typography>
+                                {/* <Typography margin={'1%'} variant="subtitle">Giá khởi Điểm : {formatToVND(product.startingPrice)}</Typography>
                                 <Typography margin={'1%'} variant="subtitle">Bước Giá : {formatToVND(product.stepPrice)}</Typography>
                                 <Typography margin={'1%'} variant="subtitle">Giá hiện tại : {formatToVND(product.finalPrice)}</Typography>
                                 <Typography margin={'1%'} variant="subtitle">Thời gian bắt đầu : {formatCreateDate(product.beginTime)}</Typography>
@@ -517,7 +517,7 @@ export default function StageProductDetail({ open, onClose, product }) {
                                     <Typography margin={'1%'} align="inherit" variant="subtitle1">Phí Tham Gia Đấu Giá</Typography>
                                     <Typography margin={'1%'} align="right" variant="subtitle1">{formatToVND(
                                         Math.min(
-                                            Math.max(product.participationFee * product.firstPrice, 10000),
+                                            Math.max(product.participationFee * product.startingPrice, 10000),
                                             200000
                                         )
                                     )}</Typography>
@@ -528,7 +528,7 @@ export default function StageProductDetail({ open, onClose, product }) {
                                     
                                     
                                     {selectedItem?.deposit ? (
-                                        (selectedItem?.firstPrice * selectedItem?.depositFee).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })
+                                        (selectedItem?.startingPrice * selectedItem?.depositFee).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })
                                     ) : (
                                         "--"
                                     )}
@@ -546,14 +546,14 @@ export default function StageProductDetail({ open, onClose, product }) {
                                     {product?.deposit ? (
                                         formatToVND(
                                             Math.min(
-                                                Math.max(product.participationFee * product.firstPrice, 10000),
+                                                Math.max(product.participationFee * product.startingPrice, 10000),
                                                 200000
-                                            ) + (selectedItem?.depositFee * selectedItem?.firstPrice)
+                                            ) + (selectedItem?.depositFee * selectedItem?.startingPrice)
                                         )
                                     ) : (
                                         formatToVND(
                                             Math.min(
-                                                Math.max(product.participationFee * product.firstPrice, 10000),
+                                                Math.max(product.participationFee * product.startingPrice, 10000),
                                                 200000
                                             ) 
                                         )
@@ -579,14 +579,14 @@ export default function StageProductDetail({ open, onClose, product }) {
                                 {product?.deposit ? (
                                          formatToVND(
                                             Math.min(
-                                                Math.max(product?.participationFee * product?.firstPrice, 10000),
+                                                Math.max(product?.participationFee * product?.startingPrice, 10000),
                                                 200000
-                                            ) + (selectedItem?.depositFee * selectedItem?.firstPrice)
+                                            ) + (selectedItem?.depositFee * selectedItem?.startingPrice)
                                         )
                                     ) : (
                                         formatToVND(
                                             Math.min(
-                                                Math.max(product.participationFee * product.firstPrice, 10000),
+                                                Math.max(product.participationFee * product.startingPrice, 10000),
                                                 200000
                                             )
                                         )

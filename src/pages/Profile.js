@@ -6,6 +6,7 @@ import AppDrawer from '../components/drawer';
 import SearchBox from "../components/search";
 import ProfilePage from "../components/profile";
 import Cart from '../components/cart';
+import DashboardAppPage from "./DashboardAppPage";
 
 
 
@@ -25,13 +26,16 @@ function Profile() {
                     <Typography variant="h4">Thông Tin Tài Khoản</Typography>
 
                 </Box>
+
                 <ProfilePage />
+                <DashboardAppPage/>
                 <Cart/>
                 <AppDrawer />
                 <Footer />
                 <AppDrawer />
                 <SearchBox />
                 </UIProvider>
+                
 
 
         </Container>

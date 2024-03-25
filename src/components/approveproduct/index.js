@@ -20,15 +20,11 @@ import {
   Grid,
 } from "@mui/material";
 import axios from "axios";
-import { jwtDecode } from "jwt-decode";
 
-const AddProductForm = () => {
-  const [itemName, setItemName] = useState("");
-  const [description, setDescription] = useState("");
-  const [categories, setCategories] = useState("");
-  const [categoryId, setCategoryId] = useState("");
-  const [address, setAddress] = useState("");
-  // const [image, setImage] = useState([]);
+const ApproveProductForm = () => {
+  const [realEstateId, setRealEstateId] = useState("");
+  const [RealEstates, setRealEstates] = useState("");
+
   const [loading, setLoading] = useState(false);
   const [successDialogOpen, setSuccessDialogOpen] = useState(false);
   const [errorDialogOpen, setErrorDialogOpen] = useState(false);
@@ -37,78 +33,57 @@ const AddProductForm = () => {
   const user = localStorage.getItem("loginUser");
   const jsonUser = JSON.parse(user);
   const theme = useTheme();
-  const decode = jwtDecode(token);
-  const [image, setImage ] = useState("");
+
   
   useEffect(() => {
     axios
-      .get("https://reasapiv2.azurewebsites.net/api/Category", {
+      .get("https://reasapiv2.azurewebsites.net/api/RealEstate", {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
         if (response.data && Array.isArray(response.data.data.pagingData)) {
-          // Assuming the data structure contains category objects with 'id' and 'name'
-          const categoriesData = response.data.data.pagingData.reduce((acc, category) => {
-            if (category.id && category.name) {
-              acc[category.id] = category.name;
-            } else {
-              console.error("Invalid category data:", category);
-            }
-            return acc;
-          }, {});
-          setCategories(categoriesData);
-          console.log(categories);
+          const estateData = response.data.data.pagingData.reduce(
+            (acc, realEstate) => {
+              if (realEstate.id && realEstate.name) {
+                acc[realEstate.id] = realEstate.name;
+              } else {
+                console.error("Invalid realEstate data:", realEstate);
+              }
+              return acc;
+            },
+            {}
+          );
+          setRealEstates(estateData);
         } else {
           console.error("Invalid response data format:", response.data);
           setError("Invalid response data format. Please try again later.");
         }
       })
       .catch((error) => {
-        console.error("Error fetching categories:", error);
-        setError("Error fetching categories. Please try again later.");
+        console.error("Error fetching realEstates:", error);
+        setError("Error fetching realEstates. Please try again later.");
       })
       .finally(() => setLoading(false));
   }, []);
 
-  const handleCategoryChange = (event) => {
-    setCategoryId(event.target.value);
+  const handleEstateChange = (event) => {
+    setRealEstateId(event.target.value);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     setLoading(true);
-    const formData = new FormData();
-    formData.append("name", itemName);
-    formData.append("address", address);
-    formData.append("description", description);
-    formData.append("categoryId", categoryId);
-    // image.forEach((img) => {
-    //   formData.append("image", img);
-
-
-    // })
-    formData.append("Images", image);
-
-    // axios({
-    //   method: "post",
-    //   url: "myurl",
-    //   data: bodyFormData,
-    //   headers: { "Content-Type": "multipart/form-data" },
-    // })
-
+    const formData = {
+      isApproved: true
+    };
     axios
     ({
-      method: "post",
-      url: "https://reasapiv2.azurewebsites.net/api/RealEstate",
+      method: "put",
+      url: `https://reasapiv2.azurewebsites.net/api/RealEstate/${realEstateId}/approve`,
       data: formData,
-      headers: { Authorization: `Bearer ${token}`, 'content-type': 'multipart/form-data' },
+      headers: { Authorization: `Bearer ${token}`, 'content-type': 'application/json' },
     })
-      // .post("https://reasapiv2.azurewebsites.net/api/RealEstate", formData, {
-      //   headers: { Authorization: `Bearer ${token}`, 'content-type': 'multipart/form-data' },
-    
-      
       .then((response) => {
-
         setSuccessDialogOpen(true);
       })
       .catch((error) => {
@@ -123,11 +98,7 @@ const AddProductForm = () => {
   const handleSuccessDialogClose = () => {
     setSuccessDialogOpen(false);
     // Reset form fields after successful submission if needed
-    setItemName("");
-    setAddress("");
-    setDescription("");
-    setCategoryId("");
-    setImage([]);
+    setRealEstateId("");   
   };
 
   const handleErrorDialogClose = () => {
@@ -153,39 +124,14 @@ const AddProductForm = () => {
       }}
       onSubmit={handleSubmit}
     >
-      <TextField
-        label="Name"
-        value={itemName}
-        onChange={(event) => setItemName(event.target.value)}
-        fullWidth
-        required
-        margin="normal"
-      />
-      <TextField
-        label="Address"
-        value={address}
-        onChange={(event) => setAddress(event.target.value)}
-        fullWidth
-        required
-        margin="normal"
-      />
-      <TextField
-        label="Description"
-        value={description}
-        onChange={(event) => setDescription(event.target.value)}
-        fullWidth
-        required
-        margin="normal"
-        multiline
-        rows={4}
-      />
+      
       <FormControl fullWidth required margin="normal">
-        <InputLabel>Category</InputLabel>
-        <Select value={categoryId} onChange={handleCategoryChange}>
-          {Object.keys(categories).length > 0 ? (
-            Object.keys(categories).map((categoryId) => (
-              <MenuItem key={categoryId} value={categoryId}>
-                {categories[categoryId]} {/* Displaying category name */}
+        <InputLabel>RealEstate</InputLabel>
+        <Select value={realEstateId} onChange={handleEstateChange}>
+          {Object.keys(RealEstates).length > 0 ? (
+            Object.keys(RealEstates).map((realEstateId) => (
+              <MenuItem key={realEstateId} value={realEstateId}>
+                {RealEstates[realEstateId]} {/* Displaying estate name */}
               </MenuItem>
             ))
           ) : (
@@ -194,13 +140,7 @@ const AddProductForm = () => {
         </Select>
       </FormControl>
 
-      <input
-        // type="file"
-        // onChange={(event) => setImage([...event.target.files[0]])}
-        multiple
-        accept="image/*"
-        type="file" onChange= {(e)=> setImage(e.target.files[0])}
-      />
+      
       <Button
         variant="contained"
         color="primary"
@@ -212,7 +152,7 @@ const AddProductForm = () => {
         {loading ? (
           <CircularProgress color="inherit" size={24} />
         ) : (
-          "Add Product"
+          "Approve estate"
         )}
       </Button>
       <Dialog open={successDialogOpen} onClose={handleSuccessDialogClose}>
@@ -220,11 +160,11 @@ const AddProductForm = () => {
           <TaskAltIcon />
         </DialogTitle>
         <DialogTitle variant="h3" align="center">
-          Product Added Successfully
+          Product Approved Successfully
         </DialogTitle>
         <DialogContent>
           <Typography align="center" variant="subtitle2">
-            Your product has been successfully added.
+            Your product has been successfully approved.
           </Typography>
         </DialogContent>
         <DialogActions>
@@ -256,4 +196,4 @@ const AddProductForm = () => {
   );
 };
 
-export default AddProductForm;
+export default ApproveProductForm;
