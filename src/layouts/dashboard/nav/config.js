@@ -21,8 +21,8 @@ const navConfig = [
     role: ['Admin', 'Staff','Member'],
   },
   {
-    title: 'Thêm tài sản',
-    path: '/additem',
+    title: 'Xem tài sản',
+    path: '/viewitem',
     icon: icon('ic_analytics'),
     role: ['Admin', 'Staff','Member'],
   },

@@ -71,6 +71,7 @@ import ReItem from './pages/ReItem';
 import AddAuction from './pages/AddAuction';
 import ApproveProduct from './pages/ApproveProduct';
 import ApproveAuction from './pages/ApproveAuction';
+import ViewEstate from './pages/ViewEstate';
 
 
 // ----------------------------------------------------------------------
@@ -93,6 +94,7 @@ export default function Router() {
     ), },
     { path: 'signup', element: <SignUp /> },
     { path: 'additem', element:  <AddProduct />},
+    { path: 'viewitem', element: <ViewEstate/>},
     //  (
     //   <Suspense>
     //     <RolesAuthRoute roles={['User']}>
