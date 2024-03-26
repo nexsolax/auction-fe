@@ -91,72 +91,7 @@ const ProfilePage = () => {
     };
 
 
-    // const handleUpdatePalpay = () => {
-    //     setIsUpdating(true);
-    //     const userId = jsonUser.Id;
-    //     const payPalAccount = rePaypalAccount.current.value;
-    //     console.log(payPalAccount);
-    //     const requestbody = {
-    //         userId, payPalAccount,
-    //     };
-    //     axios
-    //         .put(apiUpdatePaypal, requestbody, {
-    //             headers: { Authorization: `Bearer ${token}` },
-    //         })
-    //         .then((response) => {
-    //             // Handle the response (success or failure)
-    //             // You can add your logic here, e.g., show a success message
-    //             setDialogMessage("Tài Khoản paypal của bạn đã được cập nhật thành công");
-    //             setDialogOpen(true);
-    //             console.log('PUT request successful:', response);
-    //             setIsUpdating(false);
-    //         })
-    //         .catch((error) => {
-    //             // Set the error message in the state
-    //             setError(error?.response?.data || 'An error occurred.');
-
-    //             // Open the error dialog
-    //             setErrorDialogOpen(true);
-    //             setIsUpdating(false);
-    //             console.error('Error making PUT request:', error);
-    //         });
-    // }
-
-    // const handleUpdateInfo = () => {
-    //     setIsUpdating(true);
-    //     const userId = jsonUser.Id;
-    //     const userName = reUserName.current.value;
-    //     const address = reAddress.current.value;
-    //     const phone = rePhone.current.value;
-    //     const password = profileData?.password;
-    //     const avatar = profileData?.avatar;
-    //     const requestBody = {
-    //         userId, userName, password, address, phone, avatar
-    //     };
-    //     axios
-    //         .put(apiUpdateInfo, requestBody, {
-    //             headers: { Authorization: `Bearer ${decoded}` },
-    //         })
-    //         .then((response) => {
-    //             // Handle the response (success or failure)
-    //             // You can add your logic here, e.g., show a success message
-    //             // handleUpdatePalpay();
-    //             setDialogMessage("Thông tin cá nhân của bạn đã được cập nhật thành công");
-    //             setDialogOpen(true);
-    //             console.log('PUT request successful:', response);
-    //             setIsUpdating(false);
-    //             console.log('PUT request successful:', response);
-    //         })
-    //         .catch((error) => {
-    //             // Set the error message in the state
-    //             setError(error?.response?.data || 'An error occurred.');
-
-    //             // Open the error dialog
-    //             setErrorDialogOpen(true);
-    //             setIsUpdating(false);
-    //             console.error('Error making PUT request:', error);
-    //         });
-    // }
+    
 
     const formatProfileData = (data) => {
         const formattedDateOfBirth = formatDate(data.dateOfBirth);
@@ -201,61 +136,6 @@ const ProfilePage = () => {
         console.log(jsonUser.id);
         console.log(decoded);
     }, []);
-
-    
-
-
-
-    // const handleChangePassword = async () => {
-
-    //     try {
-    //         const oldPasswordValue = oldPasswordRef.current.value;
-    //         const newPasswordValue = newPasswordRef.current.value;
-    //         const reNewPasswordValue = reNewPassword.current.value;
-
-    //         // Validate that the new password matches the re-entered password
-    //         if (newPasswordValue !== reNewPasswordValue) {
-    //             setPasswordMatchError(true);
-    //             return;
-    //         }
-
-    //         if (newPasswordValue.length < 8) {
-    //             setPasswordMatchError(false); // Reset the match error
-    //             setPasswordError(true); // Set a new error for password length
-    //             return;
-    //         }
-    //         // Validate the old password before making the API call
-    //         if (oldPasswordValue !== profileData.data.password) {
-    //             setPasswordError(true);
-    //             return;
-    //         }
-    //         if (!oldPasswordValue || !newPasswordValue || !reNewPasswordValue) {
-    //             // Handle the case where any of the fields are empty
-    //             // You can display an error message or handle it as needed
-    //             // For now, let's just return and do nothing
-    //             return;
-    //         }
-
-    //         // Make the PUT request to update the password
-    //         await axios.put(
-    //             ChangePasswordApi,
-    //             { id: jsonUser.Id, newPassword: newPasswordValue, oldPassword: oldPasswordValue },
-    //             { headers: { Authorization: `Bearer ${token}` } }
-    //         );
-
-    //         // Close the dialog and clear the form fields after successful password change
-    //         setOpen(false);
-    //         oldPasswordRef.current.value = '';
-    //         newPasswordRef.current.value = '';
-    //         setDialogMessage('Mật khẩu đã thay đổi thành công!');
-    //         setDialogOpen(true);
-    //     } catch (error) {
-    //         setError('Không đổi được mật khẩu. Vui lòng thử lại.');
-    //         setErrorDialogOpen(true)
-    //         console.log('Lỗi đổi mật khẩu:', error);
-    //         setDialogOpen(true);
-    //     }
-    // };
 
 
     if (profileData && profileData.data && profileData.data.avatar) {
@@ -333,31 +213,7 @@ const ProfilePage = () => {
                       </Grid>
                     </Grid>
       
-                    {/* <Grid container sx={{marginTop:"25px" , marginLeft:"3%"}}>
-                              <Grid xs={8}>
-                                  <TextField
-                                      label="Tài Khoản Ngan hang"
-                                      fullWidth
-                                      defaultValue={profileData?.payPalAccount?.[0]?.payPalAccount || ''}
-                                      inputRef={rePaypalAccount}
-      
-                                  />
-      
-                              </Grid>
-                              <Grid xs={4}>
-                                  <Button
-                                      // onClick={handleUpdatePalpay}
-                                      sx={{ marginLeft: "5%" , marginTop:"3%"}}
-                                      variant='contained'
-                                      color="primary"
-                                      style={{ width: "150px" }}
-                                      disabled={isUpdating} // Disable the button when updating
-                                  >
-                                      {isUpdating ? <CircularProgress size={24} color="inherit" /> : 'Cập Nhập'}
-                                  </Button>
-                              </Grid>
-                          </Grid> */}
-      
+                  
                     <Grid
                       container
                       spacing={3}
@@ -395,25 +251,7 @@ const ProfilePage = () => {
                       spacing={3}
                       sx={{ marginTop: "5px", marginLeft: "2px" }}
                     >
-                      {/* <Grid item xs={6}>
-                        <TextField
-                          label="Ngày Sinh"
-                          InputLabelProps={{ shrink: true }}
-                          type="date"
-                          fullWidth
-                          value={profileData.data.dateOfBirth || ""}
-                        />
-                      </Grid>
-                      <Grid item xs={6}>
-                        <TextField
-                          disabled
-                          label="Ngày Tạo"
-                          InputLabelProps={{ shrink: true }}
-                          type="date"
-                          fullWidth
-                          value={profileData.data.createDate || ""}
-                        />
-                      </Grid> */}
+                     
                     </Grid>
       
                     <Grid item xs={12} sm={6}>
@@ -442,33 +280,10 @@ const ProfilePage = () => {
                         }}
                       />
                     </Grid>
-                    {/* <Grid item xs={12}>
-                              <Button
-                                  // onClick={handleUpdateInfo}
-                                  sx={{ marginLeft: "40%" }}
-                                  variant='contained'
-                                  color="primary"
-                                  style={{ width: "150px" }}
-                                  disabled={isUpdating} // Disable the button when updating
-                              >
-                                  {isUpdating ? <CircularProgress size={24} color="inherit" /> : 'Cập Nhập'}
-                              </Button>
-                          </Grid> */}
+                    
                   </Grid>
                 </CardContent>
-      
-                {/* <Dialog fullWidth maxWidth={maxWidth} open={dialogOpen} onClose={handleCloseSuccessDialog}>
-                      <DialogTitle sx={{ marginTop: '25px', textAlign: 'center', }}> <TaskAltIcon style={styles.TaskAltIcon} /> </DialogTitle>
-                      <DialogTitle align='center' variant='h4'>Thành Công</DialogTitle>
-                      <DialogContent>
-                          <Typography align='center' variant="subtitle2">{dialogMessage}</Typography>
-                      </DialogContent>
-                      <DialogActions>
-                          <Button onClick={handleCloseSuccessDialog} color="primary">
-                              Đóng
-                          </Button>
-                      </DialogActions>
-                  </Dialog> */}
+    
       
                 <Dialog open={open} onClose={handleCloseDialog}>
                   <DialogContent>
@@ -512,12 +327,7 @@ const ProfilePage = () => {
                   </DialogContent>
       
                   <DialogActions>
-                    {/* <Button onClick={handleCloseDialog} color="secondary">
-                              Thoát
-                          </Button>
-                          <Button onClick={handleChangePassword} color="primary">
-                              Đồng ý
-                          </Button> */}
+
                   </DialogActions>
                 </Dialog>
       
