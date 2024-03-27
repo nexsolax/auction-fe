@@ -39,7 +39,7 @@ import StaffProfile from './sections/staff/StaffProfile';
 import AddAuction from './pages/AddAuction';
 import ApproveProduct from './pages/ApproveProduct';
 import ApproveAuction from './pages/ApproveAuction';
-import AutionDetail from './pages/dev/AutionDetail';
+import AuctionDetail from './pages/AuctionDetail';
 import OpenAuction from './pages/OpenAuction';
 import CloseAuction from './pages/CloseAuction';
 import ViewEstate from './pages/ViewEstate';
@@ -175,7 +175,7 @@ export default function Router() {
       element: (
         <Suspense>
           <RolesAuthRoute roles={['Admin', 'Staff', 'Member']}>
-            <AutionDetail />
+            <AuctionDetail />
           </RolesAuthRoute>
         </Suspense>
       ),

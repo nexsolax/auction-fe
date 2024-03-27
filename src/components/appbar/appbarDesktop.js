@@ -76,7 +76,7 @@ export default function AppbarDesktop({ matches }) {
                     
                 </Menu>
                 {/* Continue with other list items */}
-                {role === "Admin" || role === "Member" || role === "Staff"? (
+                {role === "Member" ? (
                     <>
                         <ListItemButton >
                             <StyledLink component="a" href="/additem" underline="none" color="inherit">
@@ -88,17 +88,11 @@ export default function AppbarDesktop({ matches }) {
                                 <ListItemText primary="Tài Sản Của Tôi" />
                             </StyledLink>
                         </ListItemButton>
-                        <ListItemButton  >
-                            <StyledLink component="a" href="/myhistory" underline="none" color="inherit">
-                                <ListItemText primary="Lịch Sử Đấu Giá" />
-                            </StyledLink>
-                        </ListItemButton>
+                        
                     </>
                 ) : (
                     <>
-                        <ListItemText primary="Tin Tức" />
-                        <ListItemText primary="Giới Thiệu" />
-                        <ListItemText primary="Liên Hệ" />
+                        
                     </>
                 )}
                 <ListItemButton justifycont onClick={() => setShowSearchBox(true)}>
