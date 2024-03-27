@@ -14,7 +14,7 @@ export default function StageProductMeta({ product, matches }) {
     return (
       <ProductMetaWrapper>
         
-        <Typography variant={matches ? "h6" : "h5"} lineHeight={2}>
+        {/* <Typography variant={matches ? "h6" : "h5"} lineHeight={2}>
           {product.sessionName}
         </Typography>
         <Typography variant={matches ? "caption" : "body1"}>
@@ -22,7 +22,7 @@ export default function StageProductMeta({ product, matches }) {
         </Typography>
         <Typography variant={matches ? "caption" : "body1"}>
         Thời Gian Bắt Đầu : {formatCreateDate(product.beginTime)}
-        </Typography>
+        </Typography> */}
       </ProductMetaWrapper>
     );
 }

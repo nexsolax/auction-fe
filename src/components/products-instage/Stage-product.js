@@ -19,7 +19,7 @@ export default function StageProducts() {
     const matches = useMediaQuery(theme.breakpoints.down("md"));
     const [searchQuery, setSearchQuery] = useState("");
     const [filteredProducts, setFilteredProducts] = useState([]);
-    const [productss, setProductss] = useState([]);
+    const [products, setProducts] = useState([]);
     const token = localStorage.getItem('token');
     const [currentPage, setCurrentPage] = useState(1)
 
@@ -29,10 +29,21 @@ export default function StageProducts() {
             headers: { Authorization: `Bearer ${token}` },
         })
             .then(response => {
-                const data = response.data.data.pagingData;
-                // Map the fetched data to the products array
-                console.log(data)
-                setProductss(data)
+                const data = response.data.data.pagingData.map((item) => {
+                    // Perform null/undefined checks before accessing nested properties
+                    const name = item.realEstates ? item.realEstates.name : "Unknown Name";
+                    const image = item.realEstates && item.realEstates.realEstateImages ? item.realEstates.realEstateImages[0].image : "Unknown Image";
+                    const startDate = item.startDate;
+                    const id = item.id;
+                    const status = item.status;
+                    const endDate = item.endDate;
+                    // products.forEach((product) => {
+                    //   console.log(product.name);
+                    //   console.log(product.image);
+                    // });
+                    return { name, id, status, image, startDate, endDate };
+                  });
+                  setProducts(data);
             })
             .catch(error => {
                 console.error('Error fetching data:', error);
@@ -41,12 +52,21 @@ export default function StageProducts() {
 
     useEffect(() => {
         // Filter products based on searchQuery
-        const filtered = productss.filter((product) =>
-            product.sessionName.toLowerCase().includes(searchQuery.toLowerCase())
-        );
-        setFilteredProducts(filtered);
+        if (products.length > 0) {
+          const filtered = products.filter(
+            (product) =>
+              product.name &&
+              searchQuery &&
+              product.name.toLowerCase().includes(searchQuery.toLowerCase())
+          );
+          console.log(filtered);
+          setFilteredProducts(products);
+          // setSearchQuery(filtered);
+        }
+    
+        // Reset currentPage to 1 when searchQuery changes
         setCurrentPage(1);
-    }, [searchQuery, productss]);
+      }, [searchQuery, products]);
 
     const productsPerPage = 3; // Number of products to display per page
     const pageCount = Math.ceil(filteredProducts.length / productsPerPage);
@@ -78,7 +98,16 @@ export default function StageProducts() {
             {matches ? (
                 <StageSingleProducts product={product} matches={matches} />
             ) : (
-                <StageSingleProductDesktop product={product} matches={matches} />
+                <StageSingleProductDesktop
+                id={product.id}
+                status={product.status}
+                productName={product.name}
+                productImage={product.image}
+                endDate={product.endDate}
+                startDate={product.startDate}
+                //   startingPrice={product.startingPrice}
+                matches={matches}
+              />
             )}
         </Grid>
     ));
