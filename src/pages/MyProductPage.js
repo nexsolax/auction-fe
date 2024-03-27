@@ -12,7 +12,7 @@ import SearchBox from '../components/search';
 import StageProducts from '../components/products-instage/Stage-product';
 import MyProductForm from '../components/myproduct';
 import { Colors } from "../style/theme";
-import Cart from '../components/cart';
+
 
 
 
@@ -35,7 +35,6 @@ const Image ="https://images.unsplash.com/photo-1644989787501-1397b3231a19?ixlib
                 <Box display={"flex"} sx={{ p: 1 }}>
                     <Typography variant="h5"> </Typography>
                 </Box>
-                <Cart/>
                 <Footer />
                 <AppDrawer />
                 <SearchBox/>

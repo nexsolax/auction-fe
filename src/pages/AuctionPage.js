@@ -5,8 +5,6 @@ import { UIProvider } from '../context/ui';
 import AppDrawer from "../components/drawer";
 import SearchBox from "../components/search";
 import AuctionForm from "../components/auction";
-import Cart from "../components/cart";
-
 
 
 export default function AuctionPage(){
@@ -23,7 +21,7 @@ export default function AuctionPage(){
                 <Typography>
                     <h1> </h1>
                 </Typography>
-                <Cart/>
+
                 <Footer />
                 <AppDrawer />
                 <SearchBox />

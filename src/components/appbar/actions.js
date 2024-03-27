@@ -20,7 +20,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import HistoryIcon from '@mui/icons-material/History';
 import Inventory2OutlinedIcon from '@mui/icons-material/Inventory2Outlined';
 import axios from 'axios';
-import NotificationsUserPopover from '../../layouts/dashboard/header/NotificationsUserPopover';
+
 import LogoutFuncion from '../../services/LogoutFunction';
 import {
   MyList,
@@ -127,7 +127,6 @@ export default function Actions({ matches }) {
                     textAlign: 'center',
                   }}
                 >
-                  <NotificationsUserPopover />
                   <Tooltip title='Account settings'>
                     <IconButton
                       onClick={handleClick}

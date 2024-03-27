@@ -5,7 +5,6 @@ import Footer from '../components/footer';
 import AppDrawer from '../components/drawer';
 import SearchBox from "../components/search";
 import ProfilePage from "../components/profile";
-import Cart from '../components/cart';
 import DashboardAppPage from "./DashboardAppPage";
 
 
@@ -29,8 +28,6 @@ function Profile() {
 
                 <ProfilePage />
                 <DashboardAppPage/>
-                <Cart/>
-                <AppDrawer />
                 <Footer />
                 <AppDrawer />
                 <SearchBox />
