@@ -21,7 +21,6 @@ const AutionDetailComponent = () => {
   const { autionId } = useParams();
   const [bidModalOpen, setBidModalOpen] = useState(false);
   const [timeRemaining, setTimeRemaining] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(true);
   const [bidValue, setBidValue] = useState(0);
   const [highestBid, setHighestBid] = useState(0);
 
@@ -46,14 +45,16 @@ const AutionDetailComponent = () => {
           });
           setProduct(response?.data?.data);
           console.log(response?.data?.data);
-          setHighestBid(response?.data?.data?.userBids[0]?.amount);
+          setHighestBid(response?.data?.data?.userBids[0]?.amount || response?.data?.data?.startingPrice);
 
           // setTimeRemaining
+          const startDate = new Date(response?.data?.data?.startDate);
           const endDate = new Date(response?.data?.data?.endDate);
           const startDate = new Date(response?.data?.data?.startDate);
           const currentDate = new Date();
           const timeRemaining = endDate - currentDate;
           // check if timeRemaining < 0 then set isPlaying to false
+<<<<<<< HEAD
           // if (endDate > currentDate) {
           //   setTimeRemaining(timeRemaining / 1000); // convert to seconds
           // }
@@ -61,6 +62,12 @@ const AutionDetailComponent = () => {
           if (response?.data?.data?.status === "Approved") {
             setTimeRemaining((startDate - currentDate) / 1000);
           } else {
+=======
+
+          if(startDate > currentDate){
+            setTimeRemaining((startDate - currentDate) /1000)
+          }else if (endDate > currentDate) {
+>>>>>>> a0ee8e932ccb299f339a8be4bba92f2d684df855
             setTimeRemaining(timeRemaining / 1000);
           }
         })
@@ -133,15 +140,11 @@ const AutionDetailComponent = () => {
 
   const handleBidChange = (e) => {
     const value = e.target.value;
-    const nextBidValue =
-      value === ""
-        ? product.startingPrice
-        : Math.ceil(value / product.bidIncrement) * product.bidIncrement;
-    setBidValue(nextBidValue);
+    setBidValue(value);
   };
 
   const handleBidIncrement = () => {
-    setBidValue((prevBidValue) => prevBidValue + product.bidIncrement);
+    setBidValue((prevBidValue) => prevBidValue);
   };
 
   return (
@@ -200,11 +203,8 @@ const AutionDetailComponent = () => {
                         onChange={handleBidChange}
                         inputProps={{
                           min: bidValue,
-                          step: product.bidIncrement,
                         }}
                       />
-                      <Button onClick={handleBidIncrement}>+</Button>
-
                       <Button
                         variant="contained"
                         color="primary"
@@ -218,6 +218,21 @@ const AutionDetailComponent = () => {
               )}
 
               <div className="mb-4">
+                {
+                  product?.status === "OnGoing" ? (
+                    <h3 className="text-xl font-bold mb-4">Thời gian đếm ngược đến khi đấu giá kết thúc:</h3>
+                  ) : (
+                    <>
+                      {
+                        product?.status === "Approved" ? (
+                          <h3 className="text-xl font-bold mb-4">Thời gian đếm ngược đến khi đấu giá bắt đầu:</h3>
+                        ) : (
+                          <h3 className="text-xl font-bold mb-4">Thời gian đếm ngược đến khi đấu giá kết thúc:</h3>
+                        )
+                      }
+                    </>
+                  )
+                }
                 <CountdownTimer
                   {...{
                     daysRemaining,

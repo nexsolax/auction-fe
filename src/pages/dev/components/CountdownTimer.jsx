@@ -3,7 +3,6 @@ import React from 'react';
 const CountdownTimer = ({ daysRemaining, hoursRemaining, minutesRemaining, secondsRemaining }) => {
   return (
     <div>
-      <h3 className="text-xl font-bold mb-4">Thời gian đếm ngược bắt đầu trả giá:</h3>
       <div className="bg-white rounded-md border p-4">
         <div className="flex justify-between">
           <div className="text-center">
