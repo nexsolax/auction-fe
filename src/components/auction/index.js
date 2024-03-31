@@ -1,52 +1,41 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
 import axios from "axios";
 import moment from "moment";
-// import { HubConnection, HubConnectionBuilder } from "@microsoft/signalr";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import React, { createContext, useContext, useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import styled from "@emotion/styled";
 import ErrorOutlineOutlinedIcon from "@mui/icons-material/ErrorOutlineOutlined";
-import GavelIcon from "@mui/icons-material/Gavel";
-import { toast } from "react-toastify";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import {
-  Container,
+  Box,
+  Button,
+  CircularProgress,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Divider,
   Grid,
+  Modal,
+  Paper,
+  Stack,
   Table,
   TableBody,
   TableCell,
   TableContainer,
-  TableRow,
-  Paper,
-  Typography,
-  Button,
-  Box,
-  useMediaQuery,
-  DialogContent,
-  Dialog,
-  DialogTitle,
-  DialogActions,
-  TextField,
-  Stack,
-  DialogContentText,
-  Divider,
-  CircularProgress,
-  Input,
   TableHead,
   TablePagination,
-  Modal,
+  TableRow,
+  Typography,
+  useMediaQuery
 } from "@mui/material";
-import styled from "@emotion/styled";
-import AuctionCountdown from "./auctionCountdown";
-import { Colors } from "../../style/theme";
 import {
-  Product,
-  ProductDetailImage,
-  ProductImage,
+  Product
 } from "../../style/Products";
-import Scrollbar from "../scrollbar/Scrollbar";
-import startConnection from "./signalr";
-import { Notify } from "./sampleSignalr";
+import { Colors } from "../../style/theme";
+import AuctionCountdown from "./auctionCountdown";
 
 const BidDialogContext = createContext();
 
@@ -144,37 +133,6 @@ const AuctionForm = () => {
     });
   }
 
-  // const handlePayment = async () => {
-
-  //   try {
-  //     const response = await axios.post(paymentAPI, null, {
-  //       headers: { Authorization: `Bearer ${token}` }
-  //     });
-
-  //     // Assuming the API response contains the payment link
-  //     const paymentLink = response.data;
-  //     setPaymentlink(paymentLink);
-  //     // Redirect the user to the payment link
-  //     window.location.href = paymentLink;
-
-  //   } catch (error) {
-  //     console.error('Error processing payment:', error);
-  //     // Handle error, show a message to the user, etc.
-  //   }
-
-  // };
-
-  // const fetchSessionDetails = async () => {
-  //   try {
-  //     const response = await axios.get(
-  //       "https://reasapiv2.azurewebsites.net/api/Auction",
-  //       { headers: { Authorization: `Bearer ${decoded}` } }
-  //     );
-  //     setSessionDetails(response.data);
-  //   } catch (error) {
-  //     console.error("Error fetching session details:", error);
-  //   }
-  // };
 
   const fetchAuctionData = async () => {
     try {
@@ -225,34 +183,6 @@ const AuctionForm = () => {
       }
     }
   };
-
-  // const handleGoBack = async () => {
-  //   try {
-  //     setIsLoading(true);
-  //     const response = await axios.put(NotPayApi, { sessionID: sessionId }, { headers: { Authorization: `Bearer ${decoded}` } });
-  //     console.log("API response:", response.data);
-
-  //     // Check if the user is the winner based on the API response
-  //     const winnerEmail = response.data[0]?.winner?.toLowerCase(); // Convert to lowercase
-  //     console.log(winnerEmail);
-  //     const userEmail = jsonUser.Email.toLowerCase(); // Convert to lowercase
-  //     if (winnerEmail === userEmail) {
-  //       setIsWinner(true);
-  //     } else {
-  //       setIsWinner(false);
-  //     }
-  //     setIsLoading(false);
-  //     setWinnerData(response.data); // Store the winner data from the API response
-
-  //     // Set the flag to indicate that the server response has been received
-  //     setHasServerResponse(true);
-
-  //   } catch (error) {
-  //     setIsLoading(false);
-  //     console.error('Error updating session status:', error);
-  //     // Handle error if needed
-  //   }
-  // };
 
   const handleToggleDescriptions = () => {
     setShowDescriptions((prevState) => !prevState);
@@ -629,7 +559,7 @@ const AuctionForm = () => {
 
   return (
     <>
-      {/* <Notify/> */}
+
       <ProductDetailWrapper
         display={"flex"}
         flexDirection={matches ? "column" : "row"}

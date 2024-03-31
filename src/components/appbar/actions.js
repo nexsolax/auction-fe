@@ -59,7 +59,7 @@ export default function Actions({ matches }) {
       console.log('Error fetching profile data:', error);
     }
   };
-  const isLoggedIn = !!jsonUser.unique_name;
+  const isLoggedIn = !!jsonUser?.unique_name;
   const fetchSessionData = () => {
     axios
       .get(apiSession, { headers: { Authorization: `Bearer ${decoded}` } })

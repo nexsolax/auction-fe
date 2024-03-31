@@ -20,7 +20,7 @@ export default function NavSection({ data = [], ...other }) {
     <Box {...other}>
       <List disablePadding sx={{ p: 1 }}>
         {data.map((item) => (
-          <NavItem key={item.title} item={item} />
+          <NavItem key={item?.title} item={item} />
         ))}
       </List>
     </Box>
@@ -45,17 +45,12 @@ function NavItem({ item }) {
   const user = JSON.parse(localStorage.getItem('loginUser'));
 
   if (items && items.length > 0) {
-    const matchingSubItems = items.filter(subItem => subItem.role?.includes(user.role));
+    const matchingSubItems = items?.filter(subItem => subItem?.role?.includes(user?.role));
 
-    if ( role?.includes(user.role) || matchingSubItems.length > 0) {
+    if ( role?.includes(user?.role) || matchingSubItems?.length > 0 || true) {
 
       return (
         <>
-          {/* <ListItemButton onClick={handleClick}>
-            <ListItemIcon>{item.icon}</ListItemIcon>
-            <ListItemText primary={title} />
-            {open ? <ExpandLess /> : <ExpandMore />}
-          </ListItemButton> */}
           <StyledNavItem
             onClick={handleClick}
             sx={{
@@ -76,7 +71,7 @@ function NavItem({ item }) {
           </StyledNavItem>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
-              {items.map((subItem) => (
+              {items?.map((subItem) => (
                 <StyledNavItem
                   key={subItem.title}
                   component={RouterLink}
@@ -104,7 +99,7 @@ function NavItem({ item }) {
     }
   }
 
-    if (role?.includes(user.role)) {
+    if (role?.includes(user?.role)) {
       return (
         <StyledNavItem
           component={RouterLink}
