@@ -125,6 +125,7 @@ export default function LoginForm() {
       const decoded = jwtDecode(token);
       localStorage.setItem('token', token);
       localStorage.setItem('loginUser', JSON.stringify(decoded));
+      console.log(JSON.stringify(decoded))
       navigate('/dashboard/app', { replace: true });
       const role = decoded.role;
       console.log(role);

@@ -7,7 +7,7 @@ import ThemeProvider from './theme';
 // components
 import { StyledChart } from './components/chart';
 import ScrollToTop from './components/scroll-to-top';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 
 // ----------------------------------------------------------------------
 
@@ -44,7 +44,8 @@ export default function App() {
   // Hàm xử lý logout
   
   return (
-    <HelmetProvider>
+    <Suspense fallback={<div>Loading...</div>}>
+      <HelmetProvider>
       <BrowserRouter>
         <ThemeProvider>
           <ScrollToTop />
@@ -53,5 +54,6 @@ export default function App() {
         </ThemeProvider>
       </BrowserRouter>
     </HelmetProvider>
+    </Suspense>
   );
 }

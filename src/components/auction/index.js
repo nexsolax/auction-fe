@@ -1,52 +1,41 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
 import axios from "axios";
 import moment from "moment";
-// import { HubConnection, HubConnectionBuilder } from "@microsoft/signalr";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import React, { createContext, useContext, useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import styled from "@emotion/styled";
 import ErrorOutlineOutlinedIcon from "@mui/icons-material/ErrorOutlineOutlined";
-import GavelIcon from "@mui/icons-material/Gavel";
-import { toast } from "react-toastify";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import {
-  Container,
+  Box,
+  Button,
+  CircularProgress,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Divider,
   Grid,
+  Modal,
+  Paper,
+  Stack,
   Table,
   TableBody,
   TableCell,
   TableContainer,
-  TableRow,
-  Paper,
-  Typography,
-  Button,
-  Box,
-  useMediaQuery,
-  DialogContent,
-  Dialog,
-  DialogTitle,
-  DialogActions,
-  TextField,
-  Stack,
-  DialogContentText,
-  Divider,
-  CircularProgress,
-  Input,
   TableHead,
   TablePagination,
-  Modal,
+  TableRow,
+  Typography,
+  useMediaQuery
 } from "@mui/material";
-import styled from "@emotion/styled";
-import AuctionCountdown from "./auctionCountdown";
-import { Colors } from "../../style/theme";
 import {
-  Product,
-  ProductDetailImage,
-  ProductImage,
+  Product
 } from "../../style/Products";
-import Scrollbar from "../scrollbar/Scrollbar";
-import startConnection from "./signalr";
-import { Notify } from "./sampleSignalr";
+import { Colors } from "../../style/theme";
+import AuctionCountdown from "./auctionCountdown";
 
 const BidDialogContext = createContext();
 
@@ -629,7 +618,6 @@ const AuctionForm = () => {
 
   return (
     <>
-      {/* <Notify/> */}
       <ProductDetailWrapper
         display={"flex"}
         flexDirection={matches ? "column" : "row"}

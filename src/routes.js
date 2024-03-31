@@ -296,9 +296,9 @@ export default function Router() {
       element: (
         <Suspense>
           {/* <DashboardLayout /> */}
-          <RolesAuthRoute roles={['Admin', 'Staff', 'Member']}>
+          {/* <RolesAuthRoute roles={['Admin', 'Staff', 'Member']}> */}
             <DashboardLayout />
-          </RolesAuthRoute>
+          {/* </RolesAuthRoute> */}
         </Suspense>
       ),
       children: [
