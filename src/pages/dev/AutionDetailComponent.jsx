@@ -50,11 +50,9 @@ const AutionDetailComponent = () => {
           // setTimeRemaining
           const startDate = new Date(response?.data?.data?.startDate);
           const endDate = new Date(response?.data?.data?.endDate);
-          const startDate = new Date(response?.data?.data?.startDate);
           const currentDate = new Date();
           const timeRemaining = endDate - currentDate;
           // check if timeRemaining < 0 then set isPlaying to false
-<<<<<<< HEAD
           // if (endDate > currentDate) {
           //   setTimeRemaining(timeRemaining / 1000); // convert to seconds
           // }
@@ -62,12 +60,6 @@ const AutionDetailComponent = () => {
           if (response?.data?.data?.status === "Approved") {
             setTimeRemaining((startDate - currentDate) / 1000);
           } else {
-=======
-
-          if(startDate > currentDate){
-            setTimeRemaining((startDate - currentDate) /1000)
-          }else if (endDate > currentDate) {
->>>>>>> a0ee8e932ccb299f339a8be4bba92f2d684df855
             setTimeRemaining(timeRemaining / 1000);
           }
         })
