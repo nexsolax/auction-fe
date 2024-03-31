@@ -19,7 +19,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const AutionDetailComponent = () => {
   const { autionId } = useParams();
-
+  const [bidModalOpen, setBidModalOpen] = useState(false);
   const [timeRemaining, setTimeRemaining] = useState(0);
   const [bidValue, setBidValue] = useState(0);
   const [highestBid, setHighestBid] = useState(0);
