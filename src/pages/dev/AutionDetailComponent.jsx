@@ -15,7 +15,7 @@ import CountdownTimer from "./components/CountdownTimer";
 import Username from "./components/Username";
 import { Button, Input } from "@mui/material";
 import { ToastContainer, toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 
 const AutionDetailComponent = () => {
   const { autionId } = useParams();
@@ -50,11 +50,18 @@ const AutionDetailComponent = () => {
 
           // setTimeRemaining
           const endDate = new Date(response?.data?.data?.endDate);
+          const startDate = new Date(response?.data?.data?.startDate);
           const currentDate = new Date();
           const timeRemaining = endDate - currentDate;
           // check if timeRemaining < 0 then set isPlaying to false
-          if (endDate > currentDate) {
-            setTimeRemaining(timeRemaining / 1000); // convert to seconds
+          // if (endDate > currentDate) {
+          //   setTimeRemaining(timeRemaining / 1000); // convert to seconds
+          // }
+
+          if (response?.data?.data?.status === "Approved") {
+            setTimeRemaining((startDate - currentDate) / 1000);
+          } else {
+            setTimeRemaining(timeRemaining / 1000);
           }
         })
         .catch((error) => {
@@ -287,15 +294,17 @@ const AutionDetailComponent = () => {
                     Giá bắt đầu: {moneyParser(product?.startingPrice) + " đ"}
                   </p>
                   <p>
-                    Tăng giá mỗi lần:{" "} {moneyParser(product?.bidIncrement) + " đ"}
+                    Tăng giá mỗi lần:{" "}
+                    {moneyParser(product?.bidIncrement) + " đ"}
+                  </p>
+                  <p>Deposit: {moneyParser(product?.deposit) + " đ"}</p>
+                  <p>
+                    Ngày bắt đầu :{" "}
+                    {new Date(product?.startDate).toLocaleString()}
                   </p>
                   <p>
-                    Deposit: {moneyParser(product?.deposit) + " đ"}
+                    Ngày kết thúc: {new Date(product?.endDate).toLocaleString()}
                   </p>
-                  <p>
-                    Ngày bắt đầu : {new Date(product?.startDate).toLocaleString()}
-                  </p>
-                  <p>Ngày kết thúc: {new Date(product?.endDate).toLocaleString()}</p>
                   <p>
                     Thời gian duyệt sản phẩm:{" "}
                     {new Date(product?.approveTime).toLocaleString()}
