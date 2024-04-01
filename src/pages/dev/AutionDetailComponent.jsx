@@ -6,16 +6,16 @@ import {
   TabsBody,
   TabsHeader,
 } from "@material-tailwind/react";
+import { Button, Input } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "swiper/css";
 import { moneyParser } from "../../utils/formatNumber";
 import CountdownTimer from "./components/CountdownTimer";
 import Username from "./components/Username";
-import { Button, Input } from "@mui/material";
-import { ToastContainer, toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
 
 const AutionDetailComponent = () => {
   const { autionId } = useParams();
@@ -33,20 +33,24 @@ const AutionDetailComponent = () => {
 
   const [product, setProduct] = useState([]);
 
-  // write use effect call per 3 seconds
-  useEffect(() => {
-    const interval = setInterval(() => {
-      axios
-        .get(`https://reasapiv2.azurewebsites.net/api/Auction/${autionId}`)
-        .then((response) => {
-          //filter product?.userBids dateCreate newest
-          response?.data?.data?.userBids.sort((a, b) => {
-            return new Date(b.dateCreate) - new Date(a.dateCreate);
-          });
-          setProduct(response?.data?.data);
-          console.log(response?.data?.data);
-          setHighestBid(response?.data?.data?.userBids[0]?.amount || response?.data?.data?.startingPrice);
+  const fetchProduct = () => {
+    axios
+      .get(`https://reasapiv2.azurewebsites.net/api/Auction/${autionId}`)
+      .then((response) => {
+        //filter product?.userBids dateCreate newest
+        response?.data?.data?.userBids.sort((a, b) => {
+          return new Date(b.dateCreate) - new Date(a.dateCreate);
+        });
+        setProduct(response?.data?.data);
+        console.log(response?.data?.data);
+        setHighestBid(
+          response?.data?.data?.userBids[0]?.amount ||
+            response?.data?.data?.startingPrice
+        );
 
+        if (response?.data?.data?.status === "Completed") {
+          setTimeRemaining(0 / 1000);
+        } else {
           // setTimeRemaining
           const startDate = new Date(response?.data?.data?.startDate);
           const endDate = new Date(response?.data?.data?.endDate);
@@ -54,15 +58,23 @@ const AutionDetailComponent = () => {
           const timeRemaining = endDate - currentDate;
           // check if timeRemaining < 0 then set isPlaying to false
 
-          if(startDate > currentDate){
-            setTimeRemaining((startDate - currentDate) /1000)
-          }else if (endDate > currentDate) {
+          if (startDate > currentDate) {
+            setTimeRemaining((startDate - currentDate) / 1000);
+          } else if (endDate > currentDate) {
             setTimeRemaining(timeRemaining / 1000);
           }
-        })
-        .catch((error) => {
-          console.error("Error fetching data:", error);
-        });
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  };
+
+  const navigate = useNavigate();
+  // write use effect call per 3 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      fetchProduct();
     }, 1000);
 
     return () => clearInterval(interval);
@@ -81,18 +93,18 @@ const AutionDetailComponent = () => {
         config
       )
       .then((response) => {
-        console.log(response.data.data);
-        toast.success("Register successfully");
+        console.log(response?.data?.data)
 
-        window.open(
-          `${response.data.data}`,
-          "_blank",
-          "rel=noopener noreferrer"
-        );
+        window.location.href = response?.data?.data || "/";
+        return;
       })
       .catch((error) => {
-        console.error("Error fetching data:", error);
-        toast.error("Register failed");
+        console.log(error)
+        console.log(error?.response?.data?.message || error?.message);
+        toast.error("Register failed: " + error?.response?.data?.message || error?.message || "");
+      })
+      .finally(() => {
+        fetchProduct();
       });
   };
 
@@ -109,7 +121,7 @@ const AutionDetailComponent = () => {
       .post(
         `https://reasapiv2.azurewebsites.net/api/Auction/${autionId}/place-bid`,
         {
-          amount,
+          amount: amount,
         },
         config
       )
@@ -118,22 +130,18 @@ const AutionDetailComponent = () => {
         setBidModalOpen(false);
         toast.success("Bid successfully");
         setTimeout(() => {
-          window.location.reload();
+          fetchProduct();
         }, 1000);
       })
       .catch((error) => {
-        console.error("Error fetching data:", error);
-        toast.error("Bid failed");
+        console.log("Error fetching data:", error.response?.data);
+        toast.error("Bid failed: " + error?.response?.data?.message || "");
       });
   };
 
   const handleBidChange = (e) => {
     const value = e.target.value;
     setBidValue(value);
-  };
-
-  const handleBidIncrement = () => {
-    setBidValue((prevBidValue) => prevBidValue);
   };
 
   return (
@@ -183,7 +191,7 @@ const AutionDetailComponent = () => {
               {product?.status === "OnGoing" && (
                 <div className="mb-4 flex items-center">
                   {product?.status == "Pending" ? (
-                    <Button onClick={handleRegister}>Đăng ký</Button>
+                    <></>
                   ) : (
                     <>
                       <Input
@@ -206,22 +214,34 @@ const AutionDetailComponent = () => {
                 </div>
               )}
 
+              {product?.status === "Approved" && (
+                <Button
+                  onClick={handleRegister}
+                  variant="contained"
+                  className="mb-4"
+                >
+                  Đăng ký
+                </Button>
+              )}
+
               <div className="mb-4">
-                {
-                  product?.status === "OnGoing" ? (
-                    <h3 className="text-xl font-bold mb-4">Thời gian đếm ngược đến khi đấu giá kết thúc:</h3>
-                  ) : (
-                    <>
-                      {
-                        product?.status === "Approved" ? (
-                          <h3 className="text-xl font-bold mb-4">Thời gian đếm ngược đến khi đấu giá bắt đầu:</h3>
-                        ) : (
-                          <h3 className="text-xl font-bold mb-4">Thời gian đếm ngược đến khi đấu giá kết thúc:</h3>
-                        )
-                      }
-                    </>
-                  )
-                }
+                {product?.status === "OnGoing" ? (
+                  <h3 className="text-xl font-bold mb-4">
+                    Thời gian đếm ngược đến khi đấu giá kết thúc:
+                  </h3>
+                ) : (
+                  <>
+                    {product?.status === "Approved" ? (
+                      <h3 className="text-xl font-bold mb-4">
+                        Thời gian đếm ngược đến khi đấu giá bắt đầu:
+                      </h3>
+                    ) : (
+                      <h3 className="text-xl font-bold mb-4">
+                        Thời gian đếm ngược đến khi đấu giá kết thúc:
+                      </h3>
+                    )}
+                  </>
+                )}
                 <CountdownTimer
                   {...{
                     daysRemaining,
@@ -234,6 +254,18 @@ const AutionDetailComponent = () => {
               {product?.status === "Completed" ? (
                 <div className="bg-green-200 text-green-500 flex items-center justify-center rounded-md py-2 px-4">
                   <p className="text-lg font-bold">Hoàn thành</p>
+                </div>
+              ) : product?.status === "OnGoing" ? (
+                <div className="bg-blue-200 text-blue-500 flex items-center justify-center rounded-md py-2 px-4">
+                  <p className="text-lg font-bold">Đang diễn ra</p>
+                </div>
+              ) : product?.status === "Approved" ? (
+                <div className="bg-blue-200 text-blue-500 flex items-center justify-center rounded-md py-2 px-4">
+                  <p className="text-lg font-bold">Đã duyệt</p>
+                </div>
+              ) : product?.status === "Pending" ? (
+                <div className="bg-gray-200 text-gray-500 flex items-center justify-center rounded-md py-2 px-4">
+                  <p className="text-lg font-bold">Chờ duyệt</p>
                 </div>
               ) : (
                 <div className="bg-gray-200 text-gray-500 flex items-center justify-center rounded-md py-2 px-4">
@@ -298,49 +330,74 @@ const AutionDetailComponent = () => {
                     Giá bắt đầu: {moneyParser(product?.startingPrice) + " đ"}
                   </p>
                   <p>
-                    Tăng giá mỗi lần:{" "} {moneyParser(product?.bidIncrement) + " đ"}
+                    Tăng giá mỗi lần:{" "}
+                    {moneyParser(product?.bidIncrement) + " đ"}
                   </p>
                   <p>
-                    Deposit: {moneyParser(product?.deposit) + " đ"}
+                    Bước giá tối đa:{" "}
+                    {product?.maxBidIncrement
+                      ? moneyParser(product?.maxBidIncrement) + " đ"
+                      : "Không giới hạn"}
+                  </p>
+                  <p>Giá đặt cọc: {moneyParser(product?.deposit) + " đ"}</p>
+                  <p>
+                    Ngày bắt đầu :{" "}
+                    {new Date(product?.startDate).toLocaleString()}
                   </p>
                   <p>
-                    Ngày bắt đầu : {new Date(product?.startDate).toLocaleString()}
+                    Ngày kết thúc: {new Date(product?.endDate).toLocaleString()}
                   </p>
-                  <p>Ngày kết thúc: {new Date(product?.endDate).toLocaleString()}</p>
                   <p>
                     Thời gian duyệt sản phẩm:{" "}
                     {new Date(product?.approveTime).toLocaleString()}
                   </p>
-                  <p>Tình trạng: {product?.status}</p>
+                  <p>
+                    Tình trạng:{" "}
+                    {product?.status == "Pending"
+                      ? "Chờ duyệt"
+                      : product?.status == "Approved"
+                      ? "Đã duyệt"
+                      : product?.status == "OnGoing"
+                      ? "Đang diễn ra"
+                      : product?.status == "Completed"
+                      ? "Đã kết thúc"
+                      : ""}
+                  </p>
                 </div>
               </TabPanel>
               <TabPanel key={"user"} value={"user"}>
                 <div>
                   <div className="overflow-x-auto">
-                    <table className="table-auto w-full">
-                      <thead>
-                        <tr>
-                          <th className="px-4 py-2">Người đấu giá</th>
-                          <th className="px-4 py-2">Ngày tạo</th>
-                          <th className="px-4 py-2">Số tiền</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {product?.userBids?.map((bid) => (
-                          <tr key={bid?.id}>
-                            <td className="border px-4 py-2">
-                              {bid?.id && <Username userId={bid?.userId} />}
-                            </td>
-                            <td className="border px-4 py-2">
-                              {new Date(bid?.dateCreate).toLocaleString()}
-                            </td>
-                            <td className="border px-4 py-2">
-                              {moneyParser(bid?.amount) + " đ"}
-                            </td>
+                    {product?.userBids?.length === 0 ? (
+                      <div className="h-40 w-full flex justify-center items-center">
+                        <p>Chưa có lịch sử đặt giá</p>
+                      </div>
+                    ) : (
+                      <table className="table-auto w-full">
+                        <thead>
+                          <tr>
+                            <th className="px-4 py-2">Người đấu giá</th>
+                            <th className="px-4 py-2">Ngày tạo</th>
+                            <th className="px-4 py-2">Số tiền</th>
                           </tr>
-                        ))}
-                      </tbody>
-                    </table>
+                        </thead>
+                        <tbody>
+                          {product?.userBids?.map((bid) => (
+                            <tr key={bid?.id}>
+                              <td className="border px-4 py-2">
+                                {bid?.id && <Username userId={bid?.userId} />}
+                              </td>
+                              <td className="border px-4 py-2">
+                                {new Date(bid?.dateCreate).toLocaleString()}
+                              </td>
+                              <td className="border px-4 py-2">
+                                {moneyParser(bid?.amount) + " đ"}
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    )}
                   </div>
                 </div>
               </TabPanel>
