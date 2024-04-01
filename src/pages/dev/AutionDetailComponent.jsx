@@ -261,7 +261,7 @@ const AutionDetailComponent = () => {
                 </div>
               ) : product?.status === "Approved" ? (
                 <div className="bg-blue-200 text-blue-500 flex items-center justify-center rounded-md py-2 px-4">
-                  <p className="text-lg font-bold">Đã duyệt</p>
+                  <p className="text-lg font-bold">Đang mở đăng ký</p>
                 </div>
               ) : product?.status === "Pending" ? (
                 <div className="bg-gray-200 text-gray-500 flex items-center justify-center rounded-md py-2 px-4">
