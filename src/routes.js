@@ -186,10 +186,10 @@ export default function Router() {
       path: '/dashboard',
       element: (
         <Suspense>
-          {/* <DashboardLayout /> */}
-          <RolesAuthRoute roles={['Admin', 'Staff', 'Member']}>
+          <DashboardLayout />
+          {/* <RolesAuthRoute roles={['Admin', 'Staff', 'Member']}>
             <DashboardLayout />
-          </RolesAuthRoute>
+          </RolesAuthRoute> */}
         </Suspense>
       ),
       children: [
