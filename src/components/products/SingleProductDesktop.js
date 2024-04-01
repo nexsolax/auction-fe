@@ -12,6 +12,7 @@ import {
   ProductActionsWrapper,
   ProductAddToCart,
   ProductImage,
+  ProductMetaWrapper,
 } from '../../style/Products';
 import { useNavigate } from 'react-router-dom';
 
@@ -24,13 +25,12 @@ export default function SingleProductDesktop({
   productImage,
   endDate,
   startDate,
+  startingPrice,
   matches,
 }) {
   const navigation = useNavigate();
-
   const [ProductDetailDialog, showProductDetailDialog, closeProductDialog] =
     useDialogModal(ProductDetail);
-  console.log(productName, productImage, startDate, endDate);
   const [showOptions, setShowOptions] = useState(false);
   // const firstImageURL = product.images && product.images.length > 0 ? product.images[0].detail : null;
   // const imageSource = firstImageURL || defaultImageSource;
@@ -55,10 +55,7 @@ export default function SingleProductDesktop({
     <>
       <Product onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
         <ProductImage src={productImage} />
-        {productName}
-        {endDate}
-        {startDate}
-
+        
         <div
           style={{
             display: 'flex',
@@ -101,8 +98,11 @@ export default function SingleProductDesktop({
             </ProductActionButton>
           </Stack>
         </ProductActionsWrapper>
+        <ProductMetaWrapper>
+        <ProductMeta product={products} />
+        </ProductMetaWrapper>
       </Product>
-      <ProductMeta product={products} />
+
       <ProductDetailDialog product={products} />
     </>
   );

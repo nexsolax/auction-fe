@@ -9,8 +9,7 @@ import AppDrawer from '../components/drawer';
 import { UIProvider } from '../context/ui';
 import SearchBox from '../components/search';
 import StageProducts from '../components/products-instage/Stage-product';
-import Cart from '../components/cart';
-import { Notify } from '../components/auction/sampleSignalr';
+
 
 
 
@@ -30,8 +29,8 @@ function Test() {
                 <Box display={"flex"} justifycontent={"center"} sx={{ p: 4 }}>
                     <Typography variant="h4">Tài Sản Sắp Được đấu giá</Typography>
                 </Box>
-                <Notify />
-                <Cart/>
+
+                
                 <Footer />
                 <AppDrawer />
                 <SearchBox/>

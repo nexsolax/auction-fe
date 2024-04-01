@@ -35,11 +35,12 @@ export default function Products() {
           const id = item.id;
           const status = item.status;
           const endDate = item.endDate;
+          const startingPrice = item.startingPrice;
           // products.forEach((product) => {
           //   console.log(product.name);
           //   console.log(product.image);
           // });
-          return { name, id, status, image, startDate, endDate };
+          return { name, id, status, image, startDate, endDate, startingPrice };
         });
         // Map the fetched data to the products array
 
@@ -117,18 +118,19 @@ export default function Products() {
           productName={product.name}
           endDate={product.endDate}
           startDate={product.startDate}
-          //   startingPrice={product.startingPrice}
+          startingPrice={product.startingPrice}
           matches={matches}
         />
       ) : (
         <SingleProductDesktops
+          products={products}
           id={product.id}
           status={product.status}
           productName={product.name}
           productImage={product.image}
           endDate={product.endDate}
           startDate={product.startDate}
-          //   startingPrice={product.startingPrice}
+          startingPrice={product.startingPrice}
           matches={matches}
         />
       )}

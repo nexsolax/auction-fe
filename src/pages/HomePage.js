@@ -10,7 +10,7 @@ import AppDrawer from '../components/drawer';
 import { UIProvider } from '../context/ui';
 import SearchBox from '../components/search';
 import StageProducts from '../components/products-instage/Stage-product';
-import Cart from '../components/cart';
+
 
 
 
@@ -31,7 +31,6 @@ function HomePage() {
                     <Typography variant="h4">Tài Sản Sắp Được đấu giá</Typography>
                 </Box>
                 <Products />
-                <Cart/>
                 <Footer />
                 <AppDrawer />
                 <SearchBox/>

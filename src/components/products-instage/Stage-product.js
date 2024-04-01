@@ -5,12 +5,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 import StageSingleProducts from "./StageSingleProducts";
-import AppStagePagination from "../pagination/stage-pagination";
 import StageSingleProductDesktop from "./StageSingleProductDesktop";
-
-
-
-
 
 
 export default function StageProducts() {
