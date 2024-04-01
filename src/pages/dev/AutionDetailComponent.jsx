@@ -335,7 +335,7 @@ const AutionDetailComponent = () => {
                     Tăng giá mỗi lần:{" "}
                     {moneyParser(product?.bidIncrement) + " đ"}
                   </p>
-                  <p>Deposit: {moneyParser(product?.deposit) + " đ"}</p>
+                  
                   <p>
                     Bước giá tối đa:{" "}
                     {product?.maxBidIncrement
@@ -349,7 +349,6 @@ const AutionDetailComponent = () => {
                   </p>
                   <p>
                     Ngày kết thúc: {new Date(product?.endDate).toLocaleString()}
-                    Ngày kết thúc: {new Date(product?.endDate).toLocaleString()}
                   </p>
                   <p>
                     Thời gian duyệt sản phẩm:{" "}
@@ -360,7 +359,7 @@ const AutionDetailComponent = () => {
                     {product?.status == "Pending"
                       ? "Chờ duyệt"
                       : product?.status == "Approved"
-                      ? "Đã duyệt"
+                      ? "Đang mở đăng ký"
                       : product?.status == "OnGoing"
                       ? "Đang diễn ra"
                       : product?.status == "Completed"
