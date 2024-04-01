@@ -101,7 +101,7 @@ const AutionDetailComponent = () => {
       .catch((error) => {
         console.log(error)
         console.log(error?.response?.data?.message || error?.message);
-        toast.error("Register failed: " + error?.response?.data?.message || error?.message || "");
+        toast.error("Đăng ký thất bại: " + error?.response?.data?.message || error?.message || "");
       })
       .finally(() => {
         fetchProduct();
@@ -128,14 +128,14 @@ const AutionDetailComponent = () => {
       .then((response) => {
         console.log(response.data.data);
         setBidModalOpen(false);
-        toast.success("Bid successfully");
+        toast.success("Đặt giá thành công");
         setTimeout(() => {
           fetchProduct();
         }, 1000);
       })
       .catch((error) => {
         console.log("Error fetching data:", error.response?.data);
-        toast.error("Bid failed: " + error?.response?.data?.message || "");
+        toast.error("Đặt giá thất bại: " + error?.response?.data?.message || "");
       });
   };
 
