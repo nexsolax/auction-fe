@@ -332,7 +332,10 @@ const AutionDetailComponent = () => {
                   <p>
                     Tăng giá mỗi lần:{" "}
                     {moneyParser(product?.bidIncrement) + " đ"}
+                    Tăng giá mỗi lần:{" "}
+                    {moneyParser(product?.bidIncrement) + " đ"}
                   </p>
+                  <p>Deposit: {moneyParser(product?.deposit) + " đ"}</p>
                   <p>
                     Bước giá tối đa:{" "}
                     {product?.maxBidIncrement
@@ -345,6 +348,7 @@ const AutionDetailComponent = () => {
                     {new Date(product?.startDate).toLocaleString()}
                   </p>
                   <p>
+                    Ngày kết thúc: {new Date(product?.endDate).toLocaleString()}
                     Ngày kết thúc: {new Date(product?.endDate).toLocaleString()}
                   </p>
                   <p>
