@@ -332,8 +332,7 @@ const AutionDetailComponent = () => {
                   <p>
                     Tăng giá mỗi lần:{" "}
                     {moneyParser(product?.bidIncrement) + " đ"}
-                    Tăng giá mỗi lần:{" "}
-                    {moneyParser(product?.bidIncrement) + " đ"}
+                    
                   </p>
                   
                   <p>
