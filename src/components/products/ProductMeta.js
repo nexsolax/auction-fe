@@ -12,7 +12,7 @@ export default function ProductMeta({ product, matches }) {
     return (
       <ProductMetaWrapper>
         
-        <Typography variant={matches} lineHeight={2}>
+        <Typography variant={matches } lineHeight={2}>
           {product.name}
         </Typography>
         <Typography variant={matches ? "caption" : "body1"}>

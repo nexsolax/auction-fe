@@ -21,7 +21,6 @@ export default function Products() {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
 
-  //   useEffect to fetch products (uncomment this when you want to fetch data)
   useEffect(() => {
     axios
       .get("https://reasapiv2.azurewebsites.net/api/Auction")
@@ -36,13 +35,9 @@ export default function Products() {
           const status = item.status;
           const endDate = item.endDate;
           const startingPrice = item.startingPrice;
-          // products.forEach((product) => {
-          //   console.log(product.name);
-          //   console.log(product.image);
-          // });
           return { name, id, status, image, startDate, endDate, startingPrice };
         });
-        // Map the fetched data to the products array
+
 
         setProducts(data);
       })
@@ -60,7 +55,7 @@ export default function Products() {
     }
   }, [products]);
   useEffect(() => {
-    // Filter products based on searchQuery
+
     if (products.length > 0) {
       const filtered = products.filter(
         (product) =>
@@ -70,24 +65,12 @@ export default function Products() {
       );
       console.log(filtered);
       setFilteredProducts(products);
-      // setSearchQuery(filtered);
+
     }
 
-    // Reset currentPage to 1 when searchQuery changes
     setCurrentPage(1);
   }, [searchQuery, products]);
-  //   if (products.length > 0) {
-  //     products.forEach((product) => {
-  //       const filtered = products.filter(
-  //         (product) =>
-  //           product.name &&
-  //           searchQuery &&
-  //           product.name.toLowerCase().includes(searchQuery.toLowerCase())
-  //       );
-  //       console.log(filtered);
-  //       setFilteredProducts(filtered);
-  //     });
-  //   }
+ 
   const productsPerPage = 3; // Number of products to display per page
   const pageCount = Math.ceil(filteredProducts.length / productsPerPage);
 

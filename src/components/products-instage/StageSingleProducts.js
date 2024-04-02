@@ -8,12 +8,12 @@ import useDialogModal from "../../hooks/useDialogModal";
 import { Product, ProductActionButton, ProductActionsWrapper, ProductAddToCart, ProductFavButton, ProductImage } from "../../style/Products";
 import StageProductMeta from "./StageProductMeta";
 import ProductDetail from "../productdetail";
-import StageProductDetail from "../productdetail/stage-product-detail";
+
 import { Colors } from "../../style/theme";
 
 export default function StageSingleProducts({ product, matches }) {
     const [ProductDetailDialog, showProductDetailDialog, closeProductDialog] =
-        useDialogModal(StageProductDetail);
+        useDialogModal(ProductDetail);
 
     const [showOptions, setShowOptions] = useState(false);
     const [firstImage, setFirstImage] = useState("");

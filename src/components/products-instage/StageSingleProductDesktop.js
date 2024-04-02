@@ -1,99 +1,108 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-import { Stack, Tooltip, Typography } from "@mui/material";
-import ShareIcon from "@mui/icons-material/Share";
-import FitScreenIcon from "@mui/icons-material/FitScreen";
-import useDialogModal from "../../hooks/useDialogModal";
-import ProductDetail from "../productdetail";
-import StageProductMeta from "./StageProductMeta";
+import { Stack, Tooltip, Typography } from '@mui/material';
+import ShareIcon from '@mui/icons-material/Share';
+import FitScreenIcon from '@mui/icons-material/FitScreen';
+import useDialogModal from '../../hooks/useDialogModal';
+import ProductDetail from '../productdetail';
+import StageProductMeta from './StageProductMeta';
 import {
-    Product,
-    ProductActionButton,
-    ProductActionsWrapper,
-    ProductAddToCart,
-    ProductImage,
+  Product,
+  ProductActionButton,
+  ProductActionsWrapper,
+  ProductAddToCart,
+  ProductImage,
+  ProductMetaWrapper,
+} from '../../style/Products';
+import { useNavigate } from 'react-router-dom';
 
-} from "../../style/Products";
-import StageProductDetail from "../productdetail/stage-product-detail";
+const defaultImageSource = '/assets/images/covers/auction-hammer.jpg';
+export default function StageSingleProductDesktop({
+  products,
+  id,
+  status,
+  productName,
+  productImage,
+  endDate,
+  startDate,
+  startingPrice,
+  matches,
+}) {
+  const navigation = useNavigate();
+  const [ProductDetailDialog, showProductDetailDialog, closeProductDialog] =
+    useDialogModal(ProductDetail);
+  const [showOptions, setShowOptions] = useState(false);
+ 
 
-const defaultImageSource = "/assets/images/covers/auction-hammer.jpg";
+  const handleMouseEnter = () => {
+    setShowOptions(true);
+  };
+  const handleMouseLeave = () => {
+    setShowOptions(false);
+  };
 
-export default function StageSingleProductDesktop({ product, matches }) {
-    const [ProductDetailDialog, showProductDetailDialog, closeProductDialog] =
-        useDialogModal(StageProductDetail);
+  const handleClick = () => {
+    console.log('Product clicked', id);
+    navigation(`/aution-detail/${id}`);
+  };
 
-    const [showOptions, setShowOptions] = useState(false);
-    const [firstImage, setFirstImage] = useState("");
-    const firstImageURL = product.images && product.images.length > 0 ? product.images[0].detail : null;
-    const imageSource = firstImageURL || defaultImageSource;
-    const user = localStorage.getItem('loginUser');
-    const jsonUser = JSON.parse(user);
-    const [isDialogOpen, setDialogOpen] = useState(false);
-    const isLoggedIn = !!jsonUser && !!jsonUser.Email;
-    const handleAuctionButtonClick = () => {
-        localStorage.setItem("sessionId", product.sessionId);
-        console.log(product.sessionId)
-        if (isLoggedIn) {
-            // If the user is logged in, show the auction details dialog.
-            window.location.href = "/auction";
-        } else {
-            // If the user is not logged in, show the custom dialog.
-            setDialogOpen(true);
-        }
-    };
+  useEffect(() => {
+    console.log('Status changed:', status);
+  }, [status]);
 
-    // const handleAuctionButtonClick = () => {
-    //     window.location.href = "/auction";
-    // };
+  return (
+    <>
+      <Product onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+        <ProductImage src={productImage} />
+        
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'flex-start',
+            width: '100%',
+          }}
+        >
+          <span
+            style={{
+              borderColor: 'red',
+              padding: 5,
+              borderRadius: 5,
+              borderWidth: 1,
+              borderStyle: 'solid',
+            }}
+          >
+            {status}
+          </span>
+        </div>
+        {(showOptions || matches) && (
+          <ProductAddToCart
+            onClick={handleClick}
+            show={showOptions}
+            variant='contained'
+          >
+            Thông tin sản phẩm
+          </ProductAddToCart>
+        )}
+        <ProductActionsWrapper show={showOptions || matches}>
+          <Stack direction={matches ? 'row' : 'column'}>
+            <ProductActionButton>
+              <Tooltip placement='left' title='share this product'>
+                <ShareIcon color='primary' />
+              </Tooltip>
+            </ProductActionButton>
+            <ProductActionButton onClick={() => showProductDetailDialog()}>
+              <Tooltip placement='left' title='Full view'>
+                <FitScreenIcon color='primary' />
+              </Tooltip>
+            </ProductActionButton>
+          </Stack>
+        </ProductActionsWrapper>
+        <ProductMetaWrapper>
+        <StageProductMeta product={products} />
+        </ProductMetaWrapper>
+      </Product>
 
-    useEffect(() => {
-        // Extract the first image URL from the server response
-        if (product.images && product.images.length > 0) {
-            console.log("Product Images:", product.images);
-            console.log("First Image URL:", product.images[0].detail);
-            setFirstImage(product.images[0].detail);
-        }
-    }, [product]);
-
-
-
-    const handleMouseEnter = () => {
-        setShowOptions(true);
-    };
-    const handleMouseLeave = () => {
-        setShowOptions(false);
-    };
-    return (
-        <>
-            <Product onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-
-            <ProductImage src={imageSource} />
-
-                {/* <ProductFavButton isfav={0}>
-                    <FavoriteIcon />
-                </ProductFavButton> */}
-                {(showOptions || matches) && (
-                    <ProductAddToCart show={showOptions} onClick={() => showProductDetailDialog()} variant="contained">
-                        Thông tin sản phẩm
-                    </ProductAddToCart>
-                )}
-                <ProductActionsWrapper show={showOptions || matches}>
-                    <Stack direction={matches ? "row" : "column"}>
-                        <ProductActionButton>
-                            <Tooltip placement="left" title="share this product">
-                                <ShareIcon color="primary" />
-                            </Tooltip>
-                        </ProductActionButton>
-                        <ProductActionButton onClick={() => showProductDetailDialog()}>
-                            <Tooltip placement="left" title="Full view">
-                                <FitScreenIcon color="primary" />
-                            </Tooltip>
-                        </ProductActionButton>
-                    </Stack>
-                </ProductActionsWrapper>
-            </Product>
-            <StageProductMeta product={product} />
-            <ProductDetailDialog product={product} />
-        </>
-    );
+      <ProductDetailDialog product={products} />
+    </>
+  );
 }

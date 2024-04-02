@@ -32,8 +32,7 @@ export default function SingleProductDesktop({
   const [ProductDetailDialog, showProductDetailDialog, closeProductDialog] =
     useDialogModal(ProductDetail);
   const [showOptions, setShowOptions] = useState(false);
-  // const firstImageURL = product.images && product.images.length > 0 ? product.images[0].detail : null;
-  // const imageSource = firstImageURL || defaultImageSource;
+ 
 
   const handleMouseEnter = () => {
     setShowOptions(true);
