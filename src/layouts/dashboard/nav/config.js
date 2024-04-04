@@ -21,22 +21,22 @@ const navConfig = [
     role: ['Admin', 'Staff', 'Member'],
   },
   {
-    title: 'Xem tài sản',
+    title: 'Xem danh sách tài sản',
     path: '/viewitem',
     icon: icon('ic_analytics'),
     role: ['Admin', 'Staff', 'Member'],
   },
   {
-    title: 'Xác nhân tài sản',
+    title: 'Xác nhận tài sản',
     path: '/approve-product',
     icon: icon('ic_analytics'),
     role: ['Admin', 'Staff'],
   },
   {
-    title: 'Tạo đấu giá',
-    path: '/createauction',
+    title: 'Xem danh sách đấu giá',
+    path: '/viewauction',
     icon: icon('ic_analytics'),
-    role: [ 'Member'],
+    role: ['Admin', 'Staff', 'Member'],
   },
   {
     title: 'Xác nhận đấu giá',
@@ -45,17 +45,17 @@ const navConfig = [
     role: ['Admin', 'Staff'],
   },
   {
-    title: 'Mở đấu giá',
+    title: 'Mở/ Đóng đấu giá',
     path: '/open-auction',
     icon: icon('ic_analytics'),
     role: ['Admin', 'Staff'],
   },
-  {
-    title: 'Đóng đấu giá',
-    path: '/close-auction',
-    icon: icon('ic_analytics'),
-    role: ['Admin', 'Staff'],
-  },
+  // {
+  //   title: 'Đóng đấu giá',
+  //   path: '/close-auction',
+  //   icon: icon('ic_analytics'),
+  //   role: ['Admin', 'Staff'],
+  // },
   // {
   //   title: 'Người dùng',
   //   path: '/dashboard/user',

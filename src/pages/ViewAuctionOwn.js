@@ -4,9 +4,9 @@ import Footer from "../components/footer";
 import { UIProvider } from "../context/ui";
 import AppDrawer from "../components/drawer";
 import SearchBox from "../components/search";
-import AddProductForm from "../components/addproduct";
+import ViewAuctionForm from "../components/view-auction";
 
-export default function addProduct() {
+export default function ViewAuction() {
   return (
     <Container
       maxWidth="xl"
@@ -50,6 +50,7 @@ export default function addProduct() {
             </div>
           </div>
         </div>
+
         <Box
           display={"flex"}
           flexDirection={"column"}
@@ -57,10 +58,9 @@ export default function addProduct() {
           justifycontent={"center"}
           sx={{ p: 4 }}
         >
-          <Typography variant="h4">Đăng Kí Tài Sản Đấu Giá </Typography>
+          <Typography variant="h4">Danh sách đấu giá</Typography>
         </Box>
-
-        <AddProductForm />
+        <ViewAuctionForm />
         <Box display={"flex"} justifycontent={"center"} sx={{ p: 0.5 }}>
           <Typography variant="h7"> </Typography>
         </Box>

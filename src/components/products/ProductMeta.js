@@ -3,7 +3,7 @@ import { Typography } from "@mui/material";
 import moment from "moment";
 import { ProductMetaWrapper } from "../../style/Products";
 
-export default function ProductMeta({ product, matches }) {
+export default function ProductMeta({ product, matches,productName, startDate, endDate, startingPrice }) {
 
  console.log(product);
   const formatCreateDate = (startDate) => {
@@ -12,15 +12,15 @@ export default function ProductMeta({ product, matches }) {
     return (
       <ProductMetaWrapper>
         
-        <Typography variant={matches } lineHeight={2}>
-          {product.name}
+        {/* <Typography variant={matches } lineHeight={2}>
+          {productName}
         </Typography>
         <Typography variant={matches ? "caption" : "body1"}>
-        Giá khởi Điểm : {product.startingPrice}
+        Giá khởi Điểm : 
         </Typography>
         <Typography variant={matches ? "caption" : "body1"}>
         Thời Gian Bắt Đầu :  {formatCreateDate}
-        </Typography>
+        </Typography> */}
       </ProductMetaWrapper>
     );
 }

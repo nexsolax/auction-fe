@@ -25,24 +25,26 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 
-const ViewEstateForm = () => {
-  const [RealEstates, setRealEstates] = useState("");
+const ViewAuctionForm = () => {
+  const [auctions, setAuctions] = useState("");
   const [loading, setLoading] = useState(false);
 
   const [error, setError] = useState("");
   const token = localStorage.getItem("token");
   const [isDeleting, setIsDeleting] = useState(false);
   const [itemData, setItemData] = useState(null);
+  const [id, setId] =  useState("");
   const [name, setName] = useState("");
-  const [des, setDes] = useState("");
-  const [add, setAdd] = useState("");
+  const [startDate, setStartDate ]= useState("");
+  const [endDate, setEndDate ]= useState("");
+  const [startingPrice, setStartingPrice ]= useState("");
   const [image, setImg] = useState("");
   const [status, setStatus] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
     axios
-      .get("https://reasapiv2.azurewebsites.net/api/RealEstate?pageSize=100", {
+      .get("https://reasapiv2.azurewebsites.net/api/Auction?pageSize=100", {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
@@ -50,22 +52,24 @@ const ViewEstateForm = () => {
           const data = response.data.data.pagingData.map((item) => {
             // Perform null/undefined checks before accessing nested properties
             const id = item.id;
-            const name = item.name;
-            const image = item.realEstateImages[0].image;
-            const address = item.address;
-            const description = item.description;
+            const name = item.realEstates.name;
+            const image = item.realEstates.realEstateImages[0].image;
+            const startDate = item.startDate;
+            const endDate = item.endDate;
+            const startingPrice = item.startingPrice;
             const status = item.status;
-            return { id, name, image, address, description, status };
+            return { id, name, image, startDate, endDate, startingPrice, status };
           });
-          setRealEstates(data);
+          setAuctions(data);
+          
         } else {
           console.error("Invalid response data format:", response.data);
           setError("Invalid response data format. Please try again later.");
         }
       })
       .catch((error) => {
-        console.error("Error fetching realEstates:", error);
-        setError("Error fetching realEstates. Please try again later.");
+        console.error("Error fetching auctions:", error);
+        setError("Error fetching auctions. Please try again later.");
       })
       .finally(() => setLoading(false));
   });
@@ -82,11 +86,11 @@ const ViewEstateForm = () => {
       cancelButtonText: "Từ chối",
     }).then((result) => {
       if (result.isConfirmed) {
-        const foundItem = RealEstates.find((item) => item.id === itemId);
+        const foundItem = auctions.find((item) => item.id === itemId);
 
         axios
           .delete(
-            `https://reasapiv2.azurewebsites.net/api/RealEstate/${foundItem.id}`,
+            `https://reasapiv2.azurewebsites.net/api/Auction/${foundItem.id}`,
             {
               headers: { Authorization: `Bearer ${token}` },
             }
@@ -94,7 +98,7 @@ const ViewEstateForm = () => {
           .then(() => {
             Swal.fire({
               title: "Xoá thành công!",
-              text: "Tài sản đã được xoá ",
+              text: "Đấu giá đã được xoá ",
               icon: "success",
             });
 
@@ -104,7 +108,7 @@ const ViewEstateForm = () => {
             return Swal.fire({
               position: "center",
               icon: "error",
-              title: "Sản phẩm đang được đấu giá, không được xóa.",
+              title: "Đang thực hiện đấu giá, không được xóa.",
               showConfirmButton: false,
               timer: 1500,
             });
@@ -120,14 +124,9 @@ const ViewEstateForm = () => {
   }, [isDeleting]);
   const [openModal, setOpenModal] = useState(false); // State to control modal visibility
 
-  const handleItemClick = (item) => {
-    setOpenModal(true);
-    setItemData(item);
-    setName(item.name);
-    setImg(item.image);
-    setDes(item.description);
-    setAdd(item.address);
-    setStatus(item.status);
+  const handleItemClick = (id) => {
+
+    navigate(`/aution-detail/${id}`);
   };
 
   const style = {
@@ -166,14 +165,15 @@ const ViewEstateForm = () => {
                 {name}
               </Typography>
               <Typography gutterBottom variant="h5" component="div">
-                {add}
+                {startingPrice}
+              </Typography>
+              <Typography gutterBottom variant="h5" component="div">
+                {startDate}
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                {des}
+                {endDate}
               </Typography>
-              <Typography variant="body2" color="text.secondary">
-                {status}
-              </Typography>
+              
             </CardContent>
           </Card>
         </Box>
@@ -190,10 +190,10 @@ const ViewEstateForm = () => {
               <Button
                 variant="contained"
                 onClick={() => {
-                  navigate("/additem");
+                  navigate("/createauction");
                 }}
               >
-                Thêm bất động sản
+                Thêm đấu giá
               </Button>
             </Grid>
             <Grid item xs={12} >
@@ -202,23 +202,22 @@ const ViewEstateForm = () => {
                   <TableRow>
                     <TableCell>Hình ảnh</TableCell>
                     <TableCell>Tên bất động sản</TableCell>
-                    <TableCell>Địa chỉ</TableCell>
-                    <TableCell>Mô tả</TableCell>
+                    <TableCell>Giá khởi điểm</TableCell>            
                     <TableCell>Trạng thái</TableCell>
                     <TableCell>Hành động</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {Array.isArray(RealEstates) &&
-                    RealEstates.map((item) => (
+                  {Array.isArray(auctions) &&
+                    auctions.map((item) => (
                       <TableRow key={item.id} >
                         <TableCell>
                           <ProductImage src={item.image} />
                         </TableCell>
 
                         <TableCell>{item.name}</TableCell>
-                        <TableCell>{item.address}</TableCell>
-                        <TableCell>{item.description}</TableCell>
+                        <TableCell>{item.startingPrice}</TableCell>
+                        
                         <TableCell>
                           {" "}
                           <Chip
@@ -239,7 +238,7 @@ const ViewEstateForm = () => {
                           <Button
                             variant="outlined"
                             size="medium"
-                            onClick={() => handleItemClick(item)}
+                            onClick={() => handleItemClick(item.id)}
                           >
                             Xem chi tiết
                           </Button>
@@ -271,4 +270,4 @@ const ViewEstateForm = () => {
   );
 };
 
-export default ViewEstateForm;
+export default ViewAuctionForm;

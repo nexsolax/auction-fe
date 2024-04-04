@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
-import { useTheme } from "@mui/material/styles";
 import { Button, Chip } from "@mui/material";
 import axios from "axios";
 import Table from "@mui/material/Table";
@@ -15,17 +14,15 @@ import Paper from "@mui/material/Paper";
 
 const ApproveProductForm = () => {
   // const [realEstateId, setRealEstateId] = useState("");
-  const [RealEstates, setRealEstates] = useState("");
+
   const [dataList, setDataList] = useState([]);
 
   const [loading, setLoading] = useState(false);
-  const [successDialogOpen, setSuccessDialogOpen] = useState(false);
-  const [errorDialogOpen, setErrorDialogOpen] = useState(false);
+
   const [error, setError] = useState("");
   const token = localStorage.getItem("token");
-  const user = localStorage.getItem("loginUser");
-  const jsonUser = JSON.parse(user);
-  const theme = useTheme();
+
+
   const MySwal = withReactContent(Swal);
 
   useEffect(() => {
@@ -155,6 +152,21 @@ const ApproveProductForm = () => {
         setLoading(false);
       });
   };
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+  
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+  
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
+  
+    const formattedDate = `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
+  
+    return formattedDate;
+  }
 
   console.log(`real data:${dataList.length} `);
   return (
@@ -163,6 +175,7 @@ const ApproveProductForm = () => {
         <TableHead>
           <TableRow>
             <TableCell align="left">Tên nhà đất</TableCell>
+            <TableCell>Thời gian tạo</TableCell>
             <TableCell>Trạng thái</TableCell>
             <TableCell align="right">Hành động </TableCell>
           </TableRow>
@@ -176,9 +189,18 @@ const ApproveProductForm = () => {
               <TableCell component="th" scope="row">
                 {row.name}
               </TableCell>
+              <TableCell component="th" scope="row"> 
+                {formatDate(row.dateCreate)}
+              </TableCell>
               <TableCell component="th" scope="row">
                 <Chip
-                  label={row.status}
+                  label={row.status === "Approved" ? "Đã phê duyệt" :
+                  row.status === "Completed" ? "Hoàn thành" :
+                  row.status === "OnGoing" ? "Đang diễn ra" :
+                  row.status === "Rejected" ? "Đã từ chối" : 
+                  row.status === "Pending" ? "Chưa phê duyệt" : 
+                  row.status === "Sold" ? "Đã bán " :
+                  row.status === "Failed" ? "Đã thất bại " : "..."}
                   color={row.status === "Pending" ? "warning" : "info"}
                 />
               </TableCell>
