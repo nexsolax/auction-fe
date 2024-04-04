@@ -45,7 +45,7 @@ const AutionDetailComponent = () => {
         console.log(response?.data?.data);
         setHighestBid(
           response?.data?.data?.userBids[0]?.amount ||
-            response?.data?.data?.startingPrice
+          response?.data?.data?.startingPrice
         );
 
         if (response?.data?.data?.status === "Completed") {
@@ -81,11 +81,21 @@ const AutionDetailComponent = () => {
   }, []);
 
   const handleRegister = () => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      // Redirect to /login if the user is not logged in
+      // window.location.href = "/login";
+      toast.error("Bạn cần phải đăng nhập");
+      return;
+    }
+
     let config = {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        Authorization: `Bearer ${token}`,
       },
     };
+
     axios
       .post(
         `https://reasapiv2.azurewebsites.net/api/Auction/${autionId}/register`,
@@ -111,12 +121,22 @@ const AutionDetailComponent = () => {
   const handleBid = () => {
     const amount = Number(bidValue);
     if (!amount) return;
-
+  
+    const token = localStorage.getItem("token");
+  
+    if (!token) {
+      // Redirect to /login if the user is not logged in
+      // window.location.href = "/login";
+      toast.error("Bạn cần phải đăng nhập");
+      return;
+    }
+  
     let config = {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        Authorization: `Bearer ${token}`,
       },
     };
+  
     axios
       .post(
         `https://reasapiv2.azurewebsites.net/api/Auction/${autionId}/place-bid`,
@@ -332,9 +352,9 @@ const AutionDetailComponent = () => {
                   <p>
                     Tăng giá mỗi lần:{" "}
                     {moneyParser(product?.bidIncrement) + " đ"}
-                    
+
                   </p>
-                  
+
                   <p>
                     Bước giá tối đa:{" "}
                     {product?.maxBidIncrement
@@ -358,12 +378,12 @@ const AutionDetailComponent = () => {
                     {product?.status == "Pending"
                       ? "Chờ duyệt"
                       : product?.status == "Approved"
-                      ? "Đang mở đăng ký"
-                      : product?.status == "OnGoing"
-                      ? "Đang diễn ra"
-                      : product?.status == "Completed"
-                      ? "Đã kết thúc"
-                      : ""}
+                        ? "Đang mở đăng ký"
+                        : product?.status == "OnGoing"
+                          ? "Đang diễn ra"
+                          : product?.status == "Completed"
+                            ? "Đã kết thúc"
+                            : ""}
                   </p>
                 </div>
               </TabPanel>

@@ -11,6 +11,7 @@ import {
   MenuItem,
   Tooltip,
   Typography,
+  Button
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
@@ -30,6 +31,7 @@ import {
 import { Colors } from '../../style/theme';
 import { useUIContext } from '../../context/ui';
 import { jwtDecode } from 'jwt-decode';
+import { useNavigate} from 'react-router-dom';
 
 export default function Actions({ matches }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -45,7 +47,10 @@ export default function Actions({ matches }) {
   const [sessionData, setSessionData] = useState([]);
   const token = localStorage.getItem('token');
 
-  const decoded = jwtDecode(token);
+  let decoded;
+  if (token) {
+    decoded = jwtDecode(token);
+  }
   const apiProfile = `https://reasapiv2.azurewebsites.net/api/User/${jsonUser?.id}`;
   const apiSession = `https://reasapiv2.azurewebsites.net/api/User?id=${jsonUser?.id}`;
 
@@ -82,6 +87,11 @@ export default function Actions({ matches }) {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+  // const navigate = useNavigate();
+  const handleLogoutClick = () => {
+    localStorage.clear();
+    window.location.href = '/login';
   };
 
   const Component = matches
@@ -288,7 +298,14 @@ export default function Actions({ matches }) {
                 color: matches && Colors.white,
               }}
             >
-              {isLoggedIn ? <div>{jsonUser.unique_name}</div> : 'Đăng Nhập'}
+              {isLoggedIn ? (
+                <>
+                  <div>{jsonUser.unique_name}</div>
+                  <Button variant="contained" onClick={handleLogoutClick}>Đăng Xuất</Button>
+                </>
+              ) : (
+                'Đăng Nhập'
+              )}
             </Typography>
           </Link>
         )}
