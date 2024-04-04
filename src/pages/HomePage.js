@@ -27,13 +27,13 @@ function HomePage() {
                 <Appbar />
                 <Banner />
                 <Promotions />
-                <Box display={"flex"} justifycontent={"center"} sx={{ p: 4 }}>
-                    <Typography variant="h4">Tài Sản Sắp Được đấu giá</Typography>
+                <Box display={"flex"} justifyContent={"center"} alignItems={"center"} sx={{ p: 4, height: '10vh' }}>
+                    <Typography variant="h3">Danh Sách Đấu Giá Tài Sản</Typography>
                 </Box>
                 <Products />
                 <Footer />
                 <AppDrawer />
-                <SearchBox/>
+                <SearchBox />
             </UIProvider>
 
         </Container>

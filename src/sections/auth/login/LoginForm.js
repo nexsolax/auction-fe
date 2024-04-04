@@ -77,35 +77,35 @@ export default function LoginForm() {
   //     setErrMsg('');
   // }, [email, password])
 
-//   const handleForgetPass = () => {
-//     const emailValue = reEmail.current.value.trim(); // Remove leading/trailing whitespace
-//     if (!emailValue) {
-//       // Display an error message or take appropriate action for empty email
-//       setError('Địa chỉ Email không được bỏ trống');
-//       setErrorDialogOpen(true);
-//       return;
-//     }
-//     const api = `https://reasapiv2.azurewebsites.net/api/Login/reset_password/sdfsdfsdf%40gmail.com?email=${emailValue}`;
+  //   const handleForgetPass = () => {
+  //     const emailValue = reEmail.current.value.trim(); // Remove leading/trailing whitespace
+  //     if (!emailValue) {
+  //       // Display an error message or take appropriate action for empty email
+  //       setError('Địa chỉ Email không được bỏ trống');
+  //       setErrorDialogOpen(true);
+  //       return;
+  //     }
+  //     const api = `https://reasapiv2.azurewebsites.net/api/Login/reset_password/sdfsdfsdf%40gmail.com?email=${emailValue}`;
 
-//     axios
-//       .put(api)
-//       .then((response) => {
-//         // Handle the response (success or failure)
-//         // You can add your logic here, e.g., show a success message
-//         setDialogMessage("Mật khẩu mới đã được gửi đến địa chỉ Email của bạn")
-//         setDialogOpen(true);
-//         console.log('PUT request successful:', response);
+  //     axios
+  //       .put(api)
+  //       .then((response) => {
+  //         // Handle the response (success or failure)
+  //         // You can add your logic here, e.g., show a success message
+  //         setDialogMessage("Mật khẩu mới đã được gửi đến địa chỉ Email của bạn")
+  //         setDialogOpen(true);
+  //         console.log('PUT request successful:', response);
 
-//       })
-//       .catch((error) => {
-//         // Set the error message in the state
-//         setError(error?.response?.data || 'An error occurred.');
+  //       })
+  //       .catch((error) => {
+  //         // Set the error message in the state
+  //         setError(error?.response?.data || 'An error occurred.');
 
-//         // Open the error dialog
-//         setErrorDialogOpen(true);
-//         console.error('Error making PUT request:', error);
-//       });
-//   }
+  //         // Open the error dialog
+  //         setErrorDialogOpen(true);
+  //         console.error('Error making PUT request:', error);
+  //       });
+  //   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -122,7 +122,10 @@ export default function LoginForm() {
       );
       console.log(JSON.stringify(response?.data));
       const token = response?.data?.data?.tokenString;
-      const decoded = jwtDecode(token);
+      let decoded;
+      if (token) {
+        decoded = jwtDecode(token);
+      }
       localStorage.setItem('token', token);
       localStorage.setItem('loginUser', JSON.stringify(decoded));
       console.log(JSON.stringify(decoded))

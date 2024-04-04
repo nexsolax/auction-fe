@@ -153,9 +153,9 @@ export default function Router() {
       path: 'aution-detail/:autionId',
       element: (
         <Suspense>
-          <RolesAuthRoute roles={['Admin', 'Staff', 'Member']}>
+          {/* <RolesAuthRoute roles={['Admin', 'Staff', 'Member']}> */}
             <AutionDetail />
-          </RolesAuthRoute>
+          {/* </RolesAuthRoute> */}
         </Suspense>
       ),
     },

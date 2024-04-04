@@ -33,6 +33,16 @@ export default function SingleProductDesktop({
     useDialogModal(ProductDetail);
   const [showOptions, setShowOptions] = useState(false);
 
+  const statusMapping = {
+    'Completed': 'Hoàn thành',
+    'OnGoing': 'Đang diễn ra',
+    'Approved': 'Đang mở đăng ký',
+    'Pending': 'Chờ duyệt',
+  };
+
+  const statusInVietnamese = statusMapping[status] || status;
+
+
   const handleMouseEnter = () => {
     setShowOptions(true);
   };
@@ -61,13 +71,11 @@ export default function SingleProductDesktop({
   return (
     <>
       <Product onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-        <ProductImage src={productImage} />
-        Tên tài sản: {productName}
-        <br />
-        Ngày bắt đầu đấu giá: {formatDate(startDate)} <br />
-        Ngày kết thúc đấu giá: {formatDate(endDate)}
-        <br />
-        Giá khởi điểm: {startingPrice}
+        <ProductImage src={productImage} /><<<<<<< test
+
+
+        <ProductMetaWrapper>
+
         <div
           style={{
             display: "flex",
@@ -75,46 +83,27 @@ export default function SingleProductDesktop({
             width: "100%",
           }}
         >
-          {status === "Completed" && (
-            <span
-              style={{
-                borderColor: "red",
-                padding: 5,
-                borderRadius: 5,
-                borderWidth: 1,
-                borderStyle: "solid",
-              }}
-            >
-              Đã hoàn thành
-            </span>
-          )}
-            {status === "OnGoing" && (
-            <span
-              style={{
-                borderColor: "red",
-                padding: 5,
-                borderRadius: 5,
-                borderWidth: 1,
-                borderStyle: "solid",
-              }}
-            >
-              Đang diễn ra
-            </span>
-          )}
-            {status === "Approved" && (
-            <span
-              style={{
-                borderColor: "red",
-                padding: 5,
-                borderRadius: 5,
-                borderWidth: 1,
-                borderStyle: "solid",
-              }}
-            >
-              Bắt đầu đăng ký
-            </span>
-          )}
+
+          <span
+            style={{
+              padding: '0.5rem',
+              borderRadius: '0.5rem',
+              borderWidth: '1px',
+              borderStyle: 'solid',
+              borderColor: status === 'Completed' ? 'green' : status === 'OnGoing' ? 'blue' : status === 'Approved' ? 'blue' : 'gray',
+              backgroundColor: status === 'Completed' ? '#c6f6d5' : status === 'OnGoing' ? '#bee3f8' : status === 'Approved' ? '#bee3f8' : '#edf2f7',
+              color: status === 'Completed' ? 'green' : status === 'OnGoing' ? 'blue' : status === 'Approved' ? 'blue' : 'gray',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '1.125rem',
+              fontWeight: 'bold',
+            }}
+          >
+            {statusInVietnamese}
+          </span>
         </div>
+        </ProductMetaWrapper>
         {(showOptions || matches) && (
           <ProductAddToCart
             onClick={handleClick}
@@ -125,11 +114,29 @@ export default function SingleProductDesktop({
             Thông tin sản phẩm
           </ProductAddToCart>
         )}
+        <ProductActionsWrapper show={showOptions || matches}>
+          <Stack direction={matches ? 'row' : 'column'}>
+            <ProductActionButton>
+              <Tooltip placement='left' title='share this product'>
+                <ShareIcon color='primary' />
+              </Tooltip>
+            </ProductActionButton>
+            <ProductActionButton onClick={() => showProductDetailDialog()}>
+              <Tooltip placement='left' title='Full view'>
+                <FitScreenIcon color='primary' />
+              </Tooltip>
+            </ProductActionButton>
+          </Stack>
+        </ProductActionsWrapper>
+        <ProductMetaWrapper>
+          <ProductMeta
+            productName={productName}
+            endDate={endDate}
+            startDate={startDate}
+            startingPrice={startingPrice} />
+        </ProductMetaWrapper>
       </Product>
-      <ProductMetaWrapper>
-        <ProductMeta product={products} />{" "}
-        {/* Pass selected product to ProductMeta */}
-      </ProductMetaWrapper>
+
 
       <ProductDetailDialog product={products} />
     </>
