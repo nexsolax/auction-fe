@@ -45,7 +45,7 @@ export default function approveProduct() {
                     clip-rule="evenodd"
                   ></path>
                 </svg>{" "}
-                Previous Page
+               Quay lại
               </button>
             </div>
           </div>

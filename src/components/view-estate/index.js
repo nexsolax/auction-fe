@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-
+import styled from "@emotion/styled";
 import {
   Box,
   Card,
@@ -16,6 +16,7 @@ import {
   Container,
   Modal,
   Chip,
+  Link,
 } from "@mui/material";
 import axios from "axios";
 import { ProductImage } from "../../style/Products";
@@ -24,6 +25,7 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
+import { Colors } from "../../style/theme";
 
 const ViewEstateForm = () => {
   const [RealEstates, setRealEstates] = useState("");
@@ -38,6 +40,9 @@ const ViewEstateForm = () => {
   const [add, setAdd] = useState("");
   const [image, setImg] = useState("");
   const [status, setStatus] = useState("");
+  const [pricing, setPricing] = useState("");
+  const [acreage, setAcreage] = useState("");
+  const [linkAttachment, setLinkAttachment] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -54,8 +59,21 @@ const ViewEstateForm = () => {
             const image = item.realEstateImages[0].image;
             const address = item.address;
             const description = item.description;
+            const pricing = item.pricing;
+            const acreage = item.acreage;
             const status = item.status;
-            return { id, name, image, address, description, status };
+            const linkAttachment = item.linkAttachment;
+            return {
+              id,
+              name,
+              image,
+              address,
+              description,
+              pricing,
+              acreage,
+              linkAttachment,
+              status,
+            };
           });
           setRealEstates(data);
         } else {
@@ -128,6 +146,9 @@ const ViewEstateForm = () => {
     setDes(item.description);
     setAdd(item.address);
     setStatus(item.status);
+    setPricing(item.pricing);
+    setAcreage(item.acreage);
+    setLinkAttachment(item.linkAttachment);
   };
 
   const style = {
@@ -163,16 +184,32 @@ const ViewEstateForm = () => {
             />
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
-                {name}
-              </Typography>
-              <Typography gutterBottom variant="h5" component="div">
-                {add}
+                Tên tài sản: {name}
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                {des}
+                Địa chỉ: {add}
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                {status}
+                Mô tả: {des}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                Trạng thái: {status}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                Định giá tài sản: {pricing} VND
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                Diện tích: {acreage} m2
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                <Link
+                  component="a"
+                  href={linkAttachment}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Đường dẫn tài liệu đính kèm
+                </Link>
               </Typography>
             </CardContent>
           </Card>
@@ -196,8 +233,8 @@ const ViewEstateForm = () => {
                 Thêm bất động sản
               </Button>
             </Grid>
-            <Grid item xs={12} >
-              <Table >
+            <Grid item xs={12}>
+              <Table>
                 <TableHead>
                   <TableRow>
                     <TableCell>Hình ảnh</TableCell>
@@ -211,7 +248,7 @@ const ViewEstateForm = () => {
                 <TableBody>
                   {Array.isArray(RealEstates) &&
                     RealEstates.map((item) => (
-                      <TableRow key={item.id} >
+                      <TableRow key={item.id}>
                         <TableCell>
                           <ProductImage src={item.image} />
                         </TableCell>
@@ -222,13 +259,23 @@ const ViewEstateForm = () => {
                         <TableCell>
                           {" "}
                           <Chip
-                            label={item.status === "Approved" ? "Đã phê duyệt" :
-                            item.status === "Completed" ? "Hoàn thành" :
-                            item.status === "OnGoing" ? "Đang diễn ra" :
-                            item.status === "Rejected" ? "Đã từ chối" : 
-                            item.status === "Pending" ? "Chưa phê duyệt" : 
-                            item.status === "Sold" ? "Đã bán " :
-                            item.status === "Failed" ? "Đã thất bại " : "..."}
+                            label={
+                              item.status === "Approved"
+                                ? "Đã phê duyệt"
+                                : item.status === "Completed"
+                                ? "Hoàn thành"
+                                : item.status === "OnGoing"
+                                ? "Đang diễn ra"
+                                : item.status === "Rejected"
+                                ? "Đã từ chối"
+                                : item.status === "Pending"
+                                ? "Chưa phê duyệt"
+                                : item.status === "Sold"
+                                ? "Đã bán "
+                                : item.status === "Failed"
+                                ? "Đã thất bại "
+                                : "..."
+                            }
                             color={
                               item.status === "Pending" ? "warning" : "info"
                             }

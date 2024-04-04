@@ -140,7 +140,7 @@ export default function LoginForm() {
         case 'Admin':
           return navigate('/dashboard/app', { replace: true });
         case 'Member':
-          return navigate('/dashboard', { replace: true });
+          return navigate('/home', { replace: true });
         case 'Staff':
           return navigate('/dashboard/app', { replace: true });
         default:

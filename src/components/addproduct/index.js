@@ -39,7 +39,10 @@ const AddProductForm = () => {
   const theme = useTheme();
   const decode = jwtDecode(token);
   const [image, setImage ] = useState("");
-  
+  const [pricing, setPricing] = useState("");
+  const [acreage, setAcreage] = useState("");
+  const [linkAttachment, setLinkAttachment] = useState("");
+
   useEffect(() => {
     axios
       .get("https://reasapiv2.azurewebsites.net/api/Category", {
@@ -82,6 +85,9 @@ const AddProductForm = () => {
     formData.append("address", address);
     formData.append("description", description);
     formData.append("categoryId", categoryId);
+    formData.append("pricing", pricing);
+    formData.append("acreage",acreage)
+    formData.append("linkAttachment", linkAttachment);
     // image.forEach((img) => {
     //   formData.append("image", img);
 
@@ -127,6 +133,9 @@ const AddProductForm = () => {
     setAddress("");
     setDescription("");
     setCategoryId("");
+    setPricing("");
+    setAcreage("");
+    setLinkAttachment("");
     setImage([]);
   };
 
@@ -154,7 +163,7 @@ const AddProductForm = () => {
       onSubmit={handleSubmit}
     >
       <TextField
-        label="Name"
+        label="Tên tài sản"
         value={itemName}
         onChange={(event) => setItemName(event.target.value)}
         fullWidth
@@ -162,7 +171,7 @@ const AddProductForm = () => {
         margin="normal"
       />
       <TextField
-        label="Address"
+        label="Địa chỉ"
         value={address}
         onChange={(event) => setAddress(event.target.value)}
         fullWidth
@@ -170,7 +179,7 @@ const AddProductForm = () => {
         margin="normal"
       />
       <TextField
-        label="Description"
+        label="Mô tả"
         value={description}
         onChange={(event) => setDescription(event.target.value)}
         fullWidth
@@ -178,6 +187,36 @@ const AddProductForm = () => {
         margin="normal"
         multiline
         rows={4}
+      />
+      <TextField
+        label="Định giá tài sản"
+        value={pricing}
+        onChange={(event) => setPricing(event.target.value)}
+        fullWidth
+        required
+        margin="normal"
+        multiline
+        rows={2}
+      />
+      <TextField
+        label="Diện tích"
+        value={acreage}
+        onChange={(event) => setAcreage(event.target.value)}
+        fullWidth
+        required
+        margin="normal"
+        multiline
+        rows={2}
+      />
+       <TextField
+        label="Đường dẫn tài liệu đính kèm"
+        value={linkAttachment}
+        onChange={(event) => setLinkAttachment(event.target.value)}
+        fullWidth
+        required
+        margin="normal"
+        multiline
+        rows={2}
       />
       <FormControl fullWidth required margin="normal">
         <InputLabel>Category</InputLabel>

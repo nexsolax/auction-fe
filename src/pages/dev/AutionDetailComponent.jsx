@@ -30,7 +30,7 @@ const AutionDetailComponent = () => {
   );
   const minutesRemaining = Math.floor((timeRemaining % (60 * 60)) / 60);
   const secondsRemaining = Math.floor(timeRemaining % 60);
-
+  const [linkAttachment, setLinkAttachment] = useState("");
   const [product, setProduct] = useState([]);
 
   const fetchProduct = () => {
@@ -41,11 +41,13 @@ const AutionDetailComponent = () => {
         response?.data?.data?.userBids.sort((a, b) => {
           return new Date(b.dateCreate) - new Date(a.dateCreate);
         });
+
         setProduct(response?.data?.data);
+        setLinkAttachment(product?.realEstates?.linkAttachment);
         console.log(response?.data?.data);
         setHighestBid(
           response?.data?.data?.userBids[0]?.amount ||
-          response?.data?.data?.startingPrice
+            response?.data?.data?.startingPrice
         );
 
         if (response?.data?.data?.status === "Completed") {
@@ -103,15 +105,19 @@ const AutionDetailComponent = () => {
         config
       )
       .then((response) => {
-        console.log(response?.data?.data)
+        console.log(response?.data?.data);
 
         window.location.href = response?.data?.data || "/";
         return;
       })
       .catch((error) => {
-        console.log(error)
+        console.log(error);
         console.log(error?.response?.data?.message || error?.message);
-        toast.error("Đăng ký thất bại: " + error?.response?.data?.message || error?.message || "");
+        toast.error(
+          "Đăng ký thất bại: " + error?.response?.data?.message ||
+            error?.message ||
+            ""
+        );
       })
       .finally(() => {
         fetchProduct();
@@ -121,22 +127,22 @@ const AutionDetailComponent = () => {
   const handleBid = () => {
     const amount = Number(bidValue);
     if (!amount) return;
-  
+
     const token = localStorage.getItem("token");
-  
+
     if (!token) {
       // Redirect to /login if the user is not logged in
       // window.location.href = "/login";
       toast.error("Bạn cần phải đăng nhập");
       return;
     }
-  
+
     let config = {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     };
-  
+
     axios
       .post(
         `https://reasapiv2.azurewebsites.net/api/Auction/${autionId}/place-bid`,
@@ -155,7 +161,9 @@ const AutionDetailComponent = () => {
       })
       .catch((error) => {
         console.log("Error fetching data:", error.response?.data);
-        toast.error("Đặt giá thất bại: " + error?.response?.data?.message || "");
+        toast.error(
+          "Đặt giá thất bại: " + error?.response?.data?.message || ""
+        );
       });
   };
 
@@ -196,6 +204,12 @@ const AutionDetailComponent = () => {
                 </p>
                 <p>
                   <b>Miêu tả:</b> {product?.realEstates?.description}
+                </p>
+                <p>
+                  <b>Định giá tài sản:</b> {product?.realEstates?.pricing}
+                </p>
+                <p>
+                  <b>Diện tích:</b> {product?.realEstates?.acreage}
                 </p>
               </div>
 
@@ -352,9 +366,7 @@ const AutionDetailComponent = () => {
                   <p>
                     Tăng giá mỗi lần:{" "}
                     {moneyParser(product?.bidIncrement) + " đ"}
-
                   </p>
-
                   <p>
                     Bước giá tối đa:{" "}
                     {product?.maxBidIncrement
@@ -378,13 +390,21 @@ const AutionDetailComponent = () => {
                     {product?.status == "Pending"
                       ? "Chờ duyệt"
                       : product?.status == "Approved"
-                        ? "Đang mở đăng ký"
-                        : product?.status == "OnGoing"
-                          ? "Đang diễn ra"
-                          : product?.status == "Completed"
-                            ? "Đã kết thúc"
-                            : ""}
+                      ? "Đang mở đăng ký"
+                      : product?.status == "OnGoing"
+                      ? "Đang diễn ra"
+                      : product?.status == "Completed"
+                      ? "Đã kết thúc"
+                      : ""}
                   </p>
+                  Tài liệu đính kèm:{" "}
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href={product?.realEstates?.linkAttachment}
+                  >
+                    {product?.realEstates?.linkAttachment}
+                  </a>
                 </div>
               </TabPanel>
               <TabPanel key={"user"} value={"user"}>

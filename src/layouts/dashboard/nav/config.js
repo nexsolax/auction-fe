@@ -24,7 +24,7 @@ const navConfig = [
     title: 'Xem danh sách tài sản',
     path: '/viewitem',
     icon: icon('ic_analytics'),
-    role: ['Admin', 'Staff', 'Member'],
+    role: [ 'Member'],
   },
   {
     title: 'Xác nhận tài sản',
@@ -36,7 +36,7 @@ const navConfig = [
     title: 'Xem danh sách đấu giá',
     path: '/viewauction',
     icon: icon('ic_analytics'),
-    role: ['Admin', 'Staff', 'Member'],
+    role: ['Member'],
   },
   {
     title: 'Xác nhận đấu giá',

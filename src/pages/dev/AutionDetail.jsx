@@ -39,7 +39,7 @@ const AutionDetail = () => {
                   clip-rule="evenodd"
                 ></path>
               </svg>{" "}
-              Previous Page
+             Quay lại
             </button>
           </div>
         </div>

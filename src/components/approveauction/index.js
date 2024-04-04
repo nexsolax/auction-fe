@@ -43,8 +43,8 @@ const ApproveAuctionForm = () => {
       .finally(() => setLoading(false));
   }, []);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = (auctionId) => {
+    // event.preventDefault();
     setLoading(true);
     const formData = {
       isApproved: true,
@@ -81,8 +81,8 @@ const ApproveAuctionForm = () => {
         setLoading(false);
       });
   };
-  const handleSubmit2 = (event) => {
-    event.preventDefault();
+  const handleSubmit2 = (auctionId) => {
+    // event.preventDefault();
     setLoading(true);
     const formData = {
       isApproved: false,
@@ -168,33 +168,33 @@ const ApproveAuctionForm = () => {
                    row.status === "Pending" ? "Chưa phê duyệt" : 
                    row.status === "Failed" ? "Đã thất bại " : "..."}
                   
-                  color={row.status === "Approved" ? "warning" : "info"}
+                  color={row.status === "Pending" ? "warning" : "info"}
                 />
               </TableCell>
               <TableCell align="right">
                 <Button
                   variant="contained"
-                  disabled={row.status === "Approved" ? false : true}
+                  disabled={row.status === "Pending" ? false : true}
                   
                   onClick={() => handleSubmit(row.id)}
                 >
                   {" "}
                   {`${
-                    row.status === "Approved"
-                      ? "Xác nhận mở đấu giá"
+                    row.status === "Pending"
+                      ? "Xác nhận đấu giá"
                       : "Đã mở đấu giá"
                   }`}{" "}
                 </Button>
                 <Button
                   variant="contained"
-                  disabled={row.status === "OnGoing" ? false : true}
+                  disabled={row.status === "Pending" ? false : true}
                   onClick={() => handleSubmit2(row.id)}
                 >
                   {" "}
                   {`${
-                    row.status === "OnGoing"
-                      ? "Đóng đấu giá"
-                      : "Đã đóng đấu giá"
+                    row.status === "Pending"
+                      ? "Từ chối đấu giá"
+                      : "Đã từ chối"
                   }`}{" "}
                 </Button>
                
