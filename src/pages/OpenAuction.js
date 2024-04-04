@@ -58,7 +58,7 @@ export default function OpenAuction() {
           justifycontent={"center"}
           sx={{ p: 4 }}
         >
-          <Typography variant="h4">Mở đấu giá </Typography>
+          <Typography variant="h4">Mở/ Đóng đấu giá </Typography>
         </Box>
         {/* <ApproveAuctionForm/> */}
         <OpenAuctionForm />

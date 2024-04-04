@@ -33,6 +33,7 @@ import AutionDetail from './pages/dev/AutionDetail';
 import OpenAuction from './pages/OpenAuction';
 import CloseAuction from './pages/CloseAuction';
 import ViewEstate from './pages/ViewEstate';
+import ViewAuction from './pages/ViewAuctionOwn';
 
 // ----------------------------------------------------------------------
 
@@ -58,6 +59,7 @@ export default function Router() {
     { path: 'signup', element: <SignUp /> },
     { path: 'additem', element: <AddProduct /> },
     { path: 'viewitem', element: <ViewEstate/>},
+    { path: 'viewauction', element: <ViewAuction/>},
     //  (
     //   <Suspense>
     //     <RolesAuthRoute roles={['User']}>

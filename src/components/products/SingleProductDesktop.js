@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-import { Stack, Tooltip, Typography } from '@mui/material';
-import ShareIcon from '@mui/icons-material/Share';
-import FitScreenIcon from '@mui/icons-material/FitScreen';
-import useDialogModal from '../../hooks/useDialogModal';
-import ProductDetail from '../productdetail';
-import ProductMeta from './ProductMeta';
+import { Stack, Tooltip, Typography } from "@mui/material";
+import ShareIcon from "@mui/icons-material/Share";
+import FitScreenIcon from "@mui/icons-material/FitScreen";
+import useDialogModal from "../../hooks/useDialogModal";
+import ProductDetail from "../productdetail";
+import ProductMeta from "./ProductMeta";
 import {
   Product,
   ProductActionButton,
@@ -13,10 +13,10 @@ import {
   ProductAddToCart,
   ProductImage,
   ProductMetaWrapper,
-} from '../../style/Products';
-import { useNavigate } from 'react-router-dom';
+} from "../../style/Products";
+import { useNavigate } from "react-router-dom";
 
-const defaultImageSource = '/assets/images/covers/auction-hammer.jpg';
+const defaultImageSource = "/assets/images/covers/auction-hammer.jpg";
 export default function SingleProductDesktop({
   products,
   id,
@@ -32,6 +32,7 @@ export default function SingleProductDesktop({
   const [ProductDetailDialog, showProductDetailDialog, closeProductDialog] =
     useDialogModal(ProductDetail);
   const [showOptions, setShowOptions] = useState(false);
+
   const statusMapping = {
     'Completed': 'Hoàn thành',
     'OnGoing': 'Đang diễn ra',
@@ -41,6 +42,7 @@ export default function SingleProductDesktop({
 
   const statusInVietnamese = statusMapping[status] || status;
 
+
   const handleMouseEnter = () => {
     setShowOptions(true);
   };
@@ -49,26 +51,39 @@ export default function SingleProductDesktop({
   };
 
   const handleClick = () => {
-    console.log('Product clicked', id);
+    console.log("Product clicked", id);
     navigation(`/aution-detail/${id}`);
   };
 
   useEffect(() => {
-    console.log('Status changed:', status);
+    console.log("Status changed:", status);
   }, [status]);
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+
+    const formattedDate = `${date.getDate()}/${
+      date.getMonth() + 1
+    }/${date.getFullYear()}`;
+
+    return formattedDate;
+  }
 
   return (
     <>
       <Product onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-        <ProductImage src={productImage} />
+        <ProductImage src={productImage} /><<<<<<< test
+
+
         <ProductMetaWrapper>
+
         <div
           style={{
-            display: 'flex',
-            justifyContent: 'flex-start',
-            width: '100%',
+            display: "flex",
+            justifyContent: "flex-start",
+            width: "100%",
           }}
         >
+
           <span
             style={{
               padding: '0.5rem',
@@ -93,7 +108,8 @@ export default function SingleProductDesktop({
           <ProductAddToCart
             onClick={handleClick}
             show={showOptions}
-            variant='contained'
+            variant="contained"
+            product={products}
           >
             Thông tin sản phẩm
           </ProductAddToCart>
@@ -120,6 +136,7 @@ export default function SingleProductDesktop({
             startingPrice={startingPrice} />
         </ProductMetaWrapper>
       </Product>
+
 
       <ProductDetailDialog product={products} />
     </>

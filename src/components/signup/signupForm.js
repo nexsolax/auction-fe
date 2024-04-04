@@ -1,28 +1,40 @@
-import React, { useRef, useState } from 'react';
-import { TextField, Button, Box, Typography, Dialog, DialogTitle, DialogContent, DialogActions, FormControlLabel, Checkbox, Grid } from '@mui/material';
+import React, { useRef, useState } from "react";
+import {
+  TextField,
+  Button,
+  Box,
+  Typography,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  FormControlLabel,
+  Checkbox,
+  Grid,
+} from "@mui/material";
 // import { Uploader } from "uploader";
 // import { UploadDropzone } from "react-uploader";
-import { format } from 'date-fns'
-import axios from 'axios';
-import EmailIcon from '@mui/icons-material/Email';
-import PersonAddIcon from '@mui/icons-material/PersonAdd';
-import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
-import TaskAltIcon from '@mui/icons-material/TaskAlt';
-import { useNavigate } from 'react-router-dom';
-import CircularProgress from '@mui/material/CircularProgress';
+import { format } from "date-fns";
+import axios from "axios";
+import EmailIcon from "@mui/icons-material/Email";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import ErrorOutlineOutlinedIcon from "@mui/icons-material/ErrorOutlineOutlined";
+import TaskAltIcon from "@mui/icons-material/TaskAlt";
+import { useNavigate } from "react-router-dom";
+import CircularProgress from "@mui/material/CircularProgress";
 import { useTheme } from "@mui/material/styles";
 
 const SignUpForm = () => {
-  const [userName, setUserName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [rePassword, setRePassword] = useState('');
-  const [paypalAccount, setPaypalAccount] = useState('');
-  const [address, setAddress] = useState('');
-  const [phone, setPhoneNumber] = useState('');
-  const [dateOfBirth, setDateOfBirth] = useState('');
-  const [cccdnumber, setCitizenId] = useState('');
-  const [err, setError] = useState('');
+  const [userName, setUserName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [rePassword, setRePassword] = useState("");
+  const [paypalAccount, setPaypalAccount] = useState("");
+  const [address, setAddress] = useState("");
+  const [phone, setPhoneNumber] = useState("");
+  const [dateOfBirth, setDateOfBirth] = useState("");
+  const [cccdnumber, setCitizenId] = useState("");
+  const [err, setError] = useState("");
   const MAX_FILE_SIZE = 23 * 1024 * 1024; // 23 MB in bytes
   const [avatar, setAvatar] = useState(null);
   const [cccdfrontImage, setFrontImage] = useState(null);
@@ -30,11 +42,11 @@ const SignUpForm = () => {
   // const [otpValue, setOtpValue] = useState('');
   // const [otpError, setOtpError] = useState(false);
   // const otpInputRef = useRef('');
-  const token = localStorage.getItem('token');
-  const user = localStorage.getItem('loginUser');
-  const jsonUser = JSON.parse(user)
+  const token = localStorage.getItem("token");
+  const user = localStorage.getItem("loginUser");
+  const jsonUser = JSON.parse(user);
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [updateRoleMessage, setUpdateRoleMessage] = useState('');
+  const [updateRoleMessage, setUpdateRoleMessage] = useState("");
   const [checkboxError, setCheckboxError] = useState(false);
   const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
   // const [otpDialogOpen, setOtpDialogOpen] = useState(false);
@@ -43,186 +55,56 @@ const SignUpForm = () => {
   const [errorDialogOpen, setErrorDialogOpen] = useState(false);
   const [emailDisabled, setEmailDisabled] = useState(false);
   const [roleUpgradeSuccess, setRoleUpgradeSuccess] = useState(false);
-  const [maxWidth, setMaxWidth] = React.useState('sm');
-  const navigate = useNavigate()
+  const [maxWidth, setMaxWidth] = React.useState("sm");
+  const navigate = useNavigate();
   const theme = useTheme();
-//   const uploader = Uploader({ apiKey: "public_12a1ybtATujHiWyzUEfMyoyzWFbL" });
-
-  // const UpdateRoleApi = `https://reasapiv2.azurewebsites.net/api/Users/update_role_user`
-  //  const confirm = `https://reasapiv2.azurewebsites.net/api/Users/confirm_email?email=${email}`
-
-
-  // const myCustomLocale = {
-  //   "orDragDropImages": "... kéo và thả hình ảnh.",
-  //   "uploadImages": "Tải lên hình ảnh",
-  //   "maxImagesReached": "Số lượng hình ảnh tối đa:",
-  //   "cancel": "Hủy bỏ",
-  //   "continue": "Tiếp Tục",
-  //   "addAnotherImage": "Thêm một hình ảnh khác...",
-  // }
-
-
-  
-
-  // const uploaderOptions = {
-  //   multi: true,
-  //   maxFileCount: 1,
-  //   locale: myCustomLocale,
-  //   // Comment out this line & use 'onUpdate' instead of
-  //   // 'onComplete' to have the dropzone close after upload.
-  //   maxFileSizeBytes: 10 * 1024 * 1024,
-  //   mimeTypes: ["image/jpeg", "image/png", "image/jpg"],
-  //   showRemoveButton: true,
-  //   styles: {
-  //     colors: {
-  //       primary: '#377dff',
-  //     },
-  //   },
-    
-    
-  //   editor: {
-  //     images: {
-  //       preview: false,              // True by default if cropping is enabled. Previews PDFs and videos too.
-  //       crop: false,                 // True by default.
-  //       cropFilePath: image => {    // Choose the file path used for JSON image crop files.
-  //         const { filePath } = image  // In:  https://www.bytescale.com/docs/upload-api/types/FileDetails
-  //         return `${filePath}.crop` // Out: https://www.bytescale.com/docs/upload-api/types/FilePathDefinition
-  //       },
-  //       cropRatio: 4 / 3,           // Width / Height. Undefined enables freeform (default).
-  //       cropShape: "rect"           // "rect" (default) or "circ".
-  //     }
-  //   },
-  // };
-
-  // const handleOtpInputChange = (event) => {
-  //   setOtpError(false);
-  // };
-
-  // const handleOpenOtpDialog = () => {
-
-  //   if (!email) {
-  //     setError('Địa chỉ Email không được bỏ trống');
-  //     // You can set an error message if email is empty
-  //     setErrorDialogOpen(true);
-  //     return;
-  //   }
-
-  //   // If email is not empty, proceed to send OTP
-  //   setError(''); // Clear any previous error message
-  //   handleOtpSubmit(); // Call the function to send OTP
-  //   setOtpDialogOpen(true);
-  //   setOtpValue('');
-  //   setOtpError(false);
-  // };
-
-
-  
-
-  // const handleOtpSubmit = () => {
-  //   axios
-  //     // .put(comfirm, null, { headers: { Authorization: `Bearer ${token}` } })
-  //     .put( null, { headers: { Authorization: `Bearer ${token}` } })
-  //     .then((response) => {
-  //       // If the API response has no error, proceed to update the user's role
-  //       setOtpError(false);
-  //       setUpdateRoleMessage('');
-  //       // return handleUpgradeToAuctioneer();
-  //     })
-  //     .catch((error) => {
-  //       setOtpError(true);
-  //       setUpdateRoleMessage('');
-  //     });
-  // };
-
-  
 
   const handleDialogClose1 = () => {
     // setOtpDialogOpen(false);
     setDialogOpen(false);
-    setUpdateRoleMessage(''); // If needed to clear the updateRoleMessage state
+    setUpdateRoleMessage(""); // If needed to clear the updateRoleMessage state
   };
-
-  // const onFileSelected = async (event, setImageState) => {
-  //   const [file] = event.target.files;
-  //   const formData = new FormData();
-  //   formData.append('file', file);
-
-  //   try {
-  //     const response = await axios.post('https://reasapiv2.azurewebsites.net/api/Users', formData, {
-  //       onUploadProgress: (progressEvent) => {
-  //         const progress = Math.round((progressEvent.loaded * 100) / progressEvent.total);
-  //         onProgress({ progress });
-  //       },
-  //     });
-
-  //     alert(`File uploaded: ${response.data.fileUrl}`);
-  //     setImageState(response.data.fileUrl);
-  //   } catch (error) {
-  //     console.error('Error uploading file:', error);
-  //   }
-  // };
-  // const onProgress = ({ progress }) => {
-  //   console.log(`File uploading: ${progress}% complete.`)
-  // }
-
 
   const handleUpgradeToAuctioneer = async () => {
     // const otpValue = otpInputRef.current.value;
     setRoleUpgradeSuccess(true);
-    // try {
-    //   const response = await axios.put(
-    //     // UpdateRoleApi,
-    //     {
-    //       email,
-    //       code: otpValue,
-    //     },
-    //     { headers: { Authorization: `Bearer ${token}` } }
-    //   );
-
-    //   if (response.status === 200) {
-    //     if (response.data === true) {
-    //       setRoleUpgradeSuccess(true);
-    //       setUpdateRoleMessage('Xác Thực Email Thành Công');
-    //       setOtpError(false);
-    //       setEmailDisabled(true);
-    //     } else if (response.data === false) {
-    //       setRoleUpgradeSuccess(false);
-    //       // setUpdateRoleMessage('Xác Thực Email Thành Công');
-    //       setOtpError(true);
-    //     }
-    //   } else {
-    //     setRoleUpgradeSuccess(false);
-    //     setOtpError(true);
-    //   }
-    // } catch (error) {
-    //   setRoleUpgradeSuccess(false);
-    //   setOtpError(true);
-    // }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!userName || !email || !password || !rePassword || !address || !phone || !dateOfBirth ) {
-      setError('Không Được Bỏ Trống');
+    if (
+      !userName ||
+      !email ||
+      !password ||
+      !rePassword ||
+      !address ||
+      !phone ||
+      !dateOfBirth
+    ) {
+      setError("Không Được Bỏ Trống");
       setErrorDialogOpen(true);
       return;
     }
 
     if (password.length < 8) {
-      setError('Mật Khẩu Cần Ít Nhất 8 Ký Tự');
+      setError("Mật Khẩu Cần Ít Nhất 8 Ký Tự");
       setErrorDialogOpen(true);
       return;
     }
 
-    if (!email.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)) {
-      setError('Sai Kiểu email, Ví Dụ: example@gmail.com');
+    if (
+      !email.match(
+        /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+      )
+    ) {
+      setError("Sai Kiểu email, Ví Dụ: example@gmail.com");
       setErrorDialogOpen(true);
       return;
     }
 
     if (password !== rePassword) {
-      setError('Mật Khẩu Không Chính Xác');
+      setError("Mật Khẩu Không Chính Xác");
       setErrorDialogOpen(true);
       return;
     }
@@ -237,24 +119,38 @@ const SignUpForm = () => {
     // }
     // setIsLoading(true);
 
-    const date = format(new Date(dateOfBirth), 'MM-dd-yyyy')
-    console.log(date)
-    try {
+    const date = format(new Date(dateOfBirth.toISOString));
+    console.log(date);
+    function displayImage(event) {
+      const selectedImage = document.getElementById("selectedImage");
+      const file = event.target.files[0];
 
+      if (file) {
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+          selectedImage.src = e.target.result;
+        };
+
+        reader.readAsDataURL(file);
+      }
+    }
+
+    try {
       const response = await axios
-        .post('https://reasapiv2.azurewebsites.net/api/User', {
+        .post("https://reasapiv2.azurewebsites.net/api/User", {
           userName,
           email,
           password,
           address,
           phone,
-          dateOfBirth: date
-          // cccdnumber,
-          // avatar,
-          // cccdfrontImage,
-          // cccdbackImage,
+          dateOfBirth: date,
+          cccdnumber,
+          avatar,
+          cccdfrontImage,
+          cccdbackImage,
         })
-        .then(data => {
+        .then((data) => {
           console.log(data);
           const userID = data.data.userId;
           console.log(userID);
@@ -263,85 +159,62 @@ const SignUpForm = () => {
             paypalAccount,
           };
 
-          axios.post('https://reasapiv2.azurewebsites.net/api/BankAccount', paypalData)
+          axios
+            .post(
+              "https://reasapiv2.azurewebsites.net/api/BankAccount",
+              paypalData
+            )
 
-            .catch(err => {
+            .catch((err) => {
               if (err.response.status === 400) {
                 setIsLoading(false);
                 const errorMessage = err.response.data; // Assuming the error message is in the response data
-                console.log('Error:', errorMessage);
+                console.log("Error:", errorMessage);
                 err = setError(errorMessage);
                 setErrorDialogOpen(true);
               }
-            }).then(response => {
+            })
+            .then((response) => {
               setIsLoading(false);
               setSuccessDialogOpen(true);
             });
 
           // These statements should not be inside the inner .then block
-
         })
-        .catch(err => {
-
+        .catch((err) => {
           if (err.response.status === 400) {
             setIsLoading(false);
             const errorMessage = err.response.data; // Assuming the error message is in the response data
-            console.log('Error:', errorMessage);
+            console.log("Error:", errorMessage);
             err = setError(errorMessage);
             setErrorDialogOpen(true);
           }
-          console.log('Server response:', response.data);
-          // setSuccessDialogOpen(true);
-          // if (err.response && err.response.data && err.response.data.errors) {
-          //   const serverErrors = err.response.data.errors;
-          //   let formattedErrors = "";
-
-          //   Object.keys(serverErrors).forEach((key) => {
-          //     formattedErrors += `${key}:\n`;
-          //     serverErrors[key].forEach((errorMessage) => {
-          //       formattedErrors += `- ${errorMessage}\n`;
-          //     });
-          //   });
-
-          //   setError(formattedErrors);
-          //   setErrorDialogOpen(true);
-          // } else {
-          //   setError('An unexpected error occurred.');
-          //   setErrorDialogOpen(true);
-          // }
+          console.log("Server response:", response.data);
         });
 
-      console.log('Server response:', response.data);
+      console.log("Server response:", response.data);
       setSuccessDialogOpen(true);
 
       // Reset form fields
-      setUserName('');
-      setEmail('');
-      setPassword('');
-      setRePassword('');
-      setAddress('');
-      setPhoneNumber('');
-      setDateOfBirth('');
-      // setCitizenId('');
-      // setAvatar(null);
-      // setFrontImage(null);
-      // setBackImage(null);
-      setError('');
-
+      setUserName("");
+      setEmail("");
+      setPassword("");
+      setRePassword("");
+      setAddress("");
+      setPhoneNumber("");
+      setDateOfBirth("");
+      setCitizenId("");
+      setAvatar(null);
+      setFrontImage(null);
+      setBackImage(null);
+      setError("");
     } catch (error) {
       // console.error('Error:', error.response);
-
     }
   };
 
-  // const handleCloseOtpDialog = () => {
-  //   setOtpDialogOpen(false);
-  //   setOtpValue('');
-  //   setOtpError(false);
-  // };
-
   const handleSuccessDialogClose = () => {
-    navigate('/home', { replace: true });
+    navigate("/home", { replace: true });
     setSuccessDialogOpen(false);
   };
 
@@ -352,35 +225,34 @@ const SignUpForm = () => {
 
   const styles = {
     errorIcon: {
-      fontSize: '150px',
-      color: '#B5E4EB' // Adjust the size as needed // To center it vertically
+      fontSize: "150px",
+      color: "#B5E4EB", // Adjust the size as needed // To center it vertically
     },
     TaskAltIcon: {
-      fontSize: '150px',
-      color: '#C3E1AE'
-    }
+      fontSize: "150px",
+      color: "#C3E1AE",
+    },
   };
 
   return (
     <Box
       component="form"
       sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        width: '65%',
-        height: '100%',
-        margin: 'auto',
-        padding: '20px',
-        border: '1px solid #ccc',
-        borderRadius: '4px',
-        [theme.breakpoints.down('md')]: {
-          width: '100%',
-        }
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        width: "65%",
+        height: "100%",
+        margin: "auto",
+        padding: "20px",
+        border: "1px solid #ccc",
+        borderRadius: "4px",
+        [theme.breakpoints.down("md")]: {
+          width: "100%",
+        },
       }}
       onSubmit={handleSubmit}
     >
-
       <Grid container>
         <Grid xs={6}>
           <TextField
@@ -390,7 +262,7 @@ const SignUpForm = () => {
             onChange={(e) => setUserName(e.target.value)}
             margin="normal"
             required
-            sx={{ width: '100%' }}
+            sx={{ width: "100%" }}
             id="userName"
           />
         </Grid>
@@ -403,23 +275,12 @@ const SignUpForm = () => {
             margin="normal"
             disabled={emailDisabled}
             required
-            sx={{ width: '100%', marginLeft: "5px" }}
+            sx={{ width: "100%", marginLeft: "5px" }}
             id="email"
           />
         </Grid>
       </Grid>
 
-
-      {/* <Button
-        variant="outlined"
-        color="primary"
-        sx={{ marginTop: '10px', width: '100%' }}
-        // onClick={handleOpenOtpDialog}
-        endIcon={<EmailIcon />}
-        disabled={emailDisabled}
-      >
-        Xác Thực Email
-      </Button> */}
       <Grid container>
         <Grid xs={6}>
           <TextField
@@ -429,7 +290,7 @@ const SignUpForm = () => {
             onChange={(e) => setPassword(e.target.value)}
             margin="normal"
             required
-            sx={{ width: '100%' }}
+            sx={{ width: "100%" }}
             id="password"
             // disabled={!roleUpgradeSuccess}
           />
@@ -442,22 +303,21 @@ const SignUpForm = () => {
             onChange={(e) => setRePassword(e.target.value)}
             margin="normal"
             required
-            sx={{ width: '100%' , marginLeft:"5px"}}
+            sx={{ width: "100%", marginLeft: "5px" }}
             id="rePassword"
             // disabled={!roleUpgradeSuccess}
           />
         </Grid>
       </Grid>
 
-
       <TextField
-        label="Tài Khoản PayPal"
+        label="Tài Khoản ngân hàng"
         type="text"
         value={paypalAccount}
         onChange={(e) => setPaypalAccount(e.target.value)}
         margin="normal"
         required
-        sx={{ width: '100%' }}
+        sx={{ width: "100%" }}
         id="paypal"
         // disabled={!roleUpgradeSuccess}
       />
@@ -468,7 +328,7 @@ const SignUpForm = () => {
         onChange={(e) => setAddress(e.target.value)}
         margin="normal"
         required
-        sx={{ width: '100%' }}
+        sx={{ width: "100%" }}
         id="address"
         multiline
         rows={2}
@@ -477,96 +337,48 @@ const SignUpForm = () => {
 
       <Grid container>
         <Grid xs={6}>
-        <TextField
-        label="Số Điện Thoại"
-        type="tel"
-        value={phone}
-        onChange={(e) => setPhoneNumber(e.target.value)}
-        margin="normal"
-        required
-        sx={{ width: '100%' }}
-        id="phone"
-        // disabled={!roleUpgradeSuccess}
-      />
+          <TextField
+            label="Số Điện Thoại"
+            type="tel"
+            value={phone}
+            onChange={(e) => setPhoneNumber(e.target.value)}
+            margin="normal"
+            required
+            sx={{ width: "100%" }}
+            id="phone"
+            // disabled={!roleUpgradeSuccess}
+          />
         </Grid>
         <Grid xs={6}>
-        <TextField
-        label=" Tháng, Ngày, Năm Sinh"
-        type="date"
-        value={dateOfBirth}
-        onChange={(e) => setDateOfBirth(e.target.value)}
-        margin="normal"
-        required
-        sx={{ width: '100%', marginLeft:"5px" }}
-        id="dateOfBirth"
-        InputLabelProps={{
-          shrink: true
-        }}
-        // disabled={!roleUpgradeSuccess}
-      />
+          <TextField
+            label=" Tháng, Ngày, Năm Sinh"
+            type="date"
+            value={dateOfBirth}
+            onChange={(e) => setDateOfBirth(e.target.value)}
+            margin="normal"
+            required
+            sx={{ width: "100%", marginLeft: "5px" }}
+            id="dateOfBirth"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            // disabled={!roleUpgradeSuccess}
+          />
         </Grid>
       </Grid>
-      
-      
-      {/* <TextField
+
+      <TextField
         label="Số CCCD"
         type="text"
         value={cccdnumber}
         onChange={(e) => setCitizenId(e.target.value)}
         margin="normal"
         required
-        sx={{ width: '100%' }}
+        sx={{ width: "100%" }}
         id="cccdnumber"
         disabled={!roleUpgradeSuccess}
       />
-      <h2>Ảnh Đại Diện</h2>
-      <UploadDropzone uploader={uploader}       // Required.
-        width="600px"             // Optional.
-        height="375px"
-        options={uploaderOptions}        // Optional.
-        onUpdate={files => {      // Optional.
-          if (files.length === 0) {
-            console.log('No files selected.')
-          } else {
-            console.log('Files uploaded:');
-            console.log(files.map(f => f.fileUrl).join("\n"));
-            const avatarimg = files.map(f => f.fileUrl).join("\n");
-            setAvatar(avatarimg);
-          }
-        }}
 
-      />
-      <h2>Hình Ảnh Mặt Trước Thẻ CCCD</h2>
-      <UploadDropzone uploader={uploader}       // Required.
-        width="600px"             // Optional.
-        height="375px"
-        options={uploaderOptions}        // Optional.
-        onUpdate={files => {      // Optional.
-          if (files.length === 0) {
-            console.log('No files selected.')
-          } else {
-            console.log('Files uploaded:');
-            console.log(files.map(f => f.fileUrl).join("\n"));
-            const frontimg = files.map(f => f.fileUrl).join("\n");
-            setFrontImage(frontimg);
-          }
-        }} disabled={!roleUpgradeSuccess} />
-      <h2>Hình Ảnh Mặt Sau Thẻ CCCD</h2>
-      <UploadDropzone uploader={uploader}
-        options={uploaderOptions}      // Required.
-        width="600px"             // Optional.
-        height="375px"            // Optional.
-        onUpdate={files => {      // Optional.
-          if (files.length === 0) {
-            console.log('No files selected.')
-          } else {
-            console.log('Files uploaded:');
-            console.log(files.map(f => f.fileUrl).join("\n"));
-            const backimg = files.map(f => f.fileUrl).join("\n");
-            setBackImage(backimg);
-          }
-        }}
-      /> */}
       {/* {err && (
         <Typography variant="body2" color="error" sx={{ marginTop: '10px' }}>
           {err}
@@ -614,11 +426,18 @@ const SignUpForm = () => {
         </DialogActions>
       </Dialog> */}
 
-
-      <Dialog fullWidth maxWidth={maxWidth} open={!!updateRoleMessage} onClose={handleDialogClose1}>
-      <DialogTitle fullWidth maxWidth={maxWidth} sx={{ textAlign: 'center', }}> <ErrorOutlineOutlinedIcon style={styles.errorIcon} /> </DialogTitle>
+      <Dialog
+        fullWidth
+        maxWidth={maxWidth}
+        open={!!updateRoleMessage}
+        onClose={handleDialogClose1}
+      >
+        <DialogTitle fullWidth maxWidth={maxWidth} sx={{ textAlign: "center" }}>
+          {" "}
+          <ErrorOutlineOutlinedIcon style={styles.errorIcon} />{" "}
+        </DialogTitle>
         <DialogContent>
-          <Typography align='center'>{updateRoleMessage}</Typography>
+          <Typography align="center">{updateRoleMessage}</Typography>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleDialogClose1} color="primary">
@@ -627,12 +446,24 @@ const SignUpForm = () => {
         </DialogActions>
       </Dialog>
 
-
-      <Dialog fullWidth maxWidth={maxWidth} open={successDialogOpen} onClose={handleSuccessDialogClose}>
-        <DialogTitle sx={{ marginTop: '25px', textAlign: 'center', }}> <TaskAltIcon style={styles.TaskAltIcon} /> </DialogTitle>
-        <DialogTitle DialogTitle variant='h3' align='center'>Đã đăng kí tài Khoản.</DialogTitle>
+      <Dialog
+        fullWidth
+        maxWidth={maxWidth}
+        open={successDialogOpen}
+        onClose={handleSuccessDialogClose}
+      >
+        <DialogTitle sx={{ marginTop: "25px", textAlign: "center" }}>
+          {" "}
+          <TaskAltIcon style={styles.TaskAltIcon} />{" "}
+        </DialogTitle>
+        <DialogTitle DialogTitle variant="h3" align="center">
+          Đã đăng kí tài Khoản.
+        </DialogTitle>
         <DialogContent>
-          <Typography align='center' variant="subtitle2">Tài Khoản của bạn đã được tạo thành công. Vui lòng chờ Admin hệ thống xét duyệt Tài Khoản của bạn. </Typography>
+          <Typography align="center" variant="subtitle2">
+            Tài Khoản của bạn đã được tạo thành công. Vui lòng chờ Admin hệ
+            thống xét duyệt Tài Khoản của bạn.{" "}
+          </Typography>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleSuccessDialogClose}>OK</Button>
@@ -640,11 +471,21 @@ const SignUpForm = () => {
       </Dialog>
 
       {/* Error Dialog */}
-      <Dialog fullWidth maxWidth={maxWidth} open={errorDialogOpen || checkboxError} onClose={handleErrorDialogClose}>
-      <DialogTitle fullWidth maxWidth={maxWidth} sx={{ textAlign: 'center', }}> <ErrorOutlineOutlinedIcon style={styles.errorIcon} /> </DialogTitle>
-        <DialogTitle align='center'>Đã xảy ra lỗi</DialogTitle>
+      <Dialog
+        fullWidth
+        maxWidth={maxWidth}
+        open={errorDialogOpen || checkboxError}
+        onClose={handleErrorDialogClose}
+      >
+        <DialogTitle fullWidth maxWidth={maxWidth} sx={{ textAlign: "center" }}>
+          {" "}
+          <ErrorOutlineOutlinedIcon style={styles.errorIcon} />{" "}
+        </DialogTitle>
+        <DialogTitle align="center">Đã xảy ra lỗi</DialogTitle>
         <DialogContent>
-          <Typography variant="body1" align='center'>{checkboxError ? 'Bạn cần chấp nhận điều khoản và điều kiện.' : err}</Typography>
+          <Typography variant="body1" align="center">
+            {checkboxError ? "Bạn cần chấp nhận điều khoản và điều kiện." : err}
+          </Typography>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleErrorDialogClose}>OK</Button>
@@ -653,15 +494,14 @@ const SignUpForm = () => {
 
       <Button
         endIcon={<PersonAddIcon />}
-
         style={{ width: "200px" }}
         type="submit"
         variant="contained"
         color="primary"
-        sx={{ marginTop: '20px' }}
+        sx={{ marginTop: "20px" }}
         // disabled={!roleUpgradeSuccess || isLoading} // Disable when loading
       >
-        {isLoading ? <CircularProgress size={24} /> : 'Đăng Kí'}
+        {isLoading ? <CircularProgress size={24} /> : "Đăng Kí"}
       </Button>
     </Box>
   );
