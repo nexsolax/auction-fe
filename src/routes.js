@@ -122,17 +122,18 @@ export default function Router() {
     },
     { path: 'home', element: <HomePage /> },
     { path: 'prepare', element: <PrepareSession /> },
-    {
-      path: 'instage',
-      element: (
-        <Suspense>
-          {/* <InstageSession /> */}
-          <RolesAuthRoute roles={['Member']}>
-            <InstageSession />
-          </RolesAuthRoute>
-        </Suspense>
-      ),
-    },
+    { path: 'instage', element: <InstageSession /> },
+    // {
+    //   path: 'instage',
+    //   element: (
+    //     <Suspense>
+    //       {/* <InstageSession /> */}
+    //       <RolesAuthRoute roles={['Member']}>
+    //         <InstageSession />
+    //       </RolesAuthRoute>
+    //     </Suspense>
+    //   ),
+    // },
     
     { path: 'test', element: <Test /> },
     {
