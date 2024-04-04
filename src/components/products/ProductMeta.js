@@ -1,3 +1,6 @@
+import { Typography } from "@mui/material";
+
+import { ProductMetaWrapper } from "../../style/Products";
 
 export default function ProductMeta({ productName,
   endDate,

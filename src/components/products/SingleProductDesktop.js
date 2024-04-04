@@ -71,7 +71,7 @@ export default function SingleProductDesktop({
   return (
     <>
       <Product onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-        <ProductImage src={productImage} /><<<<<<< test
+        <ProductImage src={productImage} />
 
 
         <ProductMetaWrapper>
