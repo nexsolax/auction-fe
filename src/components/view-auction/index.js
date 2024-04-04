@@ -44,7 +44,7 @@ const ViewAuctionForm = () => {
 
   useEffect(() => {
     axios
-      .get("https://reasapiv2.azurewebsites.net/api/Auction?pageSize=100", {
+      .get("https://reasapiv2.azurewebsites.net/api/Auction/own?pageSize=100", {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
