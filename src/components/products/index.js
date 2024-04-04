@@ -25,7 +25,6 @@ export default function Products() {
     axios
       .get("https://reasapiv2.azurewebsites.net/api/Auction")
       .then((response) => {
-        console.log(response.data.data.pagingData[0].realEstates.realEstateImages[0].image);
         const data = response.data.data.pagingData.map((item) => {
           // Perform null/undefined checks before accessing nested properties
           const name = item.realEstates ? item.realEstates.name : "Unknown Name";
@@ -38,6 +37,18 @@ export default function Products() {
           return { name, id, status, image, startDate, endDate, startingPrice };
         });
 
+        // Sort the auctions by status
+        data.sort((a, b) => {
+          const statusOrder = ['Approved', 'OnGoing'];
+          const aIndex = statusOrder.indexOf(a.status);
+          const bIndex = statusOrder.indexOf(b.status);
+
+          // Assign a high value for statuses not found in statusOrder
+          const aValue = aIndex !== -1 ? aIndex : statusOrder.length;
+          const bValue = bIndex !== -1 ? bIndex : statusOrder.length;
+
+          return aValue - bValue;
+        });
 
         setProducts(data);
       })
@@ -70,8 +81,8 @@ export default function Products() {
 
     setCurrentPage(1);
   }, [searchQuery, products]);
- 
-  const productsPerPage = 3; // Number of products to display per page
+
+  const productsPerPage = 9; // Number of products to display per page
   const pageCount = Math.ceil(filteredProducts.length / productsPerPage);
 
   // Handle page change
